@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
         // Actions
         PlayerInputActions.Player.Sprint.Enable();
         PlayerInputActions.Player.FireAttachment.Enable();
+        PlayerInputActions.Player.Jump.Enable();
     }
 
     public void DisableInput()
@@ -40,6 +41,7 @@ public class InputManager : MonoBehaviour
         // Actions
         PlayerInputActions.Player.Sprint.Disable();
         PlayerInputActions.Player.FireAttachment.Disable();
+        PlayerInputActions.Player.Jump.Disable();
     }
 
 }
