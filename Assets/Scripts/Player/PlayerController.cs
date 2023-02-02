@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mass = 3.0f;
     [SerializeField] private float gravityValue = -9.81f;
     private Vector3 playerVelocity;
-    private bool hasPlayedLandedSound;
+    private bool hasLanded;
 
     [Header("Audio")]
     [SerializeField] private AudioClip jumpClip;
@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jetpackForce = 25.0f;
     [SerializeField] private float maxJetpackDuration = 3f;
     private bool flying;
+    private float jetpackTimer;
 
     // Fuel
     [SerializeField] private FuelStore fuelStore;
@@ -109,10 +110,11 @@ public class PlayerController : MonoBehaviour
 
         if (isGrounded && playerVelocity.y < 0)
         {
-            if (!hasPlayedLandedSound)
+            if (!hasLanded)
             {
+                hasLanded = true;
                 source.PlayOneShot(landClip);
-                hasPlayedLandedSound = true;
+                jetpackTimer = 0;
             }
             playerVelocity.y = 0f;
         }
@@ -144,14 +146,14 @@ public class PlayerController : MonoBehaviour
         if (isGrounded)
         {
             // Debug.Log("Jump");
-            hasPlayedLandedSound = false;
+            hasLanded = false;
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -mass * gravityValue);
 
             source.PlayOneShot(jumpClip);
         }
         else if (hasJetpack && !flying)
         {
-            hasPlayedLandedSound = false;
+            hasLanded = false;
             StartCoroutine(Jetpack());
         }
     }
@@ -161,7 +163,6 @@ public class PlayerController : MonoBehaviour
         // Debug.Log("Start Jetpack");
 
         flying = true;
-        float timer = 0;
 
         // Make noise
         source.PlayOneShot(jetpackStartClip);
@@ -169,13 +170,13 @@ public class PlayerController : MonoBehaviour
         jetpackParticles.Play();
 
         // Player must be holding the button, have time left, and also must have fuel left to burn
-        while (inputManager.PlayerInputActions.Player.Jump.IsPressed() && timer < maxJetpackDuration && fuelStore.CurrentFuel > 0)
+        while (inputManager.PlayerInputActions.Player.Jump.IsPressed() && jetpackTimer < maxJetpackDuration && fuelStore.CurrentFuel > 0)
         {
             // Update timer
-            timer += Time.deltaTime;
+            jetpackTimer += Time.deltaTime;
 
             // Update UI
-            jetpackDisplay.Set(timer, maxJetpackDuration);
+            jetpackDisplay.Set(jetpackTimer, maxJetpackDuration);
 
             // Use Fuel
             fuelStore.CurrentFuel -= Time.deltaTime * fuelConsumptionRate;
