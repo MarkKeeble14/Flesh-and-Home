@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
         // Set up new input
         PlayerInputActions = new PlayerInputActions();
         EnableInput();
+        Cursor.visible = false;
     }
 
     public void EnableInput()
@@ -44,4 +45,18 @@ public class InputManager : MonoBehaviour
         PlayerInputActions.Player.Jump.Disable();
     }
 
+    public Vector2 GetPlayerMovement()
+    {
+        return PlayerInputActions.Player.Move.ReadValue<Vector2>();
+    }
+
+    public Vector2 GetMouseDelta()
+    {
+        return PlayerInputActions.Player.Look.ReadValue<Vector2>();
+    }
+
+    public bool PlayerJumpedThisFrame()
+    {
+        return PlayerInputActions.Player.Jump.triggered;
+    }
 }
