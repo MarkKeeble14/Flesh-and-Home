@@ -5,25 +5,12 @@ using UnityEngine;
 
 public class PlayerTestEventInvoker : MonoBehaviour
 {
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        var trg = collision.gameObject.GetComponent<TriggerIntermediary>();
-        if(trg != null)
+        TriggerIntermediary trg = other.gameObject.GetComponent<TriggerIntermediary>();
+        if (trg != null)
         {
             trg.Act();
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
