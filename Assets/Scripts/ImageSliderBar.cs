@@ -11,6 +11,9 @@ public class ImageSliderBar : MonoBehaviour
     [SerializeField] private string suffix;
     [SerializeField] private int decimalPlaces = 1;
 
+    [SerializeField] private bool subtractMode;
+    [SerializeField] private HorizontalDirection direction;
+
     private float value;
     private float maxValue;
 
@@ -20,6 +23,7 @@ public class ImageSliderBar : MonoBehaviour
 
     private void Update()
     {
+        // Set Value and Control Object State
         float currentValue = value / maxValue;
         bool shouldBeActive = currentValue > 0 && value < maxValue;
         // Debug.Log(value + ", " + maxValue + ", " + currentValue + ", " + shouldBeActive);
@@ -31,7 +35,15 @@ public class ImageSliderBar : MonoBehaviour
         bar.gameObject.SetActive(shouldBeActive);
 
         // Set the bar fill amount and text value
-        bar.fillAmount = 1 - currentValue;
+        if (subtractMode)
+        {
+            bar.fillAmount = 1 - currentValue;
+        }
+        else
+        {
+            bar.fillAmount = currentValue;
+        }
+        bar.fillOrigin = direction == HorizontalDirection.RIGHT ? 1 : 0;
         text.text = prefix + (System.Math.Round(maxValue - (currentValue * maxValue), decimalPlaces)).ToString() + suffix;
     }
 
@@ -49,5 +61,15 @@ public class ImageSliderBar : MonoBehaviour
     {
         value = current;
         maxValue = max;
+    }
+
+    public void SetColor(Color c)
+    {
+        bar.color = c;
+    }
+
+    public void SetHorizontalDirection(HorizontalDirection direction)
+    {
+        this.direction = direction;
     }
 }

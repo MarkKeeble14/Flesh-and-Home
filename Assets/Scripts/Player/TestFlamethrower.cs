@@ -17,7 +17,7 @@ public class TestFlamethrower : MonoBehaviour
     private void Start()
     {
         inputManager = InputManager._Instance;
-        inputManager.PlayerInputActions.Player.FireAttachment.started += Fire;
+        // inputManager.PlayerInputActions.Player.FireAttachment.started += Fire;
     }
 
     private void Fire(InputAction.CallbackContext ctx)
