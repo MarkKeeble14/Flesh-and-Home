@@ -1,0 +1,23 @@
+{
+  "Template": {
+    "speaker": "",
+    "text": "",
+    "iff": "neutral",
+    "speakTime": "1",
+    "speechClip": ""
+  },
+  "TestClip1": {
+    "speaker": "LCDR Lennox",
+    "text": "Comms check.",
+    "iff": "friend",
+    "speakTime": "2.5",
+    "speechClip": "EN/TestClip1"
+  },
+  "TestClip2": {
+    "speaker": "No. 2",
+    "text": "Second test clip.",
+    "iff": "enemy",
+    "speakTime": "15",
+    "speechClip": ""
+  }
+}
