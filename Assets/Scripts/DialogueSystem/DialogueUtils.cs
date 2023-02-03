@@ -74,22 +74,7 @@ public class DialogueSnippet
 
 }
 
-public class DialogueLoader
-{
-    static DialogueLoader instance;
-
-    private DialogueLoader() {}
-
-    public static DialogueLoader GetInstance()
-    {
-        if (instance == null)
-        {
-            instance = new DialogueLoader();
-        }
-        return instance;
-    }
-}
-
+//Useful as a test for the loader.
 public class DialogueUtils : MonoBehaviour
 {
     public List<string> lineIDs = new List<string>();
