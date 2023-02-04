@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float mass = 3.0f;
     [SerializeField] private float gravityValue = -9.81f;
-    private Vector3 playerVelocity;
+    [SerializeField] private Vector3 playerVelocity;
     private bool hasLanded;
 
     [Header("Audio")]
@@ -134,7 +134,14 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -mass * gravityValue * Time.deltaTime);
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
+        // Only subtract velocity if not grounded and not hitting a ceiling while jetpacking
+        if (!isGrounded)
+        {
+            if (!(flying && isBonking))
+            {
+                playerVelocity.y += gravityValue * Time.deltaTime;
+            }
+        }
 
         // Debug.Log("Velocity: " + playerVelocity);
 
