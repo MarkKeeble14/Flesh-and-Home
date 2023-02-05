@@ -25,8 +25,6 @@ public class DialogueManager : MonoBehaviour
 
     public TextAsset locFile;
 
-    float textClearTimer = 3;
-
     AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -36,21 +34,47 @@ public class DialogueManager : MonoBehaviour
         {
             affColors[i.aff] = i.color;
         }
-        targetText = targetTextObject.GetComponent<TextMeshProUGUI>();
-        audioSource = GetComponent<AudioSource>();
 
-        //Test article - remove when unneeded.
-        ExecuteSnippet(DialogueSnippet.GetSnippetFromLocJSON("DemoConv_Controller_AskWeather", locFile));
+        //Look for unassigned objects in this gameobject.
+        if (targetTextObject != null)
+        {
+            targetText = targetTextObject.GetComponent<TextMeshProUGUI>();
+        } else
+        {
+            targetText = GetComponent<TextMeshProUGUI>();
+        }
+        
+        if (audioSource == null)
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
     }
 
-    void ExecuteSnippet(DialogueSnippet ds)
+    //Needs to be called as a coroutine (which it is).
+    //Will play the snippets in turn to their full length, and finish when they are all done.
+    public IEnumerator ExecuteDialogue(List<DialogueSnippet> snippets)
     {
-        textClearTimer = ds.speakTime;
+        foreach(DialogueSnippet ds in snippets)
+        {
+            //These will get played in turn.
+            yield return StartCoroutine(ExecuteSnippet(ds));
+        }
+    }
 
+    public IEnumerator ExecuteSnippet(DialogueSnippet ds)
+    {
+        //Set subtitle text.
         SetTextDialogue(ds);
 
+        //Rack and play the audio clip.
         audioSource.clip = ds.speechClip;
         audioSource.Play();
+
+        //Wait the required time as per snippet description -
+        //useful for cutting lines off or something like that.
+        yield return new WaitForSeconds(ds.speakTime);
+        //Clear subtitles after done talking.
+        targetText.text = "";
     }
     
     void SetTextDialogue(DialogueSnippet ds)
@@ -72,14 +96,6 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Done this way to avoid setting the text every frame.
-        if (textClearTimer > 0)
-        {
-            textClearTimer -= Time.deltaTime;
-            if(textClearTimer <= 0)
-            {
-                targetText.text = "";
-            }
-        }
+
     }
 }
