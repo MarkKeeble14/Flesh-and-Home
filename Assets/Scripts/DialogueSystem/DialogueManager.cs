@@ -25,7 +25,9 @@ public class DialogueManager : MonoBehaviour
 
     public TextAsset locFile;
 
-    float textClearTimer = 0;
+    float textClearTimer = 3;
+
+    AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,20 @@ public class DialogueManager : MonoBehaviour
             affColors[i.aff] = i.color;
         }
         targetText = targetTextObject.GetComponent<TextMeshProUGUI>();
+        audioSource = GetComponent<AudioSource>();
+
+        //Test article - remove when unneeded.
+        ExecuteSnippet(DialogueSnippet.GetSnippetFromLocJSON("DemoConv_Controller_AskWeather", locFile));
+    }
+
+    void ExecuteSnippet(DialogueSnippet ds)
+    {
+        textClearTimer = ds.speakTime;
+
+        SetTextDialogue(ds);
+
+        audioSource.clip = ds.speechClip;
+        audioSource.Play();
     }
     
     void SetTextDialogue(DialogueSnippet ds)
@@ -49,8 +65,6 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Incomplete affiliation color dictionary in DialogueManager: " + e.Message);
         }
 
-        textClearTimer = ds.speakTime;
-
         targetText.text = "<color=#" + ColorUtility.ToHtmlStringRGBA(speakerColor) + ">" +
             ds.speaker + "</color>" + ": " + ds.text;
     }
@@ -58,6 +72,14 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Done this way to avoid setting the text every frame.
+        if (textClearTimer > 0)
+        {
+            textClearTimer -= Time.deltaTime;
+            if(textClearTimer <= 0)
+            {
+                targetText.text = "";
+            }
+        }
     }
 }
