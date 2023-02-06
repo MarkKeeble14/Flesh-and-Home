@@ -94,12 +94,17 @@ public class PlayerController : MonoBehaviour
         // Get References
         controller = GetComponent<CharacterController>();
 
-        inputManager = InputManager._Instance;
         cameraTransform = Camera.main.transform;
 
         // Fetch the Input Manager Singleton
         inputManager = InputManager._Instance;
         inputManager.PlayerInputActions.Player.Jump.performed += Jump;
+    }
+
+    private void OnDestroy()
+    {
+        // Remove input action
+        inputManager.PlayerInputActions.Player.Jump.performed -= Jump;
     }
 
     void Update()
@@ -123,7 +128,7 @@ public class PlayerController : MonoBehaviour
         Vector3 move = new Vector3(movement.x, 0f, movement.y);
         move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
         move.y = 0f;
-        controller.Move(move * Time.deltaTime * MoveSpeed);
+        controller.Move(move * MoveSpeed * Time.deltaTime);
 
         // Enable footsteps audio source when walking
         footstepsSource.enabled = isGrounded && move != Vector3.zero;
@@ -177,7 +182,7 @@ public class PlayerController : MonoBehaviour
         jetpackParticles.Play();
 
         // Player must be holding the button, have time left, and also must have fuel left to burn
-        while (inputManager.PlayerInputActions.Player.Jump.IsPressed() && jetpackTimer < maxJetpackDuration && fuelStore.CurrentFuel > 0)
+        while (inputManager.PlayerInputActions.Player.Jump.IsPressed() && jetpackTimer < maxJetpackDuration && fuelStore.CurrentFuel > 0 && !isGrounded)
         {
             // Update timer
             jetpackTimer += Time.deltaTime;

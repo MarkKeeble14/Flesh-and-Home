@@ -28,6 +28,12 @@ public class TestMelee : MonoBehaviour
         inputManager.PlayerInputActions.Player.Melee.started += Melee;
     }
 
+    private void OnDestroy()
+    {
+        // Remove input action
+        inputManager.PlayerInputActions.Player.Melee.started -= Melee;
+    }
+
     private void Melee(InputAction.CallbackContext ctx)
     {
         if (isInMelee || onCooldown) return;

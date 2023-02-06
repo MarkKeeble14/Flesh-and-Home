@@ -80,6 +80,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""bce3f1dc-3bd7-4684-95a5-0ea89cf2f7b5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -258,6 +267,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Melee"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ea311aa6-1f7f-46f4-b698-817e2a1a747d"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -272,6 +292,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_FireAttachment = m_Player.FindAction("FireAttachment", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -337,6 +358,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_FireAttachment;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Melee;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -347,6 +369,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @FireAttachment => m_Wrapper.m_Player_FireAttachment;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Melee => m_Wrapper.m_Player_Melee;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -374,6 +397,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Melee.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMelee;
                 @Melee.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMelee;
                 @Melee.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMelee;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -396,6 +422,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Melee.started += instance.OnMelee;
                 @Melee.performed += instance.OnMelee;
                 @Melee.canceled += instance.OnMelee;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -408,5 +437,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnFireAttachment(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

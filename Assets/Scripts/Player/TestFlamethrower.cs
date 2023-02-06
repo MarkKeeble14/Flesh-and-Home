@@ -20,6 +20,12 @@ public class TestFlamethrower : MonoBehaviour
         // inputManager.PlayerInputActions.Player.FireAttachment.started += Fire;
     }
 
+    private void OnDestroy()
+    {
+        // Remove input action
+        // inputManager.PlayerInputActions.Player.FireAttachment.started -= Fire;
+    }
+
     private void Fire(InputAction.CallbackContext ctx)
     {
         if (fuelStore.CurrentFuel > 0)

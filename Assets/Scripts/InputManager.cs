@@ -31,6 +31,9 @@ public class InputManager : MonoBehaviour
         PlayerInputActions.Player.FireAttachment.Enable();
         PlayerInputActions.Player.Melee.Enable();
         PlayerInputActions.Player.Jump.Enable();
+
+        // Other
+        PlayerInputActions.Player.Interact.Enable();
     }
 
     public void DisableInput()
@@ -45,6 +48,9 @@ public class InputManager : MonoBehaviour
         PlayerInputActions.Player.FireAttachment.Disable();
         PlayerInputActions.Player.Melee.Disable();
         PlayerInputActions.Player.Jump.Disable();
+
+        // Other
+        PlayerInputActions.Player.Interact.Disable();
     }
 
     public Vector2 GetPlayerMovement()

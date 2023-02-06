@@ -52,6 +52,12 @@ public class TestLaserCutter : MonoBehaviour
         inputManager.PlayerInputActions.Player.FireAttachment.started += Fire;
     }
 
+    private void OnDestroy()
+    {
+        // Remove input action
+        inputManager.PlayerInputActions.Player.FireAttachment.started -= Fire;
+    }
+
     private void Update()
     {
         // Reduce timer if not shooting
