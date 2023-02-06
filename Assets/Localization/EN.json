@@ -1,0 +1,44 @@
+{
+  "Template": {
+    "speaker": "",
+    "text": "",
+    "iff": "neutral",
+    "speakTime": "1",
+    "speechClip": "EN/"
+  },
+  "TestClip1": {
+    "speaker": "LCDR Lennox",
+    "text": "Comms check.",
+    "iff": "friend",
+    "speakTime": "2.5",
+    "speechClip": "EN/TestClip1"
+  },
+  "TestClip2": {
+    "speaker": "No. 2",
+    "text": "Second test clip.",
+    "iff": "enemy",
+    "speakTime": "15",
+    "speechClip": ""
+  },
+  "DemoConv_Controller_AskWeather": {
+    "speaker": "LCDR Lennox",
+    "text": "Hm. Surface party, what's the weather looking like? Any aerial phenomena?",
+    "iff": "friend",
+    "speakTime": "6",
+    "speechClip": "EN/DemoConv_Controller_AskWeather"
+  },
+  "DemoConv_Spaceman_NoChanges": {
+    "speaker": "LT Keller",
+    "text": "Nothing unusual.",
+    "iff": "friend",
+    "speakTime": "2",
+    "speechClip": "EN/DemoConv_Spaceman_NothingUnusual"
+  },
+  "DemoConv_Controller_RespondSensorGlitch": {
+    "speaker": "LCDR Lennox",
+    "text": "Copy that. Looks like our sensors are going bad.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/DemoConv_Controller_RespondSensorGlitch"
+  }
+}
