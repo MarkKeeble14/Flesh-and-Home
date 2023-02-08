@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TestFlamethrower : MonoBehaviour
+public class FlamethrowerSettings : WeaponAttachmentController
 {
     private InputManager inputManager;
     [SerializeField] private ParticleSystem flamethrowerParticleSystem;
@@ -17,16 +17,9 @@ public class TestFlamethrower : MonoBehaviour
     private void Start()
     {
         inputManager = InputManager._Instance;
-        // inputManager.PlayerInputActions.Player.FireAttachment.started += Fire;
     }
 
-    private void OnDestroy()
-    {
-        // Remove input action
-        // inputManager.PlayerInputActions.Player.FireAttachment.started -= Fire;
-    }
-
-    private void Fire(InputAction.CallbackContext ctx)
+    public override void Fire(InputAction.CallbackContext ctx)
     {
         if (fuelStore.CurrentFuel > 0)
             StartCoroutine(Fire());
@@ -41,6 +34,9 @@ public class TestFlamethrower : MonoBehaviour
 
         while (inputManager.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFuel > 0)
         {
+            // Spread Crosshair
+            CrosshairController._Instance.Spread(1);
+
             fuelStore.CurrentFuel -= Time.deltaTime * fuelConsumptionRate;
             yield return null;
         }

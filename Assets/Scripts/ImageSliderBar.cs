@@ -6,12 +6,13 @@ using TMPro;
 
 public class ImageSliderBar : MonoBehaviour
 {
+    [SerializeField] private bool showWhenFull;
+    [SerializeField] private bool subtractMode;
     [SerializeField] private bool useText;
+    [SerializeField] private bool valueAsText;
     [SerializeField] private string prefix;
     [SerializeField] private string suffix;
     [SerializeField] private int decimalPlaces = 1;
-
-    [SerializeField] private bool subtractMode;
     [SerializeField] private HorizontalDirection direction;
 
     private float value;
@@ -25,7 +26,7 @@ public class ImageSliderBar : MonoBehaviour
     {
         // Set Value and Control Object State
         float currentValue = value / maxValue;
-        bool shouldBeActive = currentValue > 0 && value < maxValue;
+        bool shouldBeActive = (currentValue > 0 && value < maxValue) || (currentValue > 0 && showWhenFull);
         // Debug.Log(value + ", " + maxValue + ", " + currentValue + ", " + shouldBeActive);
 
         // If not set to use text, don't use text
@@ -44,7 +45,13 @@ public class ImageSliderBar : MonoBehaviour
             bar.fillAmount = currentValue;
         }
         bar.fillOrigin = direction == HorizontalDirection.RIGHT ? 1 : 0;
-        text.text = prefix + (System.Math.Round(maxValue - (currentValue * maxValue), decimalPlaces)).ToString() + suffix;
+
+        text.text =
+            prefix +
+            (valueAsText ?
+                value + " / " + maxValue :
+                (System.Math.Round(maxValue - (currentValue * maxValue), decimalPlaces)).ToString())
+            + suffix;
     }
 
     public void SetValue(float v)

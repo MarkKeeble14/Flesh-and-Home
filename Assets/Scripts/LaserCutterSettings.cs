@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(LineRenderer))]
-public class TestLaserCutter : MonoBehaviour
+public class LaserCutterSettings : WeaponAttachmentController
 {
     [Header("Settings")]
     [SerializeField] private float overheatAfter;
@@ -31,7 +31,6 @@ public class TestLaserCutter : MonoBehaviour
     [SerializeField] private AudioClipContainer overheatEndSound;
     [SerializeField] private AudioSource source;
     [SerializeField] private ImageSliderBar showOverheatBar;
-    private InputManager inputManager;
     private LineRenderer lineRenderer;
     private Material material;
 
@@ -46,19 +45,7 @@ public class TestLaserCutter : MonoBehaviour
         material = lineRenderer.material;
     }
 
-    private void Start()
-    {
-        inputManager = InputManager._Instance;
-        inputManager.PlayerInputActions.Player.FireAttachment.started += Fire;
-    }
-
-    private void OnDestroy()
-    {
-        // Remove input action
-        inputManager.PlayerInputActions.Player.FireAttachment.started -= Fire;
-    }
-
-    private void Update()
+    public void Update()
     {
         // Reduce timer if not shooting
         // Later should replace this time based calculation with a more accurate physics based on (heat dissapation iirc)
@@ -100,7 +87,7 @@ public class TestLaserCutter : MonoBehaviour
         showOverheatBar.SetColor(overheated ? overheatColor : defaultColor);
     }
 
-    private void Fire(InputAction.CallbackContext ctx)
+    public override void Fire(InputAction.CallbackContext ctx)
     {
         if (overheated) return;
         StartCoroutine(Fire());
@@ -121,7 +108,7 @@ public class TestLaserCutter : MonoBehaviour
         laserStartSound.PlayOneShot(source);
 
         // While the player has the button pressed
-        while (inputManager.PlayerInputActions.Player.FireAttachment.IsPressed())
+        while (InputManager._Instance.PlayerInputActions.Player.FireAttachment.IsPressed())
         {
             trackOverheatTimer += Time.deltaTime;
 

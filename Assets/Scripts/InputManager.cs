@@ -34,6 +34,11 @@ public class InputManager : MonoBehaviour
 
         // Other
         PlayerInputActions.Player.Interact.Enable();
+
+        // Hotkeys
+        PlayerInputActions.Player.Hotkey1.Enable();
+        PlayerInputActions.Player.Hotkey2.Enable();
+        PlayerInputActions.Player.Hotkey3.Enable();
     }
 
     public void DisableInput()
@@ -51,6 +56,11 @@ public class InputManager : MonoBehaviour
 
         // Other
         PlayerInputActions.Player.Interact.Disable();
+
+        // Hotkeys
+        PlayerInputActions.Player.Hotkey1.Disable();
+        PlayerInputActions.Player.Hotkey2.Disable();
+        PlayerInputActions.Player.Hotkey3.Disable();
     }
 
     public Vector2 GetPlayerMovement()

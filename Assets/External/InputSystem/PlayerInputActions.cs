@@ -89,6 +89,33 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hotkey1"",
+                    ""type"": ""Button"",
+                    ""id"": ""85699789-425c-4ff7-bf5e-8c916877400a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hotkey2"",
+                    ""type"": ""Button"",
+                    ""id"": ""f5db8ba9-6902-4282-955d-867994008bea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Hotkey3"",
+                    ""type"": ""Button"",
+                    ""id"": ""8d415a8d-c04b-4708-af7d-2a1eefc18823"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -278,6 +305,39 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99a60abe-5783-4e40-a7c7-a25849efcfc1"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hotkey1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b62498bd-87dc-4b9d-b462-4cb143cefef2"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hotkey2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f723fae6-3de0-4218-95e6-1e8a5edb3f42"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Hotkey3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -293,6 +353,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Hotkey1 = m_Player.FindAction("Hotkey1", throwIfNotFound: true);
+        m_Player_Hotkey2 = m_Player.FindAction("Hotkey2", throwIfNotFound: true);
+        m_Player_Hotkey3 = m_Player.FindAction("Hotkey3", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -359,6 +422,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Melee;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Hotkey1;
+    private readonly InputAction m_Player_Hotkey2;
+    private readonly InputAction m_Player_Hotkey3;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -370,6 +436,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Melee => m_Wrapper.m_Player_Melee;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Hotkey1 => m_Wrapper.m_Player_Hotkey1;
+        public InputAction @Hotkey2 => m_Wrapper.m_Player_Hotkey2;
+        public InputAction @Hotkey3 => m_Wrapper.m_Player_Hotkey3;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -400,6 +469,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Hotkey1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey1;
+                @Hotkey1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey1;
+                @Hotkey1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey1;
+                @Hotkey2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey2;
+                @Hotkey2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey2;
+                @Hotkey2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey2;
+                @Hotkey3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey3;
+                @Hotkey3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey3;
+                @Hotkey3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey3;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -425,6 +503,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Hotkey1.started += instance.OnHotkey1;
+                @Hotkey1.performed += instance.OnHotkey1;
+                @Hotkey1.canceled += instance.OnHotkey1;
+                @Hotkey2.started += instance.OnHotkey2;
+                @Hotkey2.performed += instance.OnHotkey2;
+                @Hotkey2.canceled += instance.OnHotkey2;
+                @Hotkey3.started += instance.OnHotkey3;
+                @Hotkey3.performed += instance.OnHotkey3;
+                @Hotkey3.canceled += instance.OnHotkey3;
             }
         }
     }
@@ -438,5 +525,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnHotkey1(InputAction.CallbackContext context);
+        void OnHotkey2(InputAction.CallbackContext context);
+        void OnHotkey3(InputAction.CallbackContext context);
     }
 }

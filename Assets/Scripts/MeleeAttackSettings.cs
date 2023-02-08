@@ -1,14 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TestMelee : MonoBehaviour
+public class MeleeAttackSettings : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float damage;
     [SerializeField] private float additionalCooldown;
     private bool onCooldown;
+    private bool isInMelee;
 
     [Header("Visuals")]
     [SerializeField] private List<string> attackAnimationNames = new List<string>();
@@ -18,33 +19,25 @@ public class TestMelee : MonoBehaviour
     [SerializeField] private AudioClipContainer meleeSound;
     [SerializeField] private AudioSource source;
     [SerializeField] private Animator weapon;
-    private InputManager inputManager;
 
-    private bool isInMelee;
+    private Animator Weapon
+    {
+        get
+        {
+            return weapon;
+        }
+    }
 
     private void Start()
     {
-        inputManager = InputManager._Instance;
-        inputManager.PlayerInputActions.Player.Melee.started += Melee;
-    }
-
-    private void OnDestroy()
-    {
-        // Remove input action
-        inputManager.PlayerInputActions.Player.Melee.started -= Melee;
-    }
-
-    private void Melee(InputAction.CallbackContext ctx)
-    {
-        if (isInMelee || onCooldown) return;
-        StartCoroutine(Melee());
+        InputManager._Instance.PlayerInputActions.Player.Melee.performed += Melee;
     }
 
     private IEnumerator Melee()
     {
         // We have started melee
         isInMelee = true;
-        weapon.gameObject.SetActive(true);
+        Weapon.gameObject.SetActive(true);
 
         // Play a random animation
         string animation;
@@ -65,21 +58,21 @@ public class TestMelee : MonoBehaviour
         }
 
         // Set bool in animator
-        weapon.SetBool(animation, true);
+        Weapon.SetBool(animation, true);
 
         // Play sound
         meleeSound.PlayOneShot(source);
 
         // Wait until animator has started playing animation
-        yield return new WaitUntil(() => !weapon.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
+        yield return new WaitUntil(() => !Weapon.GetCurrentAnimatorStateInfo(0).IsName("Idle"));
         // Then wait until animator has finished playing animation
-        yield return new WaitUntil(() => weapon.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !weapon.IsInTransition(0));
+        yield return new WaitUntil(() => Weapon.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !Weapon.IsInTransition(0));
 
         // Turn off bool in animator
-        weapon.SetBool(animation, false);
+        Weapon.SetBool(animation, false);
 
         // Turn off weapon gameobject so as not to show/interact with anything
-        weapon.gameObject.SetActive(false);
+        Weapon.gameObject.SetActive(false);
 
         // Additional Cooldown
         StartCoroutine(Cooldown(additionalCooldown));
@@ -94,5 +87,11 @@ public class TestMelee : MonoBehaviour
         onCooldown = true;
         yield return new WaitForSeconds(cd);
         onCooldown = false;
+    }
+
+    public void Melee(InputAction.CallbackContext ctx)
+    {
+        if (isInMelee || onCooldown) return;
+        StartCoroutine(Melee());
     }
 }
