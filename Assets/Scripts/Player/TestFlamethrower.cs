@@ -38,9 +38,10 @@ public class TestFlamethrower : MonoBehaviour
         flamethrowerParticleSystem.Play();
         flamethrowerSource.enabled = true;
         source.PlayOneShot(flamethrowerStartSound);
-
+        
         while (inputManager.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFuel > 0)
         {
+            
             fuelStore.CurrentFuel -= Time.deltaTime * fuelConsumptionRate;
             yield return null;
         }
