@@ -5,13 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/TestingScene/MarkTestScene.unity
-    guid: 24661eb3d6dab40428206024aa153321
   - enabled: 1
-    path: Assets/Scenes/TestingScene/JS_TestScene/FPS_Camera_Test.unity
-    guid: cce5ac7b79d92c7469971bd2bbe1f818
+    path: Assets/Scenes/OverworldScene.unity
+    guid: d009c4f534ffe8349894fb8c88a2889c
+  - enabled: 1
+    path: Assets/Scenes/RuinsScene.unity
+    guid: a24b625ba577c9a44b5db217bda2bfca
   m_configObjects: {}
