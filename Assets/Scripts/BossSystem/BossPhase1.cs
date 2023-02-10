@@ -6,17 +6,21 @@ public class BossPhase1 : BossAttackingPhase
 {
     [Header("Phase")]
     [SerializeField] private Transform armorPlateHolder;
-    [HideInInspector] public OverheatableBossComponentEntity[] armorPlating;
+    [HideInInspector] public List<OverheatableBossComponentEntity> armorPlating = new List<OverheatableBossComponentEntity>();
     [SerializeField] private int platesNeededToDestroyToAdvance;
     private int platesDestroyed;
 
     private void Awake()
     {
-        armorPlating = armorPlateHolder.GetComponentsInChildren<OverheatableBossComponentEntity>();
+        armorPlating.AddRange(armorPlateHolder.GetComponentsInChildren<OverheatableBossComponentEntity>());
         // Loop through plates; add an "on end action" to each (will be called when the object is "ended", so usually destroyed) which will simply remove it from the list
         foreach (OverheatableBossComponentEntity plate in armorPlating)
         {
-            plate.AddAdditionalOnEndAction(() => platesDestroyed++);
+            plate.AddAdditionalOnEndAction(() =>
+            {
+                armorPlating.Remove(plate);
+                platesDestroyed++;
+            });
         }
     }
 

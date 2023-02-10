@@ -28,6 +28,7 @@ public class InputManager : MonoBehaviour
 
         // Actions
         PlayerInputActions.Player.Sprint.Enable();
+        PlayerInputActions.Player.Shoot.Enable();
         PlayerInputActions.Player.FireAttachment.Enable();
         PlayerInputActions.Player.Melee.Enable();
         PlayerInputActions.Player.Jump.Enable();
@@ -44,12 +45,14 @@ public class InputManager : MonoBehaviour
     public void DisableInput()
     {
         // Player controls
+
         // Move and Look
         PlayerInputActions.Player.Move.Disable();
         PlayerInputActions.Player.Look.Disable();
 
         // Actions
         PlayerInputActions.Player.Sprint.Disable();
+        PlayerInputActions.Player.Shoot.Disable();
         PlayerInputActions.Player.FireAttachment.Disable();
         PlayerInputActions.Player.Melee.Disable();
         PlayerInputActions.Player.Jump.Disable();

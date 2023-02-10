@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 157486848703858808}
   - component: {fileID: 5615494516465133719}
   - component: {fileID: 3317057215007092291}
+  - component: {fileID: 4442104131247744794}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -196,9 +197,10 @@ MonoBehaviour:
     pitch: 1
   constantSource: {fileID: 5493201208609866444}
   source: {fileID: 3873537529094475354}
-  barrelScalePerAxis: {x: 0.75, y: 1, z: 0.75}
-  barrelTranslateScalePerAxis: {x: 1.25, y: 1.25, z: 1.25}
+  barrelScalePerAxis: {x: 1, y: 1.25, z: 1}
+  barrelTranslateScalePerAxis: {x: 1.5, y: 1.5, z: 1.5}
   rigidbody: {fileID: 3317057215007092291}
+  collider: {fileID: 4442104131247744794}
 --- !u!82 &5493201208609866444
 AudioSource:
   m_ObjectHideFlags: 0
@@ -459,3 +461,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &4442104131247744794
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578006172887134027}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -33,6 +33,8 @@ public class BossPhaseManager : MonoBehaviour
     public AudioSource source;
     public TemporaryAudioSource temporaryAudioSource;
 
+    private bool isDone;
+
     private void Start()
     {
         // Set initial state
@@ -45,6 +47,7 @@ public class BossPhaseManager : MonoBehaviour
 
     public void SwitchState(BossPhaseBaseState state)
     {
+        if (isDone) return;
         currentPhase.ExitState(this);
         currentPhase = state;
         currentPhase.EnterState(this);
@@ -52,15 +55,17 @@ public class BossPhaseManager : MonoBehaviour
 
     private void Update()
     {
+        if (isDone) return;
         // Update the current state
         currentPhase.UpdateState(this);
     }
 
     private BossPhaseBaseState GetCurrentPhase()
     {
-        if (index > bossPhaseOrder.Length)
+        if (index > bossPhaseOrder.Length - 1)
         {
             Debug.Log("Out of Phases");
+            isDone = true;
             return null;
         }
 

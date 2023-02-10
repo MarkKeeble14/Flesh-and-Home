@@ -53,7 +53,7 @@ public class PlayerController : KillableEntity
     {
         get
         {
-            return jetpackAirDashCooldownTimer <= 0 && flying;
+            return jetpackAirDashCooldownTimer <= 0 && !isGrounded;
         }
     }
 
@@ -275,17 +275,17 @@ public class PlayerController : KillableEntity
         {
             if (jetpackAirDashCooldownTimer > 0)
             {
-                Debug.Log("Air Dash On Cooldown; Can't use Air Dash");
+                // Debug.Log("Air Dash On Cooldown; Can't use Air Dash");
                 return;
             }
             if (!flying)
             {
-                Debug.Log("Not Flying; Can't use Air Dash");
+                // Debug.Log("Not Flying; Can't use Air Dash");
                 return;
             }
         }
 
-        Debug.Log("Activate Air Dash");
+        // Debug.Log("Activate Air Dash");
 
         // Audio
         airDashClip.PlayOneShot(source);

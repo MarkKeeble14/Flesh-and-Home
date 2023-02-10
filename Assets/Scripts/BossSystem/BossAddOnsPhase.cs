@@ -8,6 +8,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
     [SerializeField] private float duration = 10f;
     [SerializeField] private CinemachineImpulseSource groundShakeImpulseSource;
     [SerializeField] private float impulseForce;
+    [SerializeField] private bool riseBeforeEnding = true;
 
     [Header("Settings")]
     [SerializeField] private float dropSpeed = .5f;
@@ -162,25 +163,26 @@ public class BossAddOnsPhase : BossPhaseBaseState
             failureClip.PlayOneShot(boss.source);
         }
 
-        // Return to original height
-        time = 0;
-        // Audio
-        startRiseClip.PlayOneShot(boss.source);
-        while (transform.position.y < initialYHeight)
+        if (riseBeforeEnding)
         {
-            time += Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialYHeight, transform.position.z),
-                reRiseCurve.Evaluate(time) * reRiseSpeed);
-            yield return null;
-        }
+            // Return to original height
+            time = 0;
+            // Audio
+            startRiseClip.PlayOneShot(boss.source);
+            while (transform.position.y < initialYHeight)
+            {
+                time += Time.deltaTime;
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialYHeight, transform.position.z),
+                    reRiseCurve.Evaluate(time) * reRiseSpeed);
+                yield return null;
+            }
 
-        // Audio
-        finishRiseClip.PlayOneShot(boss.source);
+            // Audio
+            finishRiseClip.PlayOneShot(boss.source);
+        }
 
         // Pause
         yield return new WaitForSeconds(pauseDuration);
-
-        boss.ShellEnemyMovement.EnableNavMeshAgent();
 
         // Switch State
         boss.LoadNextPhase();

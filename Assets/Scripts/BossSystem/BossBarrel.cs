@@ -22,6 +22,16 @@ public class BossBarrel : MonoBehaviour
     [SerializeField] private new Rigidbody rigidbody;
     public Rigidbody Rigidbody => rigidbody;
 
+    [SerializeField] private new Collider collider;
+    public Collider Collider => collider;
+
+    private bool disabled;
+    public bool Disabled
+    {
+        get { return disabled; }
+        set { disabled = value; }
+    }
+
     private void Awake()
     {
         // Scale 

@@ -45,7 +45,7 @@ public class FlamethrowerSettings : WeaponAttachmentController
         flamethrowerParticleSystem.Play();
         flamethrowerSource.enabled = true;
         source.PlayOneShot(flamethrowerStartSound);
-
+        
         while (inputManager.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFuel > 0)
         {
             // Spread Crosshair

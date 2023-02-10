@@ -11,7 +11,6 @@ public class FleshPod : KillableEntity
     [SerializeField] private FleshPodSpawn critter;
     [SerializeField] private Vector2 minMaxCanSpawnPerTick;
     [SerializeField] private float timeBetweenTicks;
-    [SerializeField] private Vector3 startScale;
     [SerializeField] private LayerMask ground;
 
     [Header("Animations")]
@@ -20,6 +19,7 @@ public class FleshPod : KillableEntity
     [Header("Settle")]
     [SerializeField] private float settleSpeed;
     private bool shouldSettle;
+    private Vector3 startScale;
     private Vector3 targetScale;
 
     [Header("References")]

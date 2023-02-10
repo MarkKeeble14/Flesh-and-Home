@@ -6,11 +6,14 @@ public class KillableEntity : EndableEntity
     [SerializeField] protected float maxHealth;
     protected float currentHealth;
 
+    [SerializeField] private bool destroyOnDeath;
+
     [Header("References")]
     [SerializeField] private new Rigidbody rigidbody;
 
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onTakeDamageClip;
+
 
     private void OnEnable()
     {
@@ -42,6 +45,9 @@ public class KillableEntity : EndableEntity
         base.OnEnd();
 
         // Destroy
-        Destroy(gameObject);
+        if (destroyOnDeath)
+        {
+            Destroy(gameObject);
+        }
     }
 }

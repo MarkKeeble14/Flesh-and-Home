@@ -37,9 +37,34 @@ public abstract class LaserAttacker : Attacker
         }
     }
 
+    private Vector3 GetLaserOrigin(LaserOriginType originType, BossBarrel barrel, Transform shell)
+    {
+        switch (originType)
+        {
+            case LaserOriginType.BARREL:
+                return barrel.transform.position;
+            case LaserOriginType.SHELL:
+                return shell.position;
+            default:
+                throw new UnhandledSwitchCaseException();
+        }
+    }
+
+    private Vector3 GetDirectionOffset()
+    {
+        return new Vector3(
+            Random.Range(laserAttackerOptions.MinMaxLaserOffset.x, laserAttackerOptions.MinMaxLaserOffset.y) * (Random.value >= .5f ? 1 : -1),
+            Random.Range(laserAttackerOptions.MinMaxLaserOffset.x, laserAttackerOptions.MinMaxLaserOffset.y) * (Random.value >= .5f ? 1 : -1),
+            Random.Range(laserAttackerOptions.MinMaxLaserOffset.x, laserAttackerOptions.MinMaxLaserOffset.y) * (Random.value >= .5f ? 1 : -1)
+            );
+    }
+
     protected IEnumerator LaserFrom(BossBarrel barrel, Transform shell)
     {
         if (barrel.IsFiring) yield break;
+
+        if (barrel.Disabled) yield break;
+
         barrel.IsFiring = true;
 
         LineRenderer selected = barrel.LineRenderer;
@@ -58,10 +83,24 @@ public abstract class LaserAttacker : Attacker
 
         // Grow Laser Width
         // Starting Up
-        Vector3 direction = GetDirection(barrel, shell.position);
+        LaserAimingType aimingType = GetLaserAimingType();
+        LaserOriginType originType = GetLaserOriginType(barrel);
+
+        Vector3 randomDirection = Random.onUnitSphere;
+        Vector3 randomFocusPoint = randomDirection * laserAttackerOptions.LaserRange;
+        Vector3 laserOrigin = GetLaserOrigin(originType, barrel, shell);
+        Vector3 directionToPlayer = (bossPhaseManager.Player.position - laserOrigin + GetDirectionOffset()).normalized;
+        Vector3 direction;
 
         while (selected.widthMultiplier < laserAttackerOptions.MaxLaserWidth)
         {
+            laserOrigin = GetLaserOrigin(originType, barrel, shell);
+            direction = GetLaserDirection(aimingType, barrel, laserOrigin, directionToPlayer, randomFocusPoint);
+            if (aimingType == LaserAimingType.FOCUS_PLAYER)
+            {
+                directionToPlayer = direction;
+            }
+
             // Set Material Color
             SetColor(selected, Color.Lerp(laserAttackerOptions.ChargeColor, laserAttackerOptions.ActiveColor, selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth),
                 Mathf.Lerp(0, laserAttackerOptions.EmissionIntensityScale, selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth));
@@ -79,6 +118,13 @@ public abstract class LaserAttacker : Attacker
         // Active
         for (float t = 0; t < laserAttackerOptions.LaserStayDuration; t += Time.deltaTime)
         {
+            laserOrigin = GetLaserOrigin(originType, barrel, shell);
+            direction = GetLaserDirection(aimingType, barrel, laserOrigin, directionToPlayer, randomFocusPoint);
+            if (aimingType == LaserAimingType.FOCUS_PLAYER)
+            {
+                directionToPlayer = direction;
+            }
+
             // Set Material Color
             SetColor(selected, laserAttackerOptions.ActiveColor, laserAttackerOptions.EmissionIntensityScale);
 
@@ -95,6 +141,13 @@ public abstract class LaserAttacker : Attacker
         // Turning off
         while (selected.widthMultiplier > 0)
         {
+            laserOrigin = GetLaserOrigin(originType, barrel, shell);
+            direction = GetLaserDirection(aimingType, barrel, laserOrigin, directionToPlayer, randomFocusPoint);
+            if (aimingType == LaserAimingType.FOCUS_PLAYER)
+            {
+                directionToPlayer = direction;
+            }
+
             // Set Material Color
             SetColor(selected, Color.Lerp(laserAttackerOptions.ChargeColor, laserAttackerOptions.ActiveColor, selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth),
                 Mathf.Lerp(0, laserAttackerOptions.EmissionIntensityScale, selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth));
@@ -124,30 +177,49 @@ public abstract class LaserAttacker : Attacker
         line.material.SetColor("_EmissionColor", color * scale);
     }
 
-    private Vector3 GetDirection(BossBarrel line, Vector3 origin)
+    private Vector3 GetLaserDirection(LaserAimingType aimingType, BossBarrel barrel, Vector3 origin, Vector3 directionToPlayer, Vector3 randomPoint)
+    {
+        switch (aimingType)
+        {
+            case LaserAimingType.FOCUS_PLAYER:
+                Vector3 targetDirection = (bossPhaseManager.Player.position - origin).normalized;
+                return Vector3.MoveTowards(directionToPlayer, targetDirection, Time.deltaTime * laserAttackerOptions.FollowPlayerSpeed).normalized;
+            case LaserAimingType.STRAIGHT:
+                return (barrel.transform.position - origin).normalized;
+            case LaserAimingType.RANDOM:
+                return (randomPoint - origin).normalized;
+            default:
+                throw new UnhandledSwitchCaseException();
+        }
+    }
+
+    private LaserOriginType GetLaserOriginType(BossBarrel line)
     {
         if (line.IsAttached || laserAttackerOptions.KeepAimSourceWhenUnattached)
         {
-            // Debug.Log("Aiming from Shell: " + line.transform.parent + ", " + laserAttackerOptions.LaserTargetingOptions.keepAimSourceWhenUnattached);
-            return (line.transform.position - origin).normalized;
+            return LaserOriginType.SHELL;
         }
+        return LaserOriginType.BARREL;
+    }
 
-        if (!laserAttackerOptions.CanTargetPlayer)
+    private LaserAimingType GetLaserAimingType()
+    {
+        if (laserAttackerOptions.OriginateAtShell)
         {
-            // Debug.Log("Aiming randomly");
-            return Random.onUnitSphere;
+            return LaserAimingType.STRAIGHT;
         }
 
         float rand = Random.value;
         // Debug.Log(rand + ", " + laserAttackerOptions.ChanceToTargetPlayer.x / laserAttackerOptions.ChanceToTargetPlayer.y);
-        if (rand <= laserAttackerOptions.ChanceToTargetPlayer.x / laserAttackerOptions.ChanceToTargetPlayer.y)
+        if (laserAttackerOptions.CanTargetPlayer &&
+            rand <= laserAttackerOptions.ChanceToTargetPlayer.x / laserAttackerOptions.ChanceToTargetPlayer.y)
         {
+            return LaserAimingType.FOCUS_PLAYER;
             // Debug.Log("Aiming to Player");
-            return (bossPhaseManager.Player.position - line.transform.position).normalized;
         }
 
         // Debug.Log("Aiming randomly");
-        return Random.onUnitSphere;
+        return LaserAimingType.RANDOM;
     }
 
     private void LaserCast(bool doDamage, LineRenderer line, Vector3 direction, TimerDictionary<Collider> hasHit)

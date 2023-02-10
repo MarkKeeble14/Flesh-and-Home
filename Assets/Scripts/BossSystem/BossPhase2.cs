@@ -11,10 +11,6 @@ public class BossPhase2 : BossAttackingPhase
     {
         Debug.Log("Entering State 2");
 
-        // Tell Shell to take damage
-        bossShell.AcceptDamage = true;
-        bossShell.SetHPBar(boss.HPBar);
-
         // And also to set complete to true when done
         bossShell.AddAdditionalOnEndAction(() => complete = true);
 
@@ -37,10 +33,11 @@ public class BossPhase2 : BossAttackingPhase
         // Wait for a second
         yield return new WaitForSeconds(enterPhaseTime);
 
-        // Turn on Damage
+        // Tell Shell to take damage
         bossShell.AcceptDamage = true;
 
         // Enable HP Bar
+        bossShell.SetHPBar(boss.HPBar);
         boss.HPBar.Show();
 
         // Has movement
@@ -51,8 +48,6 @@ public class BossPhase2 : BossAttackingPhase
         {
             yield return StartCoroutine(CallAttacks(boss));
         }
-
-        yield return new WaitUntil(() => boss.HPBar.IsFull);
 
         // Switch State
         boss.LoadNextPhase();

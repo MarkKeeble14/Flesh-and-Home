@@ -4,9 +4,11 @@ public class EnemyMovement : MonoBehaviour
 {
     public bool Move = true;
     [HideInInspector] public Transform Target;
+    [SerializeField] protected LayerMask isGround;
 
     [Header("Audio")]
     [SerializeField] protected AudioSource movementSource;
+
 
     protected void Start()
     {
@@ -20,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
         {
             RaycastHit hit;
             Ray ray = new Ray(transform.position, Vector3.down);
-            Physics.Raycast(ray, out hit, Mathf.Infinity);
+            Physics.Raycast(ray, out hit, Mathf.Infinity, isGround);
             return transform.position.y - hit.point.y;
         }
     }

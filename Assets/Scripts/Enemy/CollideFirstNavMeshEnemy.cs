@@ -6,15 +6,13 @@ public class CollideFirstNavMeshEnemy : NavMeshEnemy
 {
     [Header("Collision Settings")]
     [SerializeField] private float timeAfterGroundCollisionToMove;
-    [SerializeField] private LayerMask ground;
-
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onCollideWithGroundClip;
     [SerializeField] private AudioSource source;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (LayerMaskHelper.IsInLayerMask(collision.gameObject, ground))
+        if (LayerMaskHelper.IsInLayerMask(collision.gameObject, isGround))
         {
             // Audio
             onCollideWithGroundClip.PlayOneShot(source);

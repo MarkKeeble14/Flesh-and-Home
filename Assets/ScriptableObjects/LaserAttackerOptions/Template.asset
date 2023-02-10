@@ -24,7 +24,10 @@ MonoBehaviour:
     m_Bits: 8704
   chargeColor: {r: 0, g: 0, b: 1, a: 1}
   activeColor: {r: 1, g: 0, b: 0, a: 1}
-  emissionIntensityScale: 20
+  emissionIntensityScale: 10
   keepAimSourceWhenUnattached: 0
   canTargetPlayer: 0
+  followPlayerSpeed: 0
   chanceToTargetPlayer: {x: 0, y: 0}
+  originateAtShell: 1
+  minMaxLaserOffset: {x: 2.5, y: 5}

@@ -1,4 +1,6 @@
-﻿public class KillableBossComponentEntity : KillableEntity
+﻿using UnityEngine;
+
+public class KillableBossComponentEntity : KillableEntity
 {
     public bool AcceptDamage { get; set; }
     public ImageSliderBar HPBar { get; private set; }
@@ -6,13 +8,13 @@
     public override void Damage(float damage)
     {
         if (!AcceptDamage) return;
-        HPBar.Set(currentHealth, maxHealth);
+        if (HPBar != null)
+            HPBar.Set(currentHealth, maxHealth);
         base.Damage(damage);
     }
-    public virtual void SetHPBar(ImageSliderBar hpBar)
+    public void SetHPBar(ImageSliderBar hpBar)
     {
         HPBar = hpBar;
         HPBar.Set(currentHealth, maxHealth);
     }
-
 }

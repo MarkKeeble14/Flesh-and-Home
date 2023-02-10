@@ -116,6 +116,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""e5242b96-79b3-4393-8b08-8740883ed3eb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -265,7 +274,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""40c739c9-4646-489c-a54d-7bf53347b088"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -338,6 +347,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Hotkey3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""535de6a6-0be3-4099-9f4e-e4c83440ee8f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -356,6 +376,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Hotkey1 = m_Player.FindAction("Hotkey1", throwIfNotFound: true);
         m_Player_Hotkey2 = m_Player.FindAction("Hotkey2", throwIfNotFound: true);
         m_Player_Hotkey3 = m_Player.FindAction("Hotkey3", throwIfNotFound: true);
+        m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,6 +446,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Hotkey1;
     private readonly InputAction m_Player_Hotkey2;
     private readonly InputAction m_Player_Hotkey3;
+    private readonly InputAction m_Player_Shoot;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -439,6 +461,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Hotkey1 => m_Wrapper.m_Player_Hotkey1;
         public InputAction @Hotkey2 => m_Wrapper.m_Player_Hotkey2;
         public InputAction @Hotkey3 => m_Wrapper.m_Player_Hotkey3;
+        public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -478,6 +501,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Hotkey3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey3;
                 @Hotkey3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey3;
                 @Hotkey3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHotkey3;
+                @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -512,6 +538,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Hotkey3.started += instance.OnHotkey3;
                 @Hotkey3.performed += instance.OnHotkey3;
                 @Hotkey3.canceled += instance.OnHotkey3;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -528,5 +557,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnHotkey1(InputAction.CallbackContext context);
         void OnHotkey2(InputAction.CallbackContext context);
         void OnHotkey3(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }

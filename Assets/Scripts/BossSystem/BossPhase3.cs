@@ -5,9 +5,6 @@ using UnityEngine;
 public class BossPhase3 : BossAttackingPhase
 {
     [Header("Phase")]
-    [SerializeField] private Transform armorPlateHolder;
-    private List<Rigidbody> armorPlates = new List<Rigidbody>();
-
     [SerializeField] private Transform barrelHolder;
     private List<BossBarrel> bossBarrels = new List<BossBarrel>();
 
@@ -29,6 +26,7 @@ public class BossPhase3 : BossAttackingPhase
     [Header("Barrels")]
     [SerializeField] private Vector2 barrelsMinMaxForcePerAxis;
     [SerializeField] private Vector2 barrelsMinMaxTorquePerAxis;
+    [SerializeField] private float timeAfterFleshyKillBeforeDropBarrels;
 
     [Header("Audio")]
     [SerializeField] private AudioSource shakeSource;
@@ -36,12 +34,8 @@ public class BossPhase3 : BossAttackingPhase
     [SerializeField] private AudioClipContainer reachGroundClip;
     [SerializeField] private AudioClipContainer fleshySpawnClip;
 
-
     private void Awake()
     {
-        // Add Plates
-        armorPlates.AddRange(armorPlateHolder.GetComponentsInChildren<Rigidbody>());
-
         // Add Boss Barrels
         bossBarrels.AddRange(barrelHolder.GetComponentsInChildren<BossBarrel>());
     }
@@ -50,15 +44,14 @@ public class BossPhase3 : BossAttackingPhase
     {
         Debug.Log("Entering State 3");
 
-        // Tell Flesh to take damage
-        bossFlesh.AcceptDamage = true;
-        bossFlesh.SetHPBar(boss.HPBar);
-
         // And also to set complete to true when done
         bossFlesh.AddAdditionalOnEndAction(() => complete = true);
 
-        foreach (Rigidbody rb in armorPlates)
+        foreach (OverheatableBossComponentEntity ent in boss.bossPhase1.armorPlating)
         {
+            // Get Rigidbody component
+            Rigidbody rb = ent.GetComponent<Rigidbody>();
+
             // Uparent
             rb.transform.parent = rotatersHolder;
 
@@ -111,52 +104,15 @@ public class BossPhase3 : BossAttackingPhase
     {
         Debug.Log("Phase 3 Start");
 
-        // Stop shell from moving
+        // Shell gave up on lift
         boss.ShellEnemyMovement.Move = false;
         boss.ShellEnemyMovement.DisableNavMeshAgent();
 
-        // Used for shaking
-        float randX = Random.Range(0, 100);
-        float randZ = Random.Range(0, 100);
-        for (float t = 0; t < enterPhaseTime; t += Time.deltaTime)
-        {
-            if (Time.timeScale != 0)
-            {
-                TransformHelper.ShakeTransform(transform, randX, randZ, shakeSpeed, shakeStrength);
-                shakeSource.enabled = true;
-            }
-            else
-            {
-                shakeSource.enabled = false;
-            }
-        }
-
-        // Crash down
-        // Audio
-        crashDownStartClip.PlayOneShot(boss.source);
-
-        float time = 0;
-        float groundTarget = transform.position.y - boss.ShellEnemyMovement.DistanceToGround;
-        while (transform.position.y != groundTarget)
-        {
-            time += Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, groundTarget, transform.position.z),
-                dropCurve.Evaluate(time) * dropSpeed);
-
-            yield return null;
-        }
-
-        // Audio
-        reachGroundClip.PlayOneShot(boss.source);
+        // Wait some before spawning fleshy
+        yield return new WaitForSeconds(timeBeforeFleshySpawns);
 
         // Turn on Damage
         bossFlesh.AcceptDamage = true;
-
-        // Shell gave up on lift
-        boss.ShellEnemyMovement.Move = false;
-
-        // Wait some before spawning fleshy
-        yield return new WaitForSeconds(timeBeforeFleshySpawns);
 
         // Make Fleshy Boss Exist
         boss.FleshyEnemyMovement.transform.position = boss.ShellEnemyMovement.transform.position;
@@ -165,6 +121,7 @@ public class BossPhase3 : BossAttackingPhase
         boss.FleshyEnemyMovement.EnableNavMeshAgent();
 
         // Enable HP Bar
+        bossFlesh.SetHPBar(boss.HPBar);
         boss.HPBar.Show();
 
         // Audio
@@ -176,7 +133,22 @@ public class BossPhase3 : BossAttackingPhase
             yield return StartCoroutine(CallAttacks(boss));
         }
 
-        yield return new WaitUntil(() => boss.HPBar.IsFull);
+        foreach (BossBarrel b in bossBarrels)
+        {
+            b.Disabled = true;
+        }
+
+        // Make boss cease life
+        Destroy(bossFlesh.gameObject);
+
+        yield return new WaitForSeconds(timeAfterFleshyKillBeforeDropBarrels);
+
+        // Turn gravity back on for barrels
+        foreach (BossBarrel b in bossBarrels)
+        {
+            b.Rigidbody.useGravity = true;
+            b.Collider.enabled = true;
+        }
 
         boss.LoadNextPhase();
     }

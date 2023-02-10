@@ -15,6 +15,7 @@ public class LaserCutterSettings : WeaponAttachmentController
         public float overheatAfter;
         public float maxDistance;
         public LayerMask canHit;
+        public float heatDissapationRate;
     }
 
     [SerializeField] private LaserSettings laserSettings;
@@ -67,7 +68,7 @@ public class LaserCutterSettings : WeaponAttachmentController
         {
             if (trackOverheatTimer > 0)
             {
-                trackOverheatTimer -= Time.deltaTime;
+                trackOverheatTimer -= Time.deltaTime * laserSettings.heatDissapationRate;
             }
             else
             {

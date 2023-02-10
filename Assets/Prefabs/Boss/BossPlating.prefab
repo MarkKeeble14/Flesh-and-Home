@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7743030864407437406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.85, y: 0.85, z: 0.1}
+  m_LocalScale: {x: 1, y: 1, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -233,11 +233,11 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   currentHeat: 0
-  maxWithStandableHeat: 40
-  dissapationRate: 2
-  dissapateAfter: 1
+  maxWithStandableHeat: 50
+  dissapationRate: 0.2
+  dissapateAfter: 10
   minHeat: 0.1
-  hotColor: {r: 1, g: 0.5019608, b: 0.5019608, a: 1}
+  hotColor: {r: 1, g: 0, b: 0, a: 1}
   minMaxEmissionIntensity: {x: 0, y: 25}
   renderer: {fileID: 7743030864407437378}
   rigidbody: {fileID: 7743030864407437404}
