@@ -1,5 +1,119 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1911634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1911635}
+  - component: {fileID: 1911637}
+  - component: {fileID: 1911636}
+  - component: {fileID: 1911638}
+  - component: {fileID: 1911639}
+  m_Layer: 0
+  m_Name: FlamethrowerTriggerMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1911635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911634}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 300, y: 300, z: 1000}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7362887214417341344}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!33 &1911637
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911634}
+  m_Mesh: {fileID: 3613567641014311022, guid: 7c12b40fba75e1546a7876e076e825c4, type: 3}
+--- !u!23 &1911636
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911634}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0a4a691db035ead41988d5f14721ad1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1911638
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3613567641014311022, guid: 7c12b40fba75e1546a7876e076e825c4, type: 3}
+--- !u!114 &1911639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3a648edd6af054bbbabab8b869596d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showMesh: 1
+  collider: {fileID: 1911638}
+  renderer: {fileID: 1911636}
 --- !u!1 &7362887213531304022
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +185,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 8119
+    m_Bits: 32695
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -171,6 +285,7 @@ GameObject:
   - component: {fileID: 7362887213612965738}
   - component: {fileID: 7362887213612965739}
   - component: {fileID: 7362887213612965740}
+  - component: {fileID: 129976323}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -234,7 +349,7 @@ MonoBehaviour:
   m_VerticalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 175
+    m_MaxSpeed: 100
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -258,7 +373,7 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 250
+    m_MaxSpeed: 150
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -280,6 +395,23 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_ApplyBeforeBody: 0
+--- !u!114 &129976323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887213612965742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &7362887213686877920
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +456,7 @@ GameObject:
   - component: {fileID: 7362887213904076486}
   - component: {fileID: 7362887213904076487}
   - component: {fileID: 7362887213904076536}
+  - component: {fileID: 497181590}
   m_Layer: 0
   m_Name: CMvcam1
   m_TagString: Untagged
@@ -432,6 +565,29 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: -6642537398809759920, guid: 57589074a67d3ce4c861a0e470376694, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &497181590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887213904076540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &7362887213918750417
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +683,7 @@ GameObject:
   - component: {fileID: 1426587104}
   - component: {fileID: 1426587105}
   - component: {fileID: 1426587106}
+  - component: {fileID: 652312800}
   m_Layer: 9
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -646,6 +803,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ffae2e7962124438d183442ebb3c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  source: {fileID: 7362887214131378897}
+  tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
+    type: 3}
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  maxHealth: 100
+  rigidbody: {fileID: 652312800}
+  onTakeDamageClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  playerHpBar: {fileID: 0}
+  jetpackAirDashCooldownBar: {fileID: 0}
   baseSpeed: 3
   sprintSpeed: 1.25
   airStrafeSpeed: 2.5
@@ -659,6 +831,16 @@ MonoBehaviour:
   hasJetpack: 1
   jetpackForce: 0.2
   maxJetpackDuration: 5
+  jetpackAirDashPower: 5
+  airDashVelocityFalloffSpeed: 1
+  jetpackAirDashCooldown: 5
+  jetpackAirDashCooldownTimer: 0
+  jetpackAirDashAvailableColor: {r: 1, g: 1, b: 1, a: 1}
+  jetpackAirDashUnavailableColor: {r: 1, g: 1, b: 1, a: 0.2509804}
+  airDashClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
   fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
   fuelConsumptionRate: 3
   jetpackParticles: {fileID: 7064955444343372906}
@@ -672,7 +854,6 @@ MonoBehaviour:
   environmentCollisions:
     serializedVersion: 2
     m_Bits: 384
-  source: {fileID: 7362887214131378897}
 --- !u!114 &7362887214131378898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,9 +866,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afe7e8c1482d449448073f34c0d1ddb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flamethrowerParticleSystem: {fileID: 7362887214417341358}
+  equipAttachmentClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  color: {r: 1, g: 0, b: 0, a: 1}
+  triggerSettings:
+    damage: 10
+    tickRate: 0.05
+    canHit:
+      serializedVersion: 2
+      m_Bits: 7168
   fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
   fuelConsumptionRate: 5
+  flamethrowerParticleSystem: {fileID: 7362887214417341358}
+  trigger: {fileID: 1911639}
   flamethrowerSource: {fileID: 7362887214131378910}
   flamethrowerStartSound: {fileID: 8300000, guid: 308f1d551d7a13b4fa0425d03db14c46,
     type: 3}
@@ -704,10 +897,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d55e9080f4ac4a4b86c423f0fde9b97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overheatAfter: 2
-  overheatDamage: 5
-  maxDistance: 15
-  shootFrom: {fileID: 7362887214866606261}
+  equipAttachmentClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  color: {r: 0.31347656, g: 0, b: 1, a: 1}
+  laserSettings:
+    damage: 1
+    tickRate: 0.025
+    overheatDamage: 5
+    overheatAfter: 5
+    maxDistance: 100
+    canHit:
+      serializedVersion: 2
+      m_Bits: 24576
   defaultColor: {r: 1, g: 0, b: 0, a: 1}
   overheatColor: {r: 0, g: 0, b: 1, a: 1}
   emissionIntensity: 5
@@ -715,6 +918,7 @@ MonoBehaviour:
   beamGrowSpeed: 3
   beamCollapseSpeed: 5
   beamOverheatCollapseSpeed: 10
+  shootFrom: {fileID: 7362887214866606261}
   laserConstantSound: {fileID: 7362887214131378904}
   laserStartSound:
     clip: {fileID: 8300000, guid: cc6d0dfd03d12ff48a7faa00039727bc, type: 3}
@@ -747,6 +951,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 362a51cce078d59469d15694ce622573, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipAttachmentClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  color: {r: 1, g: 0.5131041, b: 0, a: 1}
   damage: 0
   additionalCooldown: 2
   attackAnimationNames:
@@ -1468,6 +1677,8 @@ MonoBehaviour:
   flamethrowerAttachment: {fileID: 7362887214131378898}
   laserCutterAttachment: {fileID: 7362887214131378906}
   laserBayonetAttachment: {fileID: 7362887214131377446}
+  source: {fileID: 7362887214131378897}
+  attachmentEquippedDisplay: {fileID: 0}
 --- !u!114 &1426587105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,6 +1691,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f826478e3d101148a73bbb5416e4e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  equipAttachmentClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1426587106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1502,6 +1718,22 @@ MonoBehaviour:
     pitch: 1
   source: {fileID: 7362887214131378897}
   weapon: {fileID: 7362887214680791725}
+--- !u!54 &652312800
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887214131378890}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0.5
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7362887214680791727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1753,7 +1985,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7362887214866606262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.15, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

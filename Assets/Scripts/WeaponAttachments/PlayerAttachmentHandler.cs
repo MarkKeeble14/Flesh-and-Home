@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerAttachmentHandler : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PlayerAttachmentHandler : MonoBehaviour
     [SerializeField] private FlamethrowerSettings flamethrowerAttachment;
     [SerializeField] private LaserCutterSettings laserCutterAttachment;
     [SerializeField] private LaserBayonetSettings laserBayonetAttachment;
+
+    [Header("Audio")]
+    public AudioSource source;
+
+    [SerializeField] private Image attachmentEquippedDisplay;
 
     private void Start()
     {
@@ -47,5 +53,8 @@ public class PlayerAttachmentHandler : MonoBehaviour
 
         // Enter
         currentWeaponAttachment.EnterState(this);
+
+        // Change Color of UI
+        attachmentEquippedDisplay.color = currentWeaponAttachment.Color;
     }
 }

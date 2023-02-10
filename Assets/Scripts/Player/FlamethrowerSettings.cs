@@ -4,15 +4,26 @@ using UnityEngine.InputSystem;
 
 public class FlamethrowerSettings : WeaponAttachmentController
 {
-    private InputManager inputManager;
-    [SerializeField] private ParticleSystem flamethrowerParticleSystem;
+    [System.Serializable]
+    public struct TriggerSettings
+    {
+        public float damage;
+        public float tickRate;
+        public LayerMask canHit;
+    }
+
+    [SerializeField] private TriggerSettings triggerSettings;
+
     [Header("Fuel")]
     [SerializeField] private FuelStore fuelStore;
     [SerializeField] private float fuelConsumptionRate;
     [Header("References")]
+    [SerializeField] private ParticleSystem flamethrowerParticleSystem;
+    [SerializeField] private FlamethrowerTrigger trigger;
     [SerializeField] private AudioSource flamethrowerSource;
     [SerializeField] private AudioClip flamethrowerStartSound;
     [SerializeField] private AudioSource source;
+    private InputManager inputManager;
 
     private void Start()
     {
@@ -22,12 +33,15 @@ public class FlamethrowerSettings : WeaponAttachmentController
     public override void Fire(InputAction.CallbackContext ctx)
     {
         if (fuelStore.CurrentFuel > 0)
+        {
             StartCoroutine(Fire());
+        }
     }
 
     private IEnumerator Fire()
     {
         // Tell Flamethrower to play
+        trigger.Activate(triggerSettings);
         flamethrowerParticleSystem.Play();
         flamethrowerSource.enabled = true;
         source.PlayOneShot(flamethrowerStartSound);
@@ -44,6 +58,7 @@ public class FlamethrowerSettings : WeaponAttachmentController
         // Stop playing
         flamethrowerParticleSystem.Stop();
         flamethrowerSource.enabled = false;
+        trigger.Deactivate();
     }
 }
 
