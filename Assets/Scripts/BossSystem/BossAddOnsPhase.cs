@@ -1,38 +1,58 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Cinemachine;
+using System.Collections.Generic;
 
 public class BossAddOnsPhase : BossPhaseBaseState
 {
     [Header("Phase")]
+    [SerializeField] private NavMeshEnemy fleshTravellingPrefab;
     [SerializeField] private float duration = 10f;
-    [SerializeField] private CinemachineImpulseSource groundShakeImpulseSource;
-    [SerializeField] private float impulseForce;
+    [SerializeField] private float groundShakeImpulseForce = 1;
     [SerializeField] private bool riseBeforeEnding = true;
 
+    [SerializeField] private Attacker onCrashDownAttack;
+    [SerializeField] private Attacker[] repeatableAttacks;
+    [SerializeField] private float timeBetweenAttacks;
+
+    [SerializeField] private PercentageMap<EndableEntity> availableAddOns;
+    private List<BossSpawnPoint> spawnPoints = new List<BossSpawnPoint>();
+    [SerializeField] private Vector2 minMaxNumAddOns = new Vector2(1, 1);
+    [SerializeField] private float timeAddedOnKillEnemy;
+
     [Header("Settings")]
+    [SerializeField] private float pauseDuration = 1f;
+
+    [SerializeField] private float riseSpeed = .75f;
+    [SerializeField] private float riseDuration = 4f;
+    [SerializeField] private AnimationCurve riseCurve;
+
     [SerializeField] private float dropSpeed = .5f;
     [SerializeField] private AnimationCurve dropCurve;
-    [SerializeField] private float riseSpeed = .75f;
+
     [SerializeField] private float reRiseSpeed = .25f;
     [SerializeField] private AnimationCurve reRiseCurve;
-    [SerializeField] private float riseDuration = 4f;
-    [SerializeField] private float pauseDuration = 1f;
+
     [SerializeField] private float shakeSpeed = 5f;
     [SerializeField] private float shakeStrength = .02f;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource shakeSource;
-    [SerializeField] private AudioSource constantNoiseSource;
-    [SerializeField] private AudioClipContainer startShakyRiseClip;
-    [SerializeField] private AudioClipContainer finishShakyRiseClip;
-    [SerializeField] private AudioClipContainer crashDownStartClip;
-    [SerializeField] private AudioClipContainer reachGroundClip;
-    [SerializeField] private AudioClipContainer sucessClip;
-    [SerializeField] private AudioClipContainer failureClip;
-    [SerializeField] private AudioClipContainer reachResultClip;
+    [SerializeField] private AudioClipContainer startCrashClip;
+    [SerializeField] private AudioClipContainer finishCrashClip;
+
     [SerializeField] private AudioClipContainer startRiseClip;
     [SerializeField] private AudioClipContainer finishRiseClip;
+
+    [SerializeField] private AudioSource constantNoiseSource;
+    [SerializeField] private AudioClipContainer reachResultClip;
+    [SerializeField] private AudioClipContainer sucessClip;
+    [SerializeField] private AudioClipContainer failureClip;
+
+    private void Awake()
+    {
+        // Add all boss spawn points
+        spawnPoints.AddRange(FindObjectsOfType<BossSpawnPoint>());
+    }
 
     public override void EnterState(BossPhaseManager boss)
     {
@@ -56,64 +76,16 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
         yield return new WaitForSeconds(enterPhaseTime);
 
-        float time = 0;
         float initialYHeight = transform.position.y;
 
-        // Used for shaking
-        float randStartTimeX = Random.Range(0, 100f);
-        float randStartTimeZ = Random.Range(0, 100f);
-
-        // Audio
-        startShakyRiseClip.PlayOneShot(boss.source);
-
-        // Rise a little
-        for (float t = 0; t < riseDuration; t += Time.deltaTime)
-        {
-            // Shake
-            if (Time.timeScale != 0)
-            {
-                // Shake Object
-                TransformHelper.ShakeTransform(transform, randStartTimeX, randStartTimeZ, shakeSpeed, shakeStrength);
-
-                // Audio
-                shakeSource.enabled = true;
-            }
-            else
-            {
-                shakeSource.enabled = false;
-            }
-
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y + transform.up.y, transform.position.z),
-                Time.deltaTime * riseSpeed);
-
-            yield return null;
-        }
-
-        // Audio
-        finishShakyRiseClip.PlayOneShot(boss.source);
-        shakeSource.enabled = false;
+        yield return StartCoroutine(CommonRoutineRise(boss, riseCurve, riseSpeed, riseDuration, shakeSpeed, shakeStrength, startRiseClip, finishRiseClip));
 
         // Pause
         yield return new WaitForSeconds(pauseDuration);
 
-        // Audio
-        crashDownStartClip.PlayOneShot(boss.source);
+        yield return StartCoroutine(CommonRoutineCrash(boss, dropCurve, dropSpeed, groundShakeImpulseForce, startCrashClip, finishCrashClip));
 
-        // Crash down
-        float groundTarget = transform.position.y - boss.ShellEnemyMovement.DistanceToGround;
-        while (transform.position.y != groundTarget)
-        {
-            time += Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, groundTarget, transform.position.z),
-                dropCurve.Evaluate(time) * dropSpeed);
-            yield return null;
-        }
-
-        // Generate Impulse Source
-        groundShakeImpulseSource.GenerateImpulse(impulseForce);
-
-        // Audio
-        reachGroundClip.PlayOneShot(boss.source);
+        StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt));
 
         // Audio
         constantNoiseSource.enabled = true;
@@ -126,13 +98,77 @@ public class BossAddOnsPhase : BossPhaseBaseState
         boss.HPBar.Show();
 
         // Spawn Enemies
-        bool success = false;
-        for (float t = 0; t < duration; t += Time.deltaTime)
+        int numAdds = RandomHelper.RandomIntInclusive(minMaxNumAddOns);
+        // Debug.Log("Number of adds: " + numAdds);
+        float time = 0;
+        List<EndableEntity> spawnedAdds = new List<EndableEntity>();
+        for (int i = 0; i < numAdds; i++)
         {
+            // Get a spawn point
+            BossSpawnPoint point = GetSpawnPoint();
+            if (point == null)
+            {
+                // No more spawn points left, should just stop spawning here
+                // Debug.Log("No more spawn points: " + i);
+                break;
+            }
+            // say that we've spawned on this location, so it should not be spawnable anymore
+            point.SpawnedOn = true;
+            // remove the spawn point from the list; need to do so in order to efficiently pick random spawn points
+            spawnPoints.Remove(point);
+
+            // Spawn Travelling flesh
+            NavMeshEnemy traveller = Instantiate(fleshTravellingPrefab, transform.position, Quaternion.identity);
+            traveller.EnableNavMeshAgent();
+
+            // Tell that flesh to go to the chosen spawn point
+            // Once there, the code inside of the delegate will execute
+            StartCoroutine(traveller.GoToOverridenTarget(point.transform.position, 1f, true, false, true, delegate
+            {
+                // Spawn an Add On
+                EndableEntity spawned = Instantiate(availableAddOns.GetOption(), traveller.transform.position, Quaternion.identity);
+
+                // When the add on ends (dies either thru heat or hp), the code inside the delegate will run
+                spawned.AddAdditionalOnEndAction(delegate
+                {
+                    // re-add the spawn point
+                    spawnPoints.Add(point);
+
+                    // make the progress bar go a little faster
+                    time += timeAddedOnKillEnemy;
+
+                    // track the enemies killed
+                    spawnedAdds.Remove(spawned);
+                });
+                spawnedAdds.Add(spawned);
+            }));
+        }
+
+        // Wait until all enemies have been spawned
+        yield return new WaitUntil(() => spawnedAdds.Count == numAdds);
+
+        // Main Loop
+        bool success = false;
+        float timer = timeBetweenAttacks;
+        for (; time < duration; time += Time.deltaTime)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0)
+            {
+                StartCoroutine(repeatableAttacks[Random.Range(0, repeatableAttacks.Length)].StartAttack(GameManager._Instance.PlayerAimAt));
+                timer = timeBetweenAttacks;
+            }
+
             // Set HP Bar
-            boss.HPBar.Set(t, duration);
+            boss.HPBar.Set(time, duration);
 
             // If all enemies are dead, break early & set success to true
+            if (spawnedAdds.Count <= 0)
+            {
+                time = duration;
+                success = true;
+                break;
+            }
 
             // Search for nearby corpses, suckle them if there
 
@@ -141,6 +177,15 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
         // Set HP Bar
         boss.HPBar.Set(duration, duration);
+
+        // Call on end on all entities to destroy and to repopulate spawn points
+        while (spawnedAdds.Count > 0)
+        {
+            spawnedAdds[0].CallOnEndAction();
+        }
+
+        // Set all spawn points to be not spawned on so that they can be reused
+        foreach (BossSpawnPoint spawnPoint in spawnPoints) { spawnPoint.SpawnedOn = false; }
 
         yield return new WaitUntil(() => boss.HPBar.IsFull);
 
@@ -165,20 +210,8 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
         if (riseBeforeEnding)
         {
-            // Return to original height
-            time = 0;
-            // Audio
-            startRiseClip.PlayOneShot(boss.source);
-            while (transform.position.y < initialYHeight)
-            {
-                time += Time.deltaTime;
-                transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, initialYHeight, transform.position.z),
-                    reRiseCurve.Evaluate(time) * reRiseSpeed);
-                yield return null;
-            }
-
-            // Audio
-            finishRiseClip.PlayOneShot(boss.source);
+            yield return StartCoroutine(CommonRoutineRiseTo(boss, reRiseCurve, reRiseSpeed, initialYHeight, shakeSpeed, shakeStrength, groundShakeImpulseForce,
+                startRiseClip, finishRiseClip));
         }
 
         // Pause
@@ -186,5 +219,12 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
         // Switch State
         boss.LoadNextPhase();
+    }
+
+    private BossSpawnPoint GetSpawnPoint()
+    {
+        if (spawnPoints.Count == 0) return null;
+        BossSpawnPoint point = RandomHelper.GetRandomFromList(spawnPoints);
+        return point;
     }
 }

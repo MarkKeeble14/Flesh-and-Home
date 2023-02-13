@@ -7,31 +7,20 @@ public class BossPhase3 : BossAttackingPhase
     [Header("Phase")]
     [SerializeField] private Transform barrelHolder;
     private List<BossBarrel> bossBarrels = new List<BossBarrel>();
-
-    private float timeBeforeFleshySpawns = 3f;
-    [SerializeField] private float shakeSpeed = 5f;
-    [SerializeField] private float shakeStrength = .02f;
-    [SerializeField] private float dropSpeed = .5f;
-    [SerializeField] private AnimationCurve dropCurve;
-
-    [Header("Condition")]
     [SerializeField] private KillableBossComponentEntity bossFlesh;
-    private bool complete;
+    [SerializeField] private float timeBeforeFleshySpawns = 3f;
+    [SerializeField] private float timeAfterFleshyKillBeforeDropBarrels;
 
     [Header("Plates")]
-    [SerializeField] private Transform rotatersHolder;
+    [SerializeField] private Transform parentToUnequipped;
     [SerializeField] private Vector2 platesMinMaxForcePerAxis;
     [SerializeField] private Vector2 platesMinMaxTorquePerAxis;
 
     [Header("Barrels")]
     [SerializeField] private Vector2 barrelsMinMaxForcePerAxis;
     [SerializeField] private Vector2 barrelsMinMaxTorquePerAxis;
-    [SerializeField] private float timeAfterFleshyKillBeforeDropBarrels;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource shakeSource;
-    [SerializeField] private AudioClipContainer crashDownStartClip;
-    [SerializeField] private AudioClipContainer reachGroundClip;
     [SerializeField] private AudioClipContainer fleshySpawnClip;
 
     private void Awake()
@@ -53,7 +42,7 @@ public class BossPhase3 : BossAttackingPhase
             Rigidbody rb = ent.GetComponent<Rigidbody>();
 
             // Uparent
-            rb.transform.parent = rotatersHolder;
+            rb.transform.parent = parentToUnequipped;
 
             rb.isKinematic = false;
             rb.useGravity = true;
@@ -72,7 +61,7 @@ public class BossPhase3 : BossAttackingPhase
         foreach (BossBarrel b in bossBarrels)
         {
             // Uparent
-            b.transform.parent = rotatersHolder;
+            b.transform.parent = parentToUnequipped;
             b.IsAttached = false;
 
             Rigidbody rb = b.Rigidbody;

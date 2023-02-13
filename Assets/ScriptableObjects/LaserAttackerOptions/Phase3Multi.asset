@@ -22,9 +22,7 @@ MonoBehaviour:
   canHit:
     serializedVersion: 2
     m_Bits: 8704
-  chargeColor: {r: 0, g: 0, b: 1, a: 1}
-  activeColor: {r: 1, g: 0, b: 0, a: 1}
-  emissionIntensityScale: 8
+  visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
   keepAimSourceWhenUnattached: 0
   canTargetPlayer: 1
   followPlayerSpeed: 0.05

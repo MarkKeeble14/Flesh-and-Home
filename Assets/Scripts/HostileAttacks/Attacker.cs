@@ -8,8 +8,7 @@ public abstract class Attacker : MonoBehaviour
     [SerializeField] private bool hasTimeBetweenAttacks;
     [SerializeField] private float timeBetweenAttacks;
     [SerializeField] private bool enemyCanMoveWhileBetweenAttacks;
-
-    [SerializeField] private bool currentlyAttacking;
+    private bool currentlyAttacking;
     public bool CurrentlyAttacking
     {
         get
@@ -27,9 +26,9 @@ public abstract class Attacker : MonoBehaviour
     private bool hasMovement => movement != null;
 
     [Header("Audio")]
+    [SerializeField] protected AudioSource source;
     [SerializeField] private AudioClipContainer onStartClip;
     [SerializeField] private AudioClipContainer onEndClip;
-    [SerializeField] private AudioSource source;
 
     private void Awake()
     {
@@ -44,12 +43,21 @@ public abstract class Attacker : MonoBehaviour
 
     public IEnumerator StartAttack(Transform target, Action onEnd)
     {
+        if (!CanAttack(target))
+        {
+            // Debug.Log("Can't Attack");
+            yield break;
+        }
         CurrentlyAttacking = true;
+
+        // Debug.Log("Starting Attack");
 
         // Audio
         onStartClip.PlayOneShot(source);
 
         yield return StartCoroutine(Attack(target));
+
+        // Debug.Log("After Attack");
 
         // Audio
         onEndClip.PlayOneShot(source);
@@ -72,7 +80,11 @@ public abstract class Attacker : MonoBehaviour
 
     public virtual bool CanAttack(Transform target)
     {
-        if (CurrentlyAttacking) return false;
+        if (CurrentlyAttacking)
+        {
+            // Debug.Log("Can't Attack: Currently Attacking");
+            return false;
+        }
         return true;
     }
 

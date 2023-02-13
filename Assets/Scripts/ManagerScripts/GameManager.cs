@@ -13,12 +13,12 @@ public class GameManager : MonoBehaviour
 
         // Find Player
         playerTransform = FindObjectOfType<PlayerController>().transform;
-        playerController = playerTransform.GetComponent<PlayerController>();
+        playerAimAt = FindObjectOfType<PlayerHealth>().transform;
     }
-
-    private PlayerController playerController;
-    public PlayerController PlayerController => playerController;
 
     private Transform playerTransform;
     public Transform PlayerTransform => playerTransform;
+
+    private Transform playerAimAt;
+    public Transform PlayerAimAt => playerAimAt;
 }

@@ -10,6 +10,11 @@ public abstract class EndableEntity : MonoBehaviour, IDamageable
     [SerializeField] protected AudioClipContainer onEndClip;
     protected Action onEndAction;
 
+    public void CallOnEndAction()
+    {
+        onEndAction?.Invoke();
+    }
+
     public void AddAdditionalOnEndAction(Action action)
     {
         onEndAction += action;

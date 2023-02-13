@@ -24,7 +24,6 @@ public class CollideFirstNavMeshEnemy : NavMeshEnemy
     private IEnumerator StartMove()
     {
         yield return new WaitForSeconds(timeAfterGroundCollisionToMove);
-        navMeshAgent.enabled = true;
-        IsActive = true;
+        EnableNavMeshAgent();
     }
 }

@@ -6,38 +6,44 @@ using UnityEngine.PlayerLoop;
 
 public class TestRaygun : MonoBehaviour
 {
-    [Header("Shooting")]
-    [SerializeField] private ShotBehavior shotPrefab;
-    [SerializeField] private float damage = 10f;
-    [SerializeField] private float impactForce = 80f;
-    // Fire rate is measured in shots per second
-    [SerializeField] private float fireRate = 5f;
+    [System.Serializable]
+    public struct RifleSettings
+    {
+        public ShotBehavior projectile;
+        public float impactForce;
+        public float crosshairSpread;
+
+        // Laser info
+        public float damage;
+        public float shotsPerSecond;
+        public float maxDistance;
+        public LayerMask canHit;
+
+        // Overheat info
+        public OverheatSettings overheatSettings;
+
+        // Visual info
+        public LaserVisuals visuals;
+    }
+
+    [SerializeField] private RifleSettings rifleSettings;
+
     private float fireRateTimer;
-    [SerializeField] private LayerMask canHit;
-    public LayerMask CanHit => canHit;
+    public LayerMask CanHit => rifleSettings.canHit;
 
     [Header("Muzzle Flash")]
     [SerializeField] private Transform muzzleTransform;
     [SerializeField] private ParticleSystem muzzleFlash;
 
     [Header("Particles")]
-    [SerializeField] private ParticleSystem impactEffect;
     [SerializeField] private Material lazerMat;
 
     [Header("Settings")]
-    [SerializeField] private float overheatAfter = 50f;
-    [SerializeField] private float overheatDamage = 3f;
-    [SerializeField] private float maxDistance = 500f;
-    [SerializeField] private float heatPerShot = 1f;
-    [SerializeField] private float heatDissapationRate;
     private float trackOverheatTimer;
     private bool overheated;
     private bool active;
 
     [Header("Visuals")]
-    [SerializeField] private Color defaultColor;
-    [SerializeField] private Color overheatColor;
-    [SerializeField] private float emissionIntensity;
     private Color currentColor;
     public Color CurrentColor => currentColor;
 
@@ -86,7 +92,7 @@ public class TestRaygun : MonoBehaviour
             }
             else
             {
-                trackOverheatTimer -= Time.deltaTime * heatDissapationRate;
+                trackOverheatTimer -= Time.deltaTime * rifleSettings.overheatSettings.heatDissapationRate;
             }
         }
 
@@ -95,23 +101,13 @@ public class TestRaygun : MonoBehaviour
             fireRateTimer -= Time.deltaTime;
         }
 
-        /*
-        if (trackOverheatTimer > (overheatAfter / 2.0f))
-        {
-            light.color = Color.Lerp(defaultColor, overheatColor, 1.5f);
-        }
-        else if (trackOverheatTimer > 0 && trackOverheatTimer < (overheatAfter / 2.0f))
-        {
-            light.color = Color.Lerp(overheatColor, defaultColor, 1.5f);
-        }
-        */
-
         // Audio
         overheatConstantSound.enabled = overheated;
 
         // Update UI
-        showOverheatBar.Set(trackOverheatTimer, overheatAfter);
-        showOverheatBar.SetColor(overheated ? overheatColor : defaultColor);
+        showOverheatBar.Set(trackOverheatTimer, rifleSettings.overheatSettings.overheatAfter);
+        showOverheatBar.SetColor(overheated ? rifleSettings.visuals.GetMaxColor() :
+            rifleSettings.visuals.GetLerpedColor(trackOverheatTimer / rifleSettings.overheatSettings.overheatAfter));
     }
 
     private void Shoot(InputAction.CallbackContext ctx)
@@ -133,10 +129,10 @@ public class TestRaygun : MonoBehaviour
             yield return new WaitUntil(() => fireRateTimer <= 0);
 
             // We are firing and thus generating heat
-            trackOverheatTimer += heatPerShot;
+            trackOverheatTimer += rifleSettings.overheatSettings.heatAccrualRate;
 
             // Break if overheating
-            if (trackOverheatTimer > overheatAfter)
+            if (trackOverheatTimer > rifleSettings.overheatSettings.overheatAfter)
             {
                 overheated = true;
                 break;
@@ -144,20 +140,20 @@ public class TestRaygun : MonoBehaviour
 
             // Cooldown
             // Fire rate is measured in shots per second
-            fireRateTimer = 1 / fireRate;
+            fireRateTimer = 1 / rifleSettings.shotsPerSecond;
 
             // Audio
             shootSound.PlayOneShot(source);
 
             // Crosshair
-            CrosshairController._Instance.Spread(2);
+            CrosshairController._Instance.Spread(rifleSettings.crosshairSpread);
 
             // Interpolate Color based on how close we are to overheating
-            currentColor = GetBeamColor(defaultColor, overheatColor, trackOverheatTimer / overheatAfter);
+            currentColor = rifleSettings.visuals.GetLerpedColor(trackOverheatTimer / rifleSettings.overheatSettings.overheatAfter);
 
             // Change lazer color
             lazerMat.color = currentColor;
-            lazerMat.SetColor("_EmissionColor", currentColor * emissionIntensity);
+            lazerMat.SetColor("_EmissionColor", rifleSettings.visuals.GetEmmissiveColor(currentColor));
 
             // Change Muzzle flash color
             muzzleFlash.startColor = currentColor;
@@ -166,25 +162,17 @@ public class TestRaygun : MonoBehaviour
             muzzleFlash.Play();
 
             // Spawn Projectile
-            ShotBehavior laser = Instantiate(shotPrefab, muzzleTransform.position, muzzleTransform.rotation);
-            bool hasHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, maxDistance, canHit);
+            ShotBehavior laser = Instantiate(rifleSettings.projectile, muzzleTransform.position, muzzleTransform.rotation);
+            bool hasHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rifleSettings.maxDistance, rifleSettings.canHit);
 
             // if we've hit something, spawn particles and try to do damage
             if (hasHit)
             {
-                laser.setTarget(hit.point, this);
-                // Spawn Particles
-                Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-
-                // Try to do damage
-                if (hit.collider.TryGetComponent(out IDamageable damageable))
-                {
-                    damageable.Damage(damage, -hit.normal * impactForce);
-                }
+                laser.setTarget(hit.point, this, rifleSettings.damage, rifleSettings.impactForce);
             }
             else
             {
-                laser.setTarget(Camera.main.transform.forward * maxDistance, this);
+                laser.setTarget(Camera.main.transform.forward * rifleSettings.maxDistance, this, rifleSettings.damage, rifleSettings.impactForce);
             }
 
             yield return null;
@@ -210,7 +198,7 @@ public class TestRaygun : MonoBehaviour
         overheatStartSound.PlayOneShot(source);
 
         // Deal damage to play if they overheat
-        playerDamageable.Damage(overheatDamage);
+        playerDamageable.Damage(rifleSettings.overheatSettings.overheatDamage);
 
         // Wait until Overheat has cooled down
         yield return new WaitUntil(() => trackOverheatTimer <= 0);

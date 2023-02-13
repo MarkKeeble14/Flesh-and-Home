@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerController : KillableEntity
+public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private ImageSliderBar playerHpBar;
     [SerializeField] private ImageSliderBar jetpackAirDashCooldownBar;
 
     Vector3 movementVector;
@@ -88,7 +87,6 @@ public class PlayerController : KillableEntity
     }
 
     #region Collisions
-
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private Transform bonkCheckPosition;
     private bool isGrounded;
@@ -102,15 +100,15 @@ public class PlayerController : KillableEntity
     private InputManager inputManager;
     private Transform cameraTransform;
 
-    private new void Awake()
+    [SerializeField] private AudioSource source;
+
+    private void Awake()
     {
         // Set Fuel
         fuelStore.Reset();
 
         // Update UI
         jetpackDisplay.Set(0, maxJetpackDuration);
-
-        base.Awake();
     }
 
     private void Start()
@@ -124,8 +122,6 @@ public class PlayerController : KillableEntity
         inputManager = InputManager._Instance;
         inputManager.PlayerInputActions.Player.Jump.performed += Jump;
         inputManager.PlayerInputActions.Player.Sprint.performed += TryJetpackAirDash;
-
-        SetHPBar();
     }
 
     private void OnDestroy()
@@ -296,16 +292,5 @@ public class PlayerController : KillableEntity
 
         // Set cooldown
         jetpackAirDashCooldownTimer = jetpackAirDashCooldown;
-    }
-
-    public override void Damage(float damage)
-    {
-        base.Damage(damage);
-        SetHPBar();
-    }
-
-    private void SetHPBar()
-    {
-        playerHpBar.Set(currentHealth, maxHealth);
     }
 }

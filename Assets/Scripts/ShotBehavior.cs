@@ -6,12 +6,21 @@ public class ShotBehavior : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private new Light light;
     [SerializeField] private PlayerLaserExplosiveParticleSystem explosionParticleSystem;
+    [SerializeField] private ParticleSystem impactEffect;
     private TestRaygun raygun;
+    private float damage, impactForce;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (!LayerMaskHelper.IsInLayerMask(collision.gameObject, raygun.CanHit)) return;
-        Explode();
+
+        // Try to do damage
+        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.Damage(damage, -collision.GetContact(0).normal * impactForce);
+        }
+
+        Explode(collision);
     }
 
     private IEnumerator Travel(Vector3 target)
@@ -25,17 +34,28 @@ public class ShotBehavior : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void setTarget(Vector3 target, TestRaygun raygun)
+    public void setTarget(Vector3 target, TestRaygun raygun, float damage, float force)
     {
         this.raygun = raygun;
         light.color = raygun.CurrentColor;
+        this.damage = damage;
+        this.impactForce = force;
         StartCoroutine(Travel(target));
     }
 
-    void Explode()
+    void Explode(Collision collision)
     {
-        PlayerLaserExplosiveParticleSystem explosion = Instantiate(explosionParticleSystem, transform.position, Quaternion.identity);
+        ContactPoint point = collision.GetContact(0);
+
+        // Spawn Particles
+        // Explosion
+        PlayerLaserExplosiveParticleSystem explosion = Instantiate(explosionParticleSystem, point.point, Quaternion.identity);
         explosion.SetColors(raygun.CurrentColor, raygun.CurrentColor, raygun.CurrentColor);
+
+        // Metal
+        // Eventually could do a dictionary with different layers to pick out different particles (so hitting different surfaces would produce different particles
+        Instantiate(impactEffect, point.point, Quaternion.LookRotation(point.normal));
+
         Destroy(gameObject);
     }
 }

@@ -5,7 +5,6 @@ public class BossPhase2 : BossAttackingPhase
 {
     [Header("Phase")]
     [SerializeField] private KillableBossComponentEntity bossShell;
-    private bool complete;
 
     public override void EnterState(BossPhaseManager boss)
     {

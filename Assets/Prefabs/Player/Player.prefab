@@ -146,6 +146,82 @@ Transform:
   m_Father: {fileID: 4876248169073298494}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7166828130188408020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555614854346664237}
+  - component: {fileID: 7918562044240042105}
+  - component: {fileID: 1330392026440316999}
+  - component: {fileID: 503775771}
+  m_Layer: 16
+  m_Name: PlayerHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &555614854346664237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166828130188408020}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7362887213531304019}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7918562044240042105
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166828130188408020}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.75, y: 0.75, z: 0.75}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1330392026440316999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166828130188408020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3c12a758aff0e745bad9e2b99ffed95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageable: {fileID: 532859800}
+--- !u!54 &503775771
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166828130188408020}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7362887213531304022
 GameObject:
   m_ObjectHideFlags: 0
@@ -178,6 +254,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 555614854346664237}
   - {fileID: 6937309456406123340}
   - {fileID: 7362887214417341344}
   - {fileID: 7362887214806386863}
@@ -667,7 +744,7 @@ Transform:
   - {fileID: 7362887214680791726}
   - {fileID: 7362887215270215796}
   m_Father: {fileID: 7362887213531304019}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5}
 --- !u!1 &7362887213996669587
 GameObject:
@@ -717,9 +794,14 @@ GameObject:
   - component: {fileID: 7362887214131378888}
   - component: {fileID: 7362887214131378908}
   - component: {fileID: 7362887214131378909}
+  - component: {fileID: 2567597695663198020}
+  - component: {fileID: 1426587106}
   - component: {fileID: 7362887214131378898}
   - component: {fileID: 7362887214131378906}
   - component: {fileID: 7362887214131377446}
+  - component: {fileID: 1426587105}
+  - component: {fileID: 1426587104}
+  - component: {fileID: 7362887214131378907}
   - component: {fileID: 7362887214131378905}
   - component: {fileID: 7362887214131378911}
   - component: {fileID: 7362887214131378896}
@@ -727,12 +809,8 @@ GameObject:
   - component: {fileID: 7362887214131378904}
   - component: {fileID: 7362887214131377447}
   - component: {fileID: 7362887214131378897}
-  - component: {fileID: 7362887214131378907}
-  - component: {fileID: 1426587104}
-  - component: {fileID: 1426587105}
-  - component: {fileID: 1426587106}
   - component: {fileID: 652312800}
-  - component: {fileID: 2567597695663198020}
+  - component: {fileID: 532859800}
   m_Layer: 9
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -852,21 +930,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ffae2e7962124438d183442ebb3c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 7362887214131378897}
-  tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
-    type: 3}
-  onEndClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  maxHealth: 100
-  destroyOnDeath: 0
-  rigidbody: {fileID: 652312800}
-  onTakeDamageClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  playerHpBar: {fileID: 0}
   jetpackAirDashCooldownBar: {fileID: 0}
   baseSpeed: 3.25
   sprintSpeed: 1.5
@@ -900,10 +963,80 @@ MonoBehaviour:
   jetpackDisplay: {fileID: 0}
   groundCheckPosition: {fileID: 7362887213686877935}
   bonkCheckPosition: {fileID: 7362887215221931270}
-  environmentCollisionCheckRadius: 0.2
+  environmentCollisionCheckRadius: 0.3
   environmentCollisions:
     serializedVersion: 2
     m_Bits: 64896
+  source: {fileID: 7362887214131378897}
+--- !u!114 &2567597695663198020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887214131378890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 245432df505d0304283568365d3dc31c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rifleSettings:
+    projectile: {fileID: 11468384, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
+    impactForce: 80
+    crosshairSpread: 0.4
+    damage: 5
+    shotsPerSecond: 10
+    maxDistance: 500
+    canHit:
+      serializedVersion: 2
+      m_Bits: 56320
+    overheatSettings:
+      overheatDamage: 3
+      overheatAfter: 30
+      dissapateAfter: 0
+      heatAccrualRate: 1
+      heatDissapationRate: 5
+    visuals: {fileID: 11400000, guid: 7dc0f7895eea97f44b2ddf2b8da7f858, type: 2}
+  muzzleTransform: {fileID: 8910433488196863823}
+  muzzleFlash: {fileID: 1344541519311774957}
+  lazerMat: {fileID: 2100000, guid: f68f8c3a3d76fb74cbb880d372c81620, type: 2}
+  shootSound:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  overheatConstantSound: {fileID: 7362887214131378911}
+  overheatStartSound:
+    clip: {fileID: 8300000, guid: ab76d8dde477f3a488f7154f438fba36, type: 3}
+    volume: 1
+    pitch: 1
+  overheatEndSound:
+    clip: {fileID: 8300000, guid: 12855cd320b9d354c9890193b8053d35, type: 3}
+    volume: 1
+    pitch: 1
+  source: {fileID: 7362887214131378897}
+  showOverheatBar: {fileID: 0}
+--- !u!114 &1426587106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887214131378890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebfbb7c850940f44aa4be605b10bc35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 7.5
+  additionalCooldown: 2
+  attackAnimationNames:
+  - Attack3
+  meleeSound:
+    clip: {fileID: 8300000, guid: d996c13a2300f464bb713324a4367fef, type: 3}
+    volume: 1
+    pitch: 1
+  source: {fileID: 7362887214131378897}
+  weapon: {fileID: 7362887214680791725}
 --- !u!114 &7362887214131378898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -927,6 +1060,7 @@ MonoBehaviour:
     canHit:
       serializedVersion: 2
       m_Bits: 39936
+    crosshairSpread: 0.4
   fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
   fuelConsumptionRate: 5
   flamethrowerParticleSystem: {fileID: 7362887214417341358}
@@ -953,22 +1087,25 @@ MonoBehaviour:
     pitch: 1
   color: {r: 0.31347656, g: 0, b: 1, a: 1}
   laserSettings:
-    damage: 0.25
-    tickRate: 0.025
-    overheatDamage: 10
-    overheatAfter: 10
+    damage: 5
+    tickRate: 0.05
     maxDistance: 100
     canHit:
       serializedVersion: 2
       m_Bits: 24576
-    heatDissapationRate: 5
-  defaultColor: {r: 1, g: 0, b: 0, a: 1}
-  overheatColor: {r: 0, g: 0, b: 1, a: 1}
-  emissionIntensity: 5
-  fullWidth: 2
-  beamGrowSpeed: 3
-  beamCollapseSpeed: 5
-  beamOverheatCollapseSpeed: 10
+    crosshairSpread: 0.05
+    beamSettings:
+      fullWidth: 1
+      beamGrowSpeed: 1
+      beamCollapseSpeed: 3
+      beamOverheatCollapseSpeed: 10
+    overheatSettings:
+      overheatDamage: 10
+      overheatAfter: 10
+      dissapateAfter: 0
+      heatAccrualRate: 1
+      heatDissapationRate: 3
+    visuals: {fileID: 11400000, guid: 2874c53dcaa7dae43b3114efcda6dc50, type: 2}
   shootFrom: {fileID: 7362887214866606261}
   laserConstantSound: {fileID: 7362887214131378904}
   laserStartSound:
@@ -1018,6 +1155,54 @@ MonoBehaviour:
     pitch: 1
   source: {fileID: 7362887214131378897}
   weapon: {fileID: 7362887215270215795}
+--- !u!114 &1426587105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887214131378890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f826478e3d101148a73bbb5416e4e1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipAttachmentClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  color: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1426587104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887214131378890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163f2969be10ff6498a74633a4ba65dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentWeaponAttachment: {fileID: 0}
+  noWeaponAttachment: {fileID: 1426587105}
+  flamethrowerAttachment: {fileID: 7362887214131378898}
+  laserCutterAttachment: {fileID: 7362887214131378906}
+  laserBayonetAttachment: {fileID: 7362887214131377446}
+  source: {fileID: 7362887214131378897}
+  attachmentEquippedDisplay: {fileID: 0}
+--- !u!114 &7362887214131378907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887214131378890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8318356e90b4c343b97884804eaf074, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!120 &7362887214131378905
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1699,76 +1884,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7362887214131378907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362887214131378890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8318356e90b4c343b97884804eaf074, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1426587104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362887214131378890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163f2969be10ff6498a74633a4ba65dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentWeaponAttachment: {fileID: 0}
-  noWeaponAttachment: {fileID: 1426587105}
-  flamethrowerAttachment: {fileID: 7362887214131378898}
-  laserCutterAttachment: {fileID: 7362887214131378906}
-  laserBayonetAttachment: {fileID: 7362887214131377446}
-  source: {fileID: 7362887214131378897}
-  attachmentEquippedDisplay: {fileID: 0}
---- !u!114 &1426587105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362887214131378890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f826478e3d101148a73bbb5416e4e1b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  equipAttachmentClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  color: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &1426587106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362887214131378890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ebfbb7c850940f44aa4be605b10bc35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 7.5
-  additionalCooldown: 2
-  attackAnimationNames:
-  - Attack3
-  meleeSound:
-    clip: {fileID: 8300000, guid: d996c13a2300f464bb713324a4367fef, type: 3}
-    volume: 1
-    pitch: 1
-  source: {fileID: 7362887214131378897}
-  weapon: {fileID: 7362887214680791725}
 --- !u!54 &652312800
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1785,7 +1900,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2567597695663198020
+--- !u!114 &532859800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1794,44 +1909,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 7362887214131378890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 245432df505d0304283568365d3dc31c, type: 3}
+  m_Script: {fileID: 11500000, guid: c5a723fa17a88a440a622fcf584103c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPrefab: {fileID: 11468384, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
-  damage: 10
-  impactForce: 80
-  fireRate: 7.5
-  canHit:
-    serializedVersion: 2
-    m_Bits: 40320
-  muzzleTransform: {fileID: 8910433488196863823}
-  muzzleFlash: {fileID: 1344541519311774957}
-  impactEffect: {fileID: 8335990208917815452, guid: 85b95fd7e20b09448a14952cbeed319f,
+  source: {fileID: 7362887214131378897}
+  tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
     type: 3}
-  lazerMat: {fileID: 2100000, guid: f68f8c3a3d76fb74cbb880d372c81620, type: 2}
-  overheatAfter: 50
-  overheatDamage: 10
-  maxDistance: 100
-  heatPerShot: 2.5
-  heatDissapationRate: 25
-  defaultColor: {r: 0, g: 0.42352942, b: 0.6901961, a: 1}
-  overheatColor: {r: 0.6981132, g: 0, b: 0.20886385, a: 1}
-  emissionIntensity: 5
-  shootSound:
+  onEndClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  overheatConstantSound: {fileID: 7362887214131378911}
-  overheatStartSound:
-    clip: {fileID: 8300000, guid: ab76d8dde477f3a488f7154f438fba36, type: 3}
+  maxHealth: 100
+  destroyOnDeath: 1
+  rigidbody: {fileID: 652312800}
+  onTakeDamageClip:
+    clip: {fileID: 0}
     volume: 1
     pitch: 1
-  overheatEndSound:
-    clip: {fileID: 8300000, guid: 12855cd320b9d354c9890193b8053d35, type: 3}
-    volume: 1
-    pitch: 1
-  source: {fileID: 7362887214131378897}
-  showOverheatBar: {fileID: 0}
+  playerHpBar: {fileID: 0}
 --- !u!1 &7362887214680791727
 GameObject:
   m_ObjectHideFlags: 0
@@ -1981,7 +2076,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7362887213531304019}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &7362887214806386860
 Camera:
@@ -2089,7 +2184,7 @@ Transform:
   m_Children:
   - {fileID: 4876248169073298494}
   m_Father: {fileID: 7362887213531304019}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7362887215221931271
 GameObject:
@@ -2250,7 +2345,7 @@ PrefabInstance:
     - target: {fileID: 7132805142371962986, guid: 362ab080635a76041831231311cb2a4a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7132805142371962986, guid: 362ab080635a76041831231311cb2a4a,
         type: 3}
@@ -2739,7 +2834,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 619c8f12ef158d94daf9b37de15f3739,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 619c8f12ef158d94daf9b37de15f3739,
         type: 3}
@@ -2749,7 +2844,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 619c8f12ef158d94daf9b37de15f3739,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 619c8f12ef158d94daf9b37de15f3739,
         type: 3}

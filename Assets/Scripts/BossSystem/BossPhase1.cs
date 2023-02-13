@@ -20,6 +20,7 @@ public class BossPhase1 : BossAttackingPhase
             {
                 armorPlating.Remove(plate);
                 platesDestroyed++;
+                if (platesDestroyed >= platesNeededToDestroyToAdvance) complete = true;
             });
         }
     }
@@ -40,12 +41,6 @@ public class BossPhase1 : BossAttackingPhase
     public override void ExitState(BossPhaseManager boss)
     {
         Debug.Log("Exiting State 1");
-
-        // Loop through plates; No more can take damage
-        foreach (OverheatableBossComponentEntity plate in armorPlating)
-        {
-            plate.AcceptDamage = false;
-        }
 
         base.ExitState(boss);
     }
@@ -78,7 +73,7 @@ public class BossPhase1 : BossAttackingPhase
         boss.ShellEnemyMovement.Move = false;
         boss.ShellEnemyMovement.DisableNavMeshAgent();
 
-        while (platesDestroyed < platesNeededToDestroyToAdvance)
+        while (!complete)
         {
             // Attack
             yield return StartCoroutine(CallAttacks(boss));
@@ -87,6 +82,12 @@ public class BossPhase1 : BossAttackingPhase
         // Debug.Log("Waiting for Boss to be Full");
 
         yield return new WaitUntil(() => boss.HPBar.IsFull);
+
+        foreach (OverheatableBossComponentEntity plate in armorPlating)
+        {
+            plate.AcceptDamage = false;
+            plate.CoolOff(200f);
+        }
 
         // Debug.Log("Boss Bar is Full");
 

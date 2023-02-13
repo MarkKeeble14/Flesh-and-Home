@@ -17,10 +17,11 @@ public class FleshPodSpawn : BasicEnemy
         if (!Movement.Move) return;
 
         // If this enemy can Attack, call a random attack available to it
-        if (Attack.CanAttack(Movement.Target))
-        {
-            StartCoroutine(Attack.StartAttack(Movement.Target));
-        }
+        // if (Attack.CanAttack(Movement.Target))
+        // {
+        // Debug.Log("Calling Attack");
+        StartCoroutine(Attack.StartAttack(Movement.Target));
+        // }
     }
 
     public void OnSpawn(Transform target)
@@ -31,8 +32,6 @@ public class FleshPodSpawn : BasicEnemy
             Random.Range(minMaxVerticalSpawnForce.x, minMaxVerticalSpawnForce.y),
             Random.Range(minMaxHorizontalSpawnForce.x, minMaxHorizontalSpawnForce.y))
             , ForceMode.Impulse);
-
-        Movement.Target = target;
 
         // Audio
         onSpawnClip.PlayOneShot(source);

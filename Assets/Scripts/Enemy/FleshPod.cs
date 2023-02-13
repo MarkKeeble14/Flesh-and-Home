@@ -36,6 +36,8 @@ public class FleshPod : KillableEntity
         startScale = visualComponent.localScale;
         targetScale = startScale;
 
+        AttachToFloor();
+
         base.Awake();
     }
 
@@ -118,8 +120,8 @@ public class FleshPod : KillableEntity
     {
         // Reattatch to floor
         RaycastHit hit;
-        Ray ray = new Ray(visualComponent.position, Vector3.down);
+        Ray ray = new Ray(transform.position, Vector3.down);
         Physics.Raycast(ray, out hit, Mathf.Infinity, ground);
-        visualComponent.position = hit.point + (Vector3.up * targetScale.y / 2);
+        transform.position = hit.point + (Vector3.up * targetScale.y / 2);
     }
 }

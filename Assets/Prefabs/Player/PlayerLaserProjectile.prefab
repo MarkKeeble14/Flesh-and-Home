@@ -186,6 +186,8 @@ MonoBehaviour:
   light: {fileID: 10825254}
   explosionParticleSystem: {fileID: 6074646103283631049, guid: 49ea45a6784bd054cae3f798a47dda54,
     type: 3}
+  impactEffect: {fileID: 8335990208917815452, guid: 85b95fd7e20b09448a14952cbeed319f,
+    type: 3}
 --- !u!114 &217147806400698992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +219,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100, y: 100, z: 100}
+  m_Size: {x: 250, y: 250, z: 100}
   m_Center: {x: 0, y: 0, z: 50}
 --- !u!54 &1935292356314790212
 Rigidbody:
@@ -234,4 +236,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 3
+  m_CollisionDetection: 2

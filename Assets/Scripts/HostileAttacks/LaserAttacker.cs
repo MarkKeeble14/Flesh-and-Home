@@ -7,34 +7,12 @@ public abstract class LaserAttacker : Attacker
     [Header("Lasers")]
     [SerializeField] LaserAttackerOptions laserAttackerOptions;
 
-    [Header("Barrel Sets")]
-    [SerializeField] private Transform rotatingBarrelSetsHolder;
-    [SerializeField] private Transform stationaryBarrelSetsHolder;
-    protected BossBarrel[][] stationaryBarrelSets;
-    protected BossBarrel[][] rotatingBarrelSets;
-
     protected BossPhaseManager bossPhaseManager;
 
     protected void Awake()
     {
-        // Get Reference
+        // Get reference to boss phase manager
         bossPhaseManager = FindObjectOfType<BossPhaseManager>();
-
-        // Fetch and add all rotating sets
-        rotatingBarrelSets = new BossBarrel[rotatingBarrelSetsHolder.childCount][];
-        for (int i = 0; i < rotatingBarrelSetsHolder.childCount; i++)
-        {
-            Transform child = rotatingBarrelSetsHolder.GetChild(i);
-            rotatingBarrelSets[i] = child.GetComponentsInChildren<BossBarrel>();
-        }
-
-        // Fetch and add all stationary sets
-        stationaryBarrelSets = new BossBarrel[stationaryBarrelSetsHolder.childCount][];
-        for (int i = 0; i < stationaryBarrelSetsHolder.childCount; i++)
-        {
-            Transform child = stationaryBarrelSetsHolder.GetChild(i);
-            stationaryBarrelSets[i] = child.GetComponentsInChildren<BossBarrel>();
-        }
     }
 
     private Vector3 GetLaserOrigin(LaserOriginType originType, BossBarrel barrel, Transform shell)
@@ -89,7 +67,7 @@ public abstract class LaserAttacker : Attacker
         Vector3 randomDirection = Random.onUnitSphere;
         Vector3 randomFocusPoint = randomDirection * laserAttackerOptions.LaserRange;
         Vector3 laserOrigin = GetLaserOrigin(originType, barrel, shell);
-        Vector3 directionToPlayer = (bossPhaseManager.Player.position - laserOrigin + GetDirectionOffset()).normalized;
+        Vector3 directionToPlayer = (GameManager._Instance.PlayerAimAt.position - laserOrigin + GetDirectionOffset()).normalized;
         Vector3 direction;
 
         while (selected.widthMultiplier < laserAttackerOptions.MaxLaserWidth)
@@ -102,8 +80,7 @@ public abstract class LaserAttacker : Attacker
             }
 
             // Set Material Color
-            SetColor(selected, Color.Lerp(laserAttackerOptions.ChargeColor, laserAttackerOptions.ActiveColor, selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth),
-                Mathf.Lerp(0, laserAttackerOptions.EmissionIntensityScale, selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth));
+            SetColor(selected, laserAttackerOptions.LaserVisuals.GetDefaultColor());
 
             // Change Width
             ChangeWidth(selected, laserAttackerOptions.MaxLaserWidth);
@@ -126,7 +103,7 @@ public abstract class LaserAttacker : Attacker
             }
 
             // Set Material Color
-            SetColor(selected, laserAttackerOptions.ActiveColor, laserAttackerOptions.EmissionIntensityScale);
+            SetColor(selected, laserAttackerOptions.LaserVisuals.GetMaxColor());
 
             // Update Laser
             LaserCast(true, selected, direction, laserHasHitDictionary);
@@ -149,8 +126,7 @@ public abstract class LaserAttacker : Attacker
             }
 
             // Set Material Color
-            SetColor(selected, Color.Lerp(laserAttackerOptions.ChargeColor, laserAttackerOptions.ActiveColor, selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth),
-                Mathf.Lerp(0, laserAttackerOptions.EmissionIntensityScale, selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth));
+            SetColor(selected, laserAttackerOptions.LaserVisuals.GetLerpedColor(selected.widthMultiplier / laserAttackerOptions.MaxLaserWidth));
 
             // Change Width
             ChangeWidth(selected, 0);
@@ -170,11 +146,11 @@ public abstract class LaserAttacker : Attacker
         line.widthMultiplier = Mathf.MoveTowards(line.widthMultiplier, target, Time.deltaTime * laserAttackerOptions.LaserGrowSpeed);
     }
 
-    private void SetColor(LineRenderer line, Color color, float scale)
+    private void SetColor(LineRenderer line, Color color)
     {
         // Regular color
         line.material.color = color;
-        line.material.SetColor("_EmissionColor", color * scale);
+        line.material.SetColor("_EmissionColor", laserAttackerOptions.LaserVisuals.GetEmmissiveColor(color));
     }
 
     private Vector3 GetLaserDirection(LaserAimingType aimingType, BossBarrel barrel, Vector3 origin, Vector3 directionToPlayer, Vector3 randomPoint)
@@ -182,7 +158,7 @@ public abstract class LaserAttacker : Attacker
         switch (aimingType)
         {
             case LaserAimingType.FOCUS_PLAYER:
-                Vector3 targetDirection = (bossPhaseManager.Player.position - origin).normalized;
+                Vector3 targetDirection = (GameManager._Instance.PlayerAimAt.position - origin).normalized;
                 return Vector3.MoveTowards(directionToPlayer, targetDirection, Time.deltaTime * laserAttackerOptions.FollowPlayerSpeed).normalized;
             case LaserAimingType.STRAIGHT:
                 return (barrel.transform.position - origin).normalized;

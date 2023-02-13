@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MoveTowardsPlayer : EnemyMovement
+public class MoveTowardsTarget : EnemyMovement
 {
     [SerializeField] private float speed;
 
@@ -11,15 +11,15 @@ public class MoveTowardsPlayer : EnemyMovement
     void Update()
     {
         // Set Audio Source to be enabled/disabled based off of whether this enemy is moving or not
-        movementSource.enabled = Target && Move;
+        movementSource.enabled = target && Move;
 
         // If the player is not set (or null cause of dying) stop execution
-        if (!Target) return;
+        if (!target) return;
 
         // Don't allow move if not supposed to move
         if (!Move) return;
 
         // Move to target
-        transform.position += (Target.transform.position - transform.position).normalized * speed * Time.deltaTime;
+        transform.position += (target.transform.position - transform.position).normalized * speed * Time.deltaTime;
     }
 }

@@ -10,6 +10,7 @@ public class FlamethrowerSettings : WeaponAttachmentController
         public float damage;
         public float tickRate;
         public LayerMask canHit;
+        public float crosshairSpread;
     }
 
     [SerializeField] private TriggerSettings triggerSettings;
@@ -45,11 +46,11 @@ public class FlamethrowerSettings : WeaponAttachmentController
         flamethrowerParticleSystem.Play();
         flamethrowerSource.enabled = true;
         source.PlayOneShot(flamethrowerStartSound);
-        
+
         while (inputManager.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFuel > 0)
         {
             // Spread Crosshair
-            CrosshairController._Instance.Spread(1);
+            CrosshairController._Instance.Spread(triggerSettings.crosshairSpread);
 
             fuelStore.CurrentFuel -= Time.deltaTime * fuelConsumptionRate;
             yield return null;

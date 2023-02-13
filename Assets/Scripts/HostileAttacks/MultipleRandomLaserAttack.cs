@@ -7,6 +7,19 @@ public class MultipleRandomLaserAttack : LaserAttacker
     [Header("Specific Settings")]
     [SerializeField] private int maxLaserCalls = 8;
 
+    [SerializeField] private Transform[] barrelOptionHolders;
+    private List<BossBarrel> options = new List<BossBarrel>();
+
+    private new void Awake()
+    {
+        // Fetch and add all options
+        foreach (Transform holder in barrelOptionHolders)
+        {
+            options.AddRange(holder.GetComponentsInChildren<BossBarrel>());
+        }
+        base.Awake();
+    }
+
     protected override IEnumerator Attack(Transform target)
     {
         int toCall = Random.Range(1, maxLaserCalls);
@@ -17,8 +30,7 @@ public class MultipleRandomLaserAttack : LaserAttacker
         // which are unused seems not worthwhile for now at least
         for (int i = 0; i < toCall; i++)
         {
-            BossBarrel[] selectedSet = rotatingBarrelSets[Random.Range(0, rotatingBarrelSets.Length)];
-            BossBarrel selected = selectedSet[Random.Range(0, selectedSet.Length)];
+            BossBarrel selected = options[Random.Range(0, options.Count)];
 
             // if a barrel has already been selected, ignore it
             if (!callOn.Contains(selected))
