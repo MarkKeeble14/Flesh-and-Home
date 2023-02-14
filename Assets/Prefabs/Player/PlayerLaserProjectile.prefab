@@ -188,6 +188,9 @@ MonoBehaviour:
     type: 3}
   impactEffect: {fileID: 8335990208917815452, guid: 85b95fd7e20b09448a14952cbeed319f,
     type: 3}
+  canDamage:
+    serializedVersion: 2
+    m_Bits: 433152
 --- !u!114 &217147806400698992
 MonoBehaviour:
   m_ObjectHideFlags: 0
