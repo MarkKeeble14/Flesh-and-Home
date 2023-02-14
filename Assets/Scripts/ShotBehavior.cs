@@ -9,15 +9,19 @@ public class ShotBehavior : MonoBehaviour
     [SerializeField] private ParticleSystem impactEffect;
     private Rifle raygun;
     private float damage, impactForce;
+    [SerializeField] private LayerMask canDamage;
 
     private void OnCollisionEnter(Collision collision)
     {
         if (!LayerMaskHelper.IsInLayerMask(collision.gameObject, raygun.CanHit)) return;
 
         // Try to do damage
-        if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+        if (LayerMaskHelper.IsInLayerMask(collision.gameObject, canDamage))
         {
-            damageable.Damage(damage, -collision.GetContact(0).normal * impactForce);
+            if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+            {
+                damageable.Damage(damage, -collision.GetContact(0).normal * impactForce);
+            }
         }
 
         Explode(collision);
