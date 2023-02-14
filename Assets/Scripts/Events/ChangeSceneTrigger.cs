@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class EnterRuinsTrigger : DestroyTriggerOnActivate
+public class ChangeSceneTrigger : DestroyTriggerOnActivate
 {
-    [SerializeField] private string ruinsSceneName = "RuinsScene";
+    [SerializeField] private string sceneName;
 
     protected override void Activate()
     {
-        SceneManager.LoadScene(ruinsSceneName);
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -75,6 +75,6 @@ Material:
     - _UvBasedLightSaberFactor: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.8932289, g: 0.08579826, b: 0.10677112, a: 1}
-    - _EmissionColor: {r: 26.796867, g: 2.573948, b: 3.2031336, a: 30}
+    - _Color: {r: 0.73183954, g: 0.073873416, b: 0.26816043, a: 1}
+    - _EmissionColor: {r: 21.955187, g: 2.2162025, b: 8.044813, a: 30}
   m_BuildTextureStacks: []
