@@ -6,7 +6,16 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
+    Vector3 movementVector;
+    Vector3 jetpackAirDashVelocity;
+    private bool hasLanded;
+    private bool flying;
+    private float jetpackTimer;
+
+    [Header("Player Controller")]
+
     #region Movement
+
     [Header("Movement")]
     [SerializeField] private float baseSpeed = 2.0f;
     [SerializeField] private float sprintSpeed = 1.5f;
@@ -14,8 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float mass = 3.0f;
     [SerializeField] private float gravityValue = -9.81f;
-    private Vector3 playerVelocity;
-    private bool hasLanded;
+    [SerializeField] private Vector3 playerVelocity;
+
 
     [Header("Audio")]
     [SerializeField] private AudioClip jumpClip;
@@ -23,6 +32,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource footstepsSource;
 
     #endregion
+
+    [Header("Bobbing")]
+    [SerializeField] private float bobIdleSpeed = 0.025f;
+    [SerializeField] private float bobMovingSpeed = 0.05f;
+    [SerializeField] private float bobSprintingSpeed = 0.075f;
+    [SerializeField] private float bobIdleStrength = 2f;
+    [SerializeField] private float bobMovingStrength = 6f;
+    [SerializeField] private float bobSprintingStrength = 10f;
+
+    [SerializeField] private Transform lazerParent;
+    private Vector3 lazerParentOrigin;
+    private Vector3 targetWeaponBobPosition;
+    private float idleCounter;
+    private float movementCounter;
+    private float sprintingCounter;
 
     #region Jetpack
 
@@ -32,8 +56,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool hasJetpack;
     [SerializeField] private float jetpackForce = 25.0f;
     [SerializeField] private float maxJetpackDuration = 3f;
-    private bool flying;
-    private float jetpackTimer;
+    [SerializeField] private float jetpackDashPower = 10f;
+    [SerializeField] private float dashVelocityFalloffSpeedFlying = 1f;
+    [SerializeField] private float dashVelocityFalloffSpeedGrounded;
+    [SerializeField] private float jetpackDashCooldown = 5f;
+    private float jetpackDashCooldownTimer;
+    [SerializeField] private Color jetpackDashAvailableColor;
+    [SerializeField] private Color jetpackDashUnavailableColor;
+    [SerializeField] private AudioClipContainer jetpackDashClip;
+    private bool CanUseDash
+    {
+        get
+        {
+            return jetpackDashCooldownTimer <= 0;
+        }
+    }
 
     // Fuel
     [SerializeField] private FuelStore fuelStore;
@@ -46,8 +83,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip jetpackEndClip;
 
     [Header("References")]
-    [SerializeField] private JetpackDisplay jetpackDisplay;
-
+    [SerializeField] private ImageSliderBar jetpackDisplay;
+    [SerializeField] private ImageSliderBar jetpackDashCooldownBar;
+    [SerializeField] private ParticleSystem dashParticleSystem;
     #endregion
 
     private float MoveSpeed
@@ -67,7 +105,6 @@ public class PlayerController : MonoBehaviour
     }
 
     #region Collisions
-
     [SerializeField] private Transform groundCheckPosition;
     [SerializeField] private Transform bonkCheckPosition;
     private bool isGrounded;
@@ -77,29 +114,42 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
-    [Header("References")]
-    [SerializeField] private AudioSource source;
     private CharacterController controller;
     private InputManager inputManager;
     private Transform cameraTransform;
+
+    [SerializeField] private AudioSource source;
 
     private void Awake()
     {
         // Set Fuel
         fuelStore.Reset();
+
+        // Update UI
+        jetpackDisplay.Set(0, maxJetpackDuration);
     }
 
     private void Start()
     {
+
         // Get References
+        lazerParentOrigin = lazerParent.localPosition;
+
         controller = GetComponent<CharacterController>();
 
-        inputManager = InputManager._Instance;
         cameraTransform = Camera.main.transform;
 
         // Fetch the Input Manager Singleton
         inputManager = InputManager._Instance;
         inputManager.PlayerInputActions.Player.Jump.performed += Jump;
+        inputManager.PlayerInputActions.Player.Sprint.performed += TryDash;
+    }
+
+    private void OnDestroy()
+    {
+        // Remove input actions
+        inputManager.PlayerInputActions.Player.Jump.performed -= Jump;
+        inputManager.PlayerInputActions.Player.Sprint.performed -= TryDash;
     }
 
     void Update()
@@ -119,14 +169,28 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+        // Control Dash
+        // if velocity is not 0, move towards to 0
+        if (jetpackAirDashVelocity != Vector3.zero)
+        {
+            // if grounded, will fall off much quicker
+            jetpackAirDashVelocity = Vector3.Lerp(jetpackAirDashVelocity, Vector3.zero,
+                (isGrounded ? dashVelocityFalloffSpeedGrounded : dashVelocityFalloffSpeedFlying) * Time.deltaTime);
+        }
+
+        // Set UI for Air Dash Cooldown
+        jetpackDashCooldownBar.Set(jetpackDashCooldownTimer, jetpackDashCooldown);
+        jetpackDashCooldownBar.SetColor(CanUseDash ? jetpackDashAvailableColor : jetpackDashUnavailableColor);
+
+        // Movement
         Vector2 movement = inputManager.GetPlayerMovement();
-        Vector3 move = new Vector3(movement.x, 0f, movement.y);
-        move = cameraTransform.forward * move.z + cameraTransform.right * move.x;
-        move.y = 0f;
-        controller.Move(move * Time.deltaTime * MoveSpeed);
+        movementVector = new Vector3(movement.x, 0f, movement.y);
+        movementVector = cameraTransform.forward * movementVector.z + cameraTransform.right * movementVector.x;
+        movementVector.y = 0f;
+        controller.Move((movementVector + jetpackAirDashVelocity) * MoveSpeed * Time.deltaTime);
 
         // Enable footsteps audio source when walking
-        footstepsSource.enabled = isGrounded && move != Vector3.zero;
+        footstepsSource.enabled = isGrounded && movementVector != Vector3.zero;
 
         // Changes the height position of the player..
         if (inputManager.PlayerJumpedThisFrame() && isGrounded)
@@ -134,11 +198,63 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -mass * gravityValue * Time.deltaTime);
         }
 
-        playerVelocity.y += gravityValue * Time.deltaTime;
+        // Only subtract velocity if not grounded and not hitting a ceiling while jetpacking
+        if (!isGrounded)
+        {
+            if (!(flying && isBonking))
+            {
+                playerVelocity.y += gravityValue * Time.deltaTime;
+            }
+        }
+
+        // Subtract from air dash timer
+        if (jetpackDashCooldownTimer > 0)
+        {
+            jetpackDashCooldownTimer -= Time.deltaTime;
+        }
 
         // Debug.Log("Velocity: " + playerVelocity);
 
+        // Move player
         controller.Move(playerVelocity * Time.deltaTime);
+
+        // Headbobbing
+        ExecuteHeadbob();
+    }
+
+    private void ExecuteHeadbob()
+    {
+        // Headbobbing
+        if (isGrounded && IsSprinting)
+        {
+            // sprinting
+            HeadBob(sprintingCounter, bobSprintingSpeed, bobSprintingSpeed);
+            sprintingCounter += Time.deltaTime * 3f;
+            lazerParent.localPosition =
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobSprintingStrength);
+        }
+        else if (!IsSprinting && isGrounded && movementVector != Vector3.zero)
+        {
+            // moving
+            HeadBob(movementCounter, bobMovingSpeed, bobMovingSpeed);
+            movementCounter += Time.deltaTime * 3f;
+            lazerParent.localPosition =
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobMovingStrength);
+        }
+        else if (isGrounded && movementVector == Vector3.zero)
+        {
+            // idle
+            HeadBob(idleCounter, bobIdleSpeed, bobIdleSpeed);
+            idleCounter += Time.deltaTime;
+            lazerParent.localPosition =
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobIdleStrength);
+        }
+    }
+
+    void HeadBob(float z, float x_intensity, float y_intensity)
+    {
+        targetWeaponBobPosition = lazerParentOrigin + new Vector3(Mathf.Cos(z) * x_intensity, Mathf.Sin(z * 2) * y_intensity,
+            0);
     }
 
     private void Jump(InputAction.CallbackContext ctx)
@@ -170,7 +286,7 @@ public class PlayerController : MonoBehaviour
         jetpackParticles.Play();
 
         // Player must be holding the button, have time left, and also must have fuel left to burn
-        while (inputManager.PlayerInputActions.Player.Jump.IsPressed() && jetpackTimer < maxJetpackDuration && fuelStore.CurrentFuel > 0)
+        while (inputManager.PlayerInputActions.Player.Jump.IsPressed() && jetpackTimer < maxJetpackDuration && fuelStore.CurrentFuel > 0 && !isGrounded)
         {
             // Update timer
             jetpackTimer += Time.deltaTime;
@@ -179,8 +295,7 @@ public class PlayerController : MonoBehaviour
             jetpackDisplay.Set(jetpackTimer, maxJetpackDuration);
 
             // Use Fuel
-            fuelStore.CurrentFuel -= Time.deltaTime * fuelConsumptionRate;
-            if (fuelStore.CurrentFuel < 0) fuelStore.CurrentFuel = 0;
+            fuelStore.AlterFuel(-Time.deltaTime * fuelConsumptionRate);
 
             // Add force to move, but only if there is space to move upwards
             if (isBonking)
@@ -205,5 +320,32 @@ public class PlayerController : MonoBehaviour
 
         flying = false;
         // Debug.Log("End Jetpack");
+    }
+
+    private void TryDash(InputAction.CallbackContext ctx)
+    {
+        if (!CanUseDash)
+        {
+            if (jetpackDashCooldownTimer > 0)
+            {
+                // Debug.Log("Air Dash On Cooldown; Can't use Air Dash");
+                return;
+            }
+        }
+
+        // Debug.Log("Activate Air Dash");
+
+        // Audio
+        jetpackDashClip.PlayOneShot(source);
+
+        // Add Force
+        Vector3 dashForce = movementVector * jetpackDashPower;
+        jetpackAirDashVelocity += dashForce;
+
+        // Spawn Particles
+        Instantiate(dashParticleSystem, transform.position, Quaternion.LookRotation(-dashForce)).Play();
+
+        // Set cooldown
+        jetpackDashCooldownTimer = jetpackDashCooldown;
     }
 }

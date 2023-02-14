@@ -14,16 +14,16 @@ TagManager:
   - Weapon
   - Ruin
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - BossShell
+  - FleshPod
+  - FleshPodSpawn
+  - LaserCuttable
+  - BossPlating
+  - BossFleshy
+  - PlayerHitbox
+  - EnemyFlesh
+  - BossFleshyHitbox
   - 
   - 
   - 
