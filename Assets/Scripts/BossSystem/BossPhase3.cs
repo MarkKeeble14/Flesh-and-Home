@@ -6,7 +6,7 @@ public class BossPhase3 : BossAttackingPhase
 {
     [Header("Phase")]
     [SerializeField] private Transform barrelHolder;
-    private List<BossBarrel> bossBarrels = new List<BossBarrel>();
+    private List<LaserBarrel> bossBarrels = new List<LaserBarrel>();
     [SerializeField] private KillableBossComponentEntity bossFlesh;
     [SerializeField] private float timeBeforeFleshySpawns = 3f;
     [SerializeField] private float timeAfterFleshyKillBeforeDropBarrels;
@@ -26,7 +26,7 @@ public class BossPhase3 : BossAttackingPhase
     private void Awake()
     {
         // Add Boss Barrels
-        bossBarrels.AddRange(barrelHolder.GetComponentsInChildren<BossBarrel>());
+        bossBarrels.AddRange(barrelHolder.GetComponentsInChildren<LaserBarrel>());
     }
 
     public override void EnterState(BossPhaseManager boss)
@@ -58,7 +58,7 @@ public class BossPhase3 : BossAttackingPhase
             ), ForceMode.Impulse);
         }
 
-        foreach (BossBarrel b in bossBarrels)
+        foreach (LaserBarrel b in bossBarrels)
         {
             // Uparent
             b.transform.parent = parentToUnequipped;
@@ -94,7 +94,7 @@ public class BossPhase3 : BossAttackingPhase
         Debug.Log("Phase 3 Start");
 
         // Shell gave up on lift
-        boss.ShellEnemyMovement.Move = false;
+        boss.ShellEnemyMovement.SetMove(false);
         boss.ShellEnemyMovement.DisableNavMeshAgent();
 
         // Wait some before spawning fleshy
@@ -106,8 +106,7 @@ public class BossPhase3 : BossAttackingPhase
         // Make Fleshy Boss Exist
         boss.FleshyEnemyMovement.transform.position = boss.ShellEnemyMovement.transform.position;
         boss.FleshyEnemyMovement.gameObject.SetActive(true);
-        boss.FleshyEnemyMovement.Move = true;
-        boss.FleshyEnemyMovement.EnableNavMeshAgent();
+        boss.FleshyEnemyMovement.SetMove(true);
 
         // Enable HP Bar
         bossFlesh.SetHPBar(boss.HPBar);
@@ -119,10 +118,10 @@ public class BossPhase3 : BossAttackingPhase
         // Condition for this phase is for the player to kill the fleshy enemy
         while (!complete)
         {
-            yield return StartCoroutine(CallAttacks(boss));
+            yield return StartCoroutine(CallAttacks(boss, GameManager._Instance.PlayerAimAt));
         }
 
-        foreach (BossBarrel b in bossBarrels)
+        foreach (LaserBarrel b in bossBarrels)
         {
             b.Disabled = true;
         }
@@ -133,7 +132,7 @@ public class BossPhase3 : BossAttackingPhase
         yield return new WaitForSeconds(timeAfterFleshyKillBeforeDropBarrels);
 
         // Turn gravity back on for barrels
-        foreach (BossBarrel b in bossBarrels)
+        foreach (LaserBarrel b in bossBarrels)
         {
             b.Rigidbody.useGravity = true;
             b.Collider.enabled = true;

@@ -647,7 +647,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -657,7 +663,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 3688273097040236901}
 --- !u!1 &1238529496504498902
@@ -706,7 +712,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -716,7 +728,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 1765267798185173455}
 --- !u!1 &1252814719271583680
@@ -765,7 +777,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -775,10 +793,13 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 29b240790e66ad34583061530b8b8430,
+  laserAttackerOptions: {fileID: 11400000, guid: 92995b6680f92984c8411af8b1f818ab,
     type: 2}
-  maxLaserCalls: 25
-  barrelOptionHolders: []
+  maxLaserCalls: 32
+  barrelOptionHolders:
+  - {fileID: 4559155299664616357}
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
 --- !u!1 &1445814911787076748
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +846,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -835,10 +862,13 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   maxLaserCalls: 12
-  barrelOptionHolders: []
+  barrelOptionHolders:
+  - {fileID: 4559155299664616357}
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
 --- !u!1 &1696484474902682897
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +1023,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -1003,7 +1039,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 6599270303227461859}
 --- !u!1 &4559155297982300587
@@ -1201,12 +1237,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861238c6170ca1241ad86ef837e5ef99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Move: 0
   playerIsTarget: 0
   isGround:
     serializedVersion: 2
     m_Bits: 384
   movementSource: {fileID: 193684192667313155}
+  enableOnAwake: 0
 --- !u!114 &7881108961409635393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,7 +1262,8 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  maxHealth: 500
+  maxHealth: 1000
+  acceptDamage: 1
   destroyOnDeath: 0
   rigidbody: {fileID: 4559155298250650245}
   onTakeDamageClip:
@@ -1531,7 +1568,7 @@ MonoBehaviour:
   addOnsPhase2: {fileID: 299655286}
   shellNavMeshEnemy: {fileID: 4559155298250650244}
   shellNavMeshRigidbody: {fileID: 4559155298250650245}
-  fleshyBoss: {fileID: 5110091453195575289}
+  fleshyBoss: {fileID: 629767790}
   hpBar: {fileID: 0}
   Player: {fileID: 0}
   source: {fileID: 1662478180}
@@ -1549,6 +1586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0a0bb3b17ccf346a6beec5183e3434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPool: []
   enterPhaseTime: 0
   phaseBarSettings:
     Mode: 0
@@ -1624,6 +1662,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7dd74c6a85ddf14592658aed6506e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPool:
+  - {fileID: 1549034130490153647}
+  - {fileID: 2031117155908681347}
+  - {fileID: 8081500927886883647}
+  - {fileID: 1913773852784504985}
+  - {fileID: 1626451440653981667}
+  - {fileID: 4686882736173490056}
+  - {fileID: 5040039632627370614}
+  - {fileID: 1251971713988234395}
+  - {fileID: 7590469321288657619}
+  - {fileID: 7710944370173060279}
   enterPhaseTime: 2.5
   phaseBarSettings:
     Mode: 2
@@ -1650,11 +1699,6 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
-  attacks:
-  - {fileID: 1549034130490153647}
-  - {fileID: 2031117155908681347}
-  - {fileID: 8081500927886883647}
-  - {fileID: 1913773852784504985}
   numAttacksAtOnce: 2
   timeBetweenAttacks: 1
   armorPlateHolder: {fileID: 6937021556066863655}
@@ -1672,6 +1716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc8609f249a8d744ad3419bab11fa14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPool:
+  - {fileID: 7885544056425709480}
+  - {fileID: 7885544056158720997}
   enterPhaseTime: 0
   phaseBarSettings:
     Mode: 3
@@ -1704,15 +1751,16 @@ MonoBehaviour:
   groundShakeImpulseForce: 1
   riseBeforeEnding: 1
   onCrashDownAttack: {fileID: 2754082744787138833}
-  repeatableAttacks:
-  - {fileID: 7885544056425709480}
-  - {fileID: 7885544056158720997}
-  timeBetweenAttacks: 3
+  timeBetweenAttacks: 5
   availableAddOns:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
-      value: 100
-  minMaxNumAddOns: {x: 4, y: 4}
+      value: 20
+    - key: {fileID: -3187359783752088, guid: 5684e422596042044a61c646ac4191d2, type: 3}
+      value: 50
+    - key: {fileID: 6182247085408442341, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
+      value: 30
+  minMaxNumAddOns: {x: 1, y: 3}
   timeAddedOnKillEnemy: 5
   pauseDuration: 1
   riseSpeed: 0.05
@@ -1888,6 +1936,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e17664e599eb99848854bd947bc447ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPool:
+  - {fileID: 2031117155908681347}
+  - {fileID: 8081500927886883647}
+  - {fileID: 1913773852784504985}
+  - {fileID: 1626451440653981667}
+  - {fileID: 4686882736173490056}
+  - {fileID: 5040039632627370614}
+  - {fileID: 1251971713988234395}
+  - {fileID: 7590469321288657619}
+  - {fileID: 7710944370173060279}
   enterPhaseTime: 2.5
   phaseBarSettings:
     Mode: 2
@@ -1914,15 +1972,7 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
-  attacks:
-  - {fileID: 2031117155908681347}
-  - {fileID: 8081500927886883647}
-  - {fileID: 1913773852784504985}
-  - {fileID: 1626451440653981667}
-  - {fileID: 4686882736173490056}
-  - {fileID: 5040039632627370614}
-  - {fileID: 1251971713988234395}
-  numAttacksAtOnce: 3
+  numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   bossShell: {fileID: 7881108961409635393}
 --- !u!114 &299655286
@@ -1937,6 +1987,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bc8609f249a8d744ad3419bab11fa14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPool:
+  - {fileID: 7885544056425709480}
+  - {fileID: 7885544056158720997}
   enterPhaseTime: 0
   phaseBarSettings:
     Mode: 3
@@ -1969,14 +2022,15 @@ MonoBehaviour:
   groundShakeImpulseForce: 1
   riseBeforeEnding: 0
   onCrashDownAttack: {fileID: 54373864176638256}
-  repeatableAttacks:
-  - {fileID: 7885544056425709480}
-  - {fileID: 7885544056158720997}
-  timeBetweenAttacks: 0
+  timeBetweenAttacks: 3
   availableAddOns:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
-      value: 100
+      value: 20
+    - key: {fileID: -3187359783752088, guid: 5684e422596042044a61c646ac4191d2, type: 3}
+      value: 20
+    - key: {fileID: 6182247085408442341, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
+      value: 60
   minMaxNumAddOns: {x: 2, y: 4}
   timeAddedOnKillEnemy: 5
   pauseDuration: 1
@@ -2153,6 +2207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddb8f9bc1f10c8a4fb432572f61af1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPool:
+  - {fileID: 7957065367442252025}
+  - {fileID: 2891509672180706216}
   enterPhaseTime: 2.5
   phaseBarSettings:
     Mode: 2
@@ -2179,9 +2236,6 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1662478180}
-  attacks:
-  - {fileID: 7957065367442252025}
-  - {fileID: 2891509672180706216}
   numAttacksAtOnce: 1
   timeBetweenAttacks: 0
   barrelHolder: {fileID: 4559155298250650246}
@@ -2335,9 +2389,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4559155299825079984}
+  - component: {fileID: 629767790}
   - component: {fileID: 4559155299825079987}
-  - component: {fileID: 5110091453195575289}
-  - component: {fileID: 4559155299825079985}
   - component: {fileID: 1200041714}
   - component: {fileID: 6692938010683863987}
   - component: {fileID: 1200041711}
@@ -2365,6 +2418,25 @@ Transform:
   m_Father: {fileID: 4559155299601775632}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &629767790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299825079986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a2074dde4418bf44aaa3f419810ced7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIsTarget: 1
+  isGround:
+    serializedVersion: 2
+    m_Bits: 384
+  movementSource: {fileID: 6692938010683863987}
+  speed: 3.5
+  rotateTowardsMovementDirection: 0
 --- !u!114 &4559155299825079987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2389,46 +2461,6 @@ MonoBehaviour:
   minMaxGrowSpeed: {x: 0.5, y: 1.5}
   minMaxShrinkSpeed: {x: 0.75, y: 1}
   heightAllowance: 10
---- !u!114 &5110091453195575289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4559155299825079986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861238c6170ca1241ad86ef837e5ef99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Move: 1
-  playerIsTarget: 0
-  isGround:
-    serializedVersion: 2
-    m_Bits: 384
-  movementSource: {fileID: 6692938010683863987}
---- !u!195 &4559155299825079985
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4559155299825079986}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 2
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!114 &1200041714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2449,7 +2481,8 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   maxHealth: 500
-  destroyOnDeath: 0
+  acceptDamage: 1
+  destroyOnDeath: 1
   rigidbody: {fileID: 1200041713}
   onTakeDamageClip:
     clip: {fileID: 0}
@@ -2778,7 +2811,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -2788,7 +2827,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 4219836553912982098}
 --- !u!1 &5941830948853981882
@@ -2975,7 +3014,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -2985,7 +3030,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 2279130278040657870}
 --- !u!1 &7478859432974368545
@@ -3034,7 +3079,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -3044,10 +3095,13 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 29b240790e66ad34583061530b8b8430,
+  laserAttackerOptions: {fileID: 11400000, guid: 92995b6680f92984c8411af8b1f818ab,
     type: 2}
-  maxLaserCalls: 25
-  barrelOptionHolders: []
+  maxLaserCalls: 32
+  barrelOptionHolders:
+  - {fileID: 4559155299664616357}
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
 --- !u!1 &7479291086957103291
 GameObject:
   m_ObjectHideFlags: 0
@@ -3148,7 +3202,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -3158,7 +3218,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 6823342879682449955}
 --- !u!1 &8029395801953975960
@@ -3261,7 +3321,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -3271,10 +3337,13 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   maxLaserCalls: 12
-  barrelOptionHolders: []
+  barrelOptionHolders:
+  - {fileID: 4559155299664616357}
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
 --- !u!1 &8754332209502581209
 GameObject:
   m_ObjectHideFlags: 0
@@ -3321,7 +3390,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 2
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -3331,7 +3406,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 5023830293163225693}
 --- !u!1 &8902665601811258763
@@ -3427,7 +3502,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 0
   timeBetweenAttacks: 0
-  enemyCanMoveWhileBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 1
   source: {fileID: 8221368592841426486}
   onStartClip:
     clip: {fileID: 0}
@@ -3437,9 +3518,11 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: 28bc803f6bff13543a34e0c54d257963,
+  laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
-  barrel: {fileID: 0}
+  barrelOptionHolders:
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
 --- !u!1 &9202659539860248320
 GameObject:
   m_ObjectHideFlags: 0
@@ -3584,7 +3667,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: height
-      value: 25
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -3604,12 +3687,17 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: spawnAtYOffset
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: timeBetweenThumps
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
+      propertyPath: removeFromPoolWhenActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}
@@ -3747,6 +3835,11 @@ PrefabInstance:
         type: 3}
       propertyPath: timeBetweenThumps
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
+      propertyPath: removeFromPoolWhenActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}
@@ -8377,6 +8470,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
+      propertyPath: height
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
       propertyPath: maxRadius
       value: 50
       objectReference: {fileID: 0}
@@ -9440,12 +9538,12 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: damage
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: height
-      value: 75
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -9455,17 +9553,22 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: numThumps
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: expansionSpeed
-      value: 5
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: spawnAtYOffset
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
+      propertyPath: timeBetweenThumps
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}

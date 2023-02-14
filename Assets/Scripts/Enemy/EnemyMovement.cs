@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    public bool Move = true;
+    private bool isDisabledForAttack;
+    private bool move = true;
+    public bool AllowMove => move && !isDisabledForAttack;
+
     protected Transform target;
     [SerializeField] private bool playerIsTarget;
     [SerializeField] protected LayerMask isGround;
@@ -63,5 +66,15 @@ public class EnemyMovement : MonoBehaviour
         // if meant to destroy on end, do so
         if (destroyOnReachTarget)
             Destroy(gameObject);
+    }
+
+    public void SetDisabledForAttack(bool v)
+    {
+        isDisabledForAttack = v;
+    }
+
+    public void SetMove(bool v)
+    {
+        move = v;
     }
 }

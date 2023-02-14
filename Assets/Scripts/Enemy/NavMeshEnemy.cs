@@ -1,22 +1,28 @@
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class NavMeshEnemy : EnemyMovement
 {
     protected NavMeshAgent navMeshAgent;
+    [SerializeField] private bool enableOnAwake;
 
     public bool IsActive { get; protected set; }
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        if (enableOnAwake)
+            EnableNavMeshAgent();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Debug.Log(name + ": " + AllowMove);
+
         // Set Movement source to be active if moving basically
-        movementSource.enabled = IsActive && target && navMeshAgent.isOnNavMesh && Move;
+        movementSource.enabled = IsActive && target && navMeshAgent.isOnNavMesh && AllowMove;
 
         // Nav Mesh Agent has not become active yet
         if (!IsActive)
@@ -29,10 +35,10 @@ public class NavMeshEnemy : EnemyMovement
         // if (!navMeshAgent.isOnNavMesh) return;
 
         // Stop if not supposed to move so other things can move this object
-        navMeshAgent.isStopped = !Move;
+        navMeshAgent.isStopped = !AllowMove;
 
         // Don't allow move if not supposed to move
-        if (!Move)
+        if (!AllowMove)
         {
             // Debug.Log("Not Supposed to Move");
             return;

@@ -29,7 +29,7 @@ public class BossIntroPhase : BossPhaseBaseState
         Debug.Log("Intro Phase Coroutine Start");
 
         // No movement
-        boss.ShellEnemyMovement.Move = false;
+        boss.ShellEnemyMovement.SetMove(false);
 
         // Wait for a second
         yield return new WaitForSeconds(enterPhaseTime);

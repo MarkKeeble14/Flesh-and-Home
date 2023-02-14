@@ -7,7 +7,7 @@ public class ShotBehavior : MonoBehaviour
     [SerializeField] private new Light light;
     [SerializeField] private PlayerLaserExplosiveParticleSystem explosionParticleSystem;
     [SerializeField] private ParticleSystem impactEffect;
-    private TestRaygun raygun;
+    private Rifle raygun;
     private float damage, impactForce;
 
     private void OnCollisionEnter(Collision collision)
@@ -34,7 +34,7 @@ public class ShotBehavior : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void setTarget(Vector3 target, TestRaygun raygun, float damage, float force)
+    public void setTarget(Vector3 target, Rifle raygun, float damage, float force)
     {
         this.raygun = raygun;
         light.color = raygun.CurrentColor;

@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 770e8ea487f657d419976f05b8b31c02, type: 3}
-  m_Name: Template
+  m_Name: BaseTemplate
   m_EditorClassIdentifier: 
-  damage: 2
-  tickSpeed: 0.25
-  laserRange: 1000
-  laserGrowSpeed: 5
-  laserStayDuration: 5
-  maxLaserWidth: 5
-  laserRadius: 0.1
+  damage: 1
+  tickSpeed: 0.05
+  laserRange: 100
   canHit:
     serializedVersion: 2
     m_Bits: 8704
+  laserRadius: 0.01
+  beamSettings:
+    fullWidth: 0.25
+    beamGrowSpeed: 0.1
+    beamCollapseSpeed: 3
+    beamOverheatCollapseSpeed: 0
+  laserStayDuration: 5
   visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
-  keepAimSourceWhenUnattached: 0
-  canTargetPlayer: 0
-  followPlayerSpeed: 0
-  chanceToTargetPlayer: {x: 0, y: 0}
-  originateAtShell: 1
-  minMaxLaserOffset: {x: 2.5, y: 5}
+  canTargetPlayer: 1
+  followPlayerSpeed: 0.35
+  chanceToTargetPlayer: {x: 1, y: 1}
+  minMaxLaserOffset: {x: 0.1, y: 0.25}

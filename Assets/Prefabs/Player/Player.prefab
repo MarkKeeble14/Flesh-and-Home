@@ -294,7 +294,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 65463
+    m_Bits: 196535
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -930,12 +930,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ffae2e7962124438d183442ebb3c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jetpackAirDashCooldownBar: {fileID: 0}
-  baseSpeed: 3.25
-  sprintSpeed: 1.5
-  airStrafeSpeed: 2.75
-  jumpHeight: 1
-  mass: 3
+  baseSpeed: 5
+  sprintSpeed: 2
+  airStrafeSpeed: 3.5
+  jumpHeight: 1.25
+  mass: 5
   gravityValue: -9.81
   playerVelocity: {x: 0, y: 0, z: 0}
   jumpClip: {fileID: 8300000, guid: 9899a656da685824d8a375705a272712, type: 3}
@@ -943,14 +942,14 @@ MonoBehaviour:
   footstepsSource: {fileID: 7362887214131378896}
   hasJetpack: 1
   jetpackForce: 0.2
-  maxJetpackDuration: 5
-  jetpackAirDashPower: 5
-  airDashVelocityFalloffSpeed: 1
-  jetpackAirDashCooldown: 5
-  jetpackAirDashCooldownTimer: 0
-  jetpackAirDashAvailableColor: {r: 1, g: 1, b: 1, a: 1}
-  jetpackAirDashUnavailableColor: {r: 1, g: 1, b: 1, a: 0.2509804}
-  airDashClip:
+  maxJetpackDuration: 10
+  jetpackDashPower: 5
+  dashVelocityFalloffSpeedFlying: 1
+  dashVelocityFalloffSpeedGrounded: 10
+  jetpackDashCooldown: 3
+  jetpackDashAvailableColor: {r: 1, g: 0.9300962, b: 0, a: 1}
+  jetpackDashUnavailableColor: {r: 1, g: 1, b: 1, a: 0.5019608}
+  jetpackDashClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
@@ -961,6 +960,9 @@ MonoBehaviour:
   jetpackStartClip: {fileID: 8300000, guid: 726ed5f7a8e2fb942a3b03dde5571c7e, type: 3}
   jetpackEndClip: {fileID: 8300000, guid: 487161c81bec3184f9583fbf04f23fe1, type: 3}
   jetpackDisplay: {fileID: 0}
+  jetpackDashCooldownBar: {fileID: 0}
+  dashParticleSystem: {fileID: 298919151025714959, guid: 37aaa68373e3dd0449bf6bf81336a3b3,
+    type: 3}
   groundCheckPosition: {fileID: 7362887213686877935}
   bonkCheckPosition: {fileID: 7362887215221931270}
   environmentCollisionCheckRadius: 0.3
@@ -984,12 +986,12 @@ MonoBehaviour:
     projectile: {fileID: 11468384, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
     impactForce: 80
     crosshairSpread: 0.4
-    damage: 5
+    damage: 25
     shotsPerSecond: 10
     maxDistance: 500
     canHit:
       serializedVersion: 2
-      m_Bits: 56320
+      m_Bits: 187392
     overheatSettings:
       overheatDamage: 3
       overheatAfter: 30
@@ -1087,7 +1089,7 @@ MonoBehaviour:
     pitch: 1
   color: {r: 0.31347656, g: 0, b: 1, a: 1}
   laserSettings:
-    damage: 5
+    damage: 10
     tickRate: 0.05
     maxDistance: 100
     canHit:
@@ -1920,6 +1922,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   maxHealth: 100
+  acceptDamage: 0
   destroyOnDeath: 1
   rigidbody: {fileID: 652312800}
   onTakeDamageClip:

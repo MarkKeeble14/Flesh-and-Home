@@ -1,23 +1,23 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class SetLaserAttack : LaserAttacker
+public class BossSetLaserAttack : BossLaserAttack
 {
     [SerializeField] private Transform barrelSetHolder;
-    private BossBarrel[] set;
+    private LaserBarrel[] set;
 
     private new void Awake()
     {
         // Get Barrels
-        set = barrelSetHolder.GetComponentsInChildren<BossBarrel>();
+        set = barrelSetHolder.GetComponentsInChildren<LaserBarrel>();
         base.Awake();
     }
 
-    protected override IEnumerator Attack(Transform target)
+    protected override IEnumerator ExecuteAttack(Transform target)
     {
         for (int i = 0; i < set.Length; i++)
         {
-            BossBarrel selected = set[i];
+            LaserBarrel selected = set[i];
             StartCoroutine(LaserFrom(selected, bossPhaseManager.ShellEnemyMovement.transform));
         }
 

@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class OverheatableBossComponentEntity : OverheatableEntity
 {
-    public bool AcceptDamage { get; set; }
     public ImageSliderBar HPBar { get; private set; }
 
     public override void Damage(float damage)
     {
-        if (!AcceptDamage) return;
         if (HPBar != null)
             HPBar.Set(currentHeat, overheatSettings.overheatAfter);
         base.Damage(damage);

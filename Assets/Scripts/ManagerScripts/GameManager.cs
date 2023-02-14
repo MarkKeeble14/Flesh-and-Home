@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,23 @@ public class GameManager : MonoBehaviour
         // Find Player
         playerTransform = FindObjectOfType<PlayerController>().transform;
         playerAimAt = FindObjectOfType<PlayerHealth>().transform;
+    }
+
+    [SerializeField] private GameObject loseScreen;
+
+    public void OpenLoseScreen()
+    {
+        loseScreen.SetActive(true);
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private Transform playerTransform;

@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class BossPhaseBaseState : MonoBehaviour
+public abstract class BossPhaseBaseState : BasicEnemy
 {
     [Header("Phase")]
     [SerializeField] protected float enterPhaseTime = 2.5f;

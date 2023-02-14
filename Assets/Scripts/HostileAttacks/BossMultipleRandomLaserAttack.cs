@@ -2,35 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultipleRandomLaserAttack : LaserAttacker
+public class BossMultipleRandomLaserAttack : BossLaserAttack
 {
     [Header("Specific Settings")]
     [SerializeField] private int maxLaserCalls = 8;
 
     [SerializeField] private Transform[] barrelOptionHolders;
-    private List<BossBarrel> options = new List<BossBarrel>();
+    private List<LaserBarrel> options = new List<LaserBarrel>();
 
     private new void Awake()
     {
         // Fetch and add all options
         foreach (Transform holder in barrelOptionHolders)
         {
-            options.AddRange(holder.GetComponentsInChildren<BossBarrel>());
+            options.AddRange(holder.GetComponentsInChildren<LaserBarrel>());
         }
         base.Awake();
     }
 
-    protected override IEnumerator Attack(Transform target)
+    protected override IEnumerator ExecuteAttack(Transform target)
     {
         int toCall = Random.Range(1, maxLaserCalls);
-        List<BossBarrel> callOn = new List<BossBarrel>();
+        List<LaserBarrel> callOn = new List<LaserBarrel>();
 
         // Picking a random number of random barrels
         // Should potentially be a while loop so as to guarentee the maximum number of lasers being called; but dealing with the overlap of finding ones
         // which are unused seems not worthwhile for now at least
         for (int i = 0; i < toCall; i++)
         {
-            BossBarrel selected = options[Random.Range(0, options.Count)];
+            LaserBarrel selected = options[Random.Range(0, options.Count)];
 
             // if a barrel has already been selected, ignore it
             if (!callOn.Contains(selected))
@@ -41,7 +41,7 @@ public class MultipleRandomLaserAttack : LaserAttacker
 
         for (int i = 0; i < callOn.Count; i++)
         {
-            BossBarrel selected = callOn[i];
+            LaserBarrel selected = callOn[i];
             StartCoroutine(LaserFrom(selected, bossPhaseManager.ShellEnemyMovement.transform));
         }
 

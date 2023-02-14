@@ -9,23 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770e8ea487f657d419976f05b8b31c02, type: 3}
+  m_Script: {fileID: 11500000, guid: d77924867e761c84eaacdae571edc732, type: 3}
   m_Name: Phase3Multi
   m_EditorClassIdentifier: 
   damage: 2
   tickSpeed: 0.25
   laserRange: 1000
-  laserGrowSpeed: 5
-  laserStayDuration: 5
-  maxLaserWidth: 5
-  laserRadius: 0.1
   canHit:
     serializedVersion: 2
     m_Bits: 8704
+  laserRadius: 0.1
+  beamSettings:
+    fullWidth: 1
+    beamGrowSpeed: 1
+    beamCollapseSpeed: 1
+    beamOverheatCollapseSpeed: 0
+  laserStayDuration: 5
   visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
-  keepAimSourceWhenUnattached: 0
   canTargetPlayer: 1
   followPlayerSpeed: 0.05
   chanceToTargetPlayer: {x: 1, y: 10}
-  originateAtShell: 0
   minMaxLaserOffset: {x: 2.5, y: 5}
+  keepAimSourceWhenUnattached: 0
+  originateAtShell: 0

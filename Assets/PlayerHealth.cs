@@ -9,6 +9,7 @@ public class PlayerHealth : KillableEntity
     private void Start()
     {
         SetHPBar();
+        AddAdditionalOnEndAction(() => GameManager._Instance.OpenLoseScreen());
     }
 
     public override void Damage(float damage)

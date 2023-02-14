@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.PlayerLoop;
 
-public class TestRaygun : MonoBehaviour
+public class Rifle : MonoBehaviour
 {
     [System.Serializable]
     public struct RifleSettings

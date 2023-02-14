@@ -6,6 +6,20 @@ public class OverheatableEntity : EndableEntity
     [SerializeField] protected OverheatSettings overheatSettings;
     protected float currentHeat;
     private float dissapateAfterTimer;
+
+    [SerializeField] protected bool acceptDamage = true;
+    public bool AcceptDamage
+    {
+        get
+        {
+            return acceptDamage;
+        }
+        set
+        {
+            acceptDamage = value;
+        }
+    }
+
     [SerializeField] private bool setDefaultMaterialColorAsDefaultVisualColor = true;
 
     [Header("Color")]
@@ -70,6 +84,7 @@ public class OverheatableEntity : EndableEntity
 
     public override void Damage(float damage)
     {
+        if (!acceptDamage) return;
         // Add heat
         currentHeat += damage;
 

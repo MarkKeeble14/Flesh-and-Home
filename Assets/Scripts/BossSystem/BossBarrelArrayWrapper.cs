@@ -3,5 +3,5 @@
 [System.Serializable]
 public class BossBarrelArrayWrapper
 {
-    public BossBarrel[] lineRenderers;
+    public LaserBarrel[] lineRenderers;
 }

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2407002599294722366}
   - component: {fileID: 7496811503299157509}
   - component: {fileID: 805400335660515332}
+  - component: {fileID: 3860202574575028074}
   m_Layer: 12
   m_Name: FleshPodSpawn
   m_TagString: Untagged
@@ -132,30 +133,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d962418e2b5cf409503d9591a24e0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 805400335660515332}
-  tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
-    type: 3}
-  onEndClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  maxHealth: 10
-  destroyOnDeath: 1
-  rigidbody: {fileID: 5023724996855043179}
-  onTakeDamageClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  rb: {fileID: 5023724996855043179}
-  movement: {fileID: 2407002599294722366}
-  attacks:
+  attackPool:
   - {fileID: 7924698435641459214}
+  movement: {fileID: 2407002599294722366}
   minMaxVerticalSpawnForce: {x: 3, y: 4}
   minMaxHorizontalSpawnForce: {x: -5, y: 5}
   onSpawnClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  source: {fileID: 805400335660515332}
+  rigidbody: {fileID: 5023724996855043179}
 --- !u!195 &5023724996855043154
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -166,7 +154,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 7.5
   m_Acceleration: 3
   avoidancePriority: 50
   m_AngularSpeed: 200
@@ -191,8 +179,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
-  timeBetweenAttacks: 1
-  enemyCanMoveWhileBetweenAttacks: 0
+  timeBetweenAttacks: 0.25
+  disableMoveWhileBetweenAttacks: 1
+  disableMovementWhileAttacking: 1
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 1
+  maxRange: 2
+  removeFromPoolWhenActive: 0
   source: {fileID: 805400335660515332}
   onStartClip:
     clip: {fileID: 0}
@@ -202,8 +196,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  attackRange: 2
-  damage: 0.25
+  damage: 0.125
 --- !u!114 &2407002599294722366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,12 +209,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40d6913213713dd43822c986b27dae5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Move: 1
   playerIsTarget: 1
   isGround:
     serializedVersion: 2
     m_Bits: 384
   movementSource: {fileID: 7496811503299157509}
+  enableOnAwake: 0
   timeAfterGroundCollisionToMove: 0
   onCollideWithGroundClip:
     clip: {fileID: 0}
@@ -235,7 +228,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5023724996855043178}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1144227333521352715, guid: b3adc87a7f1ea9c468a7355079472740,
     type: 2}
@@ -422,3 +415,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3860202574575028074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5023724996855043178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f8244861a5a0a48b33a76cd451549c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 805400335660515332}
+  tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
+    type: 3}
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  maxHealth: 10
+  acceptDamage: 1
+  destroyOnDeath: 1
+  rigidbody: {fileID: 5023724996855043179}
+  onTakeDamageClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1

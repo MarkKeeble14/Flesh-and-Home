@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class InstaDamageAttacker : RangeBasedAttacker
+public class InstaDamageAttack : Attack
 {
     [Header("Specific Settings")]
     [SerializeField] private float damage;
 
-    protected override IEnumerator Attack(Transform target)
+    protected override IEnumerator ExecuteAttack(Transform target)
     {
         if (target.TryGetComponent(out IDamageable damageable))
         {

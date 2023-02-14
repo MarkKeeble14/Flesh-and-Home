@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class BossBarrel : MonoBehaviour
+public class LaserBarrel : MonoBehaviour
 {
     [SerializeField] private LineRenderer lineRenderer;
     public LineRenderer LineRenderer
@@ -86,5 +86,6 @@ public class BossBarrel : MonoBehaviour
     {
         // Audio
         constantSource.enabled = isFiring;
+        lineRenderer.enabled = isFiring;
     }
 }

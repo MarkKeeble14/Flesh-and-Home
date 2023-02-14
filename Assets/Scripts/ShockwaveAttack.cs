@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ShockwaveAttack : Attacker
+public class ShockwaveAttack : Attack
 {
     [SerializeField] private ShockwaveRing ring;
     [SerializeField] private int numThumps;
@@ -20,7 +20,7 @@ public class ShockwaveAttack : Attacker
     [SerializeField] private AudioClipContainer emitClip;
     [SerializeField] private AudioClipContainer endClip;
 
-    protected override IEnumerator Attack(Transform target)
+    protected override IEnumerator ExecuteAttack(Transform target)
     {
         List<ShockwaveRing> spawnedRings = new List<ShockwaveRing>();
 
@@ -36,7 +36,7 @@ public class ShockwaveAttack : Attacker
             {
                 spawnedRings.Remove(spawned);
 
-                Destroy(spawned);
+                Destroy(spawned.gameObject);
                 // Debug.Log("Removed: " + spawned + ", Remaining: " + spawnedRings.Count);
             }, maxRadius, height, expansionSpeed, damage, canHit, impulseSourceData));
 

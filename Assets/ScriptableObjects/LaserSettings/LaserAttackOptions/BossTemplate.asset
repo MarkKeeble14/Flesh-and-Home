@@ -9,23 +9,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770e8ea487f657d419976f05b8b31c02, type: 3}
-  m_Name: EnemyLaser
+  m_Script: {fileID: 11500000, guid: d77924867e761c84eaacdae571edc732, type: 3}
+  m_Name: BossTemplate
   m_EditorClassIdentifier: 
   damage: 2
   tickSpeed: 0.25
-  laserRange: 100
+  laserRange: 1000
   canHit:
     serializedVersion: 2
     m_Bits: 8704
-  laserRadius: 0.05
-  laserGrowSpeed: 1
-  maxLaserWidth: 1
-  laserStayDuration: 3
+  laserRadius: 0.1
+  beamSettings:
+    fullWidth: 5
+    beamGrowSpeed: 5
+    beamCollapseSpeed: 5
+    beamOverheatCollapseSpeed: 10
+  laserStayDuration: 5
   visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
-  keepAimSourceWhenUnattached: 0
-  canTargetPlayer: 1
+  canTargetPlayer: 0
   followPlayerSpeed: 0
-  chanceToTargetPlayer: {x: 1, y: 1}
-  originateAtShell: 0
-  minMaxLaserOffset: {x: 2.5, y: 5}
+  chanceToTargetPlayer: {x: 0, y: 0}
+  minMaxLaserOffset: {x: 0, y: 0}
+  keepAimSourceWhenUnattached: 0
+  originateAtShell: 1

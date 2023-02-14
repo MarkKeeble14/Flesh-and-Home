@@ -2,24 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleLaserAttack : LaserAttacker
+public class BossSingleLaserAttack : BossLaserAttack
 {
     [SerializeField] private Transform[] barrelOptionHolders;
-    private List<BossBarrel> options = new List<BossBarrel>();
+    private List<LaserBarrel> options = new List<LaserBarrel>();
 
     private new void Awake()
     {
         // Fetch and add all options
         foreach (Transform holder in barrelOptionHolders)
         {
-            options.AddRange(holder.GetComponentsInChildren<BossBarrel>());
+            options.AddRange(holder.GetComponentsInChildren<LaserBarrel>());
         }
         base.Awake();
     }
 
-    protected override IEnumerator Attack(Transform target)
+    protected override IEnumerator ExecuteAttack(Transform target)
     {
-        BossBarrel selected = options[Random.Range(0, options.Count)];
+        LaserBarrel selected = options[Random.Range(0, options.Count)];
         yield return StartCoroutine(LaserFrom(selected, bossPhaseManager.ShellEnemyMovement.transform));
     }
 }

@@ -11,8 +11,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
     [SerializeField] private float groundShakeImpulseForce = 1;
     [SerializeField] private bool riseBeforeEnding = true;
 
-    [SerializeField] private Attacker onCrashDownAttack;
-    [SerializeField] private Attacker[] repeatableAttacks;
+    [SerializeField] private Attack onCrashDownAttack;
     [SerializeField] private float timeBetweenAttacks;
 
     [SerializeField] private PercentageMap<EndableEntity> availableAddOns;
@@ -71,7 +70,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
     protected override IEnumerator StateBehaviour(BossPhaseManager boss)
     {
         // Stop shell from moving
-        boss.ShellEnemyMovement.Move = false;
+        boss.ShellEnemyMovement.SetMove(false);
         boss.ShellEnemyMovement.DisableNavMeshAgent();
 
         yield return new WaitForSeconds(enterPhaseTime);
@@ -84,8 +83,6 @@ public class BossAddOnsPhase : BossPhaseBaseState
         yield return new WaitForSeconds(pauseDuration);
 
         yield return StartCoroutine(CommonRoutineCrash(boss, dropCurve, dropSpeed, groundShakeImpulseForce, startCrashClip, finishCrashClip));
-
-        StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt));
 
         // Audio
         constantNoiseSource.enabled = true;
@@ -102,6 +99,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
         // Debug.Log("Number of adds: " + numAdds);
         float time = 0;
         List<EndableEntity> spawnedAdds = new List<EndableEntity>();
+        int numAddsToSpawn = 0;
         for (int i = 0; i < numAdds; i++)
         {
             // Get a spawn point
@@ -116,6 +114,8 @@ public class BossAddOnsPhase : BossPhaseBaseState
             point.SpawnedOn = true;
             // remove the spawn point from the list; need to do so in order to efficiently pick random spawn points
             spawnPoints.Remove(point);
+            // track the enemies to be spawned
+            numAddsToSpawn++;
 
             // Spawn Travelling flesh
             NavMeshEnemy traveller = Instantiate(fleshTravellingPrefab, transform.position, Quaternion.identity);
@@ -144,8 +144,10 @@ public class BossAddOnsPhase : BossPhaseBaseState
             }));
         }
 
+        yield return StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt, this));
+
         // Wait until all enemies have been spawned
-        yield return new WaitUntil(() => spawnedAdds.Count == numAdds);
+        yield return new WaitUntil(() => spawnedAdds.Count == numAddsToSpawn);
 
         // Main Loop
         bool success = false;
@@ -155,7 +157,8 @@ public class BossAddOnsPhase : BossPhaseBaseState
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                StartCoroutine(repeatableAttacks[Random.Range(0, repeatableAttacks.Length)].StartAttack(GameManager._Instance.PlayerAimAt));
+                StartCoroutine(StartNextAttack(GameManager._Instance.PlayerAimAt));
+
                 timer = timeBetweenAttacks;
             }
 
@@ -163,7 +166,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
             boss.HPBar.Set(time, duration);
 
             // If all enemies are dead, break early & set success to true
-            if (spawnedAdds.Count <= 0)
+            if (spawnedAdds.Count <= 0 && numAddsToSpawn > 0)
             {
                 time = duration;
                 success = true;

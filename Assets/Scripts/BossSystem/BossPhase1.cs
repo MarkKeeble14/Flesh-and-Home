@@ -70,13 +70,13 @@ public class BossPhase1 : BossAttackingPhase
         boss.HPBar.Show();
 
         // Stop shell from moving
-        boss.ShellEnemyMovement.Move = false;
+        boss.ShellEnemyMovement.SetMove(false);
         boss.ShellEnemyMovement.DisableNavMeshAgent();
 
         while (!complete)
         {
             // Attack
-            yield return StartCoroutine(CallAttacks(boss));
+            yield return StartCoroutine(CallAttacks(boss, GameManager._Instance.PlayerAimAt));
         }
 
         // Debug.Log("Waiting for Boss to be Full");
