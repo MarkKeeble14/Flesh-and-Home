@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Controller")]
 
     #region Movement
+
     [Header("Movement")]
     [SerializeField] private float baseSpeed = 2.0f;
     [SerializeField] private float sprintSpeed = 1.5f;
@@ -24,12 +25,28 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private Vector3 playerVelocity;
 
+
     [Header("Audio")]
     [SerializeField] private AudioClip jumpClip;
     [SerializeField] private AudioClip landClip;
     [SerializeField] private AudioSource footstepsSource;
 
     #endregion
+
+    [Header("Bobbing")]
+    [SerializeField] private float bobIdleSpeed = 0.025f;
+    [SerializeField] private float bobMovingSpeed = 0.05f;
+    [SerializeField] private float bobSprintingSpeed = 0.075f;
+    [SerializeField] private float bobIdleStrength = 2f;
+    [SerializeField] private float bobMovingStrength = 6f;
+    [SerializeField] private float bobSprintingStrength = 10f;
+
+    [SerializeField] private Transform lazerParent;
+    private Vector3 lazerParentOrigin;
+    private Vector3 targetWeaponBobPosition;
+    private float idleCounter;
+    private float movementCounter;
+    private float sprintingCounter;
 
     #region Jetpack
 
@@ -114,7 +131,10 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+
         // Get References
+        lazerParentOrigin = lazerParent.localPosition;
+
         controller = GetComponent<CharacterController>();
 
         cameraTransform = Camera.main.transform;
@@ -195,7 +215,46 @@ public class PlayerController : MonoBehaviour
 
         // Debug.Log("Velocity: " + playerVelocity);
 
+        // Move player
         controller.Move(playerVelocity * Time.deltaTime);
+
+        // Headbobbing
+        ExecuteHeadbob();
+    }
+
+    private void ExecuteHeadbob()
+    {
+        // Headbobbing
+        if (isGrounded && IsSprinting)
+        {
+            // sprinting
+            HeadBob(sprintingCounter, bobSprintingSpeed, bobSprintingSpeed);
+            sprintingCounter += Time.deltaTime * 3f;
+            lazerParent.localPosition =
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobSprintingStrength);
+        }
+        else if (!IsSprinting && isGrounded && movementVector != Vector3.zero)
+        {
+            // moving
+            HeadBob(movementCounter, bobMovingSpeed, bobMovingSpeed);
+            movementCounter += Time.deltaTime * 3f;
+            lazerParent.localPosition =
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobMovingStrength);
+        }
+        else if (isGrounded && movementVector == Vector3.zero)
+        {
+            // idle
+            HeadBob(idleCounter, bobIdleSpeed, bobIdleSpeed);
+            idleCounter += Time.deltaTime;
+            lazerParent.localPosition =
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobIdleStrength);
+        }
+    }
+
+    void HeadBob(float z, float x_intensity, float y_intensity)
+    {
+        targetWeaponBobPosition = lazerParentOrigin + new Vector3(Mathf.Cos(z) * x_intensity, Mathf.Sin(z * 2) * y_intensity,
+            0);
     }
 
     private void Jump(InputAction.CallbackContext ctx)
