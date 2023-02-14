@@ -81,8 +81,8 @@ public class ImageSliderBar : MonoBehaviour
         bar.fillAmount = displayedValue;
 
         // Determine what text to display
-        string showPercentValue = roundValue ? System.Math.Round(displayedValue, decimalPlaces).ToString() : displayedValue.ToString();
-        string showPercentInvertedValue = roundValue ? System.Math.Round(1 - displayedValue, decimalPlaces).ToString() : (1 - displayedValue).ToString();
+        string showPercentValue = roundValue ? System.Math.Round(displayedValue * 100, decimalPlaces).ToString() : displayedValue.ToString();
+        string showPercentInvertedValue = roundValue ? System.Math.Round((1 - displayedValue) * 100, decimalPlaces).ToString() : (1 - displayedValue).ToString();
         string showCompensatedValue = roundValue ? System.Math.Round(displayedValue * maxValue, decimalPlaces).ToString() : (displayedValue * maxValue).ToString();
         string showCompensatedInvertValue = roundValue ? System.Math.Round(maxValue - (displayedValue * maxValue), decimalPlaces).ToString() : (maxValue - (displayedValue * maxValue)).ToString();
         string t = "";

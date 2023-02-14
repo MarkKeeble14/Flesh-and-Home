@@ -9,6 +9,15 @@ public class CrosshairMemberController : MonoBehaviour
     [SerializeField] private Vector2 maxPos;
     [SerializeField] private float spreadSpeed;
     [SerializeField] private float releaseSpeed;
+    [SerializeField] private float restScale;
+    [SerializeField] private float maxScale;
+
+    private void Awake()
+    {
+        // Scale
+        restingPos *= restScale;
+        maxPos *= maxScale;
+    }
 
     public void Spread(float force)
     {

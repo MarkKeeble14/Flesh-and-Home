@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d77924867e761c84eaacdae571edc732, type: 3}
+  m_Name: Phase3Multi
+  m_EditorClassIdentifier: 
+  damage: 3
+  tickSpeed: 0.25
+  laserRange: 1000
+  canHit:
+    serializedVersion: 2
+    m_Bits: 8704
+  laserRadius: 0.25
+  beamSettings:
+    fullWidth: 2.5
+    beamGrowSpeed: 2.5
+    beamCollapseSpeed: 5
+    beamOverheatCollapseSpeed: 0
+  laserStayDuration: 2.5
+  visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+  canTargetPlayer: 1
+  followPlayerSpeed: 0.05
+  chanceToTargetPlayer: {x: 1, y: 10}
+  minMaxLaserOffset: {x: 2.5, y: 5}
+  keepAimSourceWhenUnattached: 0
+  originateAtShell: 0

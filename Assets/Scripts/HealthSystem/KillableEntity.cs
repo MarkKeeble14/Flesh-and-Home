@@ -4,16 +4,28 @@ public class KillableEntity : EndableEntity
 {
     [Header("Damageable")]
     [SerializeField] protected float maxHealth;
+    public float MaxHealth => maxHealth;
     protected float currentHealth;
+    [SerializeField] protected bool acceptDamage = true;
+    public bool AcceptDamage
+    {
+        get
+        {
+            return acceptDamage;
+        }
+        set
+        {
+            acceptDamage = value;
+        }
+    }
 
     [SerializeField] private bool destroyOnDeath;
 
     [Header("References")]
-    [SerializeField] private new Rigidbody rigidbody;
+    [SerializeField] protected new Rigidbody rigidbody;
 
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onTakeDamageClip;
-
 
     private void OnEnable()
     {
@@ -23,10 +35,11 @@ public class KillableEntity : EndableEntity
 
     public override void Damage(float damage)
     {
+        if (!acceptDamage) return;
         currentHealth -= damage;
 
         // Audio
-        onTakeDamageClip.PlayOneShot(source);
+        Instantiate(tempSource, transform.position, Quaternion.identity).Play(onTakeDamageClip);
 
         if (currentHealth <= 0)
         {

@@ -5,7 +5,6 @@ public class BossPhase2 : BossAttackingPhase
 {
     [Header("Phase")]
     [SerializeField] private KillableBossComponentEntity bossShell;
-    private bool complete;
 
     public override void EnterState(BossPhaseManager boss)
     {
@@ -41,12 +40,12 @@ public class BossPhase2 : BossAttackingPhase
         boss.HPBar.Show();
 
         // Has movement
-        boss.ShellEnemyMovement.Move = true;
+        boss.ShellEnemyMovement.SetMove(true);
         boss.ShellEnemyMovement.EnableNavMeshAgent();
 
         while (!complete)
         {
-            yield return StartCoroutine(CallAttacks(boss));
+            yield return StartCoroutine(CallAttacks(boss, GameManager._Instance.PlayerAimAt));
         }
 
         // Switch State

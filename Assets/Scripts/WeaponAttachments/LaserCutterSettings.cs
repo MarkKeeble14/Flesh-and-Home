@@ -9,27 +9,25 @@ public class LaserCutterSettings : WeaponAttachmentController
     [System.Serializable]
     public struct LaserSettings
     {
+        // Laser info
         public float damage;
         public float tickRate;
-        public float overheatDamage;
-        public float overheatAfter;
         public float maxDistance;
         public LayerMask canHit;
-        public float heatDissapationRate;
+        public float crosshairSpread;
+
+        // Beam info
+        public BeamSettings beamSettings;
+
+        // Overheat info
+        public OverheatSettings overheatSettings;
+
+        // Visual info
+        public LaserVisuals visuals;
     }
 
     [SerializeField] private LaserSettings laserSettings;
     private TimerDictionary<Collider> hitTickBetweenTimer = new TimerDictionary<Collider>();
-
-    [Header("Visuals")]
-    [SerializeField] private Color defaultColor;
-    [SerializeField] private Color overheatColor;
-    [SerializeField] private float emissionIntensity;
-
-    [SerializeField] private float fullWidth;
-    [SerializeField] private float beamGrowSpeed;
-    [SerializeField] private float beamCollapseSpeed;
-    [SerializeField] private float beamOverheatCollapseSpeed;
 
     [Header("References")]
     [SerializeField] private Transform shootFrom;
@@ -51,7 +49,7 @@ public class LaserCutterSettings : WeaponAttachmentController
 
     private void Awake()
     {
-        playerDamageable = GetComponent<IDamageable>();
+        playerDamageable = FindObjectOfType<PlayerHealth>();
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = 2;
         material = lineRenderer.material;
@@ -68,7 +66,7 @@ public class LaserCutterSettings : WeaponAttachmentController
         {
             if (trackOverheatTimer > 0)
             {
-                trackOverheatTimer -= Time.deltaTime * laserSettings.heatDissapationRate;
+                trackOverheatTimer -= Time.deltaTime * laserSettings.overheatSettings.heatDissapationRate;
             }
             else
             {
@@ -78,15 +76,16 @@ public class LaserCutterSettings : WeaponAttachmentController
             // Shrink Beam
             if (lineRenderer.widthMultiplier > 0)
             {
-                lineRenderer.widthMultiplier = Mathf.Lerp(lineRenderer.widthMultiplier, 0, (overheated ? beamOverheatCollapseSpeed : beamCollapseSpeed) * Time.deltaTime);
+                lineRenderer.widthMultiplier = Mathf.Lerp(lineRenderer.widthMultiplier, 0,
+                    (overheated ? laserSettings.beamSettings.beamOverheatCollapseSpeed : laserSettings.beamSettings.beamCollapseSpeed) * Time.deltaTime);
             }
         }
         else
         {
             // Grow Beam
-            if (lineRenderer.widthMultiplier < fullWidth)
+            if (lineRenderer.widthMultiplier < laserSettings.beamSettings.fullWidth)
             {
-                lineRenderer.widthMultiplier = Mathf.Lerp(lineRenderer.widthMultiplier, fullWidth, beamGrowSpeed * Time.deltaTime);
+                lineRenderer.widthMultiplier = Mathf.Lerp(lineRenderer.widthMultiplier, laserSettings.beamSettings.fullWidth, laserSettings.beamSettings.beamGrowSpeed * Time.deltaTime);
             }
         }
 
@@ -98,8 +97,10 @@ public class LaserCutterSettings : WeaponAttachmentController
         overheatConstantSound.enabled = overheated;
 
         // Update UI
-        showOverheatBar.Set(trackOverheatTimer, laserSettings.overheatAfter);
-        showOverheatBar.SetColor(overheated ? overheatColor : defaultColor);
+        showOverheatBar.Set(trackOverheatTimer, laserSettings.overheatSettings.overheatAfter);
+
+        showOverheatBar.SetColor(overheated ? laserSettings.visuals.GetMaxColor() :
+            laserSettings.visuals.GetLerpedColor(trackOverheatTimer / laserSettings.overheatSettings.overheatAfter));
     }
 
     public override void Fire(InputAction.CallbackContext ctx)
@@ -126,22 +127,22 @@ public class LaserCutterSettings : WeaponAttachmentController
         // While the player has the button pressed
         while (InputManager._Instance.PlayerInputActions.Player.FireAttachment.IsPressed())
         {
-            trackOverheatTimer += Time.deltaTime;
+            trackOverheatTimer += Time.deltaTime * laserSettings.overheatSettings.heatAccrualRate;
 
             // Interpolate Color based on how close we are to overheating
-            Color c = Color.Lerp(defaultColor, overheatColor, trackOverheatTimer / laserSettings.overheatAfter);
+            Color c = laserSettings.visuals.GetLerpedColor(trackOverheatTimer / laserSettings.overheatSettings.overheatAfter);
             material.color = c;
-            material.SetColor("_EmissionColor", c * emissionIntensity);
+            material.SetColor("_EmissionColor", laserSettings.visuals.GetEmmissiveColor(c));
 
             // Break if overheating
-            if (trackOverheatTimer > laserSettings.overheatAfter)
+            if (trackOverheatTimer > laserSettings.overheatSettings.overheatAfter)
             {
                 overheated = true;
                 break;
             }
 
             // Move Crosshair
-            CrosshairController._Instance.Spread(.25f);
+            CrosshairController._Instance.Spread(laserSettings.crosshairSpread);
 
             // Determine position and direction
             ray = new Ray(shootFrom.position, Camera.main.transform.forward);
@@ -201,7 +202,7 @@ public class LaserCutterSettings : WeaponAttachmentController
         overheatStartSound.PlayOneShot(source);
 
         // Deal damage to play if they overheat
-        playerDamageable.Damage(laserSettings.overheatDamage);
+        playerDamageable.Damage(laserSettings.overheatSettings.overheatDamage);
 
         // Wait until Overheat has cooled down
         yield return new WaitUntil(() => trackOverheatTimer <= 0);

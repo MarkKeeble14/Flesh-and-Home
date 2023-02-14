@@ -232,13 +232,14 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  currentHeat: 0
-  maxWithStandableHeat: 50
-  dissapationRate: 0.2
-  dissapateAfter: 10
-  minHeat: 0.1
-  hotColor: {r: 1, g: 0, b: 0, a: 1}
-  minMaxEmissionIntensity: {x: 0, y: 25}
+  overheatSettings:
+    overheatDamage: 0
+    overheatAfter: 500
+    dissapateAfter: 10
+    heatAccrualRate: 0
+    heatDissapationRate: 0.05
+  setDefaultMaterialColorAsDefaultVisualColor: 1
+  visuals: {fileID: 11400000, guid: 35f003d074d49364a864801f538214c5, type: 2}
   renderer: {fileID: 7743030864407437378}
   rigidbody: {fileID: 7743030864407437404}
   onHeatClip:

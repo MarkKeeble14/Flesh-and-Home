@@ -3,19 +3,28 @@
 public class OverheatableEntity : EndableEntity
 {
     [Header("Overheatable")]
-    [SerializeField] protected float currentHeat;
-    [SerializeField] protected float maxWithStandableHeat;
-    [SerializeField] private float dissapationRate;
-    [SerializeField] private float dissapateAfter;
+    [SerializeField] protected OverheatSettings overheatSettings;
+    protected float currentHeat;
     private float dissapateAfterTimer;
-    [SerializeField] private float minHeat = .1f;
+
+    [SerializeField] protected bool acceptDamage = true;
+    public bool AcceptDamage
+    {
+        get
+        {
+            return acceptDamage;
+        }
+        set
+        {
+            acceptDamage = value;
+        }
+    }
+
+    [SerializeField] private bool setDefaultMaterialColorAsDefaultVisualColor = true;
 
     [Header("Color")]
-    private Color coolColor;
-    [SerializeField] private Color hotColor;
-
-    [Header("Emission")]
-    [SerializeField] private Vector2 minMaxEmissionIntensity;
+    [SerializeField] private LaserVisuals visuals;
+    private bool emissionEnabled;
 
     [Header("References")]
     [SerializeField] private new Renderer renderer;
@@ -30,24 +39,23 @@ public class OverheatableEntity : EndableEntity
     {
         // Get a reference to the instantiated material
         material = renderer.material;
-        coolColor = material.color;
+
+        // Create copy of scriptable object for this entity
+        visuals = Instantiate(visuals);
+
+        if (setDefaultMaterialColorAsDefaultVisualColor)
+            visuals.SetDefaultColor(material.color);
 
         base.Awake();
     }
 
     private void Update()
     {
-        // Handle heat
-        if (currentHeat <= minHeat)
-        {
-            currentHeat = 0;
-        }
-
         // Heat is reduced when above 0
         if (dissapateAfterTimer <= 0)
         {
             // Reduce Heat
-            currentHeat = Mathf.Lerp(currentHeat, 0, Time.deltaTime * dissapationRate);
+            currentHeat = Mathf.Lerp(currentHeat, 0, Time.deltaTime * overheatSettings.heatDissapationRate);
         }
 
         // Handle dissapate after time
@@ -55,14 +63,28 @@ public class OverheatableEntity : EndableEntity
             dissapateAfterTimer -= Time.deltaTime;
 
         // Interpolate Color based on how close we are to overheating
-        float percent = currentHeat / maxWithStandableHeat;
-        currentColor = Color.Lerp(coolColor, hotColor, percent);
+        float percent = currentHeat / overheatSettings.overheatAfter;
+        if (percent > 0 && !emissionEnabled)
+        {
+            // Enable emission
+            emissionEnabled = true;
+        }
+        else if (percent <= 0 && emissionEnabled)
+        {
+            // Disable emission
+            emissionEnabled = false;
+        }
+        currentColor = visuals.GetLerpedColor(percent);
         material.color = currentColor;
-        material.SetColor("_EmissionColor", hotColor * Mathf.SmoothStep(minMaxEmissionIntensity.x, minMaxEmissionIntensity.y, percent));
+        if (emissionEnabled)
+            material.SetColor("_EmissionColor", visuals.GetEmmissiveColor(currentColor, percent));
+        else
+            material.SetColor("_EmissionColor", Color.black);
     }
 
     public override void Damage(float damage)
     {
+        if (!acceptDamage) return;
         // Add heat
         currentHeat += damage;
 
@@ -70,14 +92,14 @@ public class OverheatableEntity : EndableEntity
         onHeatClip.PlayOneShot(source);
 
         // Check if exeeding heat threshold
-        if (currentHeat > maxWithStandableHeat)
+        if (currentHeat > overheatSettings.overheatAfter)
         {
             // Call on End
             onEndAction();
         }
 
         // Set dissapate after timer
-        dissapateAfterTimer = dissapateAfter;
+        dissapateAfterTimer = overheatSettings.dissapateAfter;
     }
 
     public override void Damage(float damage, Vector3 force)

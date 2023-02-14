@@ -21,8 +21,8 @@ public class BossPhaseManager : MonoBehaviour
     public Rigidbody ShellRigidBody => shellNavMeshRigidbody;
 
     [Header("Fleshy")]
-    [SerializeField] private NavMeshEnemy fleshyBoss;
-    public NavMeshEnemy FleshyEnemyMovement => fleshyBoss;
+    [SerializeField] private EnemyMovement fleshyBoss;
+    public EnemyMovement FleshyEnemyMovement => fleshyBoss;
 
     [Header("Other Objects")]
     [SerializeField] private ImageSliderBar hpBar;

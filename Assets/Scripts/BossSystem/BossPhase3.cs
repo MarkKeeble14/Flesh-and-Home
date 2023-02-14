@@ -6,38 +6,27 @@ public class BossPhase3 : BossAttackingPhase
 {
     [Header("Phase")]
     [SerializeField] private Transform barrelHolder;
-    private List<BossBarrel> bossBarrels = new List<BossBarrel>();
-
-    private float timeBeforeFleshySpawns = 3f;
-    [SerializeField] private float shakeSpeed = 5f;
-    [SerializeField] private float shakeStrength = .02f;
-    [SerializeField] private float dropSpeed = .5f;
-    [SerializeField] private AnimationCurve dropCurve;
-
-    [Header("Condition")]
+    private List<LaserBarrel> bossBarrels = new List<LaserBarrel>();
     [SerializeField] private KillableBossComponentEntity bossFlesh;
-    private bool complete;
+    [SerializeField] private float timeBeforeFleshySpawns = 3f;
+    [SerializeField] private float timeAfterFleshyKillBeforeDropBarrels;
 
     [Header("Plates")]
-    [SerializeField] private Transform rotatersHolder;
+    [SerializeField] private Transform parentToUnequipped;
     [SerializeField] private Vector2 platesMinMaxForcePerAxis;
     [SerializeField] private Vector2 platesMinMaxTorquePerAxis;
 
     [Header("Barrels")]
     [SerializeField] private Vector2 barrelsMinMaxForcePerAxis;
     [SerializeField] private Vector2 barrelsMinMaxTorquePerAxis;
-    [SerializeField] private float timeAfterFleshyKillBeforeDropBarrels;
 
     [Header("Audio")]
-    [SerializeField] private AudioSource shakeSource;
-    [SerializeField] private AudioClipContainer crashDownStartClip;
-    [SerializeField] private AudioClipContainer reachGroundClip;
     [SerializeField] private AudioClipContainer fleshySpawnClip;
 
     private void Awake()
     {
         // Add Boss Barrels
-        bossBarrels.AddRange(barrelHolder.GetComponentsInChildren<BossBarrel>());
+        bossBarrels.AddRange(barrelHolder.GetComponentsInChildren<LaserBarrel>());
     }
 
     public override void EnterState(BossPhaseManager boss)
@@ -45,7 +34,10 @@ public class BossPhase3 : BossAttackingPhase
         Debug.Log("Entering State 3");
 
         // And also to set complete to true when done
-        bossFlesh.AddAdditionalOnEndAction(() => complete = true);
+        bossFlesh.AddAdditionalOnEndAction(() =>
+        {
+            complete = true;
+        });
 
         foreach (OverheatableBossComponentEntity ent in boss.bossPhase1.armorPlating)
         {
@@ -53,7 +45,7 @@ public class BossPhase3 : BossAttackingPhase
             Rigidbody rb = ent.GetComponent<Rigidbody>();
 
             // Uparent
-            rb.transform.parent = rotatersHolder;
+            rb.transform.parent = parentToUnequipped;
 
             rb.isKinematic = false;
             rb.useGravity = true;
@@ -69,10 +61,10 @@ public class BossPhase3 : BossAttackingPhase
             ), ForceMode.Impulse);
         }
 
-        foreach (BossBarrel b in bossBarrels)
+        foreach (LaserBarrel b in bossBarrels)
         {
             // Uparent
-            b.transform.parent = rotatersHolder;
+            b.transform.parent = parentToUnequipped;
             b.IsAttached = false;
 
             Rigidbody rb = b.Rigidbody;
@@ -105,7 +97,7 @@ public class BossPhase3 : BossAttackingPhase
         Debug.Log("Phase 3 Start");
 
         // Shell gave up on lift
-        boss.ShellEnemyMovement.Move = false;
+        boss.ShellEnemyMovement.SetMove(false);
         boss.ShellEnemyMovement.DisableNavMeshAgent();
 
         // Wait some before spawning fleshy
@@ -117,8 +109,7 @@ public class BossPhase3 : BossAttackingPhase
         // Make Fleshy Boss Exist
         boss.FleshyEnemyMovement.transform.position = boss.ShellEnemyMovement.transform.position;
         boss.FleshyEnemyMovement.gameObject.SetActive(true);
-        boss.FleshyEnemyMovement.Move = true;
-        boss.FleshyEnemyMovement.EnableNavMeshAgent();
+        boss.FleshyEnemyMovement.SetMove(true);
 
         // Enable HP Bar
         bossFlesh.SetHPBar(boss.HPBar);
@@ -127,24 +118,27 @@ public class BossPhase3 : BossAttackingPhase
         // Audio
         fleshySpawnClip.PlayOneShot(boss.source);
 
+        // 
+        float bossHealth = bossFlesh.MaxHealth;
+
         // Condition for this phase is for the player to kill the fleshy enemy
         while (!complete)
         {
-            yield return StartCoroutine(CallAttacks(boss));
+            yield return StartCoroutine(CallAttacks(boss, GameManager._Instance.PlayerAimAt));
         }
 
-        foreach (BossBarrel b in bossBarrels)
+        // Fill remaining HP bar to make it go away
+        boss.HPBar.Set(0, bossHealth);
+
+        foreach (LaserBarrel b in bossBarrels)
         {
             b.Disabled = true;
         }
 
-        // Make boss cease life
-        Destroy(bossFlesh.gameObject);
-
         yield return new WaitForSeconds(timeAfterFleshyKillBeforeDropBarrels);
 
         // Turn gravity back on for barrels
-        foreach (BossBarrel b in bossBarrels)
+        foreach (LaserBarrel b in bossBarrels)
         {
             b.Rigidbody.useGravity = true;
             b.Collider.enabled = true;

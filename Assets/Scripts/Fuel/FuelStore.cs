@@ -13,10 +13,21 @@ public class FuelStore : ScriptableObject
         {
             return currentFuel;
         }
-        set
+    }
+
+    public void AlterFuel(float amount)
+    {
+        if (currentFuel + amount < 0)
         {
-            currentFuel = value;
+            currentFuel = 0;
+            return;
         }
+        if (currentFuel + amount > 100)
+        {
+            currentFuel = 100;
+            return;
+        }
+        currentFuel += amount;
     }
 
     public void Reset()
