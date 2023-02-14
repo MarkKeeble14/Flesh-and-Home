@@ -295,8 +295,7 @@ public class PlayerController : MonoBehaviour
             jetpackDisplay.Set(jetpackTimer, maxJetpackDuration);
 
             // Use Fuel
-            fuelStore.CurrentFuel -= Time.deltaTime * fuelConsumptionRate;
-            if (fuelStore.CurrentFuel < 0) fuelStore.CurrentFuel = 0;
+            fuelStore.AlterFuel(-Time.deltaTime * fuelConsumptionRate);
 
             // Add force to move, but only if there is space to move upwards
             if (isBonking)

@@ -9,6 +9,7 @@ public class DamageOtherOnTouch : MonoBehaviour, IDamageOthers
 
     public void DealDamage(IDamageable damageable)
     {
+        // Debug.Log("Damaging: " + damageable);
         damageable.Damage(damage);
         hasDamagedRecently.Add(damageable, tickRate);
     }
@@ -18,14 +19,21 @@ public class DamageOtherOnTouch : MonoBehaviour, IDamageOthers
         hasDamagedRecently.Update();
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (!LayerMaskHelper.IsInLayerMask(other.gameObject, dealDamageTo)) return;
+        if (!LayerMaskHelper.IsInLayerMask(other.gameObject, dealDamageTo))
+        {
+            // Debug.Log(other + ": Not in LayerMask");
+            return;
+        }
         if (other.TryGetComponent(out IDamageable damageable)
             && !hasDamagedRecently.ContainsKey(damageable))
         {
             DealDamage(damageable);
+        }
+        else
+        {
+            // Debug.Log(other + ": Not Damageable");
         }
     }
 }

@@ -458,7 +458,7 @@ MonoBehaviour:
   m_VerticalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 100
+    m_MaxSpeed: 40
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 150
+    m_MaxSpeed: 75
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -940,6 +940,13 @@ MonoBehaviour:
   jumpClip: {fileID: 8300000, guid: 9899a656da685824d8a375705a272712, type: 3}
   landClip: {fileID: 8300000, guid: be41aa26c99368546a68043ee05a3cc9, type: 3}
   footstepsSource: {fileID: 7362887214131378896}
+  bobIdleSpeed: 0.025
+  bobMovingSpeed: 0.05
+  bobSprintingSpeed: 0.075
+  bobIdleStrength: 2
+  bobMovingStrength: 6
+  bobSprintingStrength: 10
+  lazerParent: {fileID: 7362887214866606261}
   hasJetpack: 1
   jetpackForce: 0.2
   maxJetpackDuration: 10
@@ -1922,7 +1929,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   maxHealth: 100
-  acceptDamage: 0
+  acceptDamage: 1
   destroyOnDeath: 1
   rigidbody: {fileID: 652312800}
   onTakeDamageClip:

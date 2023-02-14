@@ -34,7 +34,10 @@ public class BossPhase3 : BossAttackingPhase
         Debug.Log("Entering State 3");
 
         // And also to set complete to true when done
-        bossFlesh.AddAdditionalOnEndAction(() => complete = true);
+        bossFlesh.AddAdditionalOnEndAction(() =>
+        {
+            complete = true;
+        });
 
         foreach (OverheatableBossComponentEntity ent in boss.bossPhase1.armorPlating)
         {
@@ -115,19 +118,22 @@ public class BossPhase3 : BossAttackingPhase
         // Audio
         fleshySpawnClip.PlayOneShot(boss.source);
 
+        // 
+        float bossHealth = bossFlesh.MaxHealth;
+
         // Condition for this phase is for the player to kill the fleshy enemy
         while (!complete)
         {
             yield return StartCoroutine(CallAttacks(boss, GameManager._Instance.PlayerAimAt));
         }
 
+        // Fill remaining HP bar to make it go away
+        boss.HPBar.Set(0, bossHealth);
+
         foreach (LaserBarrel b in bossBarrels)
         {
             b.Disabled = true;
         }
-
-        // Make boss cease life
-        Destroy(bossFlesh.gameObject);
 
         yield return new WaitForSeconds(timeAfterFleshyKillBeforeDropBarrels);
 

@@ -52,7 +52,9 @@ public class FlamethrowerSettings : WeaponAttachmentController
             // Spread Crosshair
             CrosshairController._Instance.Spread(triggerSettings.crosshairSpread);
 
-            fuelStore.CurrentFuel -= Time.deltaTime * fuelConsumptionRate;
+            // Use fuel
+            fuelStore.AlterFuel(-Time.deltaTime * fuelConsumptionRate);
+
             yield return null;
         }
 

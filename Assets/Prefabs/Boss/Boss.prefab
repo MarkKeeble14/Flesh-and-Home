@@ -666,6 +666,51 @@ MonoBehaviour:
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 3688273097040236901}
+--- !u!1 &1220624308639587362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4772072698014855196}
+  - component: {fileID: 3310221154980456448}
+  m_Layer: 18
+  m_Name: CollisionHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4772072698014855196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220624308639587362}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4559155299825079984}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3310221154980456448
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220624308639587362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.5, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1238529496504498902
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +1282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861238c6170ca1241ad86ef837e5ef99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIsTarget: 0
+  playerIsTarget: 1
   isGround:
     serializedVersion: 2
     m_Bits: 384
@@ -1613,6 +1658,9 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
+  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTriggerYBase: 0
   riseCurve:
     serializedVersion: 2
     m_Curve:
@@ -1699,6 +1747,9 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
+  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTriggerYBase: 1000
   numAttacksAtOnce: 2
   timeBetweenAttacks: 1
   armorPlateHolder: {fileID: 6937021556066863655}
@@ -1745,6 +1796,9 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
+  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTriggerYBase: 1000
   fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
     type: 3}
   duration: 25
@@ -1972,6 +2026,9 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
+  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTriggerYBase: 1000
   numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   bossShell: {fileID: 7881108961409635393}
@@ -2016,6 +2073,9 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
+  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTriggerYBase: 1000
   fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
     type: 3}
   duration: 25
@@ -2236,6 +2296,9 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1662478180}
+  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTriggerYBase: 1000
   numAttacksAtOnce: 1
   timeBetweenAttacks: 0
   barrelHolder: {fileID: 4559155298250650246}
@@ -2396,6 +2459,7 @@ GameObject:
   - component: {fileID: 1200041711}
   - component: {fileID: 1200041713}
   - component: {fileID: 688889819296936332}
+  - component: {fileID: 3244498498606665534}
   m_Layer: 15
   m_Name: BossFleshy
   m_TagString: Untagged
@@ -2414,7 +2478,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4772072698014855196}
   m_Father: {fileID: 4559155299601775632}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2461,6 +2526,18 @@ MonoBehaviour:
   minMaxGrowSpeed: {x: 0.5, y: 1.5}
   minMaxShrinkSpeed: {x: 0.75, y: 1}
   heightAllowance: 10
+  maxNumEnemiesCanHaveSpawned: 2
+  chanceToSpawnEnemyPerFrame: {x: 1, y: 500}
+  enemyOptions:
+    percentageMap:
+    - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
+      value: 10
+    - key: {fileID: 3860202574575028074, guid: c0ca18ccce2619542bf829540a6af936, type: 3}
+      value: 50
+    - key: {fileID: -3187359783752088, guid: 5684e422596042044a61c646ac4191d2, type: 3}
+      value: 20
+    - key: {fileID: 6182247085408442341, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
+      value: 20
 --- !u!114 &1200041714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2706,11 +2783,28 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4559155299825079986}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 3, y: 0.5, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3244498498606665534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299825079986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702110bb688e4bd43b55e49d8e278c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0.25
+  tickRate: 0.05
+  dealDamageTo:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &5076539868468295122
 GameObject:
   m_ObjectHideFlags: 0

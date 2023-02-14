@@ -50,7 +50,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
     private void Awake()
     {
         // Add all boss spawn points
-        spawnPoints.AddRange(FindObjectsOfType<BossSpawnPoint>());
+        spawnPoints.AddRange(FindObjectsOfType<BossEnemySpawnPoint>());
     }
 
     public override void EnterState(BossPhaseManager boss)

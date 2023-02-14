@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,10 +25,21 @@ public abstract class BossPhaseBaseState : BasicEnemy
     [Header("Audio")]
     [SerializeField] private AudioSource shakeSource;
 
+    // Spawning
+    private List<BossSpawnPoint> fuelSpawnPoints = new List<BossSpawnPoint>();
+    [SerializeField] private DestroyTriggerOnActivate addFuelTriggerPrefab;
+    private Vector2 chanceToSpawnFuelTrigger;
+    [SerializeField] private int chanceToSpawnFuelTriggerYBase = 100;
+
+
     public virtual void EnterState(BossPhaseManager boss)
     {
         // Audio
         onEnterPhaseClip.PlayOneShot(boss.source);
+
+        // Add all boss spawn points
+        fuelSpawnPoints.AddRange(FindObjectsOfType<BossFuelSpawnPoint>());
+        chanceToSpawnFuelTrigger = new Vector2(1, chanceToSpawnFuelTriggerYBase * fuelSpawnPoints.Count);
 
         // Start Phase Behaviour
         StartCoroutine(StateBehaviour(boss));
@@ -39,7 +51,28 @@ public abstract class BossPhaseBaseState : BasicEnemy
     protected abstract IEnumerator StateBehaviour(BossPhaseManager boss);
     public virtual void UpdateState(BossPhaseManager boss)
     {
-        // 
+        // Spawn Re-Fuel Triggers
+        foreach (BossSpawnPoint spawnPoint in fuelSpawnPoints)
+        {
+            if (spawnPoint.SpawnedOn)
+            {
+                // Debug.Log("Already Spawned on: " + spawnPoint);
+                continue;
+            }
+            // 0% chance
+            if (chanceToSpawnFuelTrigger.y == 0) continue;
+            // Potentially spawn a fuel trigger
+            if (Random.value <= chanceToSpawnFuelTrigger.x / chanceToSpawnFuelTrigger.y)
+            {
+                spawnPoint.SpawnedOn = true;
+                DestroyTriggerOnActivate spawned = Instantiate(addFuelTriggerPrefab, spawnPoint.transform.position, Quaternion.identity);
+                spawned.AddOnActivate(() =>
+                {
+                    spawnPoint.SpawnedOn = false;
+                });
+                break;
+            }
+        }
     }
     public virtual void ExitState(BossPhaseManager boss)
     {

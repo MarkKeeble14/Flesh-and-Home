@@ -4,6 +4,7 @@ public class KillableEntity : EndableEntity
 {
     [Header("Damageable")]
     [SerializeField] protected float maxHealth;
+    public float MaxHealth => maxHealth;
     protected float currentHealth;
     [SerializeField] protected bool acceptDamage = true;
     public bool AcceptDamage

@@ -17,6 +17,12 @@ public class BossFleshySpawner : MonoBehaviour
     [SerializeField] private Vector2 minMaxShrinkSpeed;
     [SerializeField] private float heightAllowance = 5f;
 
+    [Header("Enemy Spawning")]
+    [SerializeField] private int maxNumEnemiesCanHaveSpawned;
+    [SerializeField] private Vector2 chanceToSpawnEnemyPerFrame;
+    [SerializeField] private PercentageMap<EndableEntity> enemyOptions = new PercentageMap<EndableEntity>();
+    private List<EndableEntity> spawnedEntities = new List<EndableEntity>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +44,24 @@ public class BossFleshySpawner : MonoBehaviour
                 Random.Range(-perSpawnOffsetRange.z, perSpawnOffsetRange.z));
             BossFleshSpawn spawn = Instantiate(fleshPrefab, spawnPos, Quaternion.identity);
             spawn.Set(minMaxScale, minMaxGrowSpeed, minMaxShrinkSpeed);
+
+            // Chance to spawn an enemy 
+            if (spawnedEntities.Count < maxNumEnemiesCanHaveSpawned)
+            {
+                if (Random.value <= chanceToSpawnEnemyPerFrame.x / chanceToSpawnEnemyPerFrame.y)
+                {
+                    Vector3 groundPos = hit.point;
+                    EndableEntity spawned = Instantiate(enemyOptions.GetOption(), transform.position, Quaternion.identity);
+                    spawned.AddAdditionalOnEndAction(() =>
+                    {
+                        // Remove from spawned
+                        spawnedEntities.Remove(spawned);
+                    });
+
+                    // Add to spawned
+                    spawnedEntities.Add(spawned);
+                }
+            }
         }
 
         yield return new WaitForSeconds(timeBetweenSpawns);
