@@ -22,6 +22,7 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
 
         // Add Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started += CallActivate;
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -32,6 +33,7 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
 
         // Remove Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
+        
     }
 
     protected virtual void CallActivate(InputAction.CallbackContext ctx)

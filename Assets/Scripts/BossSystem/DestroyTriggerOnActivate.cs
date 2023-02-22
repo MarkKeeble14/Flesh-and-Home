@@ -23,6 +23,8 @@ public abstract class DestroyTriggerOnActivate : TextPromptKeyTrigger
 
     private void Destroy()
     {
+        if (gameObject.name != "Door"){
         Destroy(gameObject);
+        }
     }
 }
