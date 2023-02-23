@@ -14,10 +14,12 @@ public class Rifle : MonoBehaviour
         public float crosshairSpread;
 
         // Laser info
+        public float speed;
         public float damage;
         public float shotsPerSecond;
         public float maxDistance;
         public LayerMask canHit;
+        public LayerMask canDamage;
 
         // Overheat info
         public OverheatSettings overheatSettings;
@@ -168,11 +170,11 @@ public class Rifle : MonoBehaviour
             // if we've hit something, spawn particles and try to do damage
             if (hasHit)
             {
-                laser.setTarget(hit.point, this, rifleSettings.damage, rifleSettings.impactForce);
+                laser.SetTarget(hit.point, CurrentColor, rifleSettings.canHit, rifleSettings.canDamage, rifleSettings.speed, rifleSettings.damage, rifleSettings.impactForce);
             }
             else
             {
-                laser.setTarget(Camera.main.transform.forward * rifleSettings.maxDistance, this, rifleSettings.damage, rifleSettings.impactForce);
+                laser.SetTarget(Camera.main.transform.forward * rifleSettings.maxDistance, CurrentColor, rifleSettings.canHit, rifleSettings.canDamage, rifleSettings.speed, rifleSettings.damage, rifleSettings.impactForce);
             }
 
             yield return null;

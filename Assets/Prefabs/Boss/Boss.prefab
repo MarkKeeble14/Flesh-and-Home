@@ -666,6 +666,84 @@ MonoBehaviour:
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 3688273097040236901}
+--- !u!1 &950321064742407902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4012003699791572728}
+  - component: {fileID: 5738226434668137886}
+  m_Layer: 10
+  m_Name: 3MultipleLaserProjectile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4012003699791572728
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950321064742407902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5738226434668137886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950321064742407902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc8b7a8cc634734ba2f629594bc3795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelOptionHolders:
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
+  settings:
+    Damage: 7.5
+    HitForce: 0
+    Speed: 40
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  maxLaserCalls: 32
+  minMaxTimeBetweenShots: {x: 0.25, y: 0.25}
 --- !u!1 &1220624308639587362
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,6 +1046,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 0, z: 1}
   rotateSpeed: 20
+--- !u!1 &2320728007985728541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5997872364790782757}
+  - component: {fileID: 3561800415914182439}
+  m_Layer: 10
+  m_Name: SetLaserProjectileAttack1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5997872364790782757
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2320728007985728541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3561800415914182439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2320728007985728541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a52209b9f17fe942ab8a8eafe540227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelSetHolder: {fileID: 4219836553912982098}
+  settings:
+    Damage: 5
+    HitForce: 0
+    Speed: 50
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
 --- !u!1 &2341526280254663138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,6 +1240,162 @@ MonoBehaviour:
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 6599270303227461859}
+--- !u!1 &3412864779145093466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4309516798171100516}
+  - component: {fileID: 7201681692292912999}
+  m_Layer: 10
+  m_Name: MultipleLaserProjectile1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4309516798171100516
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412864779145093466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7201681692292912999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412864779145093466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc8b7a8cc634734ba2f629594bc3795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelOptionHolders:
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
+  settings:
+    Damage: 2.5
+    HitForce: 0
+    Speed: 60
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  maxLaserCalls: 16
+  minMaxTimeBetweenShots: {x: 0.1, y: 0.1}
+--- !u!1 &4126770852396286739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8261626036162235538}
+  - component: {fileID: 3505428121587124625}
+  m_Layer: 10
+  m_Name: MultipleLaserProjectile2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8261626036162235538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126770852396286739}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3505428121587124625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126770852396286739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc8b7a8cc634734ba2f629594bc3795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelOptionHolders:
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
+  settings:
+    Damage: 5
+    HitForce: 0
+    Speed: 50
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  maxLaserCalls: 4
+  minMaxTimeBetweenShots: {x: 0.1, y: 0.25}
 --- !u!1 &4559155297982300587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1631,7 +1940,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0a0bb3b17ccf346a6beec5183e3434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPool: []
+  attackPool:
+    available:
+      percentageMap: []
   enterPhaseTime: 0
   phaseBarSettings:
     Mode: 0
@@ -1711,16 +2022,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
-  - {fileID: 1549034130490153647}
-  - {fileID: 2031117155908681347}
-  - {fileID: 8081500927886883647}
-  - {fileID: 1913773852784504985}
-  - {fileID: 1626451440653981667}
-  - {fileID: 4686882736173490056}
-  - {fileID: 5040039632627370614}
-  - {fileID: 1251971713988234395}
-  - {fileID: 7590469321288657619}
-  - {fileID: 7710944370173060279}
+    available:
+      percentageMap:
+      - key: {fileID: 2031117155908681347}
+        value: 5
+      - key: {fileID: 8081500927886883647}
+        value: 5
+      - key: {fileID: 1913773852784504985}
+        value: 10
+      - key: {fileID: 1626451440653981667}
+        value: 10
+      - key: {fileID: 4686882736173490056}
+        value: 10
+      - key: {fileID: 5040039632627370614}
+        value: 10
+      - key: {fileID: 1251971713988234395}
+        value: 10
+      - key: {fileID: 7590469321288657619}
+        value: 10
+      - key: {fileID: 7710944370173060279}
+        value: 10
+      - key: {fileID: 7201681692292912999}
+        value: 10
+      - key: {fileID: 3505428121587124625}
+        value: 5
+      - key: {fileID: 4229868858519640170}
+        value: 5
   enterPhaseTime: 2.5
   phaseBarSettings:
     Mode: 2
@@ -1750,7 +2077,7 @@ MonoBehaviour:
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerYBase: 1000
-  numAttacksAtOnce: 2
+  numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   armorPlateHolder: {fileID: 6937021556066863655}
   armorPlating: []
@@ -1768,8 +2095,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
-  - {fileID: 7885544056425709480}
-  - {fileID: 7885544056158720997}
+    available:
+      percentageMap:
+      - key: {fileID: 7885544056425709480}
+        value: 40
+      - key: {fileID: 7885544056158720997}
+        value: 40
+      - key: {fileID: 2031117155908681347}
+        value: 10
+      - key: {fileID: 8081500927886883647}
+        value: 10
   enterPhaseTime: 0
   phaseBarSettings:
     Mode: 3
@@ -1799,11 +2134,8 @@ MonoBehaviour:
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerYBase: 1000
-  fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
-    type: 3}
   duration: 25
-  groundShakeImpulseForce: 1
-  riseBeforeEnding: 1
+  numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 2754082744787138833}
   timeBetweenAttacks: 5
   availableAddOns:
@@ -1816,6 +2148,10 @@ MonoBehaviour:
       value: 30
   minMaxNumAddOns: {x: 1, y: 3}
   timeAddedOnKillEnemy: 5
+  fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
+    type: 3}
+  groundShakeImpulseForce: 1
+  riseBeforeEnding: 1
   pauseDuration: 1
   riseSpeed: 0.05
   riseDuration: 4
@@ -1991,15 +2327,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
-  - {fileID: 2031117155908681347}
-  - {fileID: 8081500927886883647}
-  - {fileID: 1913773852784504985}
-  - {fileID: 1626451440653981667}
-  - {fileID: 4686882736173490056}
-  - {fileID: 5040039632627370614}
-  - {fileID: 1251971713988234395}
-  - {fileID: 7590469321288657619}
-  - {fileID: 7710944370173060279}
+    available:
+      percentageMap:
+      - key: {fileID: 2031117155908681347}
+        value: 35
+      - key: {fileID: 8081500927886883647}
+        value: 30
+      - key: {fileID: 1913773852784504985}
+        value: 5
+      - key: {fileID: 1626451440653981667}
+        value: 5
+      - key: {fileID: 4686882736173490056}
+        value: 5
+      - key: {fileID: 5040039632627370614}
+        value: 5
+      - key: {fileID: 1251971713988234395}
+        value: 5
+      - key: {fileID: 7590469321288657619}
+        value: 5
+      - key: {fileID: 7710944370173060279}
+        value: 5
   enterPhaseTime: 2.5
   phaseBarSettings:
     Mode: 2
@@ -2045,8 +2392,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
-  - {fileID: 7885544056425709480}
-  - {fileID: 7885544056158720997}
+    available:
+      percentageMap:
+      - key: {fileID: 7885544056425709480}
+        value: 50
+      - key: {fileID: 7885544056158720997}
+        value: 50
   enterPhaseTime: 0
   phaseBarSettings:
     Mode: 3
@@ -2076,11 +2427,8 @@ MonoBehaviour:
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerYBase: 1000
-  fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
-    type: 3}
   duration: 25
-  groundShakeImpulseForce: 1
-  riseBeforeEnding: 0
+  numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 54373864176638256}
   timeBetweenAttacks: 3
   availableAddOns:
@@ -2093,6 +2441,10 @@ MonoBehaviour:
       value: 60
   minMaxNumAddOns: {x: 2, y: 4}
   timeAddedOnKillEnemy: 5
+  fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
+    type: 3}
+  groundShakeImpulseForce: 1
+  riseBeforeEnding: 0
   pauseDuration: 1
   riseSpeed: 0.1
   riseDuration: 4
@@ -2268,8 +2620,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
-  - {fileID: 7957065367442252025}
-  - {fileID: 2891509672180706216}
+    available:
+      percentageMap:
+      - key: {fileID: 7957065367442252025}
+        value: 33
+      - key: {fileID: 2891509672180706216}
+        value: 33
+      - key: {fileID: 5738226434668137886}
+        value: 34
   enterPhaseTime: 2.5
   phaseBarSettings:
     Mode: 2
@@ -2299,7 +2657,7 @@ MonoBehaviour:
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerYBase: 1000
-  numAttacksAtOnce: 1
+  numAttacksAtOnce: 2
   timeBetweenAttacks: 0
   barrelHolder: {fileID: 4559155298250650246}
   bossFlesh: {fileID: 1200041714}
@@ -2526,18 +2884,16 @@ MonoBehaviour:
   minMaxGrowSpeed: {x: 0.5, y: 1.5}
   minMaxShrinkSpeed: {x: 0.75, y: 1}
   heightAllowance: 10
-  maxNumEnemiesCanHaveSpawned: 2
-  chanceToSpawnEnemyPerFrame: {x: 1, y: 500}
+  maxNumEnemiesCanHaveSpawned: 5
+  chanceToSpawnEnemyPerFrame: {x: 1, y: 1000}
   enemyOptions:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
-      value: 10
-    - key: {fileID: 3860202574575028074, guid: c0ca18ccce2619542bf829540a6af936, type: 3}
-      value: 50
+      value: 20
     - key: {fileID: -3187359783752088, guid: 5684e422596042044a61c646ac4191d2, type: 3}
-      value: 20
+      value: 40
     - key: {fileID: 6182247085408442341, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
-      value: 20
+      value: 40
 --- !u!114 &1200041714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2805,6 +3161,159 @@ MonoBehaviour:
   dealDamageTo:
     serializedVersion: 2
     m_Bits: 512
+--- !u!1 &4717313882725679959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 264549943695135816}
+  - component: {fileID: 5791543639693257638}
+  m_Layer: 10
+  m_Name: SetLaserProjectileAttack5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &264549943695135816
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717313882725679959}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5791543639693257638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717313882725679959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a52209b9f17fe942ab8a8eafe540227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelSetHolder: {fileID: 2279130278040657870}
+  settings:
+    Damage: 5
+    HitForce: 0
+    Speed: 50
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
+--- !u!1 &5006981122804496195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2620777083032189976}
+  - component: {fileID: 4229868858519640170}
+  m_Layer: 10
+  m_Name: MultipleLaserProjectile3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2620777083032189976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5006981122804496195}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229868858519640170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5006981122804496195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc8b7a8cc634734ba2f629594bc3795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelOptionHolders:
+  - {fileID: 4559155297982300584}
+  - {fileID: 6937021556066863655}
+  settings:
+    Damage: 7.5
+    HitForce: 0
+    Speed: 40
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  maxLaserCalls: 32
+  minMaxTimeBetweenShots: {x: 0.25, y: 0.25}
 --- !u!1 &5076539868468295122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2859,6 +3368,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axis: {x: 1, y: 0, z: 0}
   rotateSpeed: 20
+--- !u!1 &5097096227288728937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703124376556793867}
+  - component: {fileID: 809495251431475111}
+  m_Layer: 10
+  m_Name: SetLaserProjectileAttack3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703124376556793867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097096227288728937}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &809495251431475111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097096227288728937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a52209b9f17fe942ab8a8eafe540227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelSetHolder: {fileID: 3688273097040236901}
+  settings:
+    Damage: 5
+    HitForce: 0
+    Speed: 50
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
 --- !u!1 &5463663979929605735
 GameObject:
   m_ObjectHideFlags: 0
@@ -2978,6 +3562,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axis: {x: 1, y: 0, z: 0}
   rotateSpeed: 20
+--- !u!1 &6056375978944359897
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2451741351571164967}
+  - component: {fileID: 4988838516359599721}
+  m_Layer: 10
+  m_Name: SetLaserProjectileAttack4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2451741351571164967
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056375978944359897}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4988838516359599721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6056375978944359897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a52209b9f17fe942ab8a8eafe540227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelSetHolder: {fileID: 6599270303227461859}
+  settings:
+    Damage: 5
+    HitForce: 0
+    Speed: 50
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
 --- !u!1 &6227935156087273065
 GameObject:
   m_ObjectHideFlags: 0
@@ -3062,6 +3721,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
   rotateSpeed: 20
+--- !u!1 &6922347311957622748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6690831539206252712}
+  - component: {fileID: 3627136482753451808}
+  m_Layer: 10
+  m_Name: SetLaserProjectileAttack6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6690831539206252712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922347311957622748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3627136482753451808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6922347311957622748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a52209b9f17fe942ab8a8eafe540227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelSetHolder: {fileID: 6823342879682449955}
+  settings:
+    Damage: 5
+    HitForce: 0
+    Speed: 50
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
 --- !u!1 &6998629952719309927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3315,6 +4049,81 @@ MonoBehaviour:
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 6823342879682449955}
+--- !u!1 &7836360545476628150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7868309403125320732}
+  - component: {fileID: 2507351113999871132}
+  m_Layer: 10
+  m_Name: SetLaserProjectileAttack2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7868309403125320732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836360545476628150}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 667259673413557362}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2507351113999871132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836360545476628150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a52209b9f17fe942ab8a8eafe540227, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 0
+  maxRange: 0
+  removeFromPoolWhenActive: 0
+  source: {fileID: 193684192667313155}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  barrelSetHolder: {fileID: 1765267798185173455}
+  settings:
+    Damage: 5
+    HitForce: 0
+    Speed: 50
+    Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+    CanHit:
+      serializedVersion: 2
+      m_Bits: 896
+    CanDamage:
+      serializedVersion: 2
+      m_Bits: 512
+  minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
 --- !u!1 &8029395801953975960
 GameObject:
   m_ObjectHideFlags: 0
@@ -3547,6 +4356,16 @@ Transform:
   - {fileID: 8332765759601539164}
   - {fileID: 2165622810028039876}
   - {fileID: 2165622810390475401}
+  - {fileID: 4309516798171100516}
+  - {fileID: 8261626036162235538}
+  - {fileID: 2620777083032189976}
+  - {fileID: 5997872364790782757}
+  - {fileID: 7868309403125320732}
+  - {fileID: 703124376556793867}
+  - {fileID: 2451741351571164967}
+  - {fileID: 264549943695135816}
+  - {fileID: 6690831539206252712}
+  - {fileID: 4012003699791572728}
   m_Father: {fileID: 4559155298250650246}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

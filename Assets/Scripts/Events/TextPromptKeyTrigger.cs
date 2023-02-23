@@ -36,6 +36,8 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
 
     protected virtual void CallActivate(InputAction.CallbackContext ctx)
     {
+        helperText.Hide();
+        InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
         Activate();
     }
 

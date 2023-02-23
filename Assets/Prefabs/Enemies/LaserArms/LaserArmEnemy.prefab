@@ -108,8 +108,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
-  - {fileID: 3240085754061577343}
-  - {fileID: 3240085754061577342}
+    available:
+      percentageMap:
+      - key: {fileID: 3240085754061577343}
+        value: 75
+      - key: {fileID: 3240085754061577342}
+        value: 25
   movement: {fileID: 3240085754061577288}
 --- !u!114 &3240085754061577288
 MonoBehaviour:
@@ -597,6 +601,7 @@ MonoBehaviour:
   barrelTranslateScalePerAxis: {x: 1, y: 1, z: 1}
   rigidbody: {fileID: 3240085754159558669}
   collider: {fileID: 3240085754159558670}
+  laserProjectile: {fileID: 0}
 --- !u!120 &3240085754159558666
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1035,6 +1040,7 @@ MonoBehaviour:
   barrelTranslateScalePerAxis: {x: 1, y: 1, z: 1}
   rigidbody: {fileID: 3240085755467808584}
   collider: {fileID: 3240085755467808585}
+  laserProjectile: {fileID: 0}
 --- !u!120 &3240085755467808581
 LineRenderer:
   m_ObjectHideFlags: 0

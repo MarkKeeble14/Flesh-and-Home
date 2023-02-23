@@ -930,11 +930,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60ffae2e7962124438d183442ebb3c6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 5
-  sprintSpeed: 2
-  airStrafeSpeed: 3.5
-  jumpHeight: 1.25
-  mass: 5
+  baseSpeed: 10
+  sprintSpeed: 1.25
+  airStrafeSpeed: 7.5
+  jumpHeight: 0.075
+  mass: 50
   gravityValue: -9.81
   playerVelocity: {x: 0, y: 0, z: 0}
   jumpClip: {fileID: 8300000, guid: 9899a656da685824d8a375705a272712, type: 3}
@@ -950,7 +950,7 @@ MonoBehaviour:
   hasJetpack: 1
   jetpackForce: 0.2
   maxJetpackDuration: 10
-  jetpackDashPower: 5
+  jetpackDashPower: 2
   dashVelocityFalloffSpeedFlying: 1
   dashVelocityFalloffSpeedGrounded: 10
   jetpackDashCooldown: 3
@@ -993,12 +993,16 @@ MonoBehaviour:
     projectile: {fileID: 11468384, guid: 9a0c3383523899643a8d0661cfaca4e4, type: 3}
     impactForce: 80
     crosshairSpread: 0.4
+    speed: 75
     damage: 25
     shotsPerSecond: 10
     maxDistance: 500
     canHit:
       serializedVersion: 2
       m_Bits: 187392
+    canDamage:
+      serializedVersion: 2
+      m_Bits: 433152
     overheatSettings:
       overheatDamage: 3
       overheatAfter: 30

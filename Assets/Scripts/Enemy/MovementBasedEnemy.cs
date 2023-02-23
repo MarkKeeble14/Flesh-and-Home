@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class MovementBasedEnemy : BasicEnemy
 {
@@ -6,25 +7,38 @@ public class MovementBasedEnemy : BasicEnemy
     [SerializeField] private EnemyMovement movement;
     public EnemyMovement Movement => movement;
 
-    private void Update()
+    private void Start()
     {
-        if (nextAttack != null)
-        {
-            movement.SetDisabledForAttack(AttackIsDisablingMove || GetIsInRangeForNextAttack(movement.Target));
-
-            // 
-            if (nextAttack.CanAttack(movement.Target))
-            {
-                StartCoroutine(StartNextAttack(movement.Target));
-            }
-        }
+        StartCoroutine(AttackCycle());
     }
 
-    private bool GetIsInRangeForNextAttack(Transform target)
+    private IEnumerator AttackCycle()
     {
-        if (nextAttack.HasMaxRange)
+        SetAttack();
+
+        bool doneAttacking = false;
+        while (!doneAttacking)
         {
-            return nextAttack.WithinRange(target);
+            movement.SetDisabledForAttack(AttackIsDisablingMove || GetIsInRangeForNextAttack(movement.Target, attack.Key));
+
+            // 
+            if (attack.Key.CanAttack(movement.Target))
+            {
+                yield return StartCoroutine(StartAttack(movement.Target, false));
+                doneAttacking = true;
+            }
+
+            yield return null;
+        }
+
+        StartCoroutine(AttackCycle());
+    }
+
+    private bool GetIsInRangeForNextAttack(Transform target, Attack attack)
+    {
+        if (attack.HasMaxRange)
+        {
+            return attack.WithinRange(target);
         }
         return true;
     }

@@ -201,6 +201,7 @@ MonoBehaviour:
   barrelTranslateScalePerAxis: {x: 1.5, y: 1.5, z: 1.5}
   rigidbody: {fileID: 3317057215007092291}
   collider: {fileID: 4442104131247744794}
+  laserProjectile: {fileID: 11468384, guid: d48dbe7120668114a911bae8801a5f37, type: 3}
 --- !u!82 &5493201208609866444
 AudioSource:
   m_ObjectHideFlags: 0
