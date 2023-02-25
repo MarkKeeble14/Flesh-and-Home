@@ -28,6 +28,7 @@ public class OverheatableBossComponentEntity : OverheatableEntity
     {
         while (currentHeat > 0)
         {
+            Debug.Log("Cooling: " + currentHeat);
             currentHeat = Mathf.MoveTowards(currentHeat, 0, Time.deltaTime * overheatSettings.heatDissapationRate * rate);
             yield return null;
         }

@@ -7,6 +7,8 @@ public class BossAddOnsPhase : BossPhaseBaseState
 {
     [Header("Phase")]
     [SerializeField] private float duration = 10f;
+    [SerializeField] private float returnToSpawnPointSpeed;
+    [SerializeField] private float returnToSpawnMaxDifferenceToAccept;
     [SerializeField] protected int numAttacksAtOnce = 1;
     [SerializeField] private Attack onCrashDownAttack;
     [SerializeField] private float timeBetweenAttacks;
@@ -71,6 +73,13 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
     protected override IEnumerator StateBehaviour(BossPhaseManager boss)
     {
+        Vector3 moveToPos = new Vector3(boss.SpawnPosition.x, boss.ShellEnemyMovement.transform.localPosition.y, boss.SpawnPosition.z);
+        while (Vector3.Distance(boss.ShellEnemyMovement.transform.localPosition, moveToPos) > returnToSpawnMaxDifferenceToAccept)
+        {
+            boss.ShellEnemyMovement.transform.localPosition = Vector3.MoveTowards(boss.ShellEnemyMovement.transform.localPosition, moveToPos, Time.deltaTime * returnToSpawnPointSpeed);
+            yield return null;
+        }
+
         // Stop shell from moving
         boss.ShellEnemyMovement.SetMove(false);
         boss.ShellEnemyMovement.DisableNavMeshAgent();

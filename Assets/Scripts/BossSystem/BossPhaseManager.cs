@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class BossPhaseManager : MonoBehaviour
 {
     private int index;
     [SerializeField] private BossPhase[] bossPhaseOrder;
+    [SerializeField] private Transform spawnPosition;
+    public Vector3 SpawnPosition => spawnPosition.position;
 
     private BossPhaseBaseState currentPhase;
     public BossIntroPhase bossIntroPhase;
@@ -19,6 +22,10 @@ public class BossPhaseManager : MonoBehaviour
     public NavMeshEnemy ShellEnemyMovement => shellNavMeshEnemy;
     [SerializeField] private Rigidbody shellNavMeshRigidbody;
     public Rigidbody ShellRigidBody => shellNavMeshRigidbody;
+    [SerializeField] private Transform[] barrelRotatorHolders;
+    [SerializeField] private Transform[] plateRotatorHolders;
+    private List<BossRotateBarrels> barrelRotators = new List<BossRotateBarrels>();
+    private List<BossRotateBarrels> plateRotators = new List<BossRotateBarrels>();
 
     [Header("Fleshy")]
     [SerializeField] private EnemyMovement fleshyBoss;
@@ -35,14 +42,46 @@ public class BossPhaseManager : MonoBehaviour
 
     private bool isDone;
 
+    private void Awake()
+    {
+        // Add Barrel Rotators
+        foreach (Transform t in barrelRotatorHolders)
+        {
+            barrelRotators.AddRange(t.GetComponentsInChildren<BossRotateBarrels>());
+        }
+
+        // Add Plate Rotators
+        foreach (Transform t in plateRotatorHolders)
+        {
+            plateRotators.AddRange(t.GetComponentsInChildren<BossRotateBarrels>());
+        }
+    }
+
+    public void SetBarrelRotatorsSpeed(float speed)
+    {
+        foreach (BossRotateBarrels rotateBarrels in barrelRotators)
+        {
+            rotateBarrels.SetRotateSpeed(speed);
+        }
+    }
+
+
+    public void SetPlateRotatorsSpeed(float speed)
+    {
+        foreach (BossRotateBarrels rotateBarrels in plateRotators)
+        {
+            rotateBarrels.SetRotateSpeed(speed);
+        }
+    }
+
     private void Start()
     {
-        // Set initial state
-        currentPhase = GetCurrentPhase();
-        currentPhase.EnterState(this);
-
         // Get a reference to the player
         Player = GameManager._Instance.PlayerTransform;
+        // Set initial state
+
+        currentPhase = GetCurrentPhase();
+        // EnterCurrentState
     }
 
     public void SwitchState(BossPhaseBaseState state)
@@ -50,6 +89,11 @@ public class BossPhaseManager : MonoBehaviour
         if (isDone) return;
         currentPhase.ExitState(this);
         currentPhase = state;
+        currentPhase.EnterState(this);
+    }
+
+    public void EnterCurrentState()
+    {
         currentPhase.EnterState(this);
     }
 

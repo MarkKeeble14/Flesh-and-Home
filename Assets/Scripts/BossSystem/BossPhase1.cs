@@ -86,7 +86,7 @@ public class BossPhase1 : BossAttackingPhase
         foreach (OverheatableBossComponentEntity plate in armorPlating)
         {
             plate.AcceptDamage = false;
-            plate.CoolOff(200f);
+            plate.CoolOff(5000f);
         }
 
         // Debug.Log("Boss Bar is Full");

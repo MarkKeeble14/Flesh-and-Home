@@ -183,6 +183,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   maxHealth: 250
+  acceptDamage: 1
   destroyOnDeath: 1
   rigidbody: {fileID: 8287840866634462593}
   onTakeDamageClip:
@@ -191,10 +192,10 @@ MonoBehaviour:
     pitch: 1
   maxCapacity: 100
   capacity: 100
-  capacityPerCritter: 0.25
+  capacityPerCritter: 2.5
   minCapacity: 25
   critter: {fileID: 5023724996855043176, guid: c0ca18ccce2619542bf829540a6af936, type: 3}
-  minMaxCanSpawnPerTick: {x: 12, y: 24}
+  minMaxCanSpawnPerTick: {x: 4, y: 8}
   timeBetweenTicks: 5
   ground:
     serializedVersion: 2

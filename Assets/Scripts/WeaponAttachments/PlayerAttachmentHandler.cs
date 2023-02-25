@@ -14,8 +14,10 @@ public class PlayerAttachmentHandler : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource source;
+    [SerializeField] private AudioClipContainer onSwitchClip;
 
     [SerializeField] private Image attachmentEquippedDisplay;
+    [SerializeField] private RadialMenu attachmentMenu;
 
     private void Start()
     {
@@ -23,22 +25,46 @@ public class PlayerAttachmentHandler : MonoBehaviour
         currentWeaponAttachment = noWeaponAttachment;
 
         // Add Controls
-        InputManager._Instance.PlayerInputActions.Player.Hotkey1.performed += SwitchToFlamethrower;
-        InputManager._Instance.PlayerInputActions.Player.Hotkey2.performed += SwitchToLaserCutter;
-        InputManager._Instance.PlayerInputActions.Player.Hotkey3.performed += SwitchToLaserBayonet;
+        InputManager._Instance.PlayerInputActions.Player.Tab.performed += OpenAttachmentMenu;
     }
 
-    private void SwitchToFlamethrower(InputAction.CallbackContext ctx)
+    private void OpenAttachmentMenu(InputAction.CallbackContext ctx)
+    {
+        StartCoroutine(OpenAttachmentMenu());
+    }
+
+    private IEnumerator OpenAttachmentMenu()
+    {
+        attachmentMenu.gameObject.SetActive(true);
+
+        Cursor.visible = true;
+
+        InputManager._Instance.PlayerInputActions.Player.Look.Disable();
+
+        yield return new WaitUntil(() => !InputManager._Instance.PlayerInputActions.Player.Tab.IsPressed());
+
+        Cursor.visible = false;
+
+        InputManager._Instance.PlayerInputActions.Player.Look.Enable();
+
+        attachmentMenu.SelectButton();
+
+        onSwitchClip.PlayOneShot(source);
+
+        attachmentMenu.gameObject.SetActive(false);
+    }
+
+    public void SwitchToFlamethrower()
     {
         SwitchAttatchment(flamethrowerAttachment);
     }
 
-    private void SwitchToLaserCutter(InputAction.CallbackContext ctx)
+    public void SwitchToLaserCutter()
     {
         SwitchAttatchment(laserCutterAttachment);
     }
 
-    private void SwitchToLaserBayonet(InputAction.CallbackContext ctx)
+    public void SwitchToLaserBayonet()
     {
         SwitchAttatchment(laserBayonetAttachment);
     }

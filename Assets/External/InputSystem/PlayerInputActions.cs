@@ -125,6 +125,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""b3edd2a5-e395-43fd-8020-bab95016b6d8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Tab"",
+                    ""type"": ""Button"",
+                    ""id"": ""452774a1-eda2-433a-8392-1bbe72484d22"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -358,6 +376,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2b03908-bccc-471a-8162-c32692044bdb"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03a7b272-c7fe-4508-8f08-3a032dd5e08e"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -377,6 +417,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Hotkey2 = m_Player.FindAction("Hotkey2", throwIfNotFound: true);
         m_Player_Hotkey3 = m_Player.FindAction("Hotkey3", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
+        m_Player_Tab = m_Player.FindAction("Tab", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -447,6 +489,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Hotkey2;
     private readonly InputAction m_Player_Hotkey3;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_MousePosition;
+    private readonly InputAction m_Player_Tab;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -462,6 +506,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Hotkey2 => m_Wrapper.m_Player_Hotkey2;
         public InputAction @Hotkey3 => m_Wrapper.m_Player_Hotkey3;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
+        public InputAction @Tab => m_Wrapper.m_Player_Tab;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -504,6 +550,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @MousePosition.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
+                @MousePosition.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
+                @MousePosition.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMousePosition;
+                @Tab.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTab;
+                @Tab.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTab;
+                @Tab.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTab;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -541,6 +593,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @MousePosition.started += instance.OnMousePosition;
+                @MousePosition.performed += instance.OnMousePosition;
+                @MousePosition.canceled += instance.OnMousePosition;
+                @Tab.started += instance.OnTab;
+                @Tab.performed += instance.OnTab;
+                @Tab.canceled += instance.OnTab;
             }
         }
     }
@@ -558,5 +616,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnHotkey2(InputAction.CallbackContext context);
         void OnHotkey3(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
+        void OnTab(InputAction.CallbackContext context);
     }
 }

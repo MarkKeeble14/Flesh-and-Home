@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 1, y: 0, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &1128438308
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 1, y: 0, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &1406886945
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +787,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 0.5, z: 3}
+  m_Size: {x: 3, y: 2, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1238529496504498902
 GameObject:
@@ -1045,7 +1045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 0, z: 1}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &2320728007985728541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &2977090605861624123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,7 +1567,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 3
-  m_Speed: 1.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 60
@@ -1898,6 +1898,7 @@ Transform:
   - {fileID: 1950324737}
   - {fileID: 1595823105}
   - {fileID: 1814149585}
+  - {fileID: 6061451887558718154}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1914,6 +1915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossPhaseOrder: 000000000100000002000000030000000400000005000000
+  spawnPosition: {fileID: 6061451887558718154}
   bossIntroPhase: {fileID: 299655287}
   bossPhase1: {fileID: 299655284}
   bossPhase2: {fileID: 299655283}
@@ -1922,6 +1924,10 @@ MonoBehaviour:
   addOnsPhase2: {fileID: 299655286}
   shellNavMeshEnemy: {fileID: 4559155298250650244}
   shellNavMeshRigidbody: {fileID: 4559155298250650245}
+  barrelRotatorHolders:
+  - {fileID: 4559155297982300584}
+  plateRotatorHolders:
+  - {fileID: 6937021556066863655}
   fleshyBoss: {fileID: 629767790}
   hpBar: {fileID: 0}
   Player: {fileID: 0}
@@ -1944,6 +1950,8 @@ MonoBehaviour:
     available:
       percentageMap: []
   enterPhaseTime: 0
+  barrelRotatorsSpeed: 180
+  plateRotatorsSpeed: 180
   phaseBarSettings:
     Mode: 0
     Color: {r: 0, g: 0, b: 0, a: 0}
@@ -1971,7 +1979,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYBase: 0
+  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 100
   riseCurve:
     serializedVersion: 2
     m_Curve:
@@ -2049,6 +2057,8 @@ MonoBehaviour:
       - key: {fileID: 4229868858519640170}
         value: 5
   enterPhaseTime: 2.5
+  barrelRotatorsSpeed: 20
+  plateRotatorsSpeed: 20
   phaseBarSettings:
     Mode: 2
     Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
@@ -2076,7 +2086,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYBase: 1000
+  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 5000
   numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   armorPlateHolder: {fileID: 6937021556066863655}
@@ -2106,6 +2116,8 @@ MonoBehaviour:
       - key: {fileID: 8081500927886883647}
         value: 10
   enterPhaseTime: 0
+  barrelRotatorsSpeed: 0
+  plateRotatorsSpeed: 0
   phaseBarSettings:
     Mode: 3
     Color: {r: 0, g: 0.5019608, b: 0, a: 1}
@@ -2133,8 +2145,10 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYBase: 1000
+  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 100
   duration: 25
+  returnToSpawnPointSpeed: 3
+  returnToSpawnMaxDifferenceToAccept: 1
   numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 2754082744787138833}
   timeBetweenAttacks: 5
@@ -2348,6 +2362,8 @@ MonoBehaviour:
       - key: {fileID: 7710944370173060279}
         value: 5
   enterPhaseTime: 2.5
+  barrelRotatorsSpeed: 40
+  plateRotatorsSpeed: 40
   phaseBarSettings:
     Mode: 2
     Color: {r: 0, g: 0.5019608, b: 1, a: 1}
@@ -2375,7 +2391,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYBase: 1000
+  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 5000
   numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   bossShell: {fileID: 7881108961409635393}
@@ -2399,6 +2415,8 @@ MonoBehaviour:
       - key: {fileID: 7885544056158720997}
         value: 50
   enterPhaseTime: 0
+  barrelRotatorsSpeed: 0
+  plateRotatorsSpeed: 0
   phaseBarSettings:
     Mode: 3
     Color: {r: 0, g: 0.5019608, b: 0, a: 1}
@@ -2426,8 +2444,10 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYBase: 1000
+  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 100
   duration: 25
+  returnToSpawnPointSpeed: 3
+  returnToSpawnMaxDifferenceToAccept: 1
   numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 54373864176638256}
   timeBetweenAttacks: 3
@@ -2629,6 +2649,8 @@ MonoBehaviour:
       - key: {fileID: 5738226434668137886}
         value: 34
   enterPhaseTime: 2.5
+  barrelRotatorsSpeed: 0
+  plateRotatorsSpeed: 0
   phaseBarSettings:
     Mode: 2
     Color: {r: 0.2509804, g: 1, b: 0, a: 1}
@@ -2656,7 +2678,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1662478180}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYBase: 1000
+  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 5000
   numAttacksAtOnce: 2
   timeBetweenAttacks: 0
   barrelHolder: {fileID: 4559155298250650246}
@@ -3142,7 +3164,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 0.5, z: 3}
+  m_Size: {x: 3, y: 2, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3244498498606665534
 MonoBehaviour:
@@ -3367,7 +3389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 1, y: 0, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &5097096227288728937
 GameObject:
   m_ObjectHideFlags: 0
@@ -3443,6 +3465,37 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
   minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
+--- !u!1 &5136936638344744944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6061451887558718154}
+  m_Layer: 0
+  m_Name: SpawnPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6061451887558718154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5136936638344744944}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4559155299601775632}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5463663979929605735
 GameObject:
   m_ObjectHideFlags: 0
@@ -3561,7 +3614,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 1, y: 0, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &6056375978944359897
 GameObject:
   m_ObjectHideFlags: 0
@@ -3720,7 +3773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &6922347311957622748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3983,7 +4036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: 1, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &7515128440811637185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4177,7 +4230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: -1, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1 &8126151618789146537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4489,7 +4542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   axis: {x: 0, y: -1, z: 0}
-  rotateSpeed: 20
+  changeRate: 0.25
 --- !u!1001 &1216716330
 PrefabInstance:
   m_ObjectHideFlags: 0

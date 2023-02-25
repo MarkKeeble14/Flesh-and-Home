@@ -35,6 +35,8 @@ public class InputManager : MonoBehaviour
 
         // Other
         PlayerInputActions.Player.Interact.Enable();
+        PlayerInputActions.Player.MousePosition.Enable();
+        PlayerInputActions.Player.Tab.Enable();
 
         // Hotkeys
         PlayerInputActions.Player.Hotkey1.Enable();
@@ -59,6 +61,8 @@ public class InputManager : MonoBehaviour
 
         // Other
         PlayerInputActions.Player.Interact.Disable();
+        PlayerInputActions.Player.MousePosition.Disable();
+        PlayerInputActions.Player.Tab.Disable();
 
         // Hotkeys
         PlayerInputActions.Player.Hotkey1.Disable();

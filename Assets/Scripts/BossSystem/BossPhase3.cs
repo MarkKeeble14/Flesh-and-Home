@@ -144,6 +144,16 @@ public class BossPhase3 : BossAttackingPhase
             b.Collider.enabled = true;
         }
 
+        // Destroy all remaining enemies
+        BasicEnemy[] enemies = FindObjectsOfType<BasicEnemy>();
+        foreach (BasicEnemy enemy in enemies)
+        {
+            if (enemy.gameObject != boss.gameObject)
+            {
+                Destroy(enemy.gameObject);
+            }
+        }
+
         boss.LoadNextPhase();
     }
 }
