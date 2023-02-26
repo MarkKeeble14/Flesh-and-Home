@@ -1,18 +1,25 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
 
 public class TriggerHelperText : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI textPrefab;
+    [SerializeField] private Transform textHolder;
+    private Dictionary<TextPromptKeyTrigger, TextMeshProUGUI> spawnedTexts = new Dictionary<TextPromptKeyTrigger, TextMeshProUGUI>();
 
-    public void Show(string text)
+    public void Show(TextPromptKeyTrigger trigger, string text)
     {
-        this.text.gameObject.SetActive(true);
-        this.text.text = text;
+        if (spawnedTexts.ContainsKey(trigger)) return;
+        TextMeshProUGUI spawned = Instantiate(textPrefab, textHolder);
+        spawnedTexts.Add(trigger, spawned);
+        spawned.text = text;
     }
 
-    public void Hide()
+    public void Hide(TextPromptKeyTrigger trigger)
     {
-        text.gameObject.SetActive(false);
+        if (!spawnedTexts.ContainsKey(trigger)) return;
+        Destroy(spawnedTexts[trigger].gameObject);
+        spawnedTexts.Remove(trigger);
     }
 }

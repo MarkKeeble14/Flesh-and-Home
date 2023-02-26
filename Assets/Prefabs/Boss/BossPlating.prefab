@@ -238,6 +238,7 @@ MonoBehaviour:
     dissapateAfter: 10
     heatAccrualRate: 0
     heatDissapationRate: 0.05
+  acceptDamage: 0
   setDefaultMaterialColorAsDefaultVisualColor: 1
   visuals: {fileID: 11400000, guid: 35f003d074d49364a864801f538214c5, type: 2}
   renderer: {fileID: 7743030864407437378}

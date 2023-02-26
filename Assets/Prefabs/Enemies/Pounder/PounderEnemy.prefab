@@ -403,7 +403,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
-  - {fileID: 7504483307488772689}
+    available:
+      percentageMap:
+      - key: {fileID: 7504483307488772689}
+        value: 100
   movement: {fileID: 959702198628339931}
 --- !u!114 &7504483307488772689
 MonoBehaviour:

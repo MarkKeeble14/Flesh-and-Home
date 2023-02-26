@@ -3,31 +3,33 @@ using System.Collections;
 
 public class ShotBehavior : MonoBehaviour
 {
-    [SerializeField] private float speed;
     [SerializeField] private new Light light;
     [SerializeField] private PlayerLaserExplosiveParticleSystem explosionParticleSystem;
     [SerializeField] private ParticleSystem impactEffect;
-    private Rifle raygun;
+    private LayerMask canHit, canDamage;
     private float damage, impactForce;
-    [SerializeField] private LayerMask canDamage;
+    private Color projectileColor;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!LayerMaskHelper.IsInLayerMask(collision.gameObject, raygun.CanHit)) return;
+        if (!LayerMaskHelper.IsInLayerMask(collision.gameObject, canHit)) return;
 
-        // Try to do damage
         if (LayerMaskHelper.IsInLayerMask(collision.gameObject, canDamage))
         {
-            if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+            // Try to do damage
+            if (LayerMaskHelper.IsInLayerMask(collision.gameObject, canHit))
             {
-                damageable.Damage(damage, -collision.GetContact(0).normal * impactForce);
+                if (collision.gameObject.TryGetComponent(out IDamageable damageable))
+                {
+                    damageable.Damage(damage, -collision.GetContact(0).normal * impactForce);
+                }
             }
         }
 
         Explode(collision);
     }
 
-    private IEnumerator Travel(Vector3 target)
+    private IEnumerator Travel(Vector3 target, float speed)
     {
         float step = speed * Time.deltaTime;
         while (transform.position != target)
@@ -38,13 +40,15 @@ public class ShotBehavior : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void setTarget(Vector3 target, Rifle raygun, float damage, float force)
+    public void SetTarget(Vector3 target, Color projectileColor, LayerMask canHit, LayerMask canDamage, float speed, float damage, float force)
     {
-        this.raygun = raygun;
-        light.color = raygun.CurrentColor;
+        this.canHit = canHit;
+        this.canDamage = canDamage;
+        this.projectileColor = projectileColor;
         this.damage = damage;
         this.impactForce = force;
-        StartCoroutine(Travel(target));
+        light.color = projectileColor;
+        StartCoroutine(Travel(target, speed));
     }
 
     void Explode(Collision collision)
@@ -54,7 +58,7 @@ public class ShotBehavior : MonoBehaviour
         // Spawn Particles
         // Explosion
         PlayerLaserExplosiveParticleSystem explosion = Instantiate(explosionParticleSystem, point.point, Quaternion.identity);
-        explosion.SetColors(raygun.CurrentColor, raygun.CurrentColor, raygun.CurrentColor);
+        explosion.SetColors(projectileColor, projectileColor, projectileColor);
 
         // Metal
         // Eventually could do a dictionary with different layers to pick out different particles (so hitting different surfaces would produce different particles

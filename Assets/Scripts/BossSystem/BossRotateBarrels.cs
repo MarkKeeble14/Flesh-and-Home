@@ -5,11 +5,19 @@ using UnityEngine;
 public class BossRotateBarrels : MonoBehaviour
 {
     [SerializeField] private Vector3 axis;
-    [SerializeField] private float rotateSpeed;
+    [SerializeField] private float changeRate = 1f;
+    private float currentSpeed;
+    private float targetSpeed;
+
+    public void SetRotateSpeed(float speed)
+    {
+        targetSpeed = speed;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(axis, Time.deltaTime * rotateSpeed, Space.Self);
+        currentSpeed = Mathf.Lerp(currentSpeed, targetSpeed, Time.deltaTime * changeRate);
+        transform.Rotate(axis, Time.deltaTime * currentSpeed, Space.Self);
     }
 }

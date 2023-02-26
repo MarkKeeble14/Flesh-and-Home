@@ -10,13 +10,13 @@ public class PercentageMap<T>
 
     public int Count => percentageMap.Count;
 
-    private T GetFromDictionary()
+    private SerializableKeyValuePair<T, int> GetFromDictionary()
     {
         // Say a list has 2 elements, 1 for SoldierEnemy with number 50, and 1 for DroneEnemy with number 50
         // That means it's a 50/50 which one of the enemies will be spawned
         int rand = RandomHelper.RandomIntExclusive(0, 100);
         float floor = 0;
-        T mostCommon = default(T);
+        SerializableKeyValuePair<T, int> mostCommon = null;
         int largestWeight = 0;
         for (int i = 0; i < percentageMap.Count; i++)
         {
@@ -26,7 +26,7 @@ public class PercentageMap<T>
             // Keeping track of the highest weighted option to return in the case of a bogus error
             if (current.Value > largestWeight)
             {
-                mostCommon = current.Key;
+                mostCommon = current;
                 largestWeight = current.Value;
             }
             // Debug.Log("To Spawn: " + current.Key + ", rand must be greater than: "
@@ -34,7 +34,7 @@ public class PercentageMap<T>
             if (rand > floor && rand <= floor + current.Value)
             {
                 // Debug.Log(current.Key);
-                return current.Key;
+                return current;
             }
             floor += current.Value;
         }
@@ -48,12 +48,43 @@ public class PercentageMap<T>
         {
             // Otherwise, return default (can be null)
             // Debug.Log("Returning default: " + default(T));
-            return default(T);
+            return null;
         }
+    }
+
+    public SerializableKeyValuePair<T, int> GetFullOption()
+    {
+        return GetFromDictionary();
     }
 
     public T GetOption()
     {
-        return GetFromDictionary();
+        return GetFullOption().Key;
+    }
+
+    public void AddOption(SerializableKeyValuePair<T, int> option)
+    {
+        // Debug.Log("Adding: Key: " + option.Key + ", Value: " + option.Value);
+        percentageMap.Add(option);
+    }
+
+    public bool RemoveOption(SerializableKeyValuePair<T, int> option)
+    {
+        // Debug.Log("Removing: Key: " + option.Key + ", Value: " + option.Value);
+        if (percentageMap.Contains(option))
+        {
+            percentageMap.Remove(option);
+            return true;
+        }
+        return false;
+    }
+
+    public SerializableKeyValuePair<T, int> FindOption(T option)
+    {
+        foreach (SerializableKeyValuePair<T, int> kvp in percentageMap)
+        {
+            if (kvp.Key.Equals(option)) return kvp;
+        }
+        return null;
     }
 }

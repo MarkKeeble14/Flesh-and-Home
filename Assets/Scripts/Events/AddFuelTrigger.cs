@@ -11,3 +11,4 @@ public class AddFuelTrigger : DestroyTriggerOnActivate
         fuelStore.AlterFuel(fuelAmount);
     }
 }
+
