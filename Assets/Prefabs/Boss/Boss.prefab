@@ -1922,6 +1922,7 @@ MonoBehaviour:
   bossPhase3: {fileID: 299655282}
   addOnsPhase1: {fileID: 299655281}
   addOnsPhase2: {fileID: 299655286}
+  armorPlateHolder: {fileID: 6937021556066863655}
   shellNavMeshEnemy: {fileID: 4559155298250650244}
   shellNavMeshRigidbody: {fileID: 4559155298250650245}
   barrelRotatorHolders:
@@ -2089,8 +2090,6 @@ MonoBehaviour:
   chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 5000
   numAttacksAtOnce: 4
   timeBetweenAttacks: 1
-  armorPlateHolder: {fileID: 6937021556066863655}
-  armorPlating: []
   platesNeededToDestroyToAdvance: 3
 --- !u!114 &299655281
 MonoBehaviour:

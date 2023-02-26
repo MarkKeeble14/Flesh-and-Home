@@ -13,7 +13,7 @@ public class RadialMenuButton : MonoBehaviour
     public Vector2 AngleBounds;
 
     [Header("References")]
-    private Image image;
+    [SerializeField] private Image image;
     public Image Image => image;
     private RectTransform rect;
     public new RectTransform transform => rect;
@@ -30,7 +30,6 @@ public class RadialMenuButton : MonoBehaviour
         // Get references
         rect = GetComponent<RectTransform>();
         detailsTransform = transform.GetChild(0).GetComponent<RectTransform>();
-        image = GetComponent<Image>();
 
         // Set
         spriteImage.sprite = sprite;

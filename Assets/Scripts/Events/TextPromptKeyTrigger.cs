@@ -6,6 +6,7 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
 {
     private string prefix = "'E' to ";
     [SerializeField] protected string activePrompt;
+    protected virtual string Suffix { get => ""; }
     protected TriggerHelperText helperText;
 
     private void Start()
@@ -19,7 +20,7 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
         if (!LayerMaskHelper.IsInLayerMask(other.gameObject, LayerMask.GetMask("Player"))) return;
 
         helperText.gameObject.SetActive(true);
-        helperText.Show(prefix + activePrompt);
+        helperText.Show(prefix + activePrompt + Suffix);
 
         // Add Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started += CallActivate;

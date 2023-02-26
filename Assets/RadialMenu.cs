@@ -6,10 +6,23 @@ using UnityEngine.InputSystem;
 public class RadialMenu : MonoBehaviour
 {
     [SerializeField] private List<RadialMenuButton> buttons = new List<RadialMenuButton>();
+    public bool IsEmpty => buttons.Count == 0;
     [SerializeField] private float offset;
     private int curMenuItem;
     private int oldMenuItem;
     private float currentAngle;
+
+    public void AddButtion(RadialMenuButton button)
+    {
+        buttons.Add(button);
+        button.gameObject.SetActive(true);
+    }
+
+    public void SetButton(RadialMenuButton button)
+    {
+        button.Image.color = button.PressedColor;
+        button.onPressEvent?.Invoke();
+    }
 
     private void Update()
     {

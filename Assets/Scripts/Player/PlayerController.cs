@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     [Header("Jetpack")]
     // Settings
     [Header("Settings")]
-    [SerializeField] private bool hasJetpack;
+    private bool hasJetpack;
     [SerializeField] private float jetpackForce = 25.0f;
     [SerializeField] private float maxJetpackDuration = 3f;
     [SerializeField] private float jetpackDashPower = 10f;
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void HeadBob(float z, float x_intensity, float y_intensity)
+    private void HeadBob(float z, float x_intensity, float y_intensity)
     {
         targetWeaponBobPosition = lazerParentOrigin + new Vector3(Mathf.Cos(z) * x_intensity, Mathf.Sin(z * 2) * y_intensity,
             0);
@@ -272,6 +272,12 @@ public class PlayerController : MonoBehaviour
             hasLanded = false;
             StartCoroutine(Jetpack());
         }
+    }
+
+    [ContextMenu("AquireJetpack")]
+    public void AquireJetpack()
+    {
+        hasJetpack = true;
     }
 
     private IEnumerator Jetpack()

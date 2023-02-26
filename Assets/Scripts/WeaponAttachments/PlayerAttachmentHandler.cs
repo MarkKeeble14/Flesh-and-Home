@@ -35,6 +35,8 @@ public class PlayerAttachmentHandler : MonoBehaviour
 
     private IEnumerator OpenAttachmentMenu()
     {
+        if (attachmentMenu.IsEmpty) yield break;
+
         attachmentMenu.gameObject.SetActive(true);
 
         Cursor.visible = true;

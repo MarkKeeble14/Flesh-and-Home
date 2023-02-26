@@ -344,7 +344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 524718dad3f3e1141bef96390984cf54, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 40b67ab885766484b95d440c1ce39740, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -374,6 +374,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   AngleBounds: {x: 0, y: 0}
+  image: {fileID: 9064385957014932520}
   spriteImage: {fileID: 2366481101462062569}
   sprite: {fileID: 21300000, guid: 2eb963264e0bf4444b81043563c6440c, type: 3}
   text: {fileID: 8616943614012309784}

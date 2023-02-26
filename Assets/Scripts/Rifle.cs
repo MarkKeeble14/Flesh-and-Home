@@ -148,7 +148,7 @@ public class Rifle : MonoBehaviour
             shootSound.PlayOneShot(source);
 
             // Crosshair
-            CrosshairController._Instance.Spread(rifleSettings.crosshairSpread);
+            CrosshairManager._Instance.Spread(CrosshairType.RIFLE, rifleSettings.crosshairSpread);
 
             // Interpolate Color based on how close we are to overheating
             currentColor = rifleSettings.visuals.GetLerpedColor(trackOverheatTimer / rifleSettings.overheatSettings.overheatAfter);

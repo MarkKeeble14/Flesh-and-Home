@@ -931,8 +931,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 10
-  sprintSpeed: 1.25
-  airStrafeSpeed: 7.5
+  sprintSpeed: 1.05
+  airStrafeSpeed: 10
   jumpHeight: 0.075
   mass: 50
   gravityValue: -9.81
@@ -947,7 +947,6 @@ MonoBehaviour:
   bobMovingStrength: 6
   bobSprintingStrength: 10
   lazerParent: {fileID: 7362887214866606261}
-  hasJetpack: 1
   jetpackForce: 0.2
   maxJetpackDuration: 10
   jetpackDashPower: 2
@@ -1100,7 +1099,7 @@ MonoBehaviour:
     pitch: 1
   color: {r: 0.31347656, g: 0, b: 1, a: 1}
   laserSettings:
-    damage: 10
+    damage: 50
     tickRate: 0.05
     maxDistance: 100
     canHit:
@@ -1203,7 +1202,12 @@ MonoBehaviour:
   laserCutterAttachment: {fileID: 7362887214131378906}
   laserBayonetAttachment: {fileID: 7362887214131377446}
   source: {fileID: 7362887214131378897}
+  onSwitchClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
   attachmentEquippedDisplay: {fileID: 0}
+  attachmentMenu: {fileID: 0}
 --- !u!114 &7362887214131378907
 MonoBehaviour:
   m_ObjectHideFlags: 0

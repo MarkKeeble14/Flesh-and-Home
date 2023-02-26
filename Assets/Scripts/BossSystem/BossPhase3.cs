@@ -39,7 +39,7 @@ public class BossPhase3 : BossAttackingPhase
             complete = true;
         });
 
-        foreach (OverheatableBossComponentEntity ent in boss.bossPhase1.armorPlating)
+        foreach (OverheatableBossComponentEntity ent in boss.ArmorPlating)
         {
             // Get Rigidbody component
             Rigidbody rb = ent.GetComponent<Rigidbody>();
@@ -130,10 +130,13 @@ public class BossPhase3 : BossAttackingPhase
         // Fill remaining HP bar to make it go away
         boss.HPBar.Set(0, bossHealth);
 
+
         foreach (LaserBarrel b in bossBarrels)
         {
             b.Disabled = true;
         }
+
+        yield return new WaitUntil(() => boss.HPBar.IsFull);
 
         yield return new WaitForSeconds(timeAfterFleshyKillBeforeDropBarrels);
 

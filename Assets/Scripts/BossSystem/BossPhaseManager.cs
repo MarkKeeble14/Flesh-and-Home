@@ -16,6 +16,18 @@ public class BossPhaseManager : MonoBehaviour
     public BossAddOnsPhase addOnsPhase1;
     public BossAddOnsPhase addOnsPhase2;
 
+    [SerializeField] private Transform armorPlateHolder;
+    private List<OverheatableBossComponentEntity> armorPlating = new List<OverheatableBossComponentEntity>();
+    public List<OverheatableBossComponentEntity> ArmorPlating { get => armorPlating; }
+    private int numPlatesOnBegin;
+    public int NumPlatesDestroyed
+    {
+        get
+        {
+            return numPlatesOnBegin - armorPlating.Count;
+        }
+    }
+
     [Header("References")]
     [Header("Shell")]
     [SerializeField] private NavMeshEnemy shellNavMeshEnemy;
@@ -55,6 +67,18 @@ public class BossPhaseManager : MonoBehaviour
         {
             plateRotators.AddRange(t.GetComponentsInChildren<BossRotateBarrels>());
         }
+
+        // Add plates
+        armorPlating.AddRange(armorPlateHolder.GetComponentsInChildren<OverheatableBossComponentEntity>());
+        // Loop through plates; add an "on end action" to each (will be called when the object is "ended", so usually destroyed) which will simply remove it from the list
+        foreach (OverheatableBossComponentEntity plate in armorPlating)
+        {
+            plate.AddAdditionalOnEndAction(() =>
+            {
+                armorPlating.Remove(plate);
+            });
+        }
+        numPlatesOnBegin = armorPlating.Count;
     }
 
     public void SetBarrelRotatorsSpeed(float speed)

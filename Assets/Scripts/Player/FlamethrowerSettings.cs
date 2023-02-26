@@ -24,12 +24,6 @@ public class FlamethrowerSettings : WeaponAttachmentController
     [SerializeField] private AudioSource flamethrowerSource;
     [SerializeField] private AudioClip flamethrowerStartSound;
     [SerializeField] private AudioSource source;
-    private InputManager inputManager;
-
-    private void Start()
-    {
-        inputManager = InputManager._Instance;
-    }
 
     public override void Fire(InputAction.CallbackContext ctx)
     {
@@ -47,10 +41,10 @@ public class FlamethrowerSettings : WeaponAttachmentController
         flamethrowerSource.enabled = true;
         source.PlayOneShot(flamethrowerStartSound);
 
-        while (inputManager.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFuel > 0)
+        while (InputManager._Instance.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFuel > 0)
         {
             // Spread Crosshair
-            CrosshairController._Instance.Spread(triggerSettings.crosshairSpread);
+            CrosshairManager._Instance.Spread(CrosshairType.FLAMETHROWER, triggerSettings.crosshairSpread);
 
             // Use fuel
             fuelStore.AlterFuel(-Time.deltaTime * fuelConsumptionRate);

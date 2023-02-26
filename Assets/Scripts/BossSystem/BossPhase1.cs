@@ -5,32 +5,14 @@ using UnityEngine;
 public class BossPhase1 : BossAttackingPhase
 {
     [Header("Phase")]
-    [SerializeField] private Transform armorPlateHolder;
-    [HideInInspector] public List<OverheatableBossComponentEntity> armorPlating = new List<OverheatableBossComponentEntity>();
     [SerializeField] private int platesNeededToDestroyToAdvance;
-    private int platesDestroyed;
-
-    private void Awake()
-    {
-        armorPlating.AddRange(armorPlateHolder.GetComponentsInChildren<OverheatableBossComponentEntity>());
-        // Loop through plates; add an "on end action" to each (will be called when the object is "ended", so usually destroyed) which will simply remove it from the list
-        foreach (OverheatableBossComponentEntity plate in armorPlating)
-        {
-            plate.AddAdditionalOnEndAction(() =>
-            {
-                armorPlating.Remove(plate);
-                platesDestroyed++;
-                if (platesDestroyed >= platesNeededToDestroyToAdvance) complete = true;
-            });
-        }
-    }
 
     public override void EnterState(BossPhaseManager boss)
     {
         Debug.Log("Entering State 1");
 
         // Disallow all plates from taking damage
-        foreach (OverheatableBossComponentEntity plate in armorPlating)
+        foreach (OverheatableBossComponentEntity plate in boss.ArmorPlating)
         {
             plate.AcceptDamage = false;
         }
@@ -48,7 +30,10 @@ public class BossPhase1 : BossAttackingPhase
     public override void UpdateState(BossPhaseManager boss)
     {
         // Set HP Bar
-        boss.HPBar.Set(platesDestroyed, platesNeededToDestroyToAdvance);
+        boss.HPBar.Set(boss.NumPlatesDestroyed, platesNeededToDestroyToAdvance);
+
+        // Set complete
+        complete = boss.NumPlatesDestroyed >= platesNeededToDestroyToAdvance;
 
         base.UpdateState(boss);
     }
@@ -61,7 +46,7 @@ public class BossPhase1 : BossAttackingPhase
         yield return new WaitForSeconds(enterPhaseTime);
 
         // Allow all plates to take damage
-        foreach (OverheatableBossComponentEntity plate in armorPlating)
+        foreach (OverheatableBossComponentEntity plate in boss.ArmorPlating)
         {
             plate.AcceptDamage = true;
         }
@@ -83,7 +68,7 @@ public class BossPhase1 : BossAttackingPhase
 
         yield return new WaitUntil(() => boss.HPBar.IsFull);
 
-        foreach (OverheatableBossComponentEntity plate in armorPlating)
+        foreach (OverheatableBossComponentEntity plate in boss.ArmorPlating)
         {
             plate.AcceptDamage = false;
             plate.CoolOff(5000f);

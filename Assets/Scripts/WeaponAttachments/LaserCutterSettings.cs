@@ -142,7 +142,7 @@ public class LaserCutterSettings : WeaponAttachmentController
             }
 
             // Move Crosshair
-            CrosshairController._Instance.Spread(laserSettings.crosshairSpread);
+            CrosshairManager._Instance.Spread(CrosshairType.LASER_CUTTER, laserSettings.crosshairSpread);
 
             // Determine position and direction
             ray = new Ray(shootFrom.position, Camera.main.transform.forward);
