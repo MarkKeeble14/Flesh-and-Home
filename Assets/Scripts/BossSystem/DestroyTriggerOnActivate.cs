@@ -7,8 +7,8 @@ public abstract class DestroyTriggerOnActivate : TextPromptKeyTrigger
 
     protected override void CallActivate(InputAction.CallbackContext ctx)
     {
+        onActivate?.Invoke();
         base.CallActivate(ctx);
-        onActivate();
     }
 
     public void AddOnActivate(Action action)
@@ -23,6 +23,9 @@ public abstract class DestroyTriggerOnActivate : TextPromptKeyTrigger
 
     private void Destroy()
     {
-        Destroy(gameObject);
+        if (gameObject.name != "Door")
+        {
+            Destroy(gameObject);
+        }
     }
 }

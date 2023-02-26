@@ -48,6 +48,8 @@ public class BossPhase2 : BossAttackingPhase
             yield return StartCoroutine(CallAttacks(boss, GameManager._Instance.PlayerAimAt));
         }
 
+        yield return new WaitUntil(() => boss.HPBar.IsFull);
+
         // Switch State
         boss.LoadNextPhase();
     }

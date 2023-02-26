@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     [Header("Jetpack")]
     // Settings
     [Header("Settings")]
-    [SerializeField] private bool hasJetpack;
+    private bool hasJetpack;
     [SerializeField] private float jetpackForce = 25.0f;
     [SerializeField] private float maxJetpackDuration = 3f;
     [SerializeField] private float jetpackDashPower = 10f;
@@ -228,30 +228,30 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && IsSprinting)
         {
             // sprinting
-            HeadBob(sprintingCounter, bobSprintingSpeed, bobSprintingSpeed);
-            sprintingCounter += Time.deltaTime * 3f;
+            HeadBob(sprintingCounter, 0, bobSprintingStrength);
+            sprintingCounter += Time.deltaTime * bobSprintingSpeed;
             lazerParent.localPosition =
-                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobSprintingStrength);
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime);
         }
         else if (!IsSprinting && isGrounded && movementVector != Vector3.zero)
         {
             // moving
-            HeadBob(movementCounter, bobMovingSpeed, bobMovingSpeed);
-            movementCounter += Time.deltaTime * 3f;
+            HeadBob(movementCounter, 0, bobMovingStrength);
+            movementCounter += Time.deltaTime * bobMovingSpeed;
             lazerParent.localPosition =
-                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobMovingStrength);
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime);
         }
         else if (isGrounded && movementVector == Vector3.zero)
         {
             // idle
-            HeadBob(idleCounter, bobIdleSpeed, bobIdleSpeed);
-            idleCounter += Time.deltaTime;
+            HeadBob(idleCounter, 0, bobIdleStrength);
+            idleCounter += Time.deltaTime * bobIdleSpeed;
             lazerParent.localPosition =
-                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobIdleStrength);
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime);
         }
     }
 
-    void HeadBob(float z, float x_intensity, float y_intensity)
+    private void HeadBob(float z, float x_intensity, float y_intensity)
     {
         targetWeaponBobPosition = lazerParentOrigin + new Vector3(Mathf.Cos(z) * x_intensity, Mathf.Sin(z * 2) * y_intensity,
             0);
@@ -272,6 +272,12 @@ public class PlayerController : MonoBehaviour
             hasLanded = false;
             StartCoroutine(Jetpack());
         }
+    }
+
+    [ContextMenu("AquireJetpack")]
+    public void AquireJetpack()
+    {
+        hasJetpack = true;
     }
 
     private IEnumerator Jetpack()

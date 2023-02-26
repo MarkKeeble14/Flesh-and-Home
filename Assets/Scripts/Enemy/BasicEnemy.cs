@@ -3,11 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public class AttackPool
+{
+    [SerializeField] private PercentageMap<Attack> available = new PercentageMap<Attack>();
+    private PercentageMap<Attack> reserve = new PercentageMap<Attack>();
+
+    public bool HasAttacksAvailable => NumAvailableAttacks > 0;
+    public int NumAvailableAttacks => available.Count;
+
+    public SerializableKeyValuePair<Attack, int> GetAttack()
+    {
+        return available.GetFullOption();
+    }
+
+    public void RemoveAttack(SerializableKeyValuePair<Attack, int> attack)
+    {
+        available.RemoveOption(attack);
+        reserve.AddOption(attack);
+    }
+
+    public void AddAttack(SerializableKeyValuePair<Attack, int> attack)
+    {
+        reserve.RemoveOption(attack);
+        available.AddOption(attack);
+    }
+}
+
 public class BasicEnemy : MonoBehaviour
 {
-    [SerializeField] private List<Attack> attackPool = new List<Attack>();
-
-    protected Attack nextAttack;
+    [SerializeField] private AttackPool attackPool = new AttackPool();
+    protected SerializableKeyValuePair<Attack, int> attack;
     protected List<Attack> currentAttacks = new List<Attack>();
 
     public bool AttackIsDisablingMove
@@ -26,39 +52,30 @@ public class BasicEnemy : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected void SetAttack()
     {
-        SetNextAttack(false);
+        attack = attackPool.GetAttack();
     }
 
-    protected IEnumerator StartNextAttack(Transform target)
+    protected IEnumerator StartAttack(Transform target, bool setNewAttack)
     {
-        SetNextAttack(true);
-        yield return StartCoroutine(StartAttack(target));
-    }
+        if (!attackPool.HasAttacksAvailable) yield break;
 
-    protected IEnumerator StartAttack(Transform target)
-    {
-        yield return StartCoroutine(nextAttack.StartAttack(target, this));
+        SerializableKeyValuePair<Attack, int> attack = this.attack;
+        if (setNewAttack)
+            attack = attackPool.GetAttack();
+
+        // Remove from attack pool if desired
+        if (attack.Key.RemoveFromPoolWhenActive)
+        {
+            attackPool.RemoveAttack(attack);
+        }
+        yield return StartCoroutine(attack.Key.StartAttack(target, this));
 
         // Add back to attack pool if desired
-        if (nextAttack.RemoveFromPoolWhenActive)
+        if (attack.Key.RemoveFromPoolWhenActive)
         {
-            attackPool.Add(nextAttack);
-        }
-    }
-
-    private void SetNextAttack(bool canRemoveFromPool)
-    {
-        if (attackPool.Count > 0)
-        {
-            nextAttack = attackPool[Random.Range(0, attackPool.Count)];
-
-            // Remove from attack pool if desired
-            if (canRemoveFromPool && nextAttack.RemoveFromPoolWhenActive)
-            {
-                attackPool.Remove(nextAttack);
-            }
+            attackPool.AddAttack(attack);
         }
     }
 
@@ -69,6 +86,8 @@ public class BasicEnemy : MonoBehaviour
 
     public void RemoveAttack(Attack attack)
     {
+        currentAttacks.Remove(attack);
+        /*
         // Contains a duplicate, remove the first instance
         if (currentAttacks.Exists(a => a == attack))
         {
@@ -81,5 +100,6 @@ public class BasicEnemy : MonoBehaviour
         {
             currentAttacks.Remove(attack);
         }
+        */
     }
 }

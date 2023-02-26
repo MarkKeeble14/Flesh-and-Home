@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0a4a691db035ead41988d5f14721ad1d, type: 2}
+  - {fileID: 2100000, guid: 2ece4a6d53081e047a988045bb156dab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930434a662f475b48ae0db3f0d4763bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePrompt: '''E'' to Aquire Fuel'
-  helperText: {fileID: 0}
+  activePrompt: Aquire Fuel
   fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
   fuelAmount: 10

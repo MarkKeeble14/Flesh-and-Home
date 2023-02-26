@@ -6,20 +6,24 @@ using System.Collections.Generic;
 public class BossAddOnsPhase : BossPhaseBaseState
 {
     [Header("Phase")]
-    [SerializeField] private NavMeshEnemy fleshTravellingPrefab;
     [SerializeField] private float duration = 10f;
-    [SerializeField] private float groundShakeImpulseForce = 1;
-    [SerializeField] private bool riseBeforeEnding = true;
-
+    [SerializeField] private float returnToSpawnPointSpeed;
+    [SerializeField] private float returnToSpawnMaxDifferenceToAccept;
+    [SerializeField] protected int numAttacksAtOnce = 1;
     [SerializeField] private Attack onCrashDownAttack;
     [SerializeField] private float timeBetweenAttacks;
 
+    [Header("Spawning")]
     [SerializeField] private PercentageMap<EndableEntity> availableAddOns;
     private List<BossSpawnPoint> spawnPoints = new List<BossSpawnPoint>();
     [SerializeField] private Vector2 minMaxNumAddOns = new Vector2(1, 1);
     [SerializeField] private float timeAddedOnKillEnemy;
+    [SerializeField] private NavMeshEnemy fleshTravellingPrefab;
 
     [Header("Settings")]
+    [SerializeField] private float groundShakeImpulseForce = 1;
+    [SerializeField] private bool riseBeforeEnding = true;
+
     [SerializeField] private float pauseDuration = 1f;
 
     [SerializeField] private float riseSpeed = .75f;
@@ -69,6 +73,13 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
     protected override IEnumerator StateBehaviour(BossPhaseManager boss)
     {
+        Vector3 moveToPos = new Vector3(boss.SpawnPosition.x, boss.ShellEnemyMovement.transform.localPosition.y, boss.SpawnPosition.z);
+        while (Vector3.Distance(boss.ShellEnemyMovement.transform.localPosition, moveToPos) > returnToSpawnMaxDifferenceToAccept)
+        {
+            boss.ShellEnemyMovement.transform.localPosition = Vector3.MoveTowards(boss.ShellEnemyMovement.transform.localPosition, moveToPos, Time.deltaTime * returnToSpawnPointSpeed);
+            yield return null;
+        }
+
         // Stop shell from moving
         boss.ShellEnemyMovement.SetMove(false);
         boss.ShellEnemyMovement.DisableNavMeshAgent();
@@ -157,7 +168,10 @@ public class BossAddOnsPhase : BossPhaseBaseState
             timer -= Time.deltaTime;
             if (timer <= 0)
             {
-                StartCoroutine(StartNextAttack(GameManager._Instance.PlayerAimAt));
+                for (int i = 0; i < numAttacksAtOnce; i++)
+                {
+                    StartCoroutine(StartAttack(GameManager._Instance.PlayerAimAt, true));
+                }
 
                 timer = timeBetweenAttacks;
             }

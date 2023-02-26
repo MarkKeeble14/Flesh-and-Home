@@ -9,6 +9,8 @@ public abstract class BossPhaseBaseState : BasicEnemy
     [Header("Phase")]
     [SerializeField] protected float enterPhaseTime = 2.5f;
     protected bool complete;
+    [SerializeField] private float barrelRotatorsSpeed = 20f;
+    [SerializeField] private float plateRotatorsSpeed = 20f;
 
     [Header("Bar Settings")]
     [SerializeField] protected ImageSliderBarSettings phaseBarSettings;
@@ -29,7 +31,7 @@ public abstract class BossPhaseBaseState : BasicEnemy
     private List<BossSpawnPoint> fuelSpawnPoints = new List<BossSpawnPoint>();
     [SerializeField] private DestroyTriggerOnActivate addFuelTriggerPrefab;
     private Vector2 chanceToSpawnFuelTrigger;
-    [SerializeField] private int chanceToSpawnFuelTriggerYBase = 100;
+    [SerializeField] private int chanceToSpawnFuelTriggerYComponentPerSpawnpoint = 5000;
 
 
     public virtual void EnterState(BossPhaseManager boss)
@@ -39,13 +41,17 @@ public abstract class BossPhaseBaseState : BasicEnemy
 
         // Add all boss spawn points
         fuelSpawnPoints.AddRange(FindObjectsOfType<BossFuelSpawnPoint>());
-        chanceToSpawnFuelTrigger = new Vector2(1, chanceToSpawnFuelTriggerYBase * fuelSpawnPoints.Count);
+        chanceToSpawnFuelTrigger = new Vector2(1, chanceToSpawnFuelTriggerYComponentPerSpawnpoint * fuelSpawnPoints.Count);
 
         // Start Phase Behaviour
         StartCoroutine(StateBehaviour(boss));
 
         // Set Bar Settings
         boss.HPBar.SetFromSettings(phaseBarSettings);
+
+        // Set rotator speeds
+        boss.SetBarrelRotatorsSpeed(barrelRotatorsSpeed);
+        boss.SetPlateRotatorsSpeed(plateRotatorsSpeed);
     }
 
     protected abstract IEnumerator StateBehaviour(BossPhaseManager boss);

@@ -40,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-    public IEnumerator GoToOverridenTarget(Vector3 position, float fudgeDistance, bool ignoreY, bool endOverrideOnReachTarget, bool destroyOnReachTarget, Action otherOnReachTarget)
+    public IEnumerator GoToOverridenTarget(Vector3 position, float maxAcceptableDistanceFromTarget, bool ignoreY, bool endOverrideOnReachTarget, bool destroyOnReachTarget, Action otherOnReachTarget)
     {
         // Set variables
         overrideTarget = true;
@@ -48,7 +48,7 @@ public class EnemyMovement : MonoBehaviour
 
         Vector3 targetPos;
         // Wait until we reach specified position
-        while (DistanceToTarget > fudgeDistance)
+        while (DistanceToTarget > maxAcceptableDistanceFromTarget)
         {
             targetPos = (ignoreY ? transform.position - (Vector3.up * transform.position.y) : transform.position);
             // Debug.Log(name + " Moving to Target: " + transform.position + ", " + position);

@@ -32,6 +32,8 @@ public class LaserBarrel : MonoBehaviour
         set { disabled = value; }
     }
 
+    [SerializeField] private ShotBehavior laserProjectile;
+
     private void Awake()
     {
         // Scale 
@@ -87,5 +89,12 @@ public class LaserBarrel : MonoBehaviour
         // Audio
         constantSource.enabled = isFiring;
         lineRenderer.enabled = isFiring;
+    }
+
+    public void ShootLaser(Color color, LayerMask canHit, LayerMask canDamage, float speed, float damage, float force)
+    {
+        ShotBehavior spawned = Instantiate(laserProjectile, transform.position, Quaternion.identity);
+        spawned.SetTarget(transform.forward * 999f, color, canHit, canDamage, speed, damage, force);
+        spawned.transform.LookAt(transform.forward * 999f);
     }
 }

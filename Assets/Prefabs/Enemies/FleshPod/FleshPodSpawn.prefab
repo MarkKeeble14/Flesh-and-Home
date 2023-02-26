@@ -134,7 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
-  - {fileID: 7924698435641459214}
+    available:
+      percentageMap:
+      - key: {fileID: 7924698435641459214}
+        value: 100
   movement: {fileID: 2407002599294722366}
   minMaxVerticalSpawnForce: {x: 3, y: 4}
   minMaxHorizontalSpawnForce: {x: -5, y: 5}

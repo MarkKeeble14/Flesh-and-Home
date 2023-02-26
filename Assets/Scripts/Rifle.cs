@@ -14,10 +14,12 @@ public class Rifle : MonoBehaviour
         public float crosshairSpread;
 
         // Laser info
+        public float speed;
         public float damage;
         public float shotsPerSecond;
         public float maxDistance;
         public LayerMask canHit;
+        public LayerMask canDamage;
 
         // Overheat info
         public OverheatSettings overheatSettings;
@@ -146,7 +148,7 @@ public class Rifle : MonoBehaviour
             shootSound.PlayOneShot(source);
 
             // Crosshair
-            CrosshairController._Instance.Spread(rifleSettings.crosshairSpread);
+            CrosshairManager._Instance.Spread(CrosshairType.RIFLE, rifleSettings.crosshairSpread);
 
             // Interpolate Color based on how close we are to overheating
             currentColor = rifleSettings.visuals.GetLerpedColor(trackOverheatTimer / rifleSettings.overheatSettings.overheatAfter);
@@ -163,16 +165,21 @@ public class Rifle : MonoBehaviour
 
             // Spawn Projectile
             ShotBehavior laser = Instantiate(rifleSettings.projectile, muzzleTransform.position, muzzleTransform.rotation);
-            bool hasHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rifleSettings.maxDistance, rifleSettings.canHit);
+            Ray shootRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.red, 10f);
+            bool hasHit = Physics.Raycast(shootRay, out hit, rifleSettings.maxDistance, rifleSettings.canHit);
 
             // if we've hit something, spawn particles and try to do damage
             if (hasHit)
             {
-                laser.setTarget(hit.point, this, rifleSettings.damage, rifleSettings.impactForce);
+                Debug.DrawLine(Camera.main.transform.position, hit.point, Color.blue, 10f);
+                laser.SetTarget(hit.point, CurrentColor, rifleSettings.canHit, rifleSettings.canDamage, rifleSettings.speed, rifleSettings.damage, rifleSettings.impactForce);
             }
             else
             {
-                laser.setTarget(Camera.main.transform.forward * rifleSettings.maxDistance, this, rifleSettings.damage, rifleSettings.impactForce);
+                // So this actually doesn't work very well, luckily we should almost always be hitting something with raycast wether it be environment or enemy
+                Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * rifleSettings.maxDistance, Color.green, 10f);
+                laser.SetTarget(Camera.main.transform.forward * rifleSettings.maxDistance, CurrentColor, rifleSettings.canHit, rifleSettings.canDamage, rifleSettings.speed, rifleSettings.damage, rifleSettings.impactForce);
             }
 
             yield return null;
