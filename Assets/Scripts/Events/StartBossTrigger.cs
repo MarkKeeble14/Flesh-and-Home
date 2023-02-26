@@ -3,11 +3,13 @@
 public class StartBossTrigger : DestroyTriggerOnActivate
 {
     [SerializeField] private BossPhaseManager bossPhaseManager;
-    [SerializeField] private OpenDoorTrigger bossDoor;
+    [SerializeField] private OpenDoorTrigger enterDoor;
+    [SerializeField] private OpenDoorTrigger exitDoor;
 
     protected override void Activate()
     {
         bossPhaseManager.EnterCurrentState();
-        bossDoor.LockClosed();
+        enterDoor.LockClosed();
+        exitDoor.LockClosed();
     }
 }

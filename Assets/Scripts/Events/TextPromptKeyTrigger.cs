@@ -22,8 +22,7 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
 
         if (showText)
         {
-            helperText.gameObject.SetActive(true);
-            helperText.Show(prefix + activePrompt + Suffix);
+            helperText.Show(this, GetHelperTextString());
         }
 
         // Add Activation Event
@@ -31,11 +30,16 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
 
     }
 
+    protected string GetHelperTextString()
+    {
+        return prefix + activePrompt + Suffix;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (!LayerMaskHelper.IsInLayerMask(other.gameObject, LayerMask.GetMask("Player"))) return;
 
-        helperText.Hide();
+        helperText.Hide(this);
 
         // Remove Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
@@ -44,7 +48,7 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
 
     protected virtual void CallActivate(InputAction.CallbackContext ctx)
     {
-        helperText.Hide();
+        helperText.Hide(this);
         InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
         Activate();
     }

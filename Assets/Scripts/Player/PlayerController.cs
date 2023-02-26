@@ -228,26 +228,26 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && IsSprinting)
         {
             // sprinting
-            HeadBob(sprintingCounter, bobSprintingSpeed, bobSprintingSpeed);
-            sprintingCounter += Time.deltaTime * 3f;
+            HeadBob(sprintingCounter, 0, bobSprintingStrength);
+            sprintingCounter += Time.deltaTime * bobSprintingSpeed;
             lazerParent.localPosition =
-                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobSprintingStrength);
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime);
         }
         else if (!IsSprinting && isGrounded && movementVector != Vector3.zero)
         {
             // moving
-            HeadBob(movementCounter, bobMovingSpeed, bobMovingSpeed);
-            movementCounter += Time.deltaTime * 3f;
+            HeadBob(movementCounter, 0, bobMovingStrength);
+            movementCounter += Time.deltaTime * bobMovingSpeed;
             lazerParent.localPosition =
-                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobMovingStrength);
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime);
         }
         else if (isGrounded && movementVector == Vector3.zero)
         {
             // idle
-            HeadBob(idleCounter, bobIdleSpeed, bobIdleSpeed);
-            idleCounter += Time.deltaTime;
+            HeadBob(idleCounter, 0, bobIdleStrength);
+            idleCounter += Time.deltaTime * bobIdleSpeed;
             lazerParent.localPosition =
-                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime * bobIdleStrength);
+                Vector3.Lerp(lazerParent.localPosition, targetWeaponBobPosition, Time.deltaTime);
         }
     }
 

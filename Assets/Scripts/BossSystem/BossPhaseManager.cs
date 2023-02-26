@@ -54,6 +54,9 @@ public class BossPhaseManager : MonoBehaviour
 
     private bool isDone;
 
+    [SerializeField] private OpenDoorTrigger enterDoor;
+    [SerializeField] private OpenDoorTrigger exitDoor;
+
     private void Awake()
     {
         // Add Barrel Rotators
@@ -134,6 +137,10 @@ public class BossPhaseManager : MonoBehaviour
         {
             Debug.Log("Out of Phases");
             isDone = true;
+
+            enterDoor.LockOpened();
+            exitDoor.LockOpened();
+
             return null;
         }
 

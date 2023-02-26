@@ -940,12 +940,12 @@ MonoBehaviour:
   jumpClip: {fileID: 8300000, guid: 9899a656da685824d8a375705a272712, type: 3}
   landClip: {fileID: 8300000, guid: be41aa26c99368546a68043ee05a3cc9, type: 3}
   footstepsSource: {fileID: 7362887214131378896}
-  bobIdleSpeed: 0.025
-  bobMovingSpeed: 0.05
-  bobSprintingSpeed: 0.075
-  bobIdleStrength: 2
-  bobMovingStrength: 6
-  bobSprintingStrength: 10
+  bobIdleSpeed: 0.75
+  bobMovingSpeed: 4
+  bobSprintingSpeed: 5
+  bobIdleStrength: 0.01
+  bobMovingStrength: 0.02
+  bobSprintingStrength: 0.05
   lazerParent: {fileID: 7362887214866606261}
   jetpackForce: 0.2
   maxJetpackDuration: 10
@@ -998,7 +998,7 @@ MonoBehaviour:
     maxDistance: 500
     canHit:
       serializedVersion: 2
-      m_Bits: 187392
+      m_Bits: 187776
     canDamage:
       serializedVersion: 2
       m_Bits: 433152

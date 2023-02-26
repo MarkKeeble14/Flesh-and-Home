@@ -165,15 +165,20 @@ public class Rifle : MonoBehaviour
 
             // Spawn Projectile
             ShotBehavior laser = Instantiate(rifleSettings.projectile, muzzleTransform.position, muzzleTransform.rotation);
-            bool hasHit = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rifleSettings.maxDistance, rifleSettings.canHit);
+            Ray shootRay = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+            Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward, Color.red, 10f);
+            bool hasHit = Physics.Raycast(shootRay, out hit, rifleSettings.maxDistance, rifleSettings.canHit);
 
             // if we've hit something, spawn particles and try to do damage
             if (hasHit)
             {
+                Debug.DrawLine(Camera.main.transform.position, hit.point, Color.blue, 10f);
                 laser.SetTarget(hit.point, CurrentColor, rifleSettings.canHit, rifleSettings.canDamage, rifleSettings.speed, rifleSettings.damage, rifleSettings.impactForce);
             }
             else
             {
+                // So this actually doesn't work very well, luckily we should almost always be hitting something with raycast wether it be environment or enemy
+                Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * rifleSettings.maxDistance, Color.green, 10f);
                 laser.SetTarget(Camera.main.transform.forward * rifleSettings.maxDistance, CurrentColor, rifleSettings.canHit, rifleSettings.canDamage, rifleSettings.speed, rifleSettings.damage, rifleSettings.impactForce);
             }
 

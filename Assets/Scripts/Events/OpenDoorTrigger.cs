@@ -2,32 +2,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Collections;
+using Cinemachine;
 
 public class OpenDoorTrigger : TextPromptKeyTrigger
 {
+    [SerializeField] private Transform door;
     [SerializeField] private bool isSlidingDoor = true;
     [SerializeField] private SlideDirection slideDirection;
-    private bool isOpen;
-
-    private Vector3 startPosition;
-
-    [SerializeField] private float slideAmount = 2f;
     [SerializeField] private float slideSpeed = 1.0f;
-    [SerializeField] private float slideDuration = 3f;
+    [SerializeField] private float nudgeAmount = .125f;
+
+    [SerializeField] private CinemachineImpulseSource shakeSource;
+    [SerializeField] private float shakeStrength;
+
+    private bool isOpen;
+    private Vector3 closePosition;
+    private Vector3 openPosition;
     private Coroutine animationCoroutine;
-    [SerializeField] private Transform door;
 
     protected override string Suffix => (isOpen ? " Close" : " Open") + " Door";
     private bool allowPlayerControl = true;
 
     private void Awake()
     {
-        startPosition = door.position;
+        closePosition = door.localPosition;
+        switch (slideDirection)
+        {
+            case SlideDirection.DOWN:
+                openPosition = closePosition - door.localScale.y * Vector3.up - (door.localScale.y * nudgeAmount * Vector3.up);
+                break;
+            case SlideDirection.RIGHT:
+                openPosition = closePosition + door.localScale.x * Vector3.right + (door.localScale.x * nudgeAmount * Vector3.right);
+                break;
+            case SlideDirection.LEFT:
+                openPosition = closePosition - door.localScale.x * Vector3.right - (door.localScale.x * nudgeAmount * Vector3.right);
+                break;
+            case SlideDirection.UP:
+                openPosition = closePosition + door.localScale.y * Vector3.up + (door.localScale.y * nudgeAmount * Vector3.up);
+                break;
+        }
     }
 
     public void LockClosed()
     {
-        Close(() => Destroy(gameObject));
+        Close(null);
+        allowPlayerControl = false;
+        showText = false;
+    }
+
+    public void LockOpened()
+    {
+        Open(null);
         allowPlayerControl = false;
         showText = false;
     }
@@ -46,6 +71,8 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
                 Close(null);
             }
         }
+        helperText.Show(this, GetHelperTextString());
+        InputManager._Instance.PlayerInputActions.Player.Interact.started += CallActivate;
     }
 
     public void Open(Action onOpened)
@@ -79,13 +106,15 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
 
     private IEnumerator SlideOpen(Action onOpened)
     {
-        Vector3 endPosition = GetEndPosition();
+        Vector3 beginOpenPos = door.localPosition;
         float time = 0;
         isOpen = true;
 
-        while (time < slideDuration)
+        while (door.localPosition != openPosition)
         {
-            door.position = Vector3.Lerp(startPosition, endPosition, time);
+            door.localPosition = Vector3.Lerp(beginOpenPos, openPosition, time);
+
+            shakeSource.GenerateImpulse(shakeStrength);
 
             time += Time.deltaTime * slideSpeed;
 
@@ -97,16 +126,15 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
 
     private IEnumerator SlideClose(Action onClosed)
     {
-        Vector3 endPosition = startPosition;
-        Vector3 beginClosePos = door.position;
-
+        Vector3 beginClosePos = door.localPosition;
         float time = 0;
-
         isOpen = false;
 
-        while (time < slideDuration)
+        while (door.localPosition != closePosition)
         {
-            door.position = Vector3.Lerp(beginClosePos, endPosition, time);
+            door.localPosition = Vector3.Lerp(beginClosePos, closePosition, time);
+
+            shakeSource.GenerateImpulse(shakeStrength);
 
             time += Time.deltaTime * slideSpeed;
 
@@ -114,22 +142,5 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
         }
 
         onClosed?.Invoke();
-    }
-
-    private Vector3 GetEndPosition()
-    {
-        switch (slideDirection)
-        {
-            case SlideDirection.DOWN:
-                return startPosition + slideAmount * -transform.up;
-            case SlideDirection.RIGHT:
-                return startPosition + slideAmount * transform.right;
-            case SlideDirection.LEFT:
-                return startPosition + slideAmount * -transform.right;
-            case SlideDirection.UP:
-                return startPosition + slideAmount * transform.up;
-            default:
-                throw new Exception("Unhanlded Switch Case in Open Door Trigger");
-        }
     }
 }
