@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class FleshPod : KillableEntity
+public class FleshPod : KillableEntity, IRoomContent
 {
     [Header("Settings")]
     [SerializeField] private float maxCapacity = 100f;
@@ -12,6 +12,8 @@ public class FleshPod : KillableEntity
     [SerializeField] private Vector2 minMaxCanSpawnPerTick;
     [SerializeField] private float timeBetweenTicks;
     [SerializeField] private LayerMask ground;
+
+    [SerializeField] private RoomEnemySettings roomEnemySettings;
 
     [Header("Animations")]
     [SerializeField] private Animator anim;
@@ -24,6 +26,7 @@ public class FleshPod : KillableEntity
 
     [Header("References")]
     [SerializeField] private Transform visualComponent;
+    private new Renderer renderer;
 
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onTickClip;
@@ -36,14 +39,13 @@ public class FleshPod : KillableEntity
         startScale = visualComponent.localScale;
         targetScale = startScale;
 
+        renderer = visualComponent.GetComponent<Renderer>();
+        roomEnemySettings.SetInactiveColors(renderer);
+        acceptDamage = false;
+
         AttachToFloor();
 
         base.Awake();
-    }
-
-    private void Start()
-    {
-        StartCoroutine(SpawningTick());
     }
 
     private void Update()
@@ -123,5 +125,12 @@ public class FleshPod : KillableEntity
         Ray ray = new Ray(transform.position, Vector3.down);
         Physics.Raycast(ray, out hit, Mathf.Infinity, ground);
         transform.position = hit.point + (Vector3.up * targetScale.y / 2);
+    }
+
+    public void Activate()
+    {
+        roomEnemySettings.SetActiveColors(renderer);
+        acceptDamage = true;
+        StartCoroutine(SpawningTick());
     }
 }

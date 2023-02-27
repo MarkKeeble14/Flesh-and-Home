@@ -20,7 +20,7 @@ GameObject:
   - component: {fileID: 3240085754061577283}
   - component: {fileID: 3240085754061577287}
   - component: {fileID: 3240085754061577280}
-  - component: {fileID: -3187359783752088}
+  - component: {fileID: 8204789487728918563}
   m_Layer: 17
   m_Name: LaserArmEnemy
   m_TagString: Untagged
@@ -114,7 +114,18 @@ MonoBehaviour:
         value: 75
       - key: {fileID: 3240085754061577342}
         value: 25
+  activateOnStart: 0
+  roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
   movement: {fileID: 3240085754061577288}
+  feastTime: 3
+  canFeastEnemies: 1
+  feastable:
+    serializedVersion: 2
+    m_Bits: 524288
+  feastableDetectionRange: 10
+  onFeastSizeChange: 1
+  onFeastHPChange: 0.5
+  scaleSpeed: 1
 --- !u!114 &3240085754061577288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,7 +456,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-3187359783752088
+--- !u!114 &8204789487728918563
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -454,10 +465,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3240085754061577291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68f8244861a5a0a48b33a76cd451549c, type: 3}
+  m_Script: {fileID: 11500000, guid: 20ad0c5900ac52e4ab93c5864d408e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 3240085754061577283}
+  source: {fileID: 3240085754061577290}
   tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
     type: 3}
   onEndClip:
@@ -466,12 +477,22 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 50
   acceptDamage: 1
-  destroyOnDeath: 1
+  acceptKnockback: 0
+  destroyOnDeath: 0
   rigidbody: {fileID: 3240085754061577280}
+  rigidbodiesToEnableOnDeath:
+  - {fileID: 3240085754159558669}
+  - {fileID: 3240085755467808584}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  feastableLayer: 19
+  corpseHP: 25
+  corpseColor: {r: 0.16609114, g: 0.4056604, b: 0.2343608, a: 1}
+  toDisableOnDeath:
+  - {fileID: 3240085754159558666}
+  - {fileID: 3240085755467808581}
 --- !u!1 &3240085754159558672
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,7 +525,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3240085754159558672}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0, z: 0.75}
+  m_LocalPosition: {x: 0.75, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -943,7 +964,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3240085755467808587}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0, z: 0.75}
+  m_LocalPosition: {x: -0.75, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []

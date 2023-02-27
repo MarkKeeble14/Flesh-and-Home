@@ -40,16 +40,24 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-    public IEnumerator GoToOverridenTarget(Vector3 position, float maxAcceptableDistanceFromTarget, bool ignoreY, bool endOverrideOnReachTarget, bool destroyOnReachTarget, Action otherOnReachTarget)
+    public IEnumerator GoToOverridenTarget(Transform target, float maxAcceptableDistanceFromTarget, bool ignoreY, bool endOverrideOnReachTarget, bool destroyOnReachTarget, Action otherOnReachTarget)
     {
         // Set variables
         overrideTarget = true;
-        overridenTargetPosition = position;
 
         Vector3 targetPos;
         // Wait until we reach specified position
         while (DistanceToTarget > maxAcceptableDistanceFromTarget)
         {
+            if (target == null)
+            {
+                // Debug.Log("Target became null; possible due to being destroyed");
+                // if meant to stop override target on end, do so
+                overrideTarget = !endOverrideOnReachTarget;
+
+                yield break;
+            }
+            overridenTargetPosition = target.position;
             targetPos = (ignoreY ? transform.position - (Vector3.up * transform.position.y) : transform.position);
             // Debug.Log(name + " Moving to Target: " + transform.position + ", " + position);
             yield return null;

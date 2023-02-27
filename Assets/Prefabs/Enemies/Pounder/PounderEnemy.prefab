@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1882520849070057078}
+  - component: {fileID: 2144187559847785579}
   m_Layer: 17
   m_Name: Arm1
   m_TagString: Untagged
@@ -33,6 +34,22 @@ Transform:
   m_Father: {fileID: 959702198628339927}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 89.997, z: 0}
+--- !u!54 &2144187559847785579
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 202596711608699226}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &959702198628339928
 GameObject:
   m_ObjectHideFlags: 0
@@ -53,7 +70,7 @@ GameObject:
   - component: {fileID: 885574085379464043}
   - component: {fileID: 7504483307488772689}
   - component: {fileID: 8590739837828899279}
-  - component: {fileID: 6182247085408442341}
+  - component: {fileID: 2281779296839727250}
   m_Layer: 17
   m_Name: PounderEnemy
   m_TagString: Untagged
@@ -407,7 +424,17 @@ MonoBehaviour:
       percentageMap:
       - key: {fileID: 7504483307488772689}
         value: 100
+  activateOnStart: 0
+  roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
   movement: {fileID: 959702198628339931}
+  feastTime: 3
+  canFeastEnemies: 1
+  feastable:
+    serializedVersion: 2
+    m_Bits: 524288
+  feastableDetectionRange: 10
+  onFeastSizeChange: 1
+  onFeastHPChange: 2
 --- !u!114 &7504483307488772689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,12 +449,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
   timeBetweenAttacks: 1
-  disableMoveWhileBetweenAttacks: 1
-  disableMovementWhileAttacking: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
   followWhileAttacking: 0
   rotateWhileAttacking: 0
   hasMaxRange: 1
-  maxRange: 5
+  maxRange: 10
   removeFromPoolWhenActive: 0
   source: {fileID: 959702198628339920}
   onStartClip:
@@ -442,8 +469,8 @@ MonoBehaviour:
   numThumps: 1
   timeBetweenThumps: 0
   maxRadius: 25
-  height: 1.25
-  spawnAtYOffset: 1
+  height: 2
+  spawnAtYOffset: 0.5
   expansionSpeed: 15
   damage: 10
   canHit:
@@ -551,7 +578,7 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: -1, z: 0}
---- !u!114 &6182247085408442341
+--- !u!114 &2281779296839727250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -560,10 +587,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 959702198628339928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68f8244861a5a0a48b33a76cd451549c, type: 3}
+  m_Script: {fileID: 11500000, guid: 20ad0c5900ac52e4ab93c5864d408e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 959702198628339920}
+  source: {fileID: 959702198628339929}
   tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
     type: 3}
   onEndClip:
@@ -572,12 +599,18 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 50
   acceptDamage: 1
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   rigidbody: {fileID: 959702198628339923}
+  rigidbodiesToEnableOnDeath:
+  - {fileID: 2144187559847785579}
+  - {fileID: 7947259757976992371}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  feastableLayer: 19
+  corpseHP: 25
+  corpseColor: {r: 0.024194535, g: 0.33962262, b: 0, a: 1}
 --- !u!1 &2520789080553671185
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,6 +814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 632873308888232341}
+  - component: {fileID: 7947259757976992371}
   m_Layer: 17
   m_Name: Arm2
   m_TagString: Untagged
@@ -805,6 +839,22 @@ Transform:
   m_Father: {fileID: 959702198628339927}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 269.997, z: 0}
+--- !u!54 &7947259757976992371
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3286045076655469068}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5063992591802160071
 GameObject:
   m_ObjectHideFlags: 0

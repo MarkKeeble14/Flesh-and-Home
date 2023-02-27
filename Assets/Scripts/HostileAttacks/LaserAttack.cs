@@ -6,6 +6,16 @@ public abstract class LaserAttack : Attack
 {
     [Header("Lasers")]
     [SerializeField] protected LaserAttackOptions laserAttackerOptions;
+    protected List<LaserBarrel> attackingFrom = new List<LaserBarrel>();
+
+    public override void Interrupt()
+    {
+        foreach (LaserBarrel barrel in attackingFrom)
+        {
+            barrel.IsFiring = false;
+        }
+        base.Interrupt();
+    }
 
     protected abstract Vector3 GetLaserOrigin(LaserBarrel barrel);
 
@@ -26,6 +36,8 @@ public abstract class LaserAttack : Attack
         }
 
         barrel.IsFiring = true;
+
+        attackingFrom.Add(barrel);
 
         LineRenderer selected = barrel.LineRenderer;
 
@@ -117,6 +129,7 @@ public abstract class LaserAttack : Attack
             yield return null;
         }
 
+        attackingFrom.Remove(barrel);
         selected.enabled = false;
         barrel.IsFiring = false;
     }

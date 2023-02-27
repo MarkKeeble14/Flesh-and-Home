@@ -1,18 +1,28 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class MovementBasedEnemy : BasicEnemy
+public class MovementBasedEnemy : RoomEnemy
 {
+    protected Coroutine currentState;
+
     [Header("References")]
     [SerializeField] private EnemyMovement movement;
     public EnemyMovement Movement => movement;
 
-    private void Start()
+    protected new void Start()
     {
-        StartCoroutine(AttackCycle());
+        base.Start();
+        movement.SetMove(false);
     }
 
-    private IEnumerator AttackCycle()
+    public override void Activate()
+    {
+        base.Activate();
+        currentState = StartCoroutine(AttackCycle());
+        movement.SetMove(true);
+    }
+
+    protected IEnumerator AttackCycle()
     {
         SetAttack();
 
@@ -27,7 +37,6 @@ public class MovementBasedEnemy : BasicEnemy
                 yield return StartCoroutine(StartAttack(movement.Target, false));
                 doneAttacking = true;
             }
-
             yield return null;
         }
 

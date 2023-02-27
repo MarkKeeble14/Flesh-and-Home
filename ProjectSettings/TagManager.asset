@@ -24,10 +24,10 @@ TagManager:
   - PlayerHitbox
   - EnemyFlesh
   - BossFleshyHitbox
-  - 
-  - 
-  - 
-  - 
+  - EnemyFeastable
+  - DoorTrigger
+  - Door
+  - RoomTrigger
   - 
   - 
   - 

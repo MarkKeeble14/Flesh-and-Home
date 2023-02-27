@@ -9,6 +9,7 @@ public class NavMeshEnemy : EnemyMovement
 
     public bool IsActive { get; protected set; }
 
+
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -21,12 +22,10 @@ public class NavMeshEnemy : EnemyMovement
     {
         // Debug.Log(name + ": " + AllowMove);
 
-        // Set Movement source to be active if moving basically
-        movementSource.enabled = IsActive && target && navMeshAgent.isOnNavMesh && AllowMove;
-
         // Nav Mesh Agent has not become active yet
         if (!IsActive)
         {
+            movementSource.enabled = false;
             // Debug.Log("Not Active");
             return;
         };
@@ -40,6 +39,7 @@ public class NavMeshEnemy : EnemyMovement
         // Don't allow move if not supposed to move
         if (!AllowMove)
         {
+            movementSource.enabled = false;
             // Debug.Log("Not Supposed to Move");
             return;
         };
@@ -49,19 +49,24 @@ public class NavMeshEnemy : EnemyMovement
         {
             // Move to position
             navMeshAgent.SetDestination(overridenTargetPosition);
+            movementSource.enabled = true;
             return;
+
         }
 
         // We are not overriding target position, just go to target if set
         // If the player is not set (or null cause of dying) stop execution
         if (!target)
         {
+            movementSource.enabled = false;
             // Debug.Log("No Target Set");
             return;
         };
 
+
         // Move to target
         navMeshAgent.SetDestination(target.transform.position);
+        movementSource.enabled = true;
     }
 
     public void DisableNavMeshAgent()

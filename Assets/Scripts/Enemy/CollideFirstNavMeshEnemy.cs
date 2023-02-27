@@ -25,5 +25,6 @@ public class CollideFirstNavMeshEnemy : NavMeshEnemy
     {
         yield return new WaitForSeconds(timeAfterGroundCollisionToMove);
         EnableNavMeshAgent();
+        SetMove(true);
     }
 }

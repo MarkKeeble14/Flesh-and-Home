@@ -3,38 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[System.Serializable]
-public class AttackPool
-{
-    [SerializeField] private PercentageMap<Attack> available = new PercentageMap<Attack>();
-    private PercentageMap<Attack> reserve = new PercentageMap<Attack>();
-
-    public bool HasAttacksAvailable => NumAvailableAttacks > 0;
-    public int NumAvailableAttacks => available.Count;
-
-    public SerializableKeyValuePair<Attack, int> GetAttack()
-    {
-        return available.GetFullOption();
-    }
-
-    public void RemoveAttack(SerializableKeyValuePair<Attack, int> attack)
-    {
-        available.RemoveOption(attack);
-        reserve.AddOption(attack);
-    }
-
-    public void AddAttack(SerializableKeyValuePair<Attack, int> attack)
-    {
-        reserve.RemoveOption(attack);
-        available.AddOption(attack);
-    }
-}
-
-public class BasicEnemy : MonoBehaviour
+public class AttackingEnemy : MonoBehaviour
 {
     [SerializeField] private AttackPool attackPool = new AttackPool();
     protected SerializableKeyValuePair<Attack, int> attack;
     protected List<Attack> currentAttacks = new List<Attack>();
+
+    public void Stop()
+    {
+        // Stop all attacks
+        foreach (Attack attack in currentAttacks)
+        {
+            attack.Interrupt();
+        }
+
+        // Stop all other coroutines
+        StopAllCoroutines();
+    }
 
     public bool AttackIsDisablingMove
     {
@@ -87,19 +72,5 @@ public class BasicEnemy : MonoBehaviour
     public void RemoveAttack(Attack attack)
     {
         currentAttacks.Remove(attack);
-        /*
-        // Contains a duplicate, remove the first instance
-        if (currentAttacks.Exists(a => a == attack))
-        {
-            for (int i = 0; i < currentAttacks.Count; i++)
-            {
-                if (currentAttacks[i] == attack) currentAttacks.RemoveAt(i);
-            }
-        }
-        else // no duplicates, remove only instance
-        {
-            currentAttacks.Remove(attack);
-        }
-        */
     }
 }

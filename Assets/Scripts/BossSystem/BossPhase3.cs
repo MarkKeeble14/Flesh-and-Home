@@ -148,8 +148,8 @@ public class BossPhase3 : BossAttackingPhase
         }
 
         // Destroy all remaining enemies
-        BasicEnemy[] enemies = FindObjectsOfType<BasicEnemy>();
-        foreach (BasicEnemy enemy in enemies)
+        AttackingEnemy[] enemies = FindObjectsOfType<AttackingEnemy>();
+        foreach (AttackingEnemy enemy in enemies)
         {
             if (enemy.gameObject != boss.gameObject)
             {
