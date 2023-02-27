@@ -798,7 +798,7 @@ GameObject:
   - component: {fileID: 1426587106}
   - component: {fileID: 7362887214131378898}
   - component: {fileID: 7362887214131378906}
-  - component: {fileID: 7362887214131377446}
+  - component: {fileID: 496811891326593969}
   - component: {fileID: 1426587105}
   - component: {fileID: 1426587104}
   - component: {fileID: 7362887214131378907}
@@ -932,7 +932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 10
   sprintSpeed: 1.05
-  airStrafeSpeed: 10
+  airStrafeSpeed: 15
   jumpHeight: 0.075
   mass: 50
   gravityValue: -9.81
@@ -952,7 +952,7 @@ MonoBehaviour:
   jetpackDashPower: 2
   dashVelocityFalloffSpeedFlying: 1
   dashVelocityFalloffSpeedGrounded: 10
-  jetpackDashCooldown: 3
+  jetpackDashCooldown: 2
   jetpackDashAvailableColor: {r: 1, g: 0.9300962, b: 0, a: 1}
   jetpackDashUnavailableColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   jetpackDashClip:
@@ -1139,7 +1139,7 @@ MonoBehaviour:
     pitch: 1
   source: {fileID: 7362887214131378897}
   showOverheatBar: {fileID: 0}
---- !u!114 &7362887214131377446
+--- !u!114 &496811891326593969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1148,25 +1148,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 7362887214131378890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362a51cce078d59469d15694ce622573, type: 3}
+  m_Script: {fileID: 11500000, guid: 6c5b0faa3cebd5e45b05fbf3c151ab65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   equipAttachmentClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  color: {r: 1, g: 0.5131041, b: 0, a: 1}
-  damage: 25
-  additionalCooldown: 2
-  attackAnimationNames:
-  - Attack1
-  - Attack2
-  meleeSound:
-    clip: {fileID: 8300000, guid: d996c13a2300f464bb713324a4367fef, type: 3}
-    volume: 1
-    pitch: 1
-  source: {fileID: 7362887214131378897}
-  weapon: {fileID: 7362887215270215795}
+  color: {r: 0.12882876, g: 1, b: 0, a: 1}
+  settings:
+    damage: 10
+    timeBetweenPulses: 0.34
+    pulses: 5
+    shootForce: 1000
+    activateOnCollideWith:
+      serializedVersion: 2
+      m_Bits: 458112
+    canDamage:
+      serializedVersion: 2
+      m_Bits: 432128
+    crosshairSpread: 50
+    pulseSpeed: 25
+    pulseRadius: 10
+    pulseKnockbackForce: 50
+    pulseStayDuration: 10
+  grenadeSpawnPos: {fileID: 8910433488196863823}
+  pulseGrenadePrefab: {fileID: 7492071582286756199, guid: 802c372d5242ff34bb8055ccce4504cc,
+    type: 3}
+  fireRate: 0.5
 --- !u!114 &1426587105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1200,7 +1209,7 @@ MonoBehaviour:
   noWeaponAttachment: {fileID: 1426587105}
   flamethrowerAttachment: {fileID: 7362887214131378898}
   laserCutterAttachment: {fileID: 7362887214131378906}
-  laserBayonetAttachment: {fileID: 7362887214131377446}
+  pulseGrenadeLauncherAttachment: {fileID: 496811891326593969}
   source: {fileID: 7362887214131378897}
   onSwitchClip:
     clip: {fileID: 0}
