@@ -16,6 +16,8 @@ public class ProgressionTrigger : DestroyTriggerOnActivate
                 return "Flamethrower";
             case UnlockType.LASER_CUTTER:
                 return "Laser Cutter";
+            case UnlockType.PULSE_GRENADE_LAUNCHER:
+                return "Pulse Grenade Launcher";
             default:
                 throw new System.Exception("Unhandled Switch Case in Progression Trigger");
         }
@@ -33,6 +35,9 @@ public class ProgressionTrigger : DestroyTriggerOnActivate
                 break;
             case UnlockType.LASER_CUTTER:
                 ProgressionManager._Instance.UnlockLaserCutter();
+                break;
+            case UnlockType.PULSE_GRENADE_LAUNCHER:
+                ProgressionManager._Instance.UnlockPulseGrenadeLauncher();
                 break;
         }
     }

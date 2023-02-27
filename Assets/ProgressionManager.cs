@@ -16,6 +16,11 @@ public class ProgressionManager : MonoBehaviour
         _Instance = this;
     }
 
+    private bool jetpackUnlocked;
+    private bool flamethrowerUnlocked;
+    private bool laserCutterUnlocked;
+    private bool pulseGrenadeLauncherUnlocked;
+
     [Header("Settings")]
     [SerializeField] private float unlockTextDuration = 3f;
 
@@ -39,9 +44,16 @@ public class ProgressionManager : MonoBehaviour
     [SerializeField] private GameObject laserCutterCrosshair;
     [SerializeField] private RadialMenuButton laserCutterButton;
 
+    [Header("Pulse Grenade Launcher")]
+    [SerializeField] private GameObject pulseGrenadeLauncherCrosshair;
+    [SerializeField] private RadialMenuButton pulseGrenadeLauncherButton;
+
     [ContextMenu("Unlock/Jetpack")]
     public void UnlockJetpack()
     {
+        if (jetpackUnlocked) return;
+        jetpackUnlocked = true;
+
         // Set fuel display to be active
         fuelDisplay.SetActive(true);
 
@@ -58,6 +70,9 @@ public class ProgressionManager : MonoBehaviour
     [ContextMenu("Unlock/Flamethrower")]
     public void UnlockFlamethrower()
     {
+        if (flamethrowerUnlocked) return;
+        flamethrowerUnlocked = true;
+
         // Set fuel display to be active
         fuelDisplay.SetActive(true);
 
@@ -78,6 +93,9 @@ public class ProgressionManager : MonoBehaviour
     [ContextMenu("Unlock/LaserCutter")]
     public void UnlockLaserCutter()
     {
+        if (laserCutterUnlocked) return;
+        laserCutterUnlocked = true;
+
         // Set weapon display to be active
         currentWeaponAttachmentDisplay.SetActive(true);
 
@@ -90,6 +108,35 @@ public class ProgressionManager : MonoBehaviour
 
         // Spawn text
         StartCoroutine(SpawnText("Laser Cutter"));
+    }
+
+    [ContextMenu("Unlock/PulseGrenadeLauncher")]
+    public void UnlockPulseGrenadeLauncher()
+    {
+        if (pulseGrenadeLauncherUnlocked) return;
+        pulseGrenadeLauncherUnlocked = true;
+
+        // Set weapon display to be active
+        currentWeaponAttachmentDisplay.SetActive(true);
+
+        // Add and select new attachment
+        weaponAttachmentMenu.AddButtion(pulseGrenadeLauncherButton);
+        weaponAttachmentMenu.SetButton(pulseGrenadeLauncherButton);
+
+        // Enable crosshair
+        pulseGrenadeLauncherCrosshair.gameObject.SetActive(true);
+
+        // Spawn text
+        StartCoroutine(SpawnText("Pulse Grenade Launcher"));
+    }
+
+    [ContextMenu("Unlock/All")]
+    private void UnlockAll()
+    {
+        UnlockJetpack();
+        UnlockFlamethrower();
+        UnlockLaserCutter();
+        UnlockPulseGrenadeLauncher();
     }
 
     public IEnumerator SpawnText(string unlocked)

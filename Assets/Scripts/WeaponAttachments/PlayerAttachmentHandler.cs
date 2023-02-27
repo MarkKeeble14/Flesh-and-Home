@@ -10,7 +10,7 @@ public class PlayerAttachmentHandler : MonoBehaviour
     [SerializeField] private NoWeaponAttachment noWeaponAttachment;
     [SerializeField] private FlamethrowerSettings flamethrowerAttachment;
     [SerializeField] private LaserCutterSettings laserCutterAttachment;
-    [SerializeField] private LaserBayonetSettings laserBayonetAttachment;
+    [SerializeField] private PulseGrenadeLauncherSettings pulseGrenadeLauncherAttachment;
 
     [Header("Audio")]
     public AudioSource source;
@@ -66,9 +66,9 @@ public class PlayerAttachmentHandler : MonoBehaviour
         SwitchAttatchment(laserCutterAttachment);
     }
 
-    public void SwitchToLaserBayonet()
+    public void SwitchToPulseGrenadeLauncher()
     {
-        SwitchAttatchment(laserBayonetAttachment);
+        SwitchAttatchment(pulseGrenadeLauncherAttachment);
     }
 
     public void SwitchAttatchment(WeaponAttachmentController attachment)
