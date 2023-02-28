@@ -49,7 +49,7 @@ public abstract class Attack : MonoBehaviour
     [SerializeField] private AudioClipContainer onStartClip;
     [SerializeField] private AudioClipContainer onEndClip;
 
-    public IEnumerator StartAttack(Transform target, BasicEnemy enemy)
+    public IEnumerator StartAttack(Transform target, AttackingEnemy enemy)
     {
         startedAttacking = true;
 
@@ -157,6 +157,11 @@ public abstract class Attack : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public virtual void Interrupt()
+    {
+        StopAllCoroutines();
     }
 
     protected float GetDistanceToTransform(Transform target) => Vector3.Distance(transform.position, target.position);

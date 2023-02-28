@@ -138,6 +138,8 @@ MonoBehaviour:
       percentageMap:
       - key: {fileID: 7924698435641459214}
         value: 100
+  activateOnStart: 1
+  roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
   movement: {fileID: 2407002599294722366}
   minMaxVerticalSpawnForce: {x: 3, y: 4}
   minMaxHorizontalSpawnForce: {x: -5, y: 5}
@@ -441,6 +443,7 @@ MonoBehaviour:
   acceptDamage: 1
   destroyOnDeath: 1
   rigidbody: {fileID: 5023724996855043179}
+  rigidbodiesToEnableOnDeath: []
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1

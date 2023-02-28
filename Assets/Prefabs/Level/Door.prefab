@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7295502765654808523}
   - component: {fileID: 4162061216616509928}
   - component: {fileID: 9080569573715557851}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 7699904856662248407}
   - component: {fileID: 6698799622566396629}
   - component: {fileID: 7101930575159945615}
-  m_Layer: 7
+  m_Layer: 21
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
