@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public abstract class BossPhaseBaseState : BasicEnemy
+public abstract class BossPhaseBaseState : AttackingEnemy
 {
     [Header("Phase")]
     [SerializeField] protected float enterPhaseTime = 2.5f;

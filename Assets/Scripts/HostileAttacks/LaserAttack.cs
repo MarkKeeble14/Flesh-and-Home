@@ -6,6 +6,16 @@ public abstract class LaserAttack : Attack
 {
     [Header("Lasers")]
     [SerializeField] protected LaserAttackOptions laserAttackerOptions;
+    protected List<LaserBarrel> attackingFrom = new List<LaserBarrel>();
+
+    public override void Interrupt()
+    {
+        foreach (LaserBarrel barrel in attackingFrom)
+        {
+            barrel.IsFiring = false;
+        }
+        base.Interrupt();
+    }
 
     protected abstract Vector3 GetLaserOrigin(LaserBarrel barrel);
 
@@ -26,6 +36,8 @@ public abstract class LaserAttack : Attack
         }
 
         barrel.IsFiring = true;
+
+        attackingFrom.Add(barrel);
 
         LineRenderer selected = barrel.LineRenderer;
 
@@ -117,6 +129,7 @@ public abstract class LaserAttack : Attack
             yield return null;
         }
 
+        attackingFrom.Remove(barrel);
         selected.enabled = false;
         barrel.IsFiring = false;
     }
@@ -168,8 +181,8 @@ public abstract class LaserAttack : Attack
     private void DamageLaserCast(Ray ray, LineRenderer line, TimerDictionary<Collider> hasHit)
     {
         RaycastHit hit;
-        Physics.SphereCast(ray.origin, laserAttackerOptions.LaserRadius, ray.direction, out hit, laserAttackerOptions.LaserRange, laserAttackerOptions.CanHit);
-        line.SetPosition(1, ray.GetPoint(laserAttackerOptions.LaserRange));
+        Physics.SphereCast(ray.origin + ray.direction, laserAttackerOptions.LaserRadius, ray.direction, out hit, laserAttackerOptions.LaserRange, laserAttackerOptions.CanHit);
+        line.SetPosition(1, hit.collider == null ? ray.GetPoint(laserAttackerOptions.LaserRange) : hit.point);
 
         if (hit.collider != null)
         {
@@ -199,7 +212,10 @@ public abstract class LaserAttack : Attack
 
     private void SimpleLaserCast(Ray ray, LineRenderer line)
     {
-        line.SetPosition(1, ray.GetPoint(laserAttackerOptions.LaserRange));
+        RaycastHit hit;
+        // + (ray.direction) is to ensure attack doesn't hit attacking object
+        Physics.SphereCast(ray.origin + ray.direction, laserAttackerOptions.LaserRadius, ray.direction, out hit, laserAttackerOptions.LaserRange, laserAttackerOptions.CanHit);
+        line.SetPosition(1, hit.collider == null ? ray.GetPoint(laserAttackerOptions.LaserRange) : hit.point);
     }
 
     protected bool GetLasersActive(LaserBarrel[] lasers)

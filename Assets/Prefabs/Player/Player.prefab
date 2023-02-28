@@ -294,7 +294,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 196535
+    m_Bits: 16449463
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -794,6 +794,7 @@ GameObject:
   - component: {fileID: 7362887214131378888}
   - component: {fileID: 7362887214131378908}
   - component: {fileID: 7362887214131378909}
+  - component: {fileID: 532859800}
   - component: {fileID: 2567597695663198020}
   - component: {fileID: 1426587106}
   - component: {fileID: 7362887214131378898}
@@ -810,7 +811,6 @@ GameObject:
   - component: {fileID: 7362887214131377447}
   - component: {fileID: 7362887214131378897}
   - component: {fileID: 652312800}
-  - component: {fileID: 532859800}
   m_Layer: 9
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -953,6 +953,8 @@ MonoBehaviour:
   dashVelocityFalloffSpeedFlying: 1
   dashVelocityFalloffSpeedGrounded: 10
   jetpackDashCooldown: 2
+  enableYInJetpackAirDash: 0
+  keepYPositiveInJetpackAirDash: 0
   jetpackDashAvailableColor: {r: 1, g: 0.9300962, b: 0, a: 1}
   jetpackDashUnavailableColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   jetpackDashClip:
@@ -976,6 +978,36 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64896
   source: {fileID: 7362887214131378897}
+--- !u!114 &532859800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887214131378890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a723fa17a88a440a622fcf584103c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 7362887214131378897}
+  tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
+    type: 3}
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  maxHealth: 100
+  acceptDamage: 1
+  acceptKnockback: 0
+  destroyOnDeath: 1
+  rigidbody: {fileID: 652312800}
+  rigidbodiesToEnableOnDeath: []
+  onTakeDamageClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  playerHpBar: {fileID: 0}
 --- !u!114 &2567597695663198020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,7 +1030,7 @@ MonoBehaviour:
     maxDistance: 500
     canHit:
       serializedVersion: 2
-      m_Bits: 187776
+      m_Bits: 2284928
     canDamage:
       serializedVersion: 2
       m_Bits: 433152
@@ -1071,7 +1103,7 @@ MonoBehaviour:
     tickRate: 0.05
     canHit:
       serializedVersion: 2
-      m_Bits: 39936
+      m_Bits: 564224
     crosshairSpread: 0.4
   fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
   fuelConsumptionRate: 5
@@ -1159,19 +1191,21 @@ MonoBehaviour:
   settings:
     damage: 10
     timeBetweenPulses: 0.34
-    pulses: 5
+    pulses: 3
     shootForce: 1000
     activateOnCollideWith:
       serializedVersion: 2
-      m_Bits: 458112
+      m_Bits: 3079552
     canDamage:
       serializedVersion: 2
       m_Bits: 432128
     crosshairSpread: 50
-    pulseSpeed: 25
+    pulseSpeed: 5
     pulseRadius: 10
     pulseKnockbackForce: 50
-    pulseStayDuration: 10
+    pulseStayDuration: 2
+    pulseScaleOut: 1
+    pulseScaleOutSpeed: 100
   grenadeSpawnPos: {fileID: 8910433488196863823}
   pulseGrenadePrefab: {fileID: 7492071582286756199, guid: 802c372d5242ff34bb8055ccce4504cc,
     type: 3}
@@ -1926,34 +1960,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &532859800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362887214131378890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5a723fa17a88a440a622fcf584103c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  source: {fileID: 7362887214131378897}
-  tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
-    type: 3}
-  onEndClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  maxHealth: 100
-  acceptDamage: 1
-  destroyOnDeath: 1
-  rigidbody: {fileID: 652312800}
-  onTakeDamageClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  playerHpBar: {fileID: 0}
 --- !u!1 &7362887214680791727
 GameObject:
   m_ObjectHideFlags: 0

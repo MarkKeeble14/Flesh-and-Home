@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashVelocityFalloffSpeedFlying = 1f;
     [SerializeField] private float dashVelocityFalloffSpeedGrounded;
     [SerializeField] private float jetpackDashCooldown = 5f;
+    [SerializeField] private bool enableYInJetpackAirDash;
+    [SerializeField] private bool keepYPositiveInJetpackAirDash;
     private float jetpackDashCooldownTimer;
     [SerializeField] private Color jetpackDashAvailableColor;
     [SerializeField] private Color jetpackDashUnavailableColor;
@@ -169,6 +171,12 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+        // if is bonking; zero out y
+        if (isBonking)
+        {
+            playerVelocity.y = 0;
+        }
+
         // Control Dash
         // if velocity is not 0, move towards to 0
         if (jetpackAirDashVelocity != Vector3.zero)
@@ -184,9 +192,14 @@ public class PlayerController : MonoBehaviour
 
         // Movement
         Vector2 movement = inputManager.GetPlayerMovement();
-        movementVector = new Vector3(movement.x, 0f, movement.y);
-        movementVector = cameraTransform.forward * movementVector.z + cameraTransform.right * movementVector.x;
-        movementVector.y = 0f;
+        Vector3 v = new Vector3(movement.x, 0f, movement.y);
+        movementVector = cameraTransform.forward * v.z + cameraTransform.right * v.x;
+        if (!enableYInJetpackAirDash
+            || keepYPositiveInJetpackAirDash && movementVector.y < 0)
+        {
+            movementVector.y = 0f;
+        }
+        // Move player
         controller.Move((movementVector + jetpackAirDashVelocity) * MoveSpeed * Time.deltaTime);
 
         // Enable footsteps audio source when walking

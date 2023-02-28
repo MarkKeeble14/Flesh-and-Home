@@ -182,10 +182,12 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  maxHealth: 250
+  maxHealth: 100
   acceptDamage: 1
+  acceptKnockback: 0
   destroyOnDeath: 1
   rigidbody: {fileID: 8287840866634462593}
+  rigidbodiesToEnableOnDeath: []
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
@@ -200,6 +202,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 384
+  roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
   anim: {fileID: 418038370}
   settleSpeed: 0.25
   visualComponent: {fileID: 1918519633}

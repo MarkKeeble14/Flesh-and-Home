@@ -134,7 +134,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
             // Tell that flesh to go to the chosen spawn point
             // Once there, the code inside of the delegate will execute
-            StartCoroutine(traveller.GoToOverridenTarget(point.transform.position, 1f, true, false, true, delegate
+            StartCoroutine(traveller.GoToOverridenTarget(point.transform, 1f, true, false, true, delegate
             {
                 // Spawn an Add On
                 EndableEntity spawned = Instantiate(availableAddOns.GetOption(), traveller.transform.position, Quaternion.identity);
