@@ -434,7 +434,8 @@ MonoBehaviour:
     m_Bits: 524288
   feastableDetectionRange: 10
   onFeastSizeChange: 1
-  onFeastHPChange: 2
+  onFeastHPChange: 1.5
+  scaleSpeed: 1
 --- !u!114 &7504483307488772689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,6 +600,7 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 50
   acceptDamage: 1
+  acceptKnockback: 0
   destroyOnDeath: 0
   rigidbody: {fileID: 959702198628339923}
   rigidbodiesToEnableOnDeath:

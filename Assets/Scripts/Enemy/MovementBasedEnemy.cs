@@ -9,6 +9,14 @@ public class MovementBasedEnemy : RoomEnemy
     [SerializeField] private EnemyMovement movement;
     public EnemyMovement Movement => movement;
 
+    public virtual bool DisablingAttacking
+    {
+        get
+        {
+            return false;
+        }
+    }
+
     protected new void Start()
     {
         base.Start();
@@ -32,8 +40,10 @@ public class MovementBasedEnemy : RoomEnemy
             movement.SetDisabledForAttack(AttackIsDisablingMove || GetIsInRangeForNextAttack(movement.Target, attack.Key));
 
             // 
-            if (attack.Key.CanAttack(movement.Target))
+            // Debug.Log("Checking if Can Attack");
+            if (attack.Key.CanAttack(movement.Target) && !DisablingAttacking)
             {
+                // Debug.Log("Can Attack");
                 yield return StartCoroutine(StartAttack(movement.Target, false));
                 doneAttacking = true;
             }

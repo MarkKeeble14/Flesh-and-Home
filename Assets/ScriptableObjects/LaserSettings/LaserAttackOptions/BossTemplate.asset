@@ -17,7 +17,7 @@ MonoBehaviour:
   laserRange: 1000
   canHit:
     serializedVersion: 2
-    m_Bits: 8704
+    m_Bits: 2106240
   laserRadius: 0.1
   beamSettings:
     fullWidth: 5

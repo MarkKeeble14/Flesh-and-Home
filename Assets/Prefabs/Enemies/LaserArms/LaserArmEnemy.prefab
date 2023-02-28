@@ -124,7 +124,7 @@ MonoBehaviour:
     m_Bits: 524288
   feastableDetectionRange: 10
   onFeastSizeChange: 1
-  onFeastHPChange: 0.5
+  onFeastHPChange: 1.25
   scaleSpeed: 1
 --- !u!114 &3240085754061577288
 MonoBehaviour:
@@ -196,7 +196,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: a8ed2e9a4f1d28d42bcc4fc6e5f6a0d4,
+  laserAttackerOptions: {fileID: 11400000, guid: d5989df28c06d924d9dad1b2bea73604,
     type: 2}
   barrel: {fileID: 3240085754159558671}
 --- !u!114 &3240085754061577342
@@ -229,7 +229,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: a8ed2e9a4f1d28d42bcc4fc6e5f6a0d4,
+  laserAttackerOptions: {fileID: 11400000, guid: d5989df28c06d924d9dad1b2bea73604,
     type: 2}
   set:
   - {fileID: 3240085754159558671}
@@ -490,9 +490,6 @@ MonoBehaviour:
   feastableLayer: 19
   corpseHP: 25
   corpseColor: {r: 0.16609114, g: 0.4056604, b: 0.2343608, a: 1}
-  toDisableOnDeath:
-  - {fileID: 3240085754159558666}
-  - {fileID: 3240085755467808581}
 --- !u!1 &3240085754159558672
 GameObject:
   m_ObjectHideFlags: 0

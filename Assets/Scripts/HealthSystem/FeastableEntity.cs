@@ -34,6 +34,11 @@ public class FeastableEntity : KillableEntity
             renderer.material.DisableKeyword("_EMISSION");
             renderer.material.color = corpseColor;
 
+            if (TryGetComponent(out NavMeshEnemy navMeshEnemy))
+            {
+                navMeshEnemy.DisableNavMeshAgent();
+            }
+
             acceptDamage = true;
             isCorpse = true;
         }

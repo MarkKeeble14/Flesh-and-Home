@@ -8,10 +8,13 @@ public class FeastingEnemy : MovementBasedEnemy
     [SerializeField] private bool canFeastEnemies;
     [SerializeField] private LayerMask feastable;
     [SerializeField] private float feastableDetectionRange;
+
+    [Tooltip("Additive")]
     [SerializeField] private float onFeastSizeChange;
+    [Tooltip("Multiplicative")]
     [SerializeField] private float onFeastHPChange;
     private Collider[] feastablesInRange;
-    private bool feastLocked;
+    private bool feastLockedOn;
     private int feastLevel;
     public int FeastLevel => feastLevel;
     private FeastableEntity feasting;
@@ -19,11 +22,18 @@ public class FeastingEnemy : MovementBasedEnemy
     [SerializeField] private float scaleSpeed = 1f;
     private Vector3 targetScale;
 
+    [SerializeField] private bool disableAttacksWhileFeasting = true;
+    private bool isFeasting;
+
+    public override bool DisablingAttacking => disableAttacksWhileFeasting && isFeasting ? true : false;
+
 
     protected new void Start()
     {
         base.Start();
+
         targetScale = transform.localScale;
+
         StartCoroutine(CheckForFeastables());
         currentState = StartCoroutine(AttackCycle());
     }
@@ -40,7 +50,7 @@ public class FeastingEnemy : MovementBasedEnemy
     {
         while (true)
         {
-            if (feastLocked) yield return null;
+            if (feastLockedOn) yield return null;
 
             feastablesInRange = Physics.OverlapSphere(transform.position, feastableDetectionRange, feastable);
             if (canFeastEnemies && feastablesInRange.Length > 0)
@@ -72,12 +82,13 @@ public class FeastingEnemy : MovementBasedEnemy
                         {
                             feasting = feastable;
                             // Debug.Log(name + " Permitted to Feast On " + target.name + ", Now Feast Locked");
-                            feastLocked = true;
+                            feastLockedOn = true;
                             feastable.Targeted = true;
 
                             StopCoroutine(currentState);
 
                             currentState = StartCoroutine(DoFeast(feastable));
+
                             yield return currentState;
                         }
                     }
@@ -89,20 +100,23 @@ public class FeastingEnemy : MovementBasedEnemy
 
     private IEnumerator DoFeast(FeastableEntity target)
     {
-        // TODO
-        yield return StartCoroutine(Movement.GoToOverridenTarget(target.transform, transform.localScale.x + target.transform.localScale.x + 1f, false, true, false, null));
-
-        Movement.SetMove(false);
+        yield return StartCoroutine(Movement.GoToOverridenTarget(target.transform, transform.localScale.x / 2, false, true, false, delegate
+        {
+            // Debug.Log(name + " Reached Override Target");
+            Movement.SetMove(false);
+        }));
 
         yield return StartCoroutine(Feast(target));
 
         Movement.SetMove(true);
 
-        StartCoroutine(AttackCycle());
+        currentState = StartCoroutine(AttackCycle());
     }
 
     private IEnumerator Feast(FeastableEntity toFeastOn)
     {
+        isFeasting = true;
+
         for (float t = 0; t < feastTime; t += Time.deltaTime)
         {
             if (toFeastOn == null)
@@ -128,9 +142,10 @@ public class FeastingEnemy : MovementBasedEnemy
         }
 
         feasting = null;
-        feastLocked = false;
+        feastLockedOn = false;
         feastLevel++;
         currentState = StartCoroutine(AttackCycle());
+        isFeasting = false;
     }
 
     public void RemoveTargeted()

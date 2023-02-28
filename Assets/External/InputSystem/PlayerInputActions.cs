@@ -143,6 +143,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""286b19ff-707f-44aa-a9a8-6ffd6b1f6b05"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -398,6 +407,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Tab"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9f0ef36-7bd0-43ea-a91f-657a83311fd4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -419,6 +439,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
         m_Player_Tab = m_Player.FindAction("Tab", throwIfNotFound: true);
+        m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -491,6 +512,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_MousePosition;
     private readonly InputAction m_Player_Tab;
+    private readonly InputAction m_Player_Escape;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -508,6 +530,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
         public InputAction @Tab => m_Wrapper.m_Player_Tab;
+        public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -556,6 +579,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Tab.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTab;
                 @Tab.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTab;
                 @Tab.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTab;
+                @Escape.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @Escape.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @Escape.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -599,6 +625,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Tab.started += instance.OnTab;
                 @Tab.performed += instance.OnTab;
                 @Tab.canceled += instance.OnTab;
+                @Escape.started += instance.OnEscape;
+                @Escape.performed += instance.OnEscape;
+                @Escape.canceled += instance.OnEscape;
             }
         }
     }
@@ -618,5 +647,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnTab(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

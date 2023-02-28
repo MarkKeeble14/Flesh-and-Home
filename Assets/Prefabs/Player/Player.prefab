@@ -294,7 +294,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1769399
+    m_Bits: 16449463
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -953,6 +953,8 @@ MonoBehaviour:
   dashVelocityFalloffSpeedFlying: 1
   dashVelocityFalloffSpeedGrounded: 10
   jetpackDashCooldown: 2
+  enableYInJetpackAirDash: 0
+  keepYPositiveInJetpackAirDash: 0
   jetpackDashAvailableColor: {r: 1, g: 0.9300962, b: 0, a: 1}
   jetpackDashUnavailableColor: {r: 1, g: 1, b: 1, a: 0.5019608}
   jetpackDashClip:
@@ -997,6 +999,7 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 100
   acceptDamage: 1
+  acceptKnockback: 0
   destroyOnDeath: 1
   rigidbody: {fileID: 652312800}
   rigidbodiesToEnableOnDeath: []
@@ -1201,6 +1204,8 @@ MonoBehaviour:
     pulseRadius: 10
     pulseKnockbackForce: 50
     pulseStayDuration: 2
+    pulseScaleOut: 1
+    pulseScaleOutSpeed: 100
   grenadeSpawnPos: {fileID: 8910433488196863823}
   pulseGrenadePrefab: {fileID: 7492071582286756199, guid: 802c372d5242ff34bb8055ccce4504cc,
     type: 3}
