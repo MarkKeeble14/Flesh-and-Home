@@ -961,7 +961,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
+  fuelStore: {fileID: 11400000, guid: 755aa0540384a8b4abc6a0e2433136a6, type: 2}
   fuelConsumptionRate: 3
   jetpackParticles: {fileID: 7064955444343372906}
   jetpackAudioSource: {fileID: 7362887214131378911}
@@ -1008,6 +1008,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   playerHpBar: {fileID: 0}
+  hpStore: {fileID: 11400000, guid: 88d987135f5b8bc4d9270160a39c920f, type: 2}
 --- !u!114 &2567597695663198020
 MonoBehaviour:
   m_ObjectHideFlags: 0

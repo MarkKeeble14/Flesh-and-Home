@@ -7,12 +7,12 @@ public class KillableBossComponentEntity : KillableEntity
     public override void Damage(float damage)
     {
         if (HPBar != null)
-            HPBar.Set(currentHealth, maxHealth);
+            HPBar.Set(CurrentHealth, MaxHealth);
         base.Damage(damage);
     }
     public void SetHPBar(ImageSliderBar hpBar)
     {
         HPBar = hpBar;
-        HPBar.Set(currentHealth, maxHealth);
+        HPBar.Set(CurrentHealth, MaxHealth);
     }
 }

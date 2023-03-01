@@ -5,6 +5,10 @@ using UnityEngine;
 public class PlayerHealth : KillableEntity
 {
     [SerializeField] private ImageSliderBar playerHpBar;
+    [SerializeField] private FloatStore hpStore;
+
+    public override float CurrentHealth { get => hpStore.CurrentFloat; set => hpStore.CurrentFloat = value; }
+    public override float MaxHealth { get => hpStore.MaxFloat; }
 
     private void Start()
     {
@@ -20,6 +24,6 @@ public class PlayerHealth : KillableEntity
 
     private void SetHPBar()
     {
-        playerHpBar.Set(currentHealth, maxHealth);
+        playerHpBar.Set(CurrentHealth, MaxHealth);
     }
 }

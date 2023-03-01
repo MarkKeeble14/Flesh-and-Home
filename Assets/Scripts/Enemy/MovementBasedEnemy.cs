@@ -17,17 +17,25 @@ public class MovementBasedEnemy : RoomEnemy
         }
     }
 
-    protected new void Start()
-    {
-        base.Start();
-        movement.SetMove(false);
-    }
-
     public override void Activate()
     {
+        // Debug.Log(name + ": Movement Based Enemy Activated");
+
         base.Activate();
-        currentState = StartCoroutine(AttackCycle());
+
         movement.SetMove(true);
+
+        currentState = StartCoroutine(AttackCycle());
+    }
+
+    public override void Deactivate()
+    {
+        base.Deactivate();
+
+        movement.SetMove(false);
+
+        if (currentState != null)
+            StopCoroutine(currentState);
     }
 
     protected IEnumerator AttackCycle()

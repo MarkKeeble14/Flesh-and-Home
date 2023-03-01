@@ -173,7 +173,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4
+  m_Speed: 6
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -436,6 +436,7 @@ MonoBehaviour:
   onFeastSizeChange: 1
   onFeastHPChange: 1.5
   scaleSpeed: 1
+  disableAttacksWhileFeasting: 1
 --- !u!114 &7504483307488772689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,7 +467,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  ring: {fileID: 5268082847997902403, guid: a69360e4b5f28b049b8f1aebda7eaedb, type: 3}
+  ring: {fileID: 5268082847997902403, guid: 5a1ba1319e0802843b622f654e126215, type: 3}
   numThumps: 1
   timeBetweenThumps: 0
   maxRadius: 25

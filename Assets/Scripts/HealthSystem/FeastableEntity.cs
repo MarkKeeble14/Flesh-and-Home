@@ -27,8 +27,8 @@ public class FeastableEntity : KillableEntity
         if (!isCorpse)
         {
             gameObject.layer = feastableLayer;
-            maxHealth = corpseHP;
-            currentHealth = corpseHP;
+            MaxHealth = corpseHP;
+            CurrentHealth = corpseHP;
 
             Renderer renderer = GetComponent<Renderer>();
             renderer.material.DisableKeyword("_EMISSION");

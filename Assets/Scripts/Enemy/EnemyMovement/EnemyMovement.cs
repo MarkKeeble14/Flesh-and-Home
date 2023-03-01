@@ -16,11 +16,36 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] protected AudioSource movementSource;
 
     protected bool overrideTarget;
-    protected Vector3 overridenTargetPosition;
+    protected Transform overridenTarget;
 
     public Transform Target => target;
 
-    public float DistanceToTarget => Vector3.Distance(transform.position, overrideTarget ? overridenTargetPosition : target.position);
+
+    private float GetDistanceToTarget(bool ignoreY)
+    {
+        if (ignoreY)
+        {
+            if (overrideTarget)
+            {
+                return Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(overridenTarget.position.x, 0, overridenTarget.position.z));
+            }
+            else
+            {
+                return Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(target.position.x, 0, target.position.z));
+            }
+        }
+        else
+        {
+            if (overrideTarget)
+            {
+                return Vector3.Distance(transform.position, overridenTarget.position);
+            }
+            else
+            {
+                return Vector3.Distance(transform.position, target.position);
+            }
+        }
+    }
 
     public float DistanceToGround
     {
@@ -39,18 +64,18 @@ public class EnemyMovement : MonoBehaviour
             target = GameManager._Instance.PlayerTransform;
     }
 
-
     public IEnumerator GoToOverridenTarget(Transform target, float maxAcceptableDistanceFromTarget, bool ignoreY, bool endOverrideOnReachTarget, bool destroyOnReachTarget, Action otherOnReachTarget)
     {
         // Debug.Log(name + ": Begin Override Target");
 
         // Set variables
         overrideTarget = true;
+        overridenTarget = target;
 
-        Vector3 targetPos;
         // Wait until we reach specified position
-        while (DistanceToTarget > maxAcceptableDistanceFromTarget)
+        while (GetDistanceToTarget(ignoreY) > maxAcceptableDistanceFromTarget)
         {
+            // Debug.Log(name + " Position = " + transform.position + ", Target Position = " + target.position + ", " + " - Distance to Target = " + GetDistanceToTarget(ignoreY));
             if (target == null)
             {
                 // Debug.Log("Target became null; possible due to being destroyed");
@@ -59,8 +84,6 @@ public class EnemyMovement : MonoBehaviour
 
                 yield break;
             }
-            overridenTargetPosition = target.position;
-            targetPos = (ignoreY ? transform.position - (Vector3.up * transform.position.y) : transform.position);
             // Debug.Log(name + " Moving to Target: " + transform.position + ", " + target.transform.position);
             yield return null;
         }

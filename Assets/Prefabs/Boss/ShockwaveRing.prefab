@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4685510220784084849}
   - component: {fileID: 8180913429516158564}
   m_Layer: 0
-  m_Name: BossShockwaveRing
+  m_Name: ShockwaveRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

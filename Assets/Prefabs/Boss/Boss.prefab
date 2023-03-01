@@ -1617,9 +1617,11 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   maxHealth: 1000
-  acceptDamage: 1
+  acceptDamage: 0
+  acceptKnockback: 0
   destroyOnDeath: 0
   rigidbody: {fileID: 4559155298250650245}
+  rigidbodiesToEnableOnDeath: []
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
@@ -1890,7 +1892,7 @@ Transform:
   m_GameObject: {fileID: 4559155299601775635}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 16}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4559155299825079984}
@@ -1935,6 +1937,8 @@ MonoBehaviour:
   source: {fileID: 1662478180}
   temporaryAudioSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
     type: 3}
+  enterDoor: {fileID: 0}
+  exitDoor: {fileID: 0}
 --- !u!114 &299655287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1980,7 +1984,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 100
+  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
   riseCurve:
     serializedVersion: 2
     m_Curve:
@@ -2087,7 +2091,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 5000
+  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
   numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   platesNeededToDestroyToAdvance: 3
@@ -2144,25 +2148,29 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 100
-  duration: 25
-  returnToSpawnPointSpeed: 3
-  returnToSpawnMaxDifferenceToAccept: 1
+  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
+  duration: 30
   numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 2754082744787138833}
   timeBetweenAttacks: 5
+  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
+    type: 3}
   availableAddOns:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
       value: 20
-    - key: {fileID: -3187359783752088, guid: 5684e422596042044a61c646ac4191d2, type: 3}
+    - key: {fileID: 8204789487728918563, guid: 5684e422596042044a61c646ac4191d2, type: 3}
       value: 50
-    - key: {fileID: 6182247085408442341, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
+    - key: {fileID: 2281779296839727250, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
       value: 30
-  minMaxNumAddOns: {x: 1, y: 3}
+  spawnPointDistanceFromBoss: 20
+  minMaxNumAddOns: {x: 2, y: 3}
   timeAddedOnKillEnemy: 5
   fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
     type: 3}
+  ground:
+    serializedVersion: 2
+    m_Bits: 384
   groundShakeImpulseForce: 1
   riseBeforeEnding: 1
   pauseDuration: 1
@@ -2219,7 +2227,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dropSpeed: 0.5
+  dropSpeed: 3
   dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -2390,7 +2398,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 5000
+  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
   numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   bossShell: {fileID: 7881108961409635393}
@@ -2443,25 +2451,29 @@ MonoBehaviour:
   shakeSource: {fileID: 1406886947}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 100
-  duration: 25
-  returnToSpawnPointSpeed: 3
-  returnToSpawnMaxDifferenceToAccept: 1
+  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
+  duration: 60
   numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 54373864176638256}
   timeBetweenAttacks: 3
+  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
+    type: 3}
   availableAddOns:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
       value: 20
-    - key: {fileID: -3187359783752088, guid: 5684e422596042044a61c646ac4191d2, type: 3}
+    - key: {fileID: 8204789487728918563, guid: 5684e422596042044a61c646ac4191d2, type: 3}
       value: 20
-    - key: {fileID: 6182247085408442341, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
+    - key: {fileID: 2281779296839727250, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
       value: 60
-  minMaxNumAddOns: {x: 2, y: 4}
-  timeAddedOnKillEnemy: 5
+  spawnPointDistanceFromBoss: 30
+  minMaxNumAddOns: {x: 3, y: 6}
+  timeAddedOnKillEnemy: 7.5
   fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
     type: 3}
+  ground:
+    serializedVersion: 2
+    m_Bits: 384
   groundShakeImpulseForce: 1
   riseBeforeEnding: 0
   pauseDuration: 1
@@ -2677,7 +2689,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1662478180}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerYComponentPerSpawnpoint: 5000
+  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
   numAttacksAtOnce: 2
   timeBetweenAttacks: 0
   barrelHolder: {fileID: 4559155298250650246}
@@ -2936,8 +2948,10 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 500
   acceptDamage: 1
+  acceptKnockback: 0
   destroyOnDeath: 1
   rigidbody: {fileID: 1200041713}
+  rigidbodiesToEnableOnDeath: []
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
@@ -4637,7 +4651,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: maxRadius
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -4647,7 +4661,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: expansionSpeed
-      value: 17.5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -4779,7 +4793,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: maxRadius
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -4789,7 +4803,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: expansionSpeed
-      value: 17.5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -9441,12 +9455,17 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: maxRadius
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: numThumps
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
+      propertyPath: expansionSpeed
+      value: 37.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -9456,7 +9475,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: timeBetweenThumps
-      value: 0.5
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}
@@ -10513,7 +10532,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: maxRadius
-      value: 50
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -10523,7 +10542,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: expansionSpeed
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -10533,7 +10552,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: timeBetweenThumps
-      value: 0.2
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}

@@ -126,6 +126,7 @@ MonoBehaviour:
   onFeastSizeChange: 1
   onFeastHPChange: 1.25
   scaleSpeed: 1
+  disableAttacksWhileFeasting: 1
 --- !u!114 &3240085754061577288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +155,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2.75
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360

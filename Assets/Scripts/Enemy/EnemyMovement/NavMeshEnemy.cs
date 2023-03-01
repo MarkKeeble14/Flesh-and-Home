@@ -47,19 +47,21 @@ public class NavMeshEnemy : EnemyMovement
         // if we are meant to go to a specified target position rather than a transfom
         if (overrideTarget)
         {
+            // Debug.Log("Override Target");
+
             // Move to position
-            navMeshAgent.SetDestination(overridenTargetPosition);
+            navMeshAgent.SetDestination(overridenTarget.position);
             movementSource.enabled = true;
             return;
-
         }
 
         // We are not overriding target position, just go to target if set
         // If the player is not set (or null cause of dying) stop execution
         if (!target)
         {
-            movementSource.enabled = false;
             // Debug.Log("No Target Set");
+
+            movementSource.enabled = false;
             return;
         };
 

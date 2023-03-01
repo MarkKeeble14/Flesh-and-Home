@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f49bec02bb2f104f8acbd469d5b2895, type: 3}
-  m_Name: FuelStore
+  m_Script: {fileID: 11500000, guid: bde1e5a3b267d004ba3be210f20c213b, type: 3}
+  m_Name: HealthStore
   m_EditorClassIdentifier: 
-  startingFuel: 100
-  currentFuel: 100
+  startingFloat: 100
+  currentFloat: 100

@@ -4,8 +4,21 @@ using UnityEngine.AI;
 public class KillableEntity : EndableEntity
 {
     [Header("Damageable")]
-    [SerializeField] protected float maxHealth;
-    public float MaxHealth
+    private float currentHealth;
+    public virtual float CurrentHealth
+    {
+        get
+        {
+            return currentHealth;
+        }
+        set
+        {
+            currentHealth = value;
+        }
+    }
+
+    [SerializeField] private float maxHealth;
+    public virtual float MaxHealth
     {
         get
         {
@@ -16,7 +29,7 @@ public class KillableEntity : EndableEntity
             maxHealth = value;
         }
     }
-    protected float currentHealth;
+
     [SerializeField] protected bool acceptDamage = true;
     public bool AcceptDamage
     {
@@ -46,18 +59,18 @@ public class KillableEntity : EndableEntity
     private void OnEnable()
     {
         // Set current health to max health
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
 
     public override void Damage(float damage)
     {
         if (!acceptDamage) return;
-        currentHealth -= damage;
+        CurrentHealth -= damage;
 
         // Audio
         Instantiate(tempSource, transform.position, Quaternion.identity).Play(onTakeDamageClip);
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             onEndAction();
         }
@@ -112,6 +125,6 @@ public class KillableEntity : EndableEntity
 
     public void ResetHealth()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
     }
 }

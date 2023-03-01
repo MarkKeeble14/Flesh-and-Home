@@ -9,6 +9,7 @@ public abstract class RoomEnemy : AttackingEnemy, IRoomContent
     private KillableEntity killableEntity;
 
     private new Renderer renderer;
+    private bool activated;
 
     protected void Awake()
     {
@@ -23,15 +24,30 @@ public abstract class RoomEnemy : AttackingEnemy, IRoomContent
         {
             Activate();
         }
-        else
+        else if (!activated)
         {
-            roomEnemySettings.SetInactiveColors(renderer);
+            Deactivate();
         }
     }
 
     public virtual void Activate()
     {
+        // Debug.Log(name + ": Room Enemy Activated");
+
+        activated = true;
+
         roomEnemySettings.SetActiveColors(renderer);
+
         killableEntity.AcceptDamage = true;
+    }
+
+    public virtual void Deactivate()
+    {
+        activated = false;
+
+        // Debug.Log(name + ": Room Enemy Activated");
+        roomEnemySettings.SetInactiveColors(renderer);
+
+        killableEntity.AcceptDamage = false;
     }
 }

@@ -22,7 +22,10 @@ public class RoomController : MonoBehaviour
         spawnPoints = GetComponentInChildren<FeastableSpawnPointsController>();
 
         // Set spawn points array; will find all feastablespawnpoints in the room
-        spawnPoints.SetArray();
+        if (spawnPoints != null)
+        {
+            spawnPoints.SetArray();
+        }
 
         // Get all room content
         enableOnEnter = GetComponentsInChildren<IRoomContent>();

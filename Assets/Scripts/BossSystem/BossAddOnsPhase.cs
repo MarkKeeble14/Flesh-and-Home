@@ -7,20 +7,20 @@ public class BossAddOnsPhase : BossPhaseBaseState
 {
     [Header("Phase")]
     [SerializeField] private float duration = 10f;
-    [SerializeField] private float returnToSpawnPointSpeed;
-    [SerializeField] private float returnToSpawnMaxDifferenceToAccept;
     [SerializeField] protected int numAttacksAtOnce = 1;
     [SerializeField] private Attack onCrashDownAttack;
     [SerializeField] private float timeBetweenAttacks;
 
     [Header("Spawning")]
+    [SerializeField] private Transform dummyPoint;
     [SerializeField] private PercentageMap<EndableEntity> availableAddOns;
-    private List<BossSpawnPoint> spawnPoints = new List<BossSpawnPoint>();
+    [SerializeField] private float spawnPointDistanceFromBoss = 1f;
     [SerializeField] private Vector2 minMaxNumAddOns = new Vector2(1, 1);
     [SerializeField] private float timeAddedOnKillEnemy;
     [SerializeField] private NavMeshEnemy fleshTravellingPrefab;
 
     [Header("Settings")]
+    [SerializeField] private LayerMask ground;
     [SerializeField] private float groundShakeImpulseForce = 1;
     [SerializeField] private bool riseBeforeEnding = true;
 
@@ -51,12 +51,6 @@ public class BossAddOnsPhase : BossPhaseBaseState
     [SerializeField] private AudioClipContainer sucessClip;
     [SerializeField] private AudioClipContainer failureClip;
 
-    private void Awake()
-    {
-        // Add all boss spawn points
-        spawnPoints.AddRange(FindObjectsOfType<BossEnemySpawnPoint>());
-    }
-
     public override void EnterState(BossPhaseManager boss)
     {
         Debug.Log("Entering Adds Phase");
@@ -73,15 +67,13 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
     protected override IEnumerator StateBehaviour(BossPhaseManager boss)
     {
-        Vector3 moveToPos = new Vector3(boss.SpawnPosition.x, boss.ShellEnemyMovement.transform.localPosition.y, boss.SpawnPosition.z);
-        while (Vector3.Distance(boss.ShellEnemyMovement.transform.localPosition, moveToPos) > returnToSpawnMaxDifferenceToAccept)
-        {
-            boss.ShellEnemyMovement.transform.localPosition = Vector3.MoveTowards(boss.ShellEnemyMovement.transform.localPosition, moveToPos, Time.deltaTime * returnToSpawnPointSpeed);
-            yield return null;
-        }
+        boss.ShellEnemyMovement.EnableNavMeshAgent();
+        boss.ShellEnemyMovement.SetMove(true);
+
+        yield return boss.ShellEnemyMovement.GoToOverridenTarget(boss.SpawnPosition, 1f, true, true, false, null);
 
         // Stop shell from moving
-        boss.ShellEnemyMovement.SetMove(false);
+        // boss.ShellEnemyMovement.SetMove(false);
         boss.ShellEnemyMovement.DisableNavMeshAgent();
 
         yield return new WaitForSeconds(enterPhaseTime);
@@ -111,54 +103,60 @@ public class BossAddOnsPhase : BossPhaseBaseState
         float time = 0;
         List<EndableEntity> spawnedAdds = new List<EndableEntity>();
         int numAddsToSpawn = 0;
+
+        Vector3 direction = boss.ShellEnemyMovement.transform.forward;
+        float angleBetweenProjectiles = 360 / numAdds;
+
         for (int i = 0; i < numAdds; i++)
         {
-            // Get a spawn point
-            BossSpawnPoint point = GetSpawnPoint();
-            if (point == null)
-            {
-                // No more spawn points left, should just stop spawning here
-                // Debug.Log("No more spawn points: " + i);
-                break;
-            }
-            // say that we've spawned on this location, so it should not be spawnable anymore
-            point.SpawnedOn = true;
-            // remove the spawn point from the list; need to do so in order to efficiently pick random spawn points
-            spawnPoints.Remove(point);
             // track the enemies to be spawned
             numAddsToSpawn++;
 
+            direction = Quaternion.AngleAxis(angleBetweenProjectiles, Vector3.up) * direction;
+
             // Spawn Travelling flesh
-            NavMeshEnemy traveller = Instantiate(fleshTravellingPrefab, transform.position, Quaternion.identity);
+            RaycastHit hit;
+            Ray ray = new Ray(boss.ShellEnemyMovement.transform.position + transform.up, Vector3.down);
+            Physics.Raycast(ray, out hit, Mathf.Infinity, ground);
+            NavMeshEnemy traveller = Instantiate(fleshTravellingPrefab, hit.point, Quaternion.identity);
             traveller.EnableNavMeshAgent();
 
             // Tell that flesh to go to the chosen spawn point
             // Once there, the code inside of the delegate will execute
-            StartCoroutine(traveller.GoToOverridenTarget(point.transform, 1f, true, false, true, delegate
+            Vector3 targetPosition = boss.ShellEnemyMovement.transform.position + direction * spawnPointDistanceFromBoss;
+            Transform point = Instantiate(dummyPoint, targetPosition, Quaternion.identity);
+            StartCoroutine(traveller.GoToOverridenTarget(point, 1f, true, true, true, delegate
             {
+                Destroy(point.gameObject);
+
                 // Spawn an Add On
                 EndableEntity spawned = Instantiate(availableAddOns.GetOption(), traveller.transform.position, Quaternion.identity);
 
                 // When the add on ends (dies either thru heat or hp), the code inside the delegate will run
                 spawned.AddAdditionalOnEndAction(delegate
                 {
-                    // re-add the spawn point
-                    spawnPoints.Add(point);
-
                     // make the progress bar go a little faster
                     time += timeAddedOnKillEnemy;
 
                     // track the enemies killed
                     spawnedAdds.Remove(spawned);
                 });
+
+                if (spawned.TryGetComponent(out NavMeshEnemy navMeshEnemy))
+                {
+                    navMeshEnemy.EnableNavMeshAgent();
+                }
+
+                if (spawned.TryGetComponent(out IRoomContent roomContent))
+                {
+                    roomContent.Activate();
+                }
+
                 spawnedAdds.Add(spawned);
             }));
         }
 
         yield return StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt, this));
-
-        // Wait until all enemies have been spawned
-        yield return new WaitUntil(() => spawnedAdds.Count == numAddsToSpawn);
 
         // Main Loop
         bool success = false;
@@ -195,14 +193,11 @@ public class BossAddOnsPhase : BossPhaseBaseState
         // Set HP Bar
         boss.HPBar.Set(duration, duration);
 
-        // Call on end on all entities to destroy and to repopulate spawn points
-        while (spawnedAdds.Count > 0)
+        // Call on end on all remaining entities
+        foreach (EndableEntity endable in spawnedAdds)
         {
-            spawnedAdds[0].CallOnEndAction();
+            endable.CallOnEndAction();
         }
-
-        // Set all spawn points to be not spawned on so that they can be reused
-        foreach (BossSpawnPoint spawnPoint in spawnPoints) { spawnPoint.SpawnedOn = false; }
 
         yield return new WaitUntil(() => boss.HPBar.IsFull);
 
@@ -236,12 +231,5 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
         // Switch State
         boss.LoadNextPhase();
-    }
-
-    private BossSpawnPoint GetSpawnPoint()
-    {
-        if (spawnPoints.Count == 0) return null;
-        BossSpawnPoint point = RandomHelper.GetRandomFromList(spawnPoints);
-        return point;
     }
 }
