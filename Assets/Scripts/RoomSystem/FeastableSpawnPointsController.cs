@@ -16,4 +16,15 @@ public class FeastableSpawnPointsController : MonoBehaviour
     {
         return RandomHelper.GetRandomFromArray(spawnPoints);
     }
+
+    public FeastableEntity Emit(FeastableEntity toEmit, bool useRandomOffset)
+    {
+        FeastableSpawnPoint spawnPoint = GetSpawnPoint();
+        return Emit(toEmit, spawnPoint, useRandomOffset);
+    }
+
+    public FeastableEntity Emit(FeastableEntity toEmit, FeastableSpawnPoint spawnPoint, bool useRandomOffset)
+    {
+        return spawnPoint.Spawn(toEmit, useRandomOffset);
+    }
 }

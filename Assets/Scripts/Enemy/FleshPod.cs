@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class FleshPod : KillableEntity, IRoomContent
+public class FleshPod : FeastableEntity, IRoomContent
 {
     [Header("Settings")]
     [SerializeField] private float maxCapacity = 100f;
@@ -26,7 +26,6 @@ public class FleshPod : KillableEntity, IRoomContent
 
     [Header("References")]
     [SerializeField] private Transform visualComponent;
-    private new Renderer renderer;
 
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onTickClip;
@@ -39,7 +38,6 @@ public class FleshPod : KillableEntity, IRoomContent
         startScale = visualComponent.localScale;
         targetScale = startScale;
 
-        renderer = visualComponent.GetComponent<Renderer>();
         roomEnemySettings.SetInactiveColors(renderer);
         acceptDamage = false;
 
@@ -59,11 +57,6 @@ public class FleshPod : KillableEntity, IRoomContent
 
     private IEnumerator SpawningTick()
     {
-        // Allow the pod to scale naturally
-        shouldSettle = true;
-
-        yield return new WaitForSeconds(timeBetweenTicks);
-
         // Audio
         onTickClip.PlayOneShot(source);
 
@@ -105,6 +98,12 @@ public class FleshPod : KillableEntity, IRoomContent
 
         AttachToFloor();
         Animate();
+
+        // Allow the pod to scale naturally
+        shouldSettle = true;
+
+        yield return new WaitForSeconds(timeBetweenTicks);
+
         StartCoroutine(SpawningTick());
     }
 

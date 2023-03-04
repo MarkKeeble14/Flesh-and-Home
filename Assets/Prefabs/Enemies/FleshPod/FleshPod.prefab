@@ -192,6 +192,10 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  feastableLayer: 19
+  corpseHP: 25
+  corpseColor: {r: 0.16470589, g: 0.40392157, b: 0.23529412, a: 1}
+  renderer: {fileID: 1918519635}
   maxCapacity: 100
   capacity: 100
   capacityPerCritter: 2.5

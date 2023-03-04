@@ -1597,6 +1597,7 @@ MonoBehaviour:
     m_Bits: 384
   movementSource: {fileID: 193684192667313155}
   enableOnAwake: 0
+  alterRigidbody: 0
 --- !u!114 &7881108961409635393
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,7 +20,6 @@ public class EnemyMovement : MonoBehaviour
 
     public Transform Target => target;
 
-
     private float GetDistanceToTarget(bool ignoreY)
     {
         if (ignoreY)
@@ -64,8 +63,15 @@ public class EnemyMovement : MonoBehaviour
             target = GameManager._Instance.PlayerTransform;
     }
 
-    public IEnumerator GoToOverridenTarget(Transform target, float maxAcceptableDistanceFromTarget, bool ignoreY, bool endOverrideOnReachTarget, bool destroyOnReachTarget, Action otherOnReachTarget)
+    public void EndOverride()
     {
+        interruptOverride = true;
+    }
+
+    private bool interruptOverride;
+    public IEnumerator GoToOverridenTarget(Transform target, float maxAcceptableDistanceFromTarget, bool ignoreY, bool endOverrideOnReachTarget, bool destroyOnReachTarget, bool destroyTransfromOnEnd, Action otherOnReachTarget, Action onFail)
+    {
+        interruptOverride = false;
         // Debug.Log(name + ": Begin Override Target");
 
         // Set variables
@@ -76,11 +82,20 @@ public class EnemyMovement : MonoBehaviour
         while (GetDistanceToTarget(ignoreY) > maxAcceptableDistanceFromTarget)
         {
             // Debug.Log(name + " Position = " + transform.position + ", Target Position = " + target.position + ", " + " - Distance to Target = " + GetDistanceToTarget(ignoreY));
-            if (target == null)
+            if (interruptOverride)
             {
+                onFail?.Invoke();
+
                 // Debug.Log("Target became null; possible due to being destroyed");
-                // if meant to stop override target on end, do so
-                overrideTarget = !endOverrideOnReachTarget;
+                overrideTarget = false;
+                // overridenTarget = null;
+
+                if (destroyTransfromOnEnd)
+                {
+                    Destroy(overridenTarget.gameObject);
+                }
+
+                overridenTarget = null;
 
                 yield break;
             }
@@ -92,6 +107,9 @@ public class EnemyMovement : MonoBehaviour
 
         // if meant to stop override target on end, do so
         overrideTarget = !endOverrideOnReachTarget;
+
+        if (destroyTransfromOnEnd)
+            Destroy(target.gameObject);
 
         // Call whatever functions passed in once reached target
         otherOnReachTarget?.Invoke();

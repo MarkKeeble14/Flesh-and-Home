@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
-public struct PulseGrenadeSettings
+[CreateAssetMenu(fileName = "PulseGrenadeSettings", menuName = "PulseGrenadeSettings")]
+public class PulseGrenadeSettings : ScriptableObject
 {
     // Laser info
     public float damage;
@@ -11,6 +11,7 @@ public struct PulseGrenadeSettings
     public LayerMask activateOnCollideWith;
     public LayerMask canDamage;
     public float crosshairSpread;
+    public bool isSticky;
     public float pulseSpeed;
     public float pulseRadius;
     public float pulseKnockbackForce;

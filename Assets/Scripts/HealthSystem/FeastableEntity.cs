@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class FeastableEntity : KillableEntity
 {
@@ -7,18 +8,23 @@ public class FeastableEntity : KillableEntity
     private bool isCorpse;
     [SerializeField] private Color corpseColor;
 
-    private bool targeted;
-    public bool Targeted
+    private FeastEnemyStateController targetedBy;
+    public FeastEnemyStateController TargetedBy
     {
         get
         {
-            return targeted;
+            return targetedBy;
         }
         set
         {
-            targeted = value;
+            targetedBy = value;
         }
     }
+
+    public Action onBecomeCorpse;
+    public Action onCorpseDie;
+
+    [SerializeField] protected new Renderer renderer;
 
     protected override void OnEnd()
     {
@@ -26,11 +32,12 @@ public class FeastableEntity : KillableEntity
 
         if (!isCorpse)
         {
+            // Debug.Log(name + ": Now Corpse");
+
             gameObject.layer = feastableLayer;
             MaxHealth = corpseHP;
             CurrentHealth = corpseHP;
 
-            Renderer renderer = GetComponent<Renderer>();
             renderer.material.DisableKeyword("_EMISSION");
             renderer.material.color = corpseColor;
 
@@ -39,16 +46,30 @@ public class FeastableEntity : KillableEntity
                 navMeshEnemy.DisableNavMeshAgent();
             }
 
+            if (TryGetComponent(out RoomEnemyStateController enemyStateController))
+            {
+                enemyStateController.Disable();
+            }
+
             acceptDamage = true;
             isCorpse = true;
+
+            // Debug.Log("On Become Corpse Invoked");
+            onBecomeCorpse?.Invoke();
         }
         else
         {
+            onCorpseDie?.Invoke();
             Destroy(gameObject);
         }
     }
+
     public void FeastOn()
     {
+        onCorpseDie?.Invoke();
+
+        CallOnEndAction();
+
         // Debug.Log(name + " Was Feasted On");
         Destroy(gameObject);
     }

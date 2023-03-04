@@ -60,6 +60,10 @@ MonoBehaviour:
   minMaxGrowSpeed: {x: 0.5, y: 1.5}
   minMaxShrinkSpeed: {x: 0.75, y: 1}
   heightAllowance: 10
+  maxNumEnemiesCanHaveSpawned: 0
+  chanceToSpawnEnemyPerFrame: {x: 0, y: 0}
+  enemyOptions:
+    percentageMap: []
 --- !u!114 &6674477849078441393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,12 +76,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861238c6170ca1241ad86ef837e5ef99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Move: 1
   playerIsTarget: 0
   isGround:
     serializedVersion: 2
     m_Bits: 1408
   movementSource: {fileID: 939019202987002304}
+  enableOnAwake: 0
+  alterRigidbody: 0
 --- !u!195 &3151333333185708294
 NavMeshAgent:
   m_ObjectHideFlags: 0

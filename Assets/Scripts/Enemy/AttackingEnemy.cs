@@ -8,18 +8,7 @@ public class AttackingEnemy : MonoBehaviour
     [SerializeField] private AttackPool attackPool = new AttackPool();
     protected SerializableKeyValuePair<Attack, int> attack;
     protected List<Attack> currentAttacks = new List<Attack>();
-
-    public void Stop()
-    {
-        // Stop all attacks
-        foreach (Attack attack in currentAttacks)
-        {
-            attack.Interrupt();
-        }
-
-        // Stop all other coroutines
-        StopAllCoroutines();
-    }
+    public bool IsDead { get; private set; }
 
     public bool AttackIsDisablingMove
     {
@@ -37,12 +26,13 @@ public class AttackingEnemy : MonoBehaviour
         }
     }
 
-    protected void SetAttack()
+    public Attack SetAttack()
     {
         attack = attackPool.GetAttack();
+        return attack.Key;
     }
 
-    protected IEnumerator StartAttack(Transform target, bool setNewAttack)
+    public IEnumerator StartAttack(Transform target, bool setNewAttack)
     {
         if (!attackPool.HasAttacksAvailable) yield break;
 
@@ -64,13 +54,29 @@ public class AttackingEnemy : MonoBehaviour
         }
     }
 
-    public void AddAttack(Attack attack)
+    public void AddCurrentAttack(Attack attack)
     {
         currentAttacks.Add(attack);
     }
 
-    public void RemoveAttack(Attack attack)
+    public void RemoveCurrentAttack(Attack attack)
     {
         currentAttacks.Remove(attack);
+    }
+
+    public void Stop()
+    {
+        // Stop all attacks
+        foreach (Attack attack in currentAttacks)
+        {
+            attack.Interrupt();
+        }
+    }
+
+    public void NotifyOfDeath()
+    {
+        // Bad?
+        IsDead = true;
+        Stop();
     }
 }

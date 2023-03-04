@@ -153,12 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff5729b738eb7e44a3f9ff670f762f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToSpawnFeastableChunk: {x: 3, y: 5}
-  minMaxSecondsBetweenChunksSpawnAttempt: {x: 5, y: 10}
+  chanceToSpawnFeastableChunk: {x: 4, y: 5}
+  minMaxSecondsBetweenChunksSpawnAttempt: {x: 7.5, y: 15}
   feastableChunk: {fileID: 656359441710905562, guid: f6b09094613f5b74fa6bc8358d85aac0,
     type: 3}
-  maxFeastablesSpawned: 3
   shouldSpawnFeastableChunks: 1
+  minMaxFeastablesInBatch: {x: 3, y: 5}
+  useMaxTotalFeastablesSpawned: 1
+  maxTotalFeastablesSpawned: 10
+  feastablesAvailableAtOnce: 5
 --- !u!65 &7275330992961647857
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1430,6 +1433,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: FeastableSpawnPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: addForceStrength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: addForceDirection.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.z
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4009492e454b41f4f810439066acef7d, type: 3}
 --- !u!1001 &2817733834205753172
@@ -1597,7 +1625,7 @@ PrefabInstance:
     - target: {fileID: 449473948106173110, guid: 4009492e454b41f4f810439066acef7d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15
+      value: -22.5
       objectReference: {fileID: 0}
     - target: {fileID: 449473948106173110, guid: 4009492e454b41f4f810439066acef7d,
         type: 3}
@@ -1648,6 +1676,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FeastableSpawnPoint (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: addForceStrength
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: addForceDirection.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.z
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4009492e454b41f4f810439066acef7d, type: 3}
@@ -1751,7 +1804,7 @@ PrefabInstance:
     - target: {fileID: 449473948106173110, guid: 4009492e454b41f4f810439066acef7d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15
+      value: 22.5
       objectReference: {fileID: 0}
     - target: {fileID: 449473948106173110, guid: 4009492e454b41f4f810439066acef7d,
         type: 3}
@@ -1792,6 +1845,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FeastableSpawnPoint (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: addForceStrength
+      value: 2500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: addForceDirection.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3324563120652248886, guid: 4009492e454b41f4f810439066acef7d,
+        type: 3}
+      propertyPath: randomOffsetRange.z
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4009492e454b41f4f810439066acef7d, type: 3}

@@ -15,6 +15,9 @@ public class BossDefinedBarrelsLaserAttack : BossLaserAttack
 
         yield return new WaitUntil(() => GetLasersActive(set));
 
-        yield return new WaitUntil(() => !GetLasersActive(set));
+        while (GetLasersActive(set) && !executionInterrupted)
+        {
+            yield return null;
+        }
     }
 }

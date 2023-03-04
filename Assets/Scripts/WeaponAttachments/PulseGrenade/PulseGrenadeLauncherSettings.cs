@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PulseGrenadeLauncherSettings : WeaponAttachmentController
 {
+    [Header("Pulse Grenade Launcher")]
     [SerializeField] private PulseGrenadeSettings settings;
 
     [SerializeField] private Transform grenadeSpawnPos;

@@ -49,12 +49,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 148ba2e314383ec43bc847f7b9fce00a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasCollidedWith: []
+  fadeOutSpeed: 0.2
+  minAlpha: 0
+  collider: {fileID: 8180913429516158564}
+  renderer: {fileID: 4934152693469160433}
   source: {fileID: 5268082847997902401}
   hitClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  hasCollidedWith: []
 --- !u!82 &5268082847997902401
 AudioSource:
   m_ObjectHideFlags: 0

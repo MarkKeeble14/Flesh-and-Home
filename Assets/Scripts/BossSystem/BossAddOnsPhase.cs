@@ -70,7 +70,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
         boss.ShellEnemyMovement.EnableNavMeshAgent();
         boss.ShellEnemyMovement.SetMove(true);
 
-        yield return boss.ShellEnemyMovement.GoToOverridenTarget(boss.SpawnPosition, 1f, true, true, false, null);
+        yield return boss.ShellEnemyMovement.GoToOverridenTarget(boss.SpawnPosition, 1f, true, true, false, false, null, null);
 
         // Stop shell from moving
         // boss.ShellEnemyMovement.SetMove(false);
@@ -125,10 +125,9 @@ public class BossAddOnsPhase : BossPhaseBaseState
             // Once there, the code inside of the delegate will execute
             Vector3 targetPosition = boss.ShellEnemyMovement.transform.position + direction * spawnPointDistanceFromBoss;
             Transform point = Instantiate(dummyPoint, targetPosition, Quaternion.identity);
-            StartCoroutine(traveller.GoToOverridenTarget(point, 1f, true, true, true, delegate
+            StartCoroutine(traveller.GoToOverridenTarget(point, 1f, true, true, true, false,
+                delegate
             {
-                Destroy(point.gameObject);
-
                 // Spawn an Add On
                 EndableEntity spawned = Instantiate(availableAddOns.GetOption(), traveller.transform.position, Quaternion.identity);
 
@@ -153,7 +152,8 @@ public class BossAddOnsPhase : BossPhaseBaseState
                 }
 
                 spawnedAdds.Add(spawned);
-            }));
+            },
+            null));
         }
 
         yield return StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt, this));

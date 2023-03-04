@@ -9,10 +9,13 @@ public class NavMeshEnemy : EnemyMovement
 
     public bool IsActive { get; protected set; }
 
+    [SerializeField] private bool alterRigidbody = true;
+    private Rigidbody rb;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
         if (enableOnAwake)
             EnableNavMeshAgent();
     }
@@ -35,6 +38,8 @@ public class NavMeshEnemy : EnemyMovement
 
         // Stop if not supposed to move so other things can move this object
         navMeshAgent.isStopped = !AllowMove;
+        if (alterRigidbody)
+            rb.isKinematic = !AllowMove;
 
         // Don't allow move if not supposed to move
         if (!AllowMove)
@@ -47,7 +52,7 @@ public class NavMeshEnemy : EnemyMovement
         // if we are meant to go to a specified target position rather than a transfom
         if (overrideTarget)
         {
-            // Debug.Log("Override Target");
+            // Debug.Log(name + ": Override Target" + overridenTarget);
 
             // Move to position
             navMeshAgent.SetDestination(overridenTarget.position);

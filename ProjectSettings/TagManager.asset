@@ -24,13 +24,13 @@ TagManager:
   - PlayerHitbox
   - EnemyFlesh
   - BossFleshyHitbox
-  - EnemyFeastable
+  - Feastable
   - DoorTrigger
   - Door
   - RoomTrigger
   - EnemyFeastableComponent
   - UnlockTrigger
-  - 
+  - FlamethrowerTrigger
   - 
   - 
   - 

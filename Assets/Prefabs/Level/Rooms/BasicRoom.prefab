@@ -51,12 +51,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff5729b738eb7e44a3f9ff670f762f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chanceToSpawnFeastableChunk: {x: 3, y: 5}
-  minMaxSecondsBetweenChunksSpawnAttempt: {x: 5, y: 10}
+  chanceToSpawnFeastableChunk: {x: 4, y: 5}
+  minMaxSecondsBetweenChunksSpawnAttempt: {x: 7.5, y: 15}
   feastableChunk: {fileID: 656359441710905562, guid: f6b09094613f5b74fa6bc8358d85aac0,
     type: 3}
-  maxFeastablesSpawned: 3
   shouldSpawnFeastableChunks: 1
+  minMaxFeastablesInBatch: {x: 3, y: 5}
+  useMaxTotalFeastablesSpawned: 1
+  maxTotalFeastablesSpawned: 10
+  feastablesAvailableAtOnce: 5
 --- !u!65 &4332440914877815845
 BoxCollider:
   m_ObjectHideFlags: 0
