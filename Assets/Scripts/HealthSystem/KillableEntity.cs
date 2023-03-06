@@ -43,6 +43,8 @@ public class KillableEntity : EndableEntity
         }
     }
 
+    public virtual bool IsDead => currentHealth <= 0;
+
     [SerializeField] private bool acceptKnockback;
 
     [Header("What Happens After Death?")]
@@ -52,6 +54,7 @@ public class KillableEntity : EndableEntity
     [SerializeField] protected new Rigidbody rigidbody;
     public Rigidbody Rigidbody => rigidbody;
     [SerializeField] private Rigidbody[] rigidbodiesToEnableOnDeath;
+    [SerializeField] protected new Renderer renderer;
 
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onTakeDamageClip;
@@ -86,6 +89,7 @@ public class KillableEntity : EndableEntity
 
     protected override void OnEnd()
     {
+        // Debug.Log(name + ": Killable - On End Called");
         base.OnEnd();
 
         acceptDamage = false;
@@ -104,17 +108,9 @@ public class KillableEntity : EndableEntity
             Destroy(gameObject);
         }
 
-        // if this entity died while it was trying to feast something, make sure that thing can once again be feasted 
-        if (TryGetComponent(out FeastEnemyStateController feastingEnemy)
-            && feastingEnemy.CurrentTarget != null)
-        {
-            feastingEnemy.CurrentTarget.TargetedBy = feastingEnemy;
-        }
-
         // Stop basic enemy functions such as attacking
         if (TryGetComponent(out AttackingEnemy basicEnemy))
         {
-
             basicEnemy.NotifyOfDeath();
         }
 

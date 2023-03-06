@@ -188,14 +188,18 @@ MonoBehaviour:
   destroyOnDeath: 1
   rigidbody: {fileID: 8287840866634462593}
   rigidbodiesToEnableOnDeath: []
+  renderer: {fileID: 1918519635}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  feastableLayer: 19
-  corpseHP: 25
-  corpseColor: {r: 0.16470589, g: 0.40392157, b: 0.23529412, a: 1}
-  renderer: {fileID: 1918519635}
+  fleshyTraveller: {fileID: -1068128480174535724, guid: 1ec8123e792c42d49ba10fba5255660d,
+    type: 3}
+  travellerHP: 50
+  detectionRange: 50
+  feastingEnemyLayer:
+    serializedVersion: 2
+    m_Bits: 131072
   maxCapacity: 100
   capacity: 100
   capacityPerCritter: 2.5

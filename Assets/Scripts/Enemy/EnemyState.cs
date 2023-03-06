@@ -7,28 +7,21 @@ public abstract class EnemyState : MonoBehaviour
 {
     public enum EnemyStateType
     {
+        IDLE,
         ATTACK,
-        FEAST,
         DEAD,
     }
 
-    private Coroutine stateBehaviour;
-
     public virtual void EnterState(RoomEnemyStateController enemy)
     {
-        // Start State Behaviour
-        stateBehaviour = StartCoroutine(StateBehaviour(enemy));
+        // Debug.Log(name + ", Entering State: " + this);
     }
     public virtual void ExitState(RoomEnemyStateController enemy)
     {
-        if (stateBehaviour == null) return;
-
-        // End State Behaviour
-        StopCoroutine(stateBehaviour);
+        // Debug.Log(name + ", Exiting State: " + this);
     }
     public virtual void UpdateState(RoomEnemyStateController enemy)
     {
-        //
+        // 
     }
-    public abstract IEnumerator StateBehaviour(RoomEnemyStateController enemy);
 }

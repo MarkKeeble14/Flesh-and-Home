@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using Cinemachine;
 
 public class ShockwaveRing : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class ShockwaveRing : MonoBehaviour
     private LayerMask canHit;
     private float damage;
     private ImpulseSourceData impulseSourceData;
+    [SerializeField] private CinemachineImpulseSource collideWithPlayerImpulseSource;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -30,7 +32,7 @@ public class ShockwaveRing : MonoBehaviour
 
         if (other.TryGetComponent(out IDamageable damageable))
         {
-            impulseSourceData.collideWithPlayerImpulseSource.GenerateImpulse(
+            collideWithPlayerImpulseSource.GenerateImpulse(
                 new Vector3(
                     RandomHelper.RandomFloat(impulseSourceData.horizontalMinMaxImpulse),
                     RandomHelper.RandomFloat(impulseSourceData.verticalMinMaxImpulse),

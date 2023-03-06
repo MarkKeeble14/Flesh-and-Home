@@ -59,6 +59,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  collideWithPlayerImpulseSource: {fileID: 3801011761655478278}
 --- !u!82 &5268082847997902401
 AudioSource:
   m_ObjectHideFlags: 0

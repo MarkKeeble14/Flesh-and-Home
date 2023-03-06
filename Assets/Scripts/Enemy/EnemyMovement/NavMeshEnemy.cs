@@ -21,12 +21,14 @@ public class NavMeshEnemy : EnemyMovement
     }
 
     // Update is called once per frame
-    void Update()
+    protected new void Update()
     {
+        base.Update();
+
         // Debug.Log(name + ": " + AllowMove);
 
         // Nav Mesh Agent has not become active yet
-        if (!IsActive)
+        if (!IsActive || !navMeshAgent.isOnNavMesh)
         {
             movementSource.enabled = false;
             // Debug.Log("Not Active");
@@ -48,17 +50,6 @@ public class NavMeshEnemy : EnemyMovement
             // Debug.Log("Not Supposed to Move");
             return;
         };
-
-        // if we are meant to go to a specified target position rather than a transfom
-        if (overrideTarget)
-        {
-            // Debug.Log(name + ": Override Target" + overridenTarget);
-
-            // Move to position
-            navMeshAgent.SetDestination(overridenTarget.position);
-            movementSource.enabled = true;
-            return;
-        }
 
         // We are not overriding target position, just go to target if set
         // If the player is not set (or null cause of dying) stop execution
@@ -86,5 +77,15 @@ public class NavMeshEnemy : EnemyMovement
     {
         navMeshAgent.enabled = true;
         IsActive = true;
+    }
+
+    public override void SetSpeed(float f)
+    {
+        navMeshAgent.speed = f;
+    }
+
+    public override float GetSpeed()
+    {
+        return navMeshAgent.speed;
     }
 }

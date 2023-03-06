@@ -9,6 +9,11 @@ public class ChangeSpawnPosition : MonoBehaviour
 
     public void Start()
     {
+        ChangePosition(spawnPosition);
+    }
+
+    public void ChangePosition(SpawnPosition spawnPosition)
+    {
         SpawnPositionData data = spawnPositionDictionary[spawnPosition];
         transform.position = data.position;
         transform.localEulerAngles = data.eulerAngles;
@@ -18,7 +23,8 @@ public class ChangeSpawnPosition : MonoBehaviour
     {
         RUIN_START,
         HUB,
-        BOSS_ROOM
+        BOSS_ROOM,
+        OVERWORLD
     }
 
     [System.Serializable]

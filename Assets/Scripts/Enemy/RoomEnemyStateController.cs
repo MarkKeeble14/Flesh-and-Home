@@ -19,9 +19,23 @@ public class RoomEnemyStateController : RoomEnemy
 
     private bool isDisabled;
 
+    public void OverrideToAggroState()
+    {
+        defaultState = aggroState;
+        unAggroState = aggroState;
+        SwitchState(aggroState);
+    }
+
     private new void Awake()
     {
         base.Awake();
+
+        if (TryGetComponent(out KillableEntity killableEntity))
+        {
+            killableEntity.AddAdditionalOnEndAction(() => OnDeath());
+        }
+
+        SwitchState(defaultState);
     }
 
     protected void Update()
@@ -32,27 +46,18 @@ public class RoomEnemyStateController : RoomEnemy
             currentState.UpdateState(this);
     }
 
-    public override void Activate()
+    public override void OnPlayerEnterRoom()
     {
+        base.OnPlayerEnterRoom();
         if (isDisabled) return;
-
-        // Debug.Log(name + ": Enemy Activated");
-
-        base.Activate();
-
         SwitchState(aggroState);
     }
 
-    public override void Deactivate()
+    public override void OnPlayerLeaveRoom()
     {
+        base.OnPlayerLeaveRoom();
         if (isDisabled) return;
-
-        base.Deactivate();
-
-        if (HasBeenActivated)
-            SwitchState(unAggroState);
-        else
-            SwitchState(defaultState);
+        SwitchState(unAggroState);
     }
 
     private void SwitchState(EnemyState state)
@@ -62,11 +67,9 @@ public class RoomEnemyStateController : RoomEnemy
         if (currentState != null)
         {
             currentState.ExitState(this);
-            Debug.Log("Exiting: " + currentState);
         }
         currentState = state;
         currentState.EnterState(this);
-        Debug.Log("Entering: " + currentState);
     }
 
     public void SwitchState(EnemyState.EnemyStateType enemyStateType)
@@ -74,7 +77,7 @@ public class RoomEnemyStateController : RoomEnemy
         SwitchState(enemyStates[enemyStateType]);
     }
 
-    public virtual void Disable()
+    protected virtual void OnDeath()
     {
         SwitchState(EnemyState.EnemyStateType.DEAD);
         isDisabled = true;

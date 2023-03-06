@@ -10,9 +10,9 @@ public class BossAddOnsPhase : BossPhaseBaseState
     [SerializeField] protected int numAttacksAtOnce = 1;
     [SerializeField] private Attack onCrashDownAttack;
     [SerializeField] private float timeBetweenAttacks;
+    [SerializeField] private float returnToSpawnSpeed = 25f;
 
     [Header("Spawning")]
-    [SerializeField] private Transform dummyPoint;
     [SerializeField] private PercentageMap<EndableEntity> availableAddOns;
     [SerializeField] private float spawnPointDistanceFromBoss = 1f;
     [SerializeField] private Vector2 minMaxNumAddOns = new Vector2(1, 1);
@@ -70,7 +70,15 @@ public class BossAddOnsPhase : BossPhaseBaseState
         boss.ShellEnemyMovement.EnableNavMeshAgent();
         boss.ShellEnemyMovement.SetMove(true);
 
-        yield return boss.ShellEnemyMovement.GoToOverridenTarget(boss.SpawnPosition, 1f, true, true, false, false, null, null);
+        bool hasReachedTargetPos = false;
+        float prevSpeed = boss.ShellEnemyMovement.GetSpeed();
+        boss.ShellEnemyMovement.ClearTargets();
+        boss.ShellEnemyMovement.SetSpeed(returnToSpawnSpeed);
+        boss.ShellEnemyMovement.OverrideTarget(boss.SpawnPosition, 1f, true, false, () => hasReachedTargetPos = true, null);
+
+        yield return new WaitUntil(() => hasReachedTargetPos);
+
+        boss.ShellEnemyMovement.SetSpeed(prevSpeed);
 
         // Stop shell from moving
         // boss.ShellEnemyMovement.SetMove(false);
@@ -124,8 +132,8 @@ public class BossAddOnsPhase : BossPhaseBaseState
             // Tell that flesh to go to the chosen spawn point
             // Once there, the code inside of the delegate will execute
             Vector3 targetPosition = boss.ShellEnemyMovement.transform.position + direction * spawnPointDistanceFromBoss;
-            Transform point = Instantiate(dummyPoint, targetPosition, Quaternion.identity);
-            StartCoroutine(traveller.GoToOverridenTarget(point, 1f, true, true, true, false,
+
+            traveller.OverrideTarget(targetPosition, 1f, true,
                 delegate
             {
                 // Spawn an Add On
@@ -151,12 +159,19 @@ public class BossAddOnsPhase : BossPhaseBaseState
                     roomContent.Activate();
                 }
 
+                if (spawned.TryGetComponent(out RoomEnemyStateController enemyStateController))
+                {
+                    enemyStateController.OverrideToAggroState();
+                }
+
                 spawnedAdds.Add(spawned);
+
+                Destroy(traveller.gameObject);
             },
-            null));
+            () => Destroy(traveller.gameObject));
         }
 
-        yield return StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt, this));
+        StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt, this));
 
         // Main Loop
         bool success = false;
@@ -168,7 +183,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
             {
                 for (int i = 0; i < numAttacksAtOnce; i++)
                 {
-                    StartCoroutine(StartAttack(GameManager._Instance.PlayerAimAt, true));
+                    StartCoroutine(StartAttack(GameManager._Instance.PlayerAimAt, true, null));
                 }
 
                 timer = timeBetweenAttacks;
@@ -177,6 +192,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
             // Set HP Bar
             boss.HPBar.Set(time, duration);
 
+            /*
             // If all enemies are dead, break early & set success to true
             if (spawnedAdds.Count <= 0 && numAddsToSpawn > 0)
             {
@@ -184,6 +200,7 @@ public class BossAddOnsPhase : BossPhaseBaseState
                 success = true;
                 break;
             }
+            */
 
             // Search for nearby corpses, suckle them if there
 
@@ -192,12 +209,6 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
         // Set HP Bar
         boss.HPBar.Set(duration, duration);
-
-        // Call on end on all remaining entities
-        foreach (EndableEntity endable in spawnedAdds)
-        {
-            endable.CallOnEndAction();
-        }
 
         yield return new WaitUntil(() => boss.HPBar.IsFull);
 

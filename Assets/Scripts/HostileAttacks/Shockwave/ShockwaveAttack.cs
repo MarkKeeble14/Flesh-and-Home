@@ -43,7 +43,7 @@ public class ShockwaveAttack : Attack
             ShockwaveRing spawned = Instantiate(ring, hit.point + Vector3.up * spawnAtYOffset, Quaternion.identity);
             spawnedRings.Add(spawned);
 
-            StartCoroutine(spawned.ExecuteThump(() =>
+            spawned.StartCoroutine(spawned.ExecuteThump(() =>
             {
                 spawnedRings.Remove(spawned);
                 spawned.FadeOut();

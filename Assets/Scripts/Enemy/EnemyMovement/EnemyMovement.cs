@@ -1,48 +1,63 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public abstract class EnemyMovement : MonoBehaviour
 {
     private bool isDisabledForAttack;
     private bool move = true;
     public bool AllowMove => move && !isDisabledForAttack;
 
     protected Transform target;
+    public Transform Target => target;
     [SerializeField] private bool playerIsTarget;
     [SerializeField] protected LayerMask isGround;
 
     [Header("Audio")]
     [SerializeField] protected AudioSource movementSource;
 
-    protected bool overrideTarget;
-    protected Transform overridenTarget;
+    [SerializeField] private Transform dummyPoint;
 
-    public Transform Target => target;
+    private Stack<TargetData> targets = new Stack<TargetData>();
+    private TargetData currentTarget;
+    private bool hasReachedTargetPosition;
+
+    private Stack<Transform> availableDummyPoints = new Stack<Transform>();
+    private List<Transform> spawnedDummyPoints = new List<Transform>();
+
+    public abstract void SetSpeed(float f);
+    public abstract float GetSpeed();
+
+    public struct TargetData
+    {
+        public Transform target;
+        public Action onSuccess;
+        public Action onFailure;
+        public bool overrideIgnoreY;
+        public float overrideAcceptableDistanceBetweenTargetAndMover;
+        public bool destroyOnReachTarget;
+
+        public TargetData(Transform target, Action onSuccess, Action onFailure, bool overrideIgnoreY, float overrideAcceptableDistanceBetweenTargetAndMover, bool destroyOnReachTarget)
+        {
+            this.target = target;
+            this.onSuccess = onSuccess;
+            this.onFailure = onFailure;
+            this.overrideIgnoreY = overrideIgnoreY;
+            this.overrideAcceptableDistanceBetweenTargetAndMover = overrideAcceptableDistanceBetweenTargetAndMover;
+            this.destroyOnReachTarget = destroyOnReachTarget;
+        }
+    }
 
     private float GetDistanceToTarget(bool ignoreY)
     {
         if (ignoreY)
         {
-            if (overrideTarget)
-            {
-                return Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(overridenTarget.position.x, 0, overridenTarget.position.z));
-            }
-            else
-            {
-                return Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(target.position.x, 0, target.position.z));
-            }
+            return Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(target.position.x, 0, target.position.z));
         }
         else
         {
-            if (overrideTarget)
-            {
-                return Vector3.Distance(transform.position, overridenTarget.position);
-            }
-            else
-            {
-                return Vector3.Distance(transform.position, target.position);
-            }
+            return Vector3.Distance(transform.position, target.position);
         }
     }
 
@@ -61,62 +76,116 @@ public class EnemyMovement : MonoBehaviour
     {
         if (playerIsTarget && target == null)
             target = GameManager._Instance.PlayerTransform;
-    }
 
-    public void EndOverride()
-    {
-        interruptOverride = true;
-    }
-
-    private bool interruptOverride;
-    public IEnumerator GoToOverridenTarget(Transform target, float maxAcceptableDistanceFromTarget, bool ignoreY, bool endOverrideOnReachTarget, bool destroyOnReachTarget, bool destroyTransfromOnEnd, Action otherOnReachTarget, Action onFail)
-    {
-        interruptOverride = false;
-        // Debug.Log(name + ": Begin Override Target");
-
-        // Set variables
-        overrideTarget = true;
-        overridenTarget = target;
-
-        // Wait until we reach specified position
-        while (GetDistanceToTarget(ignoreY) > maxAcceptableDistanceFromTarget)
+        if (TryGetComponent(out EndableEntity endableEntity))
         {
-            // Debug.Log(name + " Position = " + transform.position + ", Target Position = " + target.position + ", " + " - Distance to Target = " + GetDistanceToTarget(ignoreY));
-            if (interruptOverride)
+            endableEntity.AddAdditionalOnEndAction(() => DestroyPoints());
+        }
+    }
+
+    public void ClearTargets()
+    {
+        while (targets.Count > 0)
+        {
+            TargetData popped = targets.Pop();
+            popped.onFailure?.Invoke();
+            if (popped.destroyOnReachTarget)
             {
-                onFail?.Invoke();
-
-                // Debug.Log("Target became null; possible due to being destroyed");
-                overrideTarget = false;
-                // overridenTarget = null;
-
-                if (destroyTransfromOnEnd)
+                if (spawnedDummyPoints.Contains(popped.target))
                 {
-                    Destroy(overridenTarget.gameObject);
+                    availableDummyPoints.Push(popped.target);
                 }
-
-                overridenTarget = null;
-
-                yield break;
+                else
+                {
+                    Destroy(popped.target.gameObject);
+                }
             }
-            // Debug.Log(name + " Moving to Target: " + transform.position + ", " + target.transform.position);
-            yield return null;
         }
 
-        // Debug.Log("Reached Target");
+        target = null;
+    }
 
-        // if meant to stop override target on end, do so
-        overrideTarget = !endOverrideOnReachTarget;
+    private void DestroyPoints()
+    {
+        foreach (Transform dummyPoint in spawnedDummyPoints)
+        {
+            Destroy(dummyPoint.gameObject);
+        }
+    }
 
-        if (destroyTransfromOnEnd)
-            Destroy(target.gameObject);
+    private void NextTarget()
+    {
+        currentTarget = targets.Pop();
+    }
 
-        // Call whatever functions passed in once reached target
-        otherOnReachTarget?.Invoke();
+    public void OverrideTarget(Vector3 targetPos, float acceptableDistanceBetweenTargetAndMover, bool ignoreY, Action onSuccess, Action onFailure)
+    {
+        Transform dummyPoint;
+        if (availableDummyPoints.Count == 0)
+        {
+            dummyPoint = Instantiate(this.dummyPoint, targetPos, Quaternion.identity, ClutterSavior._Instance.transform);
+            spawnedDummyPoints.Add(dummyPoint);
+        }
+        else
+        {
+            dummyPoint = availableDummyPoints.Pop();
+            dummyPoint.position = targetPos;
+        }
+        OverrideTarget(dummyPoint, acceptableDistanceBetweenTargetAndMover, ignoreY, true, onSuccess, onFailure);
+    }
 
-        // if meant to destroy on end, do so
-        if (destroyOnReachTarget)
-            Destroy(gameObject);
+    protected void Update()
+    {
+        if (hasReachedTargetPosition)
+        {
+            return;
+        }
+        else
+        {
+            if (target == null)
+            {
+                hasReachedTargetPosition = true;
+                currentTarget.onFailure?.Invoke();
+                return;
+            }
+            else
+            {
+                // Debug.Log(name + ": Distance to Go: " + GetDistanceToTarget(overrideIgnoreY));
+                if (GetDistanceToTarget(currentTarget.overrideIgnoreY) <= currentTarget.overrideAcceptableDistanceBetweenTargetAndMover)
+                {
+                    hasReachedTargetPosition = true;
+                    currentTarget.onSuccess?.Invoke();
+
+                    if (currentTarget.destroyOnReachTarget)
+                    {
+                        if (spawnedDummyPoints.Contains(currentTarget.target))
+                        {
+                            availableDummyPoints.Push(currentTarget.target);
+                        }
+                        else
+                        {
+                            Destroy(currentTarget.target.gameObject);
+                        }
+                    }
+
+                    if (targets.Count > 0)
+                        NextTarget();
+                }
+            }
+        }
+    }
+
+    public void OverrideTarget(Transform target, float acceptableDistanceBetweenTargetAndMover, bool ignoreY, bool destroyTargetOnEnd, Action onSuccess, Action onFailure)
+    {
+        if (target != null)
+        {
+            targets.Push(currentTarget);
+        }
+
+        TargetData newTarget = new TargetData(target, onSuccess, onFailure, ignoreY, acceptableDistanceBetweenTargetAndMover, destroyTargetOnEnd);
+        currentTarget = newTarget;
+        this.target = currentTarget.target;
+        hasReachedTargetPosition = false;
     }
 
     public void SetDisabledForAttack(bool v)

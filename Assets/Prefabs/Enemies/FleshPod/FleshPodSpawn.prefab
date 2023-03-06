@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 3860202574575028074}
   - component: {fileID: 5023724996855043176}
   - component: {fileID: 1941884154462041485}
+  - component: {fileID: -4030935778139801945}
   m_Layer: 12
   m_Name: FleshPodSpawn
   m_TagString: Untagged
@@ -450,7 +451,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   movementSource: {fileID: 7496811503299157509}
+  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
+    type: 3}
   enableOnAwake: 0
+  alterRigidbody: 1
   timeAfterGroundCollisionToMove: 0
   onCollideWithGroundClip:
     clip: {fileID: 0}
@@ -482,6 +486,7 @@ MonoBehaviour:
   destroyOnDeath: 1
   rigidbody: {fileID: 5023724996855043179}
   rigidbodiesToEnableOnDeath: []
+  renderer: {fileID: 0}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
@@ -509,7 +514,9 @@ MonoBehaviour:
     dictionary:
     - key: 0
       value: {fileID: 1941884154462041485}
-  defaultState: 3
+    - key: 2
+      value: {fileID: -4030935778139801945}
+  defaultState: 0
   aggroState: 0
   unAggroState: 0
   movement: {fileID: 2407002599294722366}
@@ -531,5 +538,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 155cb63f2592ed946abd18da90535864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4030935778139801945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5023724996855043178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f209ad97556e2254b96ec6cb978bd7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

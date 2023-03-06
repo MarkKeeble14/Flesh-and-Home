@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1882520849070057078}
   - component: {fileID: 2144187559847785579}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Arm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 2854728007549927425}
   - component: {fileID: 8898761843540015141}
   - component: {fileID: 3636546086596846040}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Shockwave1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   numThumps: 1
   timeBetweenThumps: 0
   maxRadius: 25
-  height: 2
+  height: 7.5
   spawnAtYOffset: 0.5
   expansionSpeed: 15
   damage: 10
@@ -244,10 +244,11 @@ GameObject:
   - component: {fileID: 959702198628339930}
   - component: {fileID: 959702198628339931}
   - component: {fileID: 2281779296839727250}
-  - component: {fileID: 7316895372226613432}
-  - component: {fileID: 2658321206875087034}
-  - component: {fileID: 7075875001378242814}
+  - component: {fileID: 5215206905127188695}
+  - component: {fileID: 8899907301702536468}
   - component: {fileID: 7658811976651653969}
+  - component: {fileID: 8144851917663707010}
+  - component: {fileID: 5860000141898226273}
   m_Layer: 17
   m_Name: PounderEnemy
   m_TagString: Untagged
@@ -584,6 +585,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   movementSource: {fileID: 959702198628339929}
+  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
+    type: 3}
   enableOnAwake: 1
   alterRigidbody: 1
 --- !u!114 &2281779296839727250
@@ -613,15 +616,19 @@ MonoBehaviour:
   rigidbodiesToEnableOnDeath:
   - {fileID: 2144187559847785579}
   - {fileID: 7947259757976992371}
+  renderer: {fileID: 959702198628339925}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  feastableLayer: 19
-  corpseHP: 25
-  corpseColor: {r: 0.024194535, g: 0.33962262, b: 0, a: 1}
-  renderer: {fileID: 959702198628339925}
---- !u!114 &7316895372226613432
+  fleshyTraveller: {fileID: -1068128480174535724, guid: 1ec8123e792c42d49ba10fba5255660d,
+    type: 3}
+  travellerHP: 50
+  detectionRange: 50
+  feastingEnemyLayer:
+    serializedVersion: 2
+    m_Bits: 131072
+--- !u!114 &5215206905127188695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -630,7 +637,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 959702198628339928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34d4d83091645244388552a3ee70da67, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d4b642ae6cc5ac47af7a0b542ec4287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleSpeed: 2.5
+  feastLevel: 1
+  onFeastSizeChange: 1.25
+  onFeastHPChange: 1.4
+--- !u!114 &8899907301702536468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959702198628339928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172133b2b6be73c4e980b1ef5e33de81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
@@ -643,55 +666,15 @@ MonoBehaviour:
   enemyStates:
     dictionary:
     - key: 0
-      value: {fileID: 7075875001378242814}
+      value: {fileID: 5860000141898226273}
     - key: 1
-      value: {fileID: 2658321206875087034}
+      value: {fileID: 8144851917663707010}
     - key: 2
       value: {fileID: 7658811976651653969}
-  defaultState: 2
-  aggroState: 0
-  unAggroState: 1
+  defaultState: 0
+  aggroState: 1
+  unAggroState: 0
   movement: {fileID: 959702198628339931}
-  scaleSpeed: 1
-  feastableDetectionRange: 15
-  feastable:
-    serializedVersion: 2
-    m_Bits: 524288
---- !u!114 &2658321206875087034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 959702198628339928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107aa9140e757144eace2c1183c8290f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNotInRoomOnEndChangeToState: 1
-  playerInRoomOnEndChangeToState: 0
-  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
-    type: 3}
-  pauseTime: 3
-  wanderDistance: 3
-  roomWideFeastableDetection: 1
-  feastTime: 5
-  onFeastSizeChange: 0.5
-  onFeastHPChange: 1.25
---- !u!114 &7075875001378242814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 959702198628339928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 501205966fe900142b62254b3368538b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prioritizeFeasting: 1
 --- !u!114 &7658811976651653969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,6 +687,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f209ad97556e2254b96ec6cb978bd7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8144851917663707010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959702198628339928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155cb63f2592ed946abd18da90535864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5860000141898226273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959702198628339928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0bb1ed5ab0d1cd47858107070c9f203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderDistance: 5
+  pauseTime: 1
 --- !u!1 &2520789080553671185
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +725,7 @@ GameObject:
   - component: {fileID: 1401552420160161213}
   - component: {fileID: 9008095304038524925}
   - component: {fileID: 3884943670264216834}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -813,7 +822,7 @@ GameObject:
   - component: {fileID: 3764463731325579150}
   - component: {fileID: 4651605492750961333}
   - component: {fileID: 2461658335473284642}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -908,7 +917,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632873308888232341}
   - component: {fileID: 7947259757976992371}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Arm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -957,7 +966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1820808212177247977}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: AttackList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -992,7 +1001,7 @@ GameObject:
   - component: {fileID: 9005178148256495715}
   - component: {fileID: 1044042816125282647}
   - component: {fileID: 6610742162130012876}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1089,7 +1098,7 @@ GameObject:
   - component: {fileID: 7167200876835237161}
   - component: {fileID: 8109076399407762592}
   - component: {fileID: 6377582180559740840}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

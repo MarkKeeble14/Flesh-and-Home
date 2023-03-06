@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class FleshPod : FeastableEntity, IRoomContent
+public class FleshPod : KillableEntity, IRoomContent
 {
     [Header("Settings")]
     [SerializeField] private float maxCapacity = 100f;
@@ -74,7 +74,7 @@ public class FleshPod : FeastableEntity, IRoomContent
                         Random.Range(0, visualComponent.localScale.y / 2),
                         Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
                     )
-                , Quaternion.identity);
+                , Quaternion.identity, ClutterSavior._Instance.transform);
 
             // Set the spawned thingy
             spawned.OnSpawn(GameManager._Instance.PlayerTransform);

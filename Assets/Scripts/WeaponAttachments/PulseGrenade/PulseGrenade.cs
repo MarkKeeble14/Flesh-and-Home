@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PulseGrenade : MonoBehaviour
@@ -19,6 +20,8 @@ public class PulseGrenade : MonoBehaviour
         StartCoroutine(Lifetime());
     }
 
+    private List<PulseGrenadePulse> spawned = new List<PulseGrenadePulse>();
+
     private IEnumerator Lifetime()
     {
         yield return new WaitUntil(() => activated);
@@ -26,11 +29,18 @@ public class PulseGrenade : MonoBehaviour
         for (int i = 0; i < settings.pulses; i++)
         {
             PulseGrenadePulse spawned = Instantiate(pulsePrefab, transform);
-            spawned.Set(settings, () => Destroy(spawned.gameObject));
+            this.spawned.Add(spawned);
+            spawned.Set(settings, delegate
+            {
+                Destroy(spawned.gameObject);
+                this.spawned.Remove(spawned);
+            });
 
             if (i != settings.pulses - 1)
                 yield return new WaitForSeconds(settings.timeBetweenPulses);
         }
+
+        yield return new WaitUntil(() => spawned.Count == 0);
 
         Destroy(gameObject);
     }

@@ -6,11 +6,6 @@ public class InputManager : MonoBehaviour
     public PlayerInputActions PlayerInputActions;
     private void Awake()
     {
-        if (_Instance != null)
-        {
-            _Instance.DisableInput();
-            Destroy(_Instance.gameObject);
-        }
         _Instance = this;
 
         // Set up new input
@@ -20,6 +15,13 @@ public class InputManager : MonoBehaviour
         PlayerInputActions.Player.Escape.Enable();
 
         Cursor.visible = false;
+    }
+
+    private void OnDestroy()
+    {
+        _Instance = null;
+        DisableInput();
+        PlayerInputActions.Player.Escape.Disable();
     }
 
     public void EnableInput()

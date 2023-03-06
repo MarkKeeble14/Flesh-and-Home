@@ -2,15 +2,14 @@
 
 public class DeadEnemyState : EnemyState
 {
+
     public override void EnterState(RoomEnemyStateController enemy)
     {
         base.EnterState(enemy);
 
-        enemy.Movement.SetMove(false);
-    }
+        // 27 is the int assigned to the "DeadEnemy" Layer
+        gameObject.layer = 27;
 
-    public override IEnumerator StateBehaviour(RoomEnemyStateController enemy)
-    {
-        yield break;
+        enemy.Movement.SetMove(false);
     }
 }

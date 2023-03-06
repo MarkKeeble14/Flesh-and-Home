@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: Pulser
   m_EditorClassIdentifier: 
   damage: 25
-  timeBetweenPulses: 2.5
+  timeBetweenPulses: 0.75
   pulses: 5
   shootForce: 1500
   activateOnCollideWith:
     serializedVersion: 2
-    m_Bits: 11468160
+    m_Bits: 11439488
   canDamage:
     serializedVersion: 2
     m_Bits: 169984
   crosshairSpread: 25
-  isSticky: 1
-  pulseSpeed: 12.5
+  isSticky: 0
+  pulseSpeed: 50
   pulseRadius: 30
   pulseKnockbackForce: 50
-  pulseStayDuration: 0.5
+  pulseStayDuration: 0.25
   pulseScaleOut: 1
-  pulseScaleOutSpeed: 50
+  pulseScaleOutSpeed: 75

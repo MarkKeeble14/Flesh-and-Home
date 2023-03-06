@@ -11,10 +11,10 @@ public abstract class RoomEnemy : AttackingEnemy, IRoomContent
 
     public RoomController SpawnRoom { get; set; }
     private new Renderer renderer;
-    private bool activated;
 
     public bool PlayerIsInRoom { get; set; }
     public bool HasBeenActivated { get; private set; }
+    public bool IsCurrentlyActive { get; private set; }
 
     protected void Awake()
     {
@@ -27,23 +27,22 @@ public abstract class RoomEnemy : AttackingEnemy, IRoomContent
 
     protected void Start()
     {
+        if (!HasBeenActivated)
+            Deactivate();
+
         if (activateOnStart)
         {
             Activate();
-        }
-        else if (!activated)
-        {
-            Deactivate();
         }
     }
 
     public virtual void Activate()
     {
-        HasBeenActivated = true;
-
         // Debug.Log(name + ": Room Enemy Activated");
 
-        activated = true;
+        HasBeenActivated = true;
+
+        IsCurrentlyActive = true;
 
         roomEnemySettings.SetActiveColors(renderer);
 
@@ -52,21 +51,22 @@ public abstract class RoomEnemy : AttackingEnemy, IRoomContent
 
     public virtual void Deactivate()
     {
-        activated = false;
-
         // Debug.Log(name + ": Room Enemy Activated");
+
+        IsCurrentlyActive = false;
+
         roomEnemySettings.SetInactiveColors(renderer);
 
         killableEntity.AcceptDamage = false;
     }
 
-    public void Aggro()
+    public virtual void OnPlayerEnterRoom()
     {
         PlayerIsInRoom = true;
         Activate();
     }
 
-    public void Deaggro()
+    public virtual void OnPlayerLeaveRoom()
     {
         PlayerIsInRoom = false;
         Deactivate();

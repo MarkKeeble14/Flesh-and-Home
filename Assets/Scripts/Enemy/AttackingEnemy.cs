@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -32,7 +33,7 @@ public class AttackingEnemy : MonoBehaviour
         return attack.Key;
     }
 
-    public IEnumerator StartAttack(Transform target, bool setNewAttack)
+    public IEnumerator StartAttack(Transform target, bool setNewAttack, Action onFinishAttack)
     {
         if (!attackPool.HasAttacksAvailable) yield break;
 
@@ -52,6 +53,8 @@ public class AttackingEnemy : MonoBehaviour
         {
             attackPool.AddAttack(attack);
         }
+
+        onFinishAttack?.Invoke();
     }
 
     public void AddCurrentAttack(Attack attack)

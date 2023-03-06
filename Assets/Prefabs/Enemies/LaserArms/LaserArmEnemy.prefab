@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8684878184082703764}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: AttackList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,10 +51,11 @@ GameObject:
   - component: {fileID: 3240085754061577289}
   - component: {fileID: 3240085754061577288}
   - component: {fileID: 8204789487728918563}
-  - component: {fileID: 7240291165814894563}
-  - component: {fileID: 7840589910256432663}
-  - component: {fileID: 976821555831621428}
+  - component: {fileID: 7201154453564974301}
+  - component: {fileID: 8095261538247776477}
   - component: {fileID: 1290536258943890374}
+  - component: {fileID: 7501019873870035100}
+  - component: {fileID: 8018810378253527400}
   m_Layer: 17
   m_Name: LaserArmEnemy
   m_TagString: Untagged
@@ -391,6 +392,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   movementSource: {fileID: 3240085754061577290}
+  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
+    type: 3}
   enableOnAwake: 1
   alterRigidbody: 1
 --- !u!114 &8204789487728918563
@@ -420,15 +423,19 @@ MonoBehaviour:
   rigidbodiesToEnableOnDeath:
   - {fileID: 3240085754159558669}
   - {fileID: 3240085755467808584}
+  renderer: {fileID: 3240085754061577286}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  feastableLayer: 19
-  corpseHP: 25
-  corpseColor: {r: 0.16609114, g: 0.4056604, b: 0.2343608, a: 1}
-  renderer: {fileID: 3240085754061577286}
---- !u!114 &7240291165814894563
+  fleshyTraveller: {fileID: -1068128480174535724, guid: 1ec8123e792c42d49ba10fba5255660d,
+    type: 3}
+  travellerHP: 50
+  detectionRange: 50
+  feastingEnemyLayer:
+    serializedVersion: 2
+    m_Bits: 131072
+--- !u!114 &7201154453564974301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -437,70 +444,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 3240085754061577291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34d4d83091645244388552a3ee70da67, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d4b642ae6cc5ac47af7a0b542ec4287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleSpeed: 2.5
+  feastLevel: 1
+  onFeastSizeChange: 0.5
+  onFeastHPChange: 1.25
+--- !u!114 &8095261538247776477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172133b2b6be73c4e980b1ef5e33de81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackPool:
     available:
       percentageMap:
-      - key: {fileID: 9008745641772614235}
-        value: 25
       - key: {fileID: 4308688546929136318}
         value: 75
+      - key: {fileID: 9008745641772614235}
+        value: 25
   activateOnStart: 0
   roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
   enemyStates:
     dictionary:
     - key: 0
-      value: {fileID: 7840589910256432663}
+      value: {fileID: 8018810378253527400}
     - key: 1
-      value: {fileID: 976821555831621428}
+      value: {fileID: 7501019873870035100}
     - key: 2
       value: {fileID: 1290536258943890374}
-  defaultState: 2
-  aggroState: 0
-  unAggroState: 1
+  defaultState: 0
+  aggroState: 1
+  unAggroState: 0
   movement: {fileID: 3240085754061577288}
-  scaleSpeed: 1
-  feastableDetectionRange: 15
-  feastable:
-    serializedVersion: 2
-    m_Bits: 524288
---- !u!114 &7840589910256432663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240085754061577291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 501205966fe900142b62254b3368538b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prioritizeFeasting: 1
---- !u!114 &976821555831621428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240085754061577291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 107aa9140e757144eace2c1183c8290f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNotInRoomOnEndChangeToState: 1
-  playerInRoomOnEndChangeToState: 0
-  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
-    type: 3}
-  pauseTime: 3
-  wanderDistance: 3
-  roomWideFeastableDetection: 1
-  feastTime: 3
-  onFeastSizeChange: 0.5
-  onFeastHPChange: 1.125
 --- !u!114 &1290536258943890374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,6 +496,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f209ad97556e2254b96ec6cb978bd7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7501019873870035100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155cb63f2592ed946abd18da90535864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8018810378253527400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0bb1ed5ab0d1cd47858107070c9f203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderDistance: 5
+  pauseTime: 1
 --- !u!1 &3240085754159558672
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +539,7 @@ GameObject:
   - component: {fileID: 3240085754159558667}
   - component: {fileID: 3240085754159558668}
   - component: {fileID: 3240085754159558669}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Arm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -969,7 +978,7 @@ GameObject:
   - component: {fileID: 3240085755467808582}
   - component: {fileID: 3240085755467808583}
   - component: {fileID: 3240085755467808584}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Arm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1401,7 +1410,7 @@ GameObject:
   m_Component:
   - component: {fileID: 555226448069307442}
   - component: {fileID: 9008745641772614235}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: DoubleBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1468,7 +1477,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193775052383505525}
   - component: {fileID: 4308688546929136318}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: SingleBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

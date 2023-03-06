@@ -20,19 +20,19 @@ TagManager:
   - FleshPodSpawn
   - LaserCuttable
   - BossPlating
-  - BossFleshy
+  - 
   - PlayerHitbox
-  - EnemyFlesh
+  - FeastingEnemy
   - BossFleshyHitbox
-  - Feastable
+  - FeastableTraveller
   - DoorTrigger
   - Door
   - RoomTrigger
-  - EnemyFeastableComponent
+  - 
   - UnlockTrigger
   - FlamethrowerTrigger
   - 
-  - 
+  - DeadEnemy
   - 
   - 
   - 

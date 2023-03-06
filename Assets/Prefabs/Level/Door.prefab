@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1179189138964674029}
   - component: {fileID: 5767323205614926793}
   - component: {fileID: 7295502765654808523}
-  - component: {fileID: 4162061216616509928}
   - component: {fileID: 9080569573715557851}
+  - component: {fileID: 7390371790218163411}
   m_Layer: 20
   m_Name: Trigger
   m_TagString: Untagged
@@ -99,26 +99,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4162061216616509928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 156251065368912402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f8f3e7a870849846b5f4c62415d7224, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activePrompt: 
-  door: {fileID: 2041011343539784274}
-  isSlidingDoor: 1
-  slideDirection: 1
-  slideSpeed: 0.75
-  nudgeAmount: 0.125
-  shakeSource: {fileID: 9080569573715557851}
-  shakeStrength: 5
 --- !u!114 &9080569573715557851
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +188,26 @@ MonoBehaviour:
     m_DissipationDistance: 5
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 1, y: 1, z: 1}
+--- !u!114 &7390371790218163411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156251065368912402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8f3e7a870849846b5f4c62415d7224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activePrompt: 
+  door: {fileID: 2041011343539784274}
+  isSlidingDoor: 1
+  slideDirection: 0
+  slideSpeed: 1
+  nudgeAmount: 0.125
+  shakeSource: {fileID: 9080569573715557851}
+  shakeStrength: 5
 --- !u!1 &1891597537356711763
 GameObject:
   m_ObjectHideFlags: 0

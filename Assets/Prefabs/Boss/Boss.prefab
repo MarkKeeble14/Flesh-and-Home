@@ -1567,7 +1567,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 3
-  m_Speed: 2
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 60
@@ -1596,6 +1596,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   movementSource: {fileID: 193684192667313155}
+  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
+    type: 3}
   enableOnAwake: 0
   alterRigidbody: 0
 --- !u!114 &7881108961409635393
@@ -1623,6 +1625,7 @@ MonoBehaviour:
   destroyOnDeath: 0
   rigidbody: {fileID: 4559155298250650245}
   rigidbodiesToEnableOnDeath: []
+  renderer: {fileID: 0}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
@@ -2852,7 +2855,7 @@ GameObject:
   - component: {fileID: 1200041713}
   - component: {fileID: 688889819296936332}
   - component: {fileID: 3244498498606665534}
-  m_Layer: 15
+  m_Layer: 19
   m_Name: BossFleshy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2892,7 +2895,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 384
   movementSource: {fileID: 6692938010683863987}
-  speed: 3.5
+  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
+    type: 3}
+  speed: 10
   rotateTowardsMovementDirection: 0
 --- !u!114 &4559155299825079987
 MonoBehaviour:
@@ -2914,19 +2919,20 @@ MonoBehaviour:
   minMaxNumPerSpawn: {x: 7, y: 10}
   perSpawnOffsetRange: {x: 1.5, y: 0, z: 1.5}
   timeBetweenSpawns: 0.05
-  minMaxScale: {x: 0.75, y: 1.25}
-  minMaxGrowSpeed: {x: 0.5, y: 1.5}
-  minMaxShrinkSpeed: {x: 0.75, y: 1}
+  minMaxScale: {x: 2, y: 3.25}
+  minMaxGrowSpeed: {x: 1.25, y: 2.5}
+  minMaxShrinkSpeed: {x: 1, y: 3}
   heightAllowance: 10
+  spawnOnGround: 1
   maxNumEnemiesCanHaveSpawned: 5
-  chanceToSpawnEnemyPerFrame: {x: 1, y: 1000}
+  chanceToSpawnEnemyPerFrame: {x: 1, y: 2500}
   enemyOptions:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
       value: 20
-    - key: {fileID: -3187359783752088, guid: 5684e422596042044a61c646ac4191d2, type: 3}
+    - key: {fileID: 8204789487728918563, guid: 5684e422596042044a61c646ac4191d2, type: 3}
       value: 40
-    - key: {fileID: 6182247085408442341, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
+    - key: {fileID: 2281779296839727250, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
       value: 40
 --- !u!114 &1200041714
 MonoBehaviour:
@@ -2953,6 +2959,7 @@ MonoBehaviour:
   destroyOnDeath: 1
   rigidbody: {fileID: 1200041713}
   rigidbodiesToEnableOnDeath: []
+  renderer: {fileID: 0}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
@@ -3192,8 +3199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 702110bb688e4bd43b55e49d8e278c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.25
-  tickRate: 0.05
+  damage: 2.5
+  tickRate: 0.25
   dealDamageTo:
     serializedVersion: 2
     m_Bits: 512
@@ -9451,7 +9458,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: height
-      value: 12.5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -9476,7 +9483,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: timeBetweenThumps
-      value: 2.5
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}
@@ -10528,7 +10535,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: height
-      value: 12.5
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -10538,7 +10545,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: numThumps
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -10553,7 +10560,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: timeBetweenThumps
-      value: 2.5
+      value: 0.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}

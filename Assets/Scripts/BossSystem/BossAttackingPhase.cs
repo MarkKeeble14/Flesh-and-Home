@@ -13,7 +13,7 @@ public abstract class BossAttackingPhase : BossPhaseBaseState
     {
         for (int i = 0; i < numAttacksAtOnce; i++)
         {
-            StartCoroutine(StartAttack(target, true));
+            StartCoroutine(StartAttack(target, true, null));
         }
 
         // Debug.Log("Waiting to be Attacking");

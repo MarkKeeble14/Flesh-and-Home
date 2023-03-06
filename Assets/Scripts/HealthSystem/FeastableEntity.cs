@@ -1,76 +1,83 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FeastableEntity : KillableEntity
 {
-    [SerializeField] private int feastableLayer = 19;
-    [SerializeField] private float corpseHP;
-    private bool isCorpse;
-    [SerializeField] private Color corpseColor;
+    [SerializeField] private KillableEntity fleshyTraveller;
+    [SerializeField] private float travellerHP;
 
-    private FeastEnemyStateController targetedBy;
-    public FeastEnemyStateController TargetedBy
-    {
-        get
-        {
-            return targetedBy;
-        }
-        set
-        {
-            targetedBy = value;
-        }
-    }
-
-    public Action onBecomeCorpse;
-    public Action onCorpseDie;
-
-    [SerializeField] protected new Renderer renderer;
+    [SerializeField] private float detectionRange;
+    [SerializeField] private LayerMask feastingEnemyLayer;
 
     protected override void OnEnd()
     {
         base.OnEnd();
 
-        if (!isCorpse)
+        FeastingEnemy target = FindNearestFeastingEnemy();
+        KillableEntity spawned = Instantiate(fleshyTraveller, new Vector3(transform.position.x, TransformHelper.FindGroundPoint(transform), transform.position.z), Quaternion.identity);
+
+        if (target != null)
         {
-            // Debug.Log(name + ": Now Corpse");
+            spawned.MaxHealth = travellerHP;
+            spawned.ResetHealth();
+            spawned.transform.localScale = transform.localScale;
 
-            gameObject.layer = feastableLayer;
-            MaxHealth = corpseHP;
-            CurrentHealth = corpseHP;
+            EnemyMovement spawnedMovement = spawned.GetComponent<EnemyMovement>();
 
-            renderer.material.DisableKeyword("_EMISSION");
-            renderer.material.color = corpseColor;
+            // Debug.Log(name + ", Target: " + target);
 
-            if (TryGetComponent(out NavMeshEnemy navMeshEnemy))
-            {
-                navMeshEnemy.DisableNavMeshAgent();
-            }
+            // Move to Enemy
+            spawnedMovement.OverrideTarget(target.transform, target.transform.localScale.x + .5f, true, false,
+                delegate
+                {
+                    if (target.Health.IsDead)
+                    {
+                        // Debug.Log("Failure: " + target);
+                        Destroy(spawned.gameObject);
+                        Destroy(gameObject);
 
-            if (TryGetComponent(out RoomEnemyStateController enemyStateController))
-            {
-                enemyStateController.Disable();
-            }
-
-            acceptDamage = true;
-            isCorpse = true;
-
-            // Debug.Log("On Become Corpse Invoked");
-            onBecomeCorpse?.Invoke();
+                    }
+                    else
+                    {
+                        // Debug.Log("Success: " + target);
+                        target.FeastOnEntity(this);
+                        Destroy(spawned.gameObject);
+                        Destroy(gameObject);
+                    }
+                }, delegate
+                {
+                    // Debug.Log("Failure");
+                    Destroy(spawned.gameObject);
+                    Destroy(gameObject);
+                });
         }
         else
         {
-            onCorpseDie?.Invoke();
+            Destroy(spawned.gameObject, .25f);
+            // Debug.Log("No Target; Destroying");
             Destroy(gameObject);
         }
     }
 
-    public void FeastOn()
+    private FeastingEnemy FindNearestFeastingEnemy()
     {
-        onCorpseDie?.Invoke();
-
-        CallOnEndAction();
-
-        // Debug.Log(name + " Was Feasted On");
-        Destroy(gameObject);
+        // TODO
+        Collider[] enemiesInRange = Physics.OverlapSphere(transform.position, detectionRange, feastingEnemyLayer);
+        List<Collider> candidateEnemies = new List<Collider>();
+        foreach (Collider col in enemiesInRange)
+        {
+            if (col.gameObject.Equals(gameObject)) continue;
+            candidateEnemies.Add(col);
+        }
+        // Debug.Log("There are " + candidateEnemies.Count + " candidates in range of " + name);
+        if (candidateEnemies.Count == 0)
+        {
+            // Debug.Log("No Candidates around " + name + " - Returning Null");
+            return null;
+        }
+        Transform chosenFeastingEnemy = TransformHelper.GetClosestTransformToTransform(transform, candidateEnemies);
+        // Debug.Log("Chosen Candidate: " + chosenFeastingEnemy);
+        return chosenFeastingEnemy.GetComponent<FeastingEnemy>();
     }
 }
