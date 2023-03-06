@@ -201,13 +201,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activePrompt: 
+  destroyOnActivate: 0
   door: {fileID: 2041011343539784274}
   isSlidingDoor: 1
-  slideDirection: 0
+  slideDirection: 2
   slideSpeed: 1
   nudgeAmount: 0.125
   shakeSource: {fileID: 9080569573715557851}
-  shakeStrength: 5
+  shakeStrength: 3
+  allowPlayerControl: 1
 --- !u!1 &1891597537356711763
 GameObject:
   m_ObjectHideFlags: 0

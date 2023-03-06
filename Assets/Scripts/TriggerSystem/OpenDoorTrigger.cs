@@ -21,9 +21,11 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
     private Coroutine animationCoroutine;
 
     protected override string Suffix => (isOpen ? " Close" : " Open") + " Door";
-    private bool allowPlayerControl = true;
+    [SerializeField] private bool allowPlayerControl = true;
 
-    private void Awake()
+    protected override bool AllowShowText => allowPlayerControl;
+
+    private new void Awake()
     {
         closePosition = door.localPosition;
         switch (slideDirection)
@@ -41,6 +43,28 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
                 openPosition = closePosition + door.localScale.y * Vector3.up + (door.localScale.y * nudgeAmount * Vector3.up);
                 break;
         }
+
+        onActivate += delegate
+        {
+            if (!allowPlayerControl) return;
+            if (!isOpen)
+            {
+                Open(null);
+            }
+            else
+            {
+                /*
+                if (isSlidingDoor)
+                {
+                    Close(null);
+                }
+                */
+            }
+            // helperText.Show(this, GetHelperTextString());
+            // InputManager._Instance.PlayerInputActions.Player.Interact.started += CallActivate;
+        };
+
+        base.Awake();
     }
 
     public void LockClosed()
@@ -57,24 +81,6 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
         showText = false;
     }
 
-    protected override void Activate()
-    {
-        if (!allowPlayerControl) return;
-        if (!isOpen)
-        {
-            Open(null);
-        }
-        else
-        {
-            if (isSlidingDoor)
-            {
-                Close(null);
-            }
-        }
-        helperText.Show(this, GetHelperTextString());
-        InputManager._Instance.PlayerInputActions.Player.Interact.started += CallActivate;
-    }
-
     public void Open(Action onOpened)
     {
         if (animationCoroutine != null)
@@ -85,6 +91,8 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
         if (isSlidingDoor)
         {
             animationCoroutine = StartCoroutine(SlideOpen(onOpened));
+            allowPlayerControl = false;
+            showText = false;
         }
     }
 

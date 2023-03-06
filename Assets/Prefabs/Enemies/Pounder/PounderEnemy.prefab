@@ -117,7 +117,7 @@ MonoBehaviour:
   numThumps: 1
   timeBetweenThumps: 0
   maxRadius: 25
-  height: 7.5
+  height: 10
   spawnAtYOffset: 0.5
   expansionSpeed: 15
   damage: 10
@@ -125,7 +125,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65536
   impulseSourceData:
-    collideWithPlayerImpulseSource: {fileID: 3636546086596846040}
     verticalMinMaxImpulse: {x: -1, y: 1}
     horizontalMinMaxImpulse: {x: -0.5, y: 0.5}
     impulseMultiplier: 1

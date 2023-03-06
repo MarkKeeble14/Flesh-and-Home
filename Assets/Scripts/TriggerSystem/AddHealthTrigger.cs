@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddHealthTrigger : DestroyTriggerOnActivate
+public class AddHealthTrigger : TextPromptKeyTrigger
 {
     [SerializeField] private FloatStore hpStore;
     [SerializeField] private float hpRestore;
 
-    protected override void Activate()
+    private new void Awake()
     {
-        hpStore.AlterFloat(hpRestore);
+        onActivate += () => hpStore.AlterFloat(hpRestore);
+        base.Awake();
     }
 }

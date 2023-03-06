@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class AddFuelTrigger : DestroyTriggerOnActivate
+public class AddFuelTrigger : TextPromptKeyTrigger
 {
     [SerializeField] private FloatStore fuelStore;
     [SerializeField] private float fuelAmount;
 
-    protected override void Activate()
+    private new void Awake()
     {
-        fuelStore.AlterFloat(fuelAmount);
+        onActivate += () => fuelStore.AlterFloat(fuelAmount);
+        base.Awake();
     }
 }
 

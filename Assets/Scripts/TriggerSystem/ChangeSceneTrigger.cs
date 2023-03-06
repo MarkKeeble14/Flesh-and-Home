@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class ChangeSceneTrigger : DestroyTriggerOnActivate
+public class ChangeSceneTrigger : TextPromptKeyTrigger
 {
     [SerializeField] private string sceneName;
 
-    protected override void Activate()
+    private new void Awake()
     {
-        SceneManager.LoadScene(sceneName);
+        onActivate += () => SceneManager.LoadScene(sceneName);
+        base.Awake();
     }
 }

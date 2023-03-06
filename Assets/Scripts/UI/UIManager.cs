@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
@@ -17,10 +18,13 @@ public class UIManager : MonoBehaviour
     private int escapeToggle;
     [SerializeField] private SerializableDictionary<CanvasFunction, GameObject> canvases = new SerializableDictionary<CanvasFunction, GameObject>();
 
+    [SerializeField] private Animator blackBars;
     private void Start()
     {
         InputManager._Instance.PlayerInputActions.Player.Escape.performed += Escape;
     }
+
+    [SerializeField] private GameObject[] disableObjectsWhenBlackBarsAreActive;
 
     public void OpenSettingsMenu()
     {
@@ -46,6 +50,20 @@ public class UIManager : MonoBehaviour
         canvases[canvas].SetActive(false);
     }
 
+    public void SetBlackBars(bool v, bool skipAnimation)
+    {
+        foreach (GameObject obj in disableObjectsWhenBlackBarsAreActive)
+        {
+            obj.gameObject.SetActive(!v);
+        }
+
+        blackBars.SetBool("Show", v);
+        if (skipAnimation)
+        {
+            blackBars.Play(v ? "Show" : "Hide", 0, 1);
+        }
+
+    }
 
     public void Escape(InputAction.CallbackContext ctx)
     {
