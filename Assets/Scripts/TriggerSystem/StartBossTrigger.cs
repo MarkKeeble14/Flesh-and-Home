@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 
-public class StartBossTrigger : DestroyTriggerOnActivate
+public class StartBossTrigger : TextPromptKeyTrigger
 {
     [SerializeField] private BossPhaseManager bossPhaseManager;
     [SerializeField] private OpenDoorTrigger enterDoor;
     [SerializeField] private OpenDoorTrigger exitDoor;
 
-    protected override void Activate()
+    private new void Awake()
     {
-        bossPhaseManager.EnterCurrentState();
-        enterDoor.LockClosed();
-        exitDoor.LockClosed();
+        onActivate += delegate
+        {
+            bossPhaseManager.EnterCurrentState();
+            enterDoor.LockClosed();
+            exitDoor.LockClosed();
+        };
+
+        base.Awake();
     }
 }

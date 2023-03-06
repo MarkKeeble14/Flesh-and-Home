@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class ProgressionManager : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class ProgressionManager : MonoBehaviour
 
     private bool jetpackUnlocked;
     private bool flamethrowerUnlocked;
+
+    private List<UnlockType> currentUnlocks = new List<UnlockType>();
+
     private bool laserCutterUnlocked;
     private bool pulseGrenadeLauncherUnlocked;
 
@@ -74,6 +78,8 @@ public class ProgressionManager : MonoBehaviour
         // Allow player to use jetpack
         playerController.AquireJetpack();
 
+        currentUnlocks.Add(UnlockType.JETPACK);
+
         // Spawn text
         StartCoroutine(SpawnText("Jetpack"));
     }
@@ -97,6 +103,8 @@ public class ProgressionManager : MonoBehaviour
         // Enable crosshair
         flamethrowerCrosshair.gameObject.SetActive(true);
 
+        currentUnlocks.Add(UnlockType.FLAMETHROWER);
+
         // Spawn text
         StartCoroutine(SpawnText("Flamethrower"));
     }
@@ -116,6 +124,8 @@ public class ProgressionManager : MonoBehaviour
 
         // Enable crosshair
         laserCutterCrosshair.gameObject.SetActive(true);
+
+        currentUnlocks.Add(UnlockType.LASER_CUTTER);
 
         // Spawn text
         StartCoroutine(SpawnText("Laser Cutter"));
@@ -137,6 +147,8 @@ public class ProgressionManager : MonoBehaviour
         // Enable crosshair
         pulseGrenadeLauncherCrosshair.gameObject.SetActive(true);
 
+        currentUnlocks.Add(UnlockType.PULSE_GRENADE_LAUNCHER);
+
         // Spawn text
         StartCoroutine(SpawnText("Pulse Grenade Launcher"));
     }
@@ -156,5 +168,14 @@ public class ProgressionManager : MonoBehaviour
         spawned.text = "Unlocked: " + unlocked + "!";
         yield return new WaitForSeconds(unlockTextDuration);
         spawned.GetComponent<Animator>().SetTrigger("Done");
+    }
+
+    public bool HasAllUnlocks(List<UnlockType> requiredUnlocks)
+    {
+        foreach (UnlockType type in requiredUnlocks)
+        {
+            if (!currentUnlocks.Contains(type)) return false;
+        }
+        return true;
     }
 }

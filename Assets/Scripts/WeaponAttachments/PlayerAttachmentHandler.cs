@@ -74,7 +74,8 @@ public class PlayerAttachmentHandler : MonoBehaviour
     public void SwitchAttatchment(WeaponAttachmentController attachment)
     {
         // Exit
-        currentWeaponAttachment.ExitState(this);
+        if (currentWeaponAttachment != null)
+            currentWeaponAttachment.ExitState(this);
 
         // Switch
         currentWeaponAttachment = attachment;

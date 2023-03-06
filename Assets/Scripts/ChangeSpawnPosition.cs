@@ -24,7 +24,10 @@ public class ChangeSpawnPosition : MonoBehaviour
         RUIN_START,
         HUB,
         BOSS_ROOM,
-        OVERWORLD
+        OVERWORLD,
+        UNLOCK1,
+        UNLOCK2,
+        UNLOCK3
     }
 
     [System.Serializable]
