@@ -21,6 +21,9 @@ public class BossSetLaserProjectileAttack : Attack
         {
             LaserBarrel selected = set[i];
             selected.ShootLaser(settings.Visuals.GetEmmissiveColor(settings.Visuals.GetLerpedColor(i / set.Length)), settings.CanHit, settings.CanDamage, settings.Speed, settings.Damage, settings.HitForce);
+
+            if (executionInterrupted) break;
+
             yield return new WaitForSeconds(RandomHelper.RandomFloat(minMaxTimeBetweenShots));
         }
     }

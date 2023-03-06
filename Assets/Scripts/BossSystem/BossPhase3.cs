@@ -136,8 +136,6 @@ public class BossPhase3 : BossAttackingPhase
             b.Disabled = true;
         }
 
-        yield return new WaitUntil(() => boss.HPBar.IsFull);
-
         yield return new WaitForSeconds(timeAfterFleshyKillBeforeDropBarrels);
 
         // Turn gravity back on for barrels

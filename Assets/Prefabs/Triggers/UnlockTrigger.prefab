@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 356225051794016195}
   - component: {fileID: 356225051794016194}
   - component: {fileID: 7649217492800962641}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: UnlockTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

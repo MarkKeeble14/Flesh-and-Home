@@ -31,7 +31,7 @@ public abstract class BossPhaseBaseState : AttackingEnemy
     private List<BossSpawnPoint> fuelSpawnPoints = new List<BossSpawnPoint>();
     [SerializeField] private DestroyTriggerOnActivate addFuelTriggerPrefab;
     private Vector2 chanceToSpawnFuelTrigger;
-    [SerializeField] private int chanceToSpawnFuelTriggerYComponentPerSpawnpoint = 5000;
+    [SerializeField] private Vector2 chanceToSpawnFuelTriggerPerSpawnpoint = new Vector2(1, 10000);
 
 
     public virtual void EnterState(BossPhaseManager boss)
@@ -41,7 +41,7 @@ public abstract class BossPhaseBaseState : AttackingEnemy
 
         // Add all boss spawn points
         fuelSpawnPoints.AddRange(FindObjectsOfType<BossFuelSpawnPoint>());
-        chanceToSpawnFuelTrigger = new Vector2(1, chanceToSpawnFuelTriggerYComponentPerSpawnpoint * fuelSpawnPoints.Count);
+        chanceToSpawnFuelTrigger = new Vector2(chanceToSpawnFuelTriggerPerSpawnpoint.x, chanceToSpawnFuelTriggerPerSpawnpoint.y * fuelSpawnPoints.Count);
 
         // Start Phase Behaviour
         StartCoroutine(StateBehaviour(boss));

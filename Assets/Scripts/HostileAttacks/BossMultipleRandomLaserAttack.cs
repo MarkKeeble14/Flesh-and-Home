@@ -47,6 +47,9 @@ public class BossMultipleRandomLaserAttack : BossLaserAttack
 
         yield return new WaitUntil(() => GetLasersActive(callOn));
 
-        yield return new WaitUntil(() => !GetLasersActive(callOn));
+        while (GetLasersActive(callOn) && !executionInterrupted)
+        {
+            yield return null;
+        }
     }
 }

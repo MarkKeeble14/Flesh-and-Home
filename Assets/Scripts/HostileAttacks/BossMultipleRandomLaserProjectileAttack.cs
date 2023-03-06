@@ -42,6 +42,8 @@ public class BossMultipleRandomLaserProjectileAttack : Attack
 
         for (int i = 0; i < callOn.Count; i++)
         {
+            if (executionInterrupted) break;
+
             LaserBarrel selected = callOn[i];
             selected.ShootLaser(settings.Visuals.GetEmmissiveColor(settings.Visuals.GetLerpedColor(i / callOn.Count)), settings.CanHit, settings.CanDamage, settings.Speed, settings.Damage, settings.HitForce);
             yield return new WaitForSeconds(RandomHelper.RandomFloat(minMaxTimeBetweenShots));

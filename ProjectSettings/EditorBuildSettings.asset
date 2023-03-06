@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: Assets/Scenes/JayTestScene/TitleScene.unity
+    guid: 987a888ef7bb9804a902a56ffc8b0482
+  - enabled: 1
+    path: Assets/Scenes/JayTestScene/InteractiveTitleScene.unity
+    guid: 70b47bb61ec6388478880959fa8ea818
   - enabled: 1
     path: Assets/Scenes/OverworldScene.unity
     guid: d009c4f534ffe8349894fb8c88a2889c
   - enabled: 1
-    path: Assets/Scenes/BossTestScene.unity
-    guid: f04f138d4fe000f40acacd59b29cad18
+    path: Assets/Scenes/RuinsLayoutScene.unity
+    guid: 95434ffc941689b459f59f74e4cac4be
   m_configObjects: {}

@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Fuel
-    [SerializeField] private FuelStore fuelStore;
+    [SerializeField] private FloatStore fuelStore;
     [SerializeField] private float fuelConsumptionRate = 1f;
     [SerializeField] private ParticleSystem jetpackParticles;
 
@@ -305,7 +305,7 @@ public class PlayerController : MonoBehaviour
         jetpackParticles.Play();
 
         // Player must be holding the button, have time left, and also must have fuel left to burn
-        while (inputManager.PlayerInputActions.Player.Jump.IsPressed() && jetpackTimer < maxJetpackDuration && fuelStore.CurrentFuel > 0 && !isGrounded)
+        while (inputManager.PlayerInputActions.Player.Jump.IsPressed() && jetpackTimer < maxJetpackDuration && fuelStore.CurrentFloat > 0 && !isGrounded)
         {
             // Update timer
             jetpackTimer += Time.deltaTime;
@@ -314,7 +314,7 @@ public class PlayerController : MonoBehaviour
             jetpackDisplay.Set(jetpackTimer, maxJetpackDuration);
 
             // Use Fuel
-            fuelStore.AlterFuel(-Time.deltaTime * fuelConsumptionRate);
+            fuelStore.AlterFloat(-Time.deltaTime * fuelConsumptionRate);
 
             // Add force to move, but only if there is space to move upwards
             if (isBonking)

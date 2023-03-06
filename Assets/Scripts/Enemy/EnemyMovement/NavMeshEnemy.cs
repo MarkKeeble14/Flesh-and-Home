@@ -9,21 +9,26 @@ public class NavMeshEnemy : EnemyMovement
 
     public bool IsActive { get; protected set; }
 
+    [SerializeField] private bool alterRigidbody = true;
+    private Rigidbody rb;
 
     private void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
         if (enableOnAwake)
             EnableNavMeshAgent();
     }
 
     // Update is called once per frame
-    void Update()
+    protected new void Update()
     {
+        base.Update();
+
         // Debug.Log(name + ": " + AllowMove);
 
         // Nav Mesh Agent has not become active yet
-        if (!IsActive)
+        if (!IsActive || !navMeshAgent.isOnNavMesh)
         {
             movementSource.enabled = false;
             // Debug.Log("Not Active");
@@ -35,6 +40,8 @@ public class NavMeshEnemy : EnemyMovement
 
         // Stop if not supposed to move so other things can move this object
         navMeshAgent.isStopped = !AllowMove;
+        if (alterRigidbody)
+            rb.isKinematic = !AllowMove;
 
         // Don't allow move if not supposed to move
         if (!AllowMove)
@@ -44,22 +51,13 @@ public class NavMeshEnemy : EnemyMovement
             return;
         };
 
-        // if we are meant to go to a specified target position rather than a transfom
-        if (overrideTarget)
-        {
-            // Move to position
-            navMeshAgent.SetDestination(overridenTargetPosition);
-            movementSource.enabled = true;
-            return;
-
-        }
-
         // We are not overriding target position, just go to target if set
         // If the player is not set (or null cause of dying) stop execution
         if (!target)
         {
-            movementSource.enabled = false;
             // Debug.Log("No Target Set");
+
+            movementSource.enabled = false;
             return;
         };
 
@@ -79,5 +77,15 @@ public class NavMeshEnemy : EnemyMovement
     {
         navMeshAgent.enabled = true;
         IsActive = true;
+    }
+
+    public override void SetSpeed(float f)
+    {
+        navMeshAgent.speed = f;
+    }
+
+    public override float GetSpeed()
+    {
+        return navMeshAgent.speed;
     }
 }

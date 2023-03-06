@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class FleshPodSpawn : MovementBasedEnemy
+public class FleshPodSpawn : RoomEnemyStateController
 {
     [Header("Enemy")]
     [Header("Settings")]
@@ -11,12 +11,12 @@ public class FleshPodSpawn : MovementBasedEnemy
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onSpawnClip;
     [SerializeField] private AudioSource source;
-    [SerializeField] private new Rigidbody rigidbody;
+    [SerializeField] private Rigidbody rb;
 
     public void OnSpawn(Transform target)
     {
         // Add Force
-        rigidbody.AddForce(new Vector3(
+        rb.AddForce(new Vector3(
             Random.Range(minMaxHorizontalSpawnForce.x, minMaxHorizontalSpawnForce.y),
             Random.Range(minMaxVerticalSpawnForce.x, minMaxVerticalSpawnForce.y),
             Random.Range(minMaxHorizontalSpawnForce.x, minMaxHorizontalSpawnForce.y))

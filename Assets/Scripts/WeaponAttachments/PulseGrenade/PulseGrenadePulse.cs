@@ -12,7 +12,7 @@ public class PulseGrenadePulse : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (!LayerMaskHelper.IsInLayerMask(other.gameObject, settings.canDamage)) return;
-
+        if (hasHitList.Contains(other)) return;
         if (other.TryGetComponent(out IDamageable damageable))
         {
             damageable.Damage(settings.damage, settings.pulseKnockbackForce * (other.transform.position - transform.position).normalized);

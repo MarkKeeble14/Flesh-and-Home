@@ -16,7 +16,7 @@ public class FlamethrowerSettings : WeaponAttachmentController
     [SerializeField] private TriggerSettings triggerSettings;
 
     [Header("Fuel")]
-    [SerializeField] private FuelStore fuelStore;
+    [SerializeField] private FloatStore fuelStore;
     [SerializeField] private float fuelConsumptionRate;
     [Header("References")]
     [SerializeField] private ParticleSystem flamethrowerParticleSystem;
@@ -27,7 +27,7 @@ public class FlamethrowerSettings : WeaponAttachmentController
 
     public override void Fire(InputAction.CallbackContext ctx)
     {
-        if (fuelStore.CurrentFuel > 0)
+        if (fuelStore.CurrentFloat > 0)
         {
             StartCoroutine(Fire());
         }
@@ -41,13 +41,13 @@ public class FlamethrowerSettings : WeaponAttachmentController
         flamethrowerSource.enabled = true;
         source.PlayOneShot(flamethrowerStartSound);
 
-        while (InputManager._Instance.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFuel > 0)
+        while (InputManager._Instance.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFloat > 0)
         {
             // Spread Crosshair
             CrosshairManager._Instance.Spread(CrosshairType.FLAMETHROWER, triggerSettings.crosshairSpread);
 
             // Use fuel
-            fuelStore.AlterFuel(-Time.deltaTime * fuelConsumptionRate);
+            fuelStore.AlterFloat(-Time.deltaTime * fuelConsumptionRate);
 
             yield return null;
         }

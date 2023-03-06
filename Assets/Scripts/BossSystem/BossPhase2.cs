@@ -42,13 +42,12 @@ public class BossPhase2 : BossAttackingPhase
         // Has movement
         boss.ShellEnemyMovement.SetMove(true);
         boss.ShellEnemyMovement.EnableNavMeshAgent();
+        boss.ShellEnemyMovement.OverrideTarget(GameManager._Instance.PlayerTransform, 0f, true, false, null, null);
 
         while (!complete)
         {
             yield return StartCoroutine(CallAttacks(boss, GameManager._Instance.PlayerAimAt));
         }
-
-        yield return new WaitUntil(() => boss.HPBar.IsFull);
 
         // Switch State
         boss.LoadNextPhase();

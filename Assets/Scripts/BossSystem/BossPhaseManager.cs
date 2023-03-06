@@ -6,7 +6,7 @@ public class BossPhaseManager : MonoBehaviour
     private int index;
     [SerializeField] private BossPhase[] bossPhaseOrder;
     [SerializeField] private Transform spawnPosition;
-    public Vector3 SpawnPosition => spawnPosition.position;
+    public Transform SpawnPosition => spawnPosition;
 
     private BossPhaseBaseState currentPhase;
     public BossIntroPhase bossIntroPhase;

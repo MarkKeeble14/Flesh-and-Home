@@ -7,6 +7,10 @@ public class SingleBarrelAttack : StandardLaserAttack
 
     protected override IEnumerator ExecuteAttack(Transform target)
     {
-        yield return StartCoroutine(LaserFrom(barrel, target));
+        StartCoroutine(LaserFrom(barrel, target));
+
+        yield return new WaitUntil(() => barrel.IsFiring);
+
+        yield return new WaitUntil(() => !barrel.IsFiring);
     }
 }

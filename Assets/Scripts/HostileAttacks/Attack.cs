@@ -48,13 +48,14 @@ public abstract class Attack : MonoBehaviour
     [SerializeField] protected AudioSource source;
     [SerializeField] private AudioClipContainer onStartClip;
     [SerializeField] private AudioClipContainer onEndClip;
+    protected bool executionInterrupted;
 
     public IEnumerator StartAttack(Transform target, AttackingEnemy enemy)
     {
         startedAttacking = true;
 
         // Add attack to enemy tracker
-        enemy.AddAttack(this);
+        enemy.AddCurrentAttack(this);
 
         // Debug.Log("Starting Attack - 3");
 
@@ -67,6 +68,7 @@ public abstract class Attack : MonoBehaviour
         // 
         while (currentlyAttacking)
         {
+            // Debug.Log(name + ", Currently Attacking: " + currentlyAttacking);
             // Set rotation if desired
             if (rotateWhileAttacking)
             {
@@ -88,6 +90,8 @@ public abstract class Attack : MonoBehaviour
             yield return null;
         }
 
+        executionInterrupted = false;
+
         // Debug.Log("After Attack - 4");
 
         // Audio
@@ -106,7 +110,7 @@ public abstract class Attack : MonoBehaviour
         }
 
         // Remove attack from enemy tracker
-        enemy.RemoveAttack(this);
+        enemy.RemoveCurrentAttack(this);
 
         // Re-enable movement
         isDisablingMovement = false;
@@ -116,7 +120,13 @@ public abstract class Attack : MonoBehaviour
     {
         // Actually call attack
         currentlyAttacking = true;
+
+        // Debug.Log("Currently Attacking now True");
+
         yield return StartCoroutine(ExecuteAttack(target));
+
+        // Debug.Log("Currently Attacking now False");
+
         currentlyAttacking = false;
     }
 
@@ -161,7 +171,8 @@ public abstract class Attack : MonoBehaviour
 
     public virtual void Interrupt()
     {
-        StopAllCoroutines();
+        // Debug.Log(name + ": Interrupted");
+        executionInterrupted = true;
     }
 
     protected float GetDistanceToTransform(Transform target) => Vector3.Distance(transform.position, target.position);

@@ -4,8 +4,21 @@ using UnityEngine.AI;
 public class KillableEntity : EndableEntity
 {
     [Header("Damageable")]
-    [SerializeField] protected float maxHealth;
-    public float MaxHealth
+    private float currentHealth;
+    public virtual float CurrentHealth
+    {
+        get
+        {
+            return currentHealth;
+        }
+        set
+        {
+            currentHealth = value;
+        }
+    }
+
+    [SerializeField] private float maxHealth;
+    public virtual float MaxHealth
     {
         get
         {
@@ -16,7 +29,7 @@ public class KillableEntity : EndableEntity
             maxHealth = value;
         }
     }
-    protected float currentHealth;
+
     [SerializeField] protected bool acceptDamage = true;
     public bool AcceptDamage
     {
@@ -30,6 +43,8 @@ public class KillableEntity : EndableEntity
         }
     }
 
+    public virtual bool IsDead => currentHealth <= 0;
+
     [SerializeField] private bool acceptKnockback;
 
     [Header("What Happens After Death?")]
@@ -37,27 +52,28 @@ public class KillableEntity : EndableEntity
 
     [Header("References")]
     [SerializeField] protected new Rigidbody rigidbody;
+    public Rigidbody Rigidbody => rigidbody;
     [SerializeField] private Rigidbody[] rigidbodiesToEnableOnDeath;
+    [SerializeField] protected new Renderer renderer;
 
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onTakeDamageClip;
 
-
     private void OnEnable()
     {
         // Set current health to max health
-        currentHealth = maxHealth;
+        CurrentHealth = maxHealth;
     }
 
     public override void Damage(float damage)
     {
         if (!acceptDamage) return;
-        currentHealth -= damage;
+        CurrentHealth -= damage;
 
         // Audio
         Instantiate(tempSource, transform.position, Quaternion.identity).Play(onTakeDamageClip);
 
-        if (currentHealth <= 0)
+        if (CurrentHealth <= 0)
         {
             onEndAction();
         }
@@ -73,6 +89,7 @@ public class KillableEntity : EndableEntity
 
     protected override void OnEnd()
     {
+        // Debug.Log(name + ": Killable - On End Called");
         base.OnEnd();
 
         acceptDamage = false;
@@ -91,16 +108,10 @@ public class KillableEntity : EndableEntity
             Destroy(gameObject);
         }
 
-        // if this entity died while it was trying to feast something, make sure that thing can once again be feasted 
-        if (TryGetComponent(out FeastingEnemy feastingEnemy))
-        {
-            feastingEnemy.RemoveTargeted();
-        }
-
         // Stop basic enemy functions such as attacking
         if (TryGetComponent(out AttackingEnemy basicEnemy))
         {
-            basicEnemy.Stop();
+            basicEnemy.NotifyOfDeath();
         }
 
         // Stop enemy from moving
@@ -112,6 +123,6 @@ public class KillableEntity : EndableEntity
 
     public void ResetHealth()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = MaxHealth;
     }
 }
