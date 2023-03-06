@@ -2,7 +2,7 @@
 using UnityEngine.InputSystem;
 using TMPro;
 
-public abstract class TextPromptKeyTrigger : MonoBehaviour
+public abstract class TextPromptKeyTrigger : EventTrigger
 {
     private string prefix = "'E' to ";
     [SerializeField] protected string activePrompt;
@@ -10,24 +10,45 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
     protected TriggerHelperText helperText;
     protected bool showText = true;
 
+    protected virtual bool AllowShowText
+    {
+        get
+        {
+            return true;
+        }
+    }
+
+    [SerializeField] private bool destroyOnActivate = true;
+
+    protected void Awake()
+    {
+        if (destroyOnActivate)
+            onActivate += () => Destroy(gameObject);
+    }
+
     private void Start()
     {
         // Find Helper Text
         helperText = FindObjectOfType<TriggerHelperText>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnEnter(Collider other)
     {
-        if (!LayerMaskHelper.IsInLayerMask(other.gameObject, LayerMask.GetMask("Player"))) return;
-
-        if (showText)
+        if (showText && AllowShowText)
         {
             helperText.Show(this, GetHelperTextString());
         }
 
         // Add Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started += CallActivate;
+    }
 
+    protected override void OnExit(Collider other)
+    {
+        helperText.Hide(this);
+
+        // Remove Activation Event
+        InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
     }
 
     protected string GetHelperTextString()
@@ -35,23 +56,10 @@ public abstract class TextPromptKeyTrigger : MonoBehaviour
         return prefix + activePrompt + Suffix;
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (!LayerMaskHelper.IsInLayerMask(other.gameObject, LayerMask.GetMask("Player"))) return;
-
-        helperText.Hide(this);
-
-        // Remove Activation Event
-        InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
-
-    }
-
-    protected virtual void CallActivate(InputAction.CallbackContext ctx)
+    protected override void CallActivate(InputAction.CallbackContext ctx)
     {
         helperText.Hide(this);
         InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
-        Activate();
+        base.CallActivate(ctx);
     }
-
-    protected abstract void Activate();
 }
