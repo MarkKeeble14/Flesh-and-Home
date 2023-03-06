@@ -119,6 +119,7 @@ Transform:
   - {fileID: 995548071286788854}
   - {fileID: 6276931627921728842}
   - {fileID: 995548072034271831}
+  - {fileID: 7561528680027743502}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -210,3 +211,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 919bb71f3c66b5c49b1e2bb35dd67008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loseScreen: {fileID: 0}
+--- !u!1 &7454074870224244612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7561528680027743502}
+  - component: {fileID: 7310309838653759188}
+  m_Layer: 0
+  m_Name: ProgressionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7561528680027743502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454074870224244612}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 995548071931521427}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7310309838653759188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454074870224244612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5725e89b9760a594cb64b89fa92e325c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unlockAllOnStart: 0
+  unlockTextDuration: 5
+  onUnlockPopupText: {fileID: 2012528630382652088, guid: 819840c2741016c43be1e26884a11ac0,
+    type: 3}
+  spawnedTextParent: {fileID: 0}
+  weaponAttachmentMenu: {fileID: 0}
+  currentWeaponAttachmentDisplay: {fileID: 0}
+  fuelDisplay: {fileID: 0}
+  playerController: {fileID: 0}
+  hasJetpackIcon: {fileID: 0}
+  flamethrowerCrosshair: {fileID: 0}
+  flamethrowerButton: {fileID: 0}
+  laserCutterCrosshair: {fileID: 0}
+  laserCutterButton: {fileID: 0}
+  pulseGrenadeLauncherCrosshair: {fileID: 0}
+  pulseGrenadeLauncherButton: {fileID: 0}

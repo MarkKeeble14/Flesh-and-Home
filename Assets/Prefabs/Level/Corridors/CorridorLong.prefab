@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1596997707379866955}
-  m_Layer: 7
+  - component: {fileID: 6958281197011390689}
+  - component: {fileID: -7480637101460060051}
+  m_Layer: 22
   m_Name: CorridorLong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,9 +32,40 @@ Transform:
   m_Children:
   - {fileID: 1596997707798162023}
   - {fileID: 1596997708005025158}
+  - {fileID: 6685301210478980133}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6958281197011390689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596997707379866954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff5729b738eb7e44a3f9ff670f762f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chanceToSpawnFeastableChunk: {x: 1, y: 2}
+  minMaxSecondsBetweenChunksSpawnAttempt: {x: 15, y: 30}
+  feastableChunk: {fileID: 0}
+  maxFeastablesSpawned: 0
+  shouldSpawnFeastableChunks: 0
+--- !u!65 &-7480637101460060051
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596997707379866954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 50, z: 25}
+  m_Center: {x: 0, y: 25, z: 0}
 --- !u!1 &1596997707679773347
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,3 +522,78 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &8084505401610104929
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1596997707379866955}
+    m_Modifications:
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3240085754061577291, guid: 5684e422596042044a61c646ac4191d2,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserArmEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5684e422596042044a61c646ac4191d2, type: 3}
+--- !u!4 &6685301210478980133 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3240085754061577284, guid: 5684e422596042044a61c646ac4191d2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8084505401610104929}
+  m_PrefabAsset: {fileID: 0}

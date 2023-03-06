@@ -29,4 +29,14 @@ public class MoveTowardsTarget : EnemyMovement
         // Move to target
         transform.position += (target.transform.position - transform.position).normalized * speed * Time.deltaTime;
     }
+
+    public override void SetSpeed(float f)
+    {
+        speed = f;
+    }
+
+    public override float GetSpeed()
+    {
+        return speed;
+    }
 }

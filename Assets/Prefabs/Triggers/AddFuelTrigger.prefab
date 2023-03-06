@@ -111,5 +111,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activePrompt: Aquire Fuel
-  fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
+  fuelStore: {fileID: 11400000, guid: 755aa0540384a8b4abc6a0e2433136a6, type: 2}
   fuelAmount: 10

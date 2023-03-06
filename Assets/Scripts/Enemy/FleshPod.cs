@@ -26,7 +26,6 @@ public class FleshPod : KillableEntity, IRoomContent
 
     [Header("References")]
     [SerializeField] private Transform visualComponent;
-    private new Renderer renderer;
 
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onTickClip;
@@ -39,7 +38,6 @@ public class FleshPod : KillableEntity, IRoomContent
         startScale = visualComponent.localScale;
         targetScale = startScale;
 
-        renderer = visualComponent.GetComponent<Renderer>();
         roomEnemySettings.SetInactiveColors(renderer);
         acceptDamage = false;
 
@@ -59,11 +57,6 @@ public class FleshPod : KillableEntity, IRoomContent
 
     private IEnumerator SpawningTick()
     {
-        // Allow the pod to scale naturally
-        shouldSettle = true;
-
-        yield return new WaitForSeconds(timeBetweenTicks);
-
         // Audio
         onTickClip.PlayOneShot(source);
 
@@ -81,7 +74,7 @@ public class FleshPod : KillableEntity, IRoomContent
                         Random.Range(0, visualComponent.localScale.y / 2),
                         Random.Range(-transform.localScale.z / 2, transform.localScale.z / 2)
                     )
-                , Quaternion.identity);
+                , Quaternion.identity, ClutterSavior._Instance.transform);
 
             // Set the spawned thingy
             spawned.OnSpawn(GameManager._Instance.PlayerTransform);
@@ -105,26 +98,33 @@ public class FleshPod : KillableEntity, IRoomContent
 
         AttachToFloor();
         Animate();
+
+        // Allow the pod to scale naturally
+        shouldSettle = true;
+
+        yield return new WaitForSeconds(timeBetweenTicks);
+
+        StartCoroutine(SpawningTick());
     }
 
     private void Animate()
     {
-        // Prevent the pod from scaling naturally so that we can control solely in the Animate coroutine
+        // Prevent the pod from scaling naturally so that we can control solely in the Animation
         shouldSettle = false;
 
         // Trigger animation
         anim.SetTrigger("Pulse");
-
-        StartCoroutine(SpawningTick());
     }
 
     private void AttachToFloor()
     {
         // Reattatch to floor
         RaycastHit hit;
-        Ray ray = new Ray(transform.position, Vector3.down);
+        Ray ray = new Ray(transform.position + visualComponent.transform.up, Vector3.down);
         Physics.Raycast(ray, out hit, Mathf.Infinity, ground);
-        transform.position = hit.point + (Vector3.up * targetScale.y / 2);
+        Vector3 groundPos = hit.point + (Vector3.up * targetScale.y / 2);
+        transform.position = groundPos;
+        // Debug.Log(transform.parent.name + ", Flesh Pod Ground Pos: " + groundPos);
     }
 
     public void Activate()

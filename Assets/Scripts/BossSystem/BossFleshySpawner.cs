@@ -16,6 +16,7 @@ public class BossFleshySpawner : MonoBehaviour
     [SerializeField] private Vector2 minMaxGrowSpeed;
     [SerializeField] private Vector2 minMaxShrinkSpeed;
     [SerializeField] private float heightAllowance = 5f;
+    [SerializeField] private bool spawnOnGround = true;
 
     [Header("Enemy Spawning")]
     [SerializeField] private int maxNumEnemiesCanHaveSpawned;
@@ -38,11 +39,13 @@ public class BossFleshySpawner : MonoBehaviour
         int numToSpawn = (int)Random.Range(minMaxNumPerSpawn.x, minMaxNumPerSpawn.y);
         for (int i = 0; i < numToSpawn; i++)
         {
-            Vector3 spawnPos = hit.point + new Vector3(
-                Random.Range(-perSpawnOffsetRange.x, perSpawnOffsetRange.x),
-                Random.Range(-perSpawnOffsetRange.y, perSpawnOffsetRange.y),
-                Random.Range(-perSpawnOffsetRange.z, perSpawnOffsetRange.z));
-            BossFleshSpawn spawn = Instantiate(fleshPrefab, spawnPos, Quaternion.identity);
+            Vector3 spawnPos = (spawnOnGround ? hit.point : transform.position)
+                + new Vector3(
+                    Random.Range(-perSpawnOffsetRange.x, perSpawnOffsetRange.x),
+                    Random.Range(-perSpawnOffsetRange.y, perSpawnOffsetRange.y),
+                    Random.Range(-perSpawnOffsetRange.z, perSpawnOffsetRange.z)
+                );
+            BossFleshSpawn spawn = Instantiate(fleshPrefab, spawnPos, Quaternion.identity, ClutterSavior._Instance.transform);
             spawn.Set(minMaxScale, minMaxGrowSpeed, minMaxShrinkSpeed);
 
             // Chance to spawn an enemy 
@@ -60,6 +63,12 @@ public class BossFleshySpawner : MonoBehaviour
 
                     // Add to spawned
                     spawnedEntities.Add(spawned);
+
+                    if (spawned.TryGetComponent(out RoomEnemyStateController enemyStateController))
+                    {
+                        enemyStateController.Activate();
+                        enemyStateController.OverrideToAggroState();
+                    }
                 }
             }
         }

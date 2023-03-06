@@ -45,11 +45,13 @@ public class FlamethrowerTrigger : MonoBehaviour
             return;
         }
 
-        // TODO: Damage/Dp Whatever to what we've hit
+        // Debug.Log("Hitting: " + other.gameObject);
+
         // if other object has a component which implements IDamageable, use it to deal damage
         if (other.TryGetComponent(out IDamageable damageable))
         {
             // Debug.Log("Damageing:" + damageable);
+            // Debug.Log("Damaging: " + damageable);
 
             damageable.Damage(settings.damage);
             hitTickBetweenTimer.Add(other, settings.tickRate);

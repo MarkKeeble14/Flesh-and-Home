@@ -4,11 +4,11 @@ using TMPro;
 public class FuelStoreDisplay : MonoBehaviour
 {
     [SerializeField] private ImageSliderBar sliderBar;
-    [SerializeField] private FuelStore fuel;
+    [SerializeField] private FloatStore fuel;
 
     private void Update()
     {
-        sliderBar.Set(fuel.CurrentFuel, fuel.StartingFuel);
+        sliderBar.Set(fuel.CurrentFloat, fuel.StartingFloat);
     }
 }
 

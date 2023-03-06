@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2738773359136310156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8684878184082703764}
+  m_Layer: 0
+  m_Name: AttackList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8684878184082703764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2738773359136310156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 193775052383505525}
+  - {fileID: 555226448069307442}
+  m_Father: {fileID: 3240085754061577284}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3240085754061577291
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,16 +44,18 @@ GameObject:
   - component: {fileID: 3240085754061577284}
   - component: {fileID: 3240085754061577285}
   - component: {fileID: 3240085754061577286}
-  - component: {fileID: 3240085754061577281}
-  - component: {fileID: 3240085754061577288}
-  - component: {fileID: 3240085754061577289}
-  - component: {fileID: 3240085754061577343}
-  - component: {fileID: 3240085754061577342}
   - component: {fileID: 3240085754061577290}
   - component: {fileID: 3240085754061577283}
   - component: {fileID: 3240085754061577287}
   - component: {fileID: 3240085754061577280}
+  - component: {fileID: 3240085754061577289}
+  - component: {fileID: 3240085754061577288}
   - component: {fileID: 8204789487728918563}
+  - component: {fileID: 7201154453564974301}
+  - component: {fileID: 8095261538247776477}
+  - component: {fileID: 1290536258943890374}
+  - component: {fileID: 7501019873870035100}
+  - component: {fileID: 8018810378253527400}
   m_Layer: 17
   m_Name: LaserArmEnemy
   m_TagString: Untagged
@@ -42,6 +77,7 @@ Transform:
   m_Children:
   - {fileID: 3240085754159558663}
   - {fileID: 3240085755467808578}
+  - {fileID: 8684878184082703764}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,145 +131,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3240085754061577281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240085754061577291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a1d0835a70322a46a009c197c3c9469, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackPool:
-    available:
-      percentageMap:
-      - key: {fileID: 3240085754061577343}
-        value: 75
-      - key: {fileID: 3240085754061577342}
-        value: 25
-  activateOnStart: 0
-  roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
-  movement: {fileID: 3240085754061577288}
-  feastTime: 3
-  canFeastEnemies: 1
-  feastable:
-    serializedVersion: 2
-    m_Bits: 524288
-  feastableDetectionRange: 10
-  onFeastSizeChange: 1
-  onFeastHPChange: 1.25
-  scaleSpeed: 1
---- !u!114 &3240085754061577288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240085754061577291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861238c6170ca1241ad86ef837e5ef99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerIsTarget: 1
-  isGround:
-    serializedVersion: 2
-    m_Bits: 384
-  movementSource: {fileID: 3240085754061577290}
-  enableOnAwake: 1
---- !u!195 &3240085754061577289
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240085754061577291}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 2.75
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 360
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &3240085754061577343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240085754061577291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8c3a41628b583444be2a81e060dac83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasTimeBetweenAttacks: 1
-  timeBetweenAttacks: 1
-  disableMoveWhileBetweenAttacks: 0
-  disableMovementWhileAttacking: 0
-  followWhileAttacking: 1
-  rotateWhileAttacking: 1
-  hasMaxRange: 1
-  maxRange: 10
-  removeFromPoolWhenActive: 0
-  source: {fileID: 3240085754061577283}
-  onStartClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  onEndClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: d5989df28c06d924d9dad1b2bea73604,
-    type: 2}
-  barrel: {fileID: 3240085754159558671}
---- !u!114 &3240085754061577342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3240085754061577291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c94131561e154045bd0bba61caf9ea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasTimeBetweenAttacks: 1
-  timeBetweenAttacks: 1
-  disableMoveWhileBetweenAttacks: 0
-  disableMovementWhileAttacking: 0
-  followWhileAttacking: 1
-  rotateWhileAttacking: 1
-  hasMaxRange: 1
-  maxRange: 10
-  removeFromPoolWhenActive: 0
-  source: {fileID: 3240085754061577283}
-  onStartClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  onEndClip:
-    clip: {fileID: 0}
-    volume: 1
-    pitch: 1
-  laserAttackerOptions: {fileID: 11400000, guid: d5989df28c06d924d9dad1b2bea73604,
-    type: 2}
-  set:
-  - {fileID: 3240085754159558671}
-  - {fileID: 3240085755467808586}
 --- !u!82 &3240085754061577290
 AudioSource:
   m_ObjectHideFlags: 0
@@ -456,6 +353,49 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!195 &3240085754061577289
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 10
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 360
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &3240085754061577288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 861238c6170ca1241ad86ef837e5ef99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIsTarget: 1
+  isGround:
+    serializedVersion: 2
+    m_Bits: 384
+  movementSource: {fileID: 3240085754061577290}
+  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
+    type: 3}
+  enableOnAwake: 1
+  alterRigidbody: 1
 --- !u!114 &8204789487728918563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -483,13 +423,105 @@ MonoBehaviour:
   rigidbodiesToEnableOnDeath:
   - {fileID: 3240085754159558669}
   - {fileID: 3240085755467808584}
+  renderer: {fileID: 3240085754061577286}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  feastableLayer: 19
-  corpseHP: 25
-  corpseColor: {r: 0.16609114, g: 0.4056604, b: 0.2343608, a: 1}
+  fleshyTraveller: {fileID: -1068128480174535724, guid: 1ec8123e792c42d49ba10fba5255660d,
+    type: 3}
+  travellerHP: 50
+  detectionRange: 50
+  feastingEnemyLayer:
+    serializedVersion: 2
+    m_Bits: 131072
+--- !u!114 &7201154453564974301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d4b642ae6cc5ac47af7a0b542ec4287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scaleSpeed: 2.5
+  feastLevel: 1
+  onFeastSizeChange: 0.5
+  onFeastHPChange: 1.25
+--- !u!114 &8095261538247776477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172133b2b6be73c4e980b1ef5e33de81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPool:
+    available:
+      percentageMap:
+      - key: {fileID: 4308688546929136318}
+        value: 75
+      - key: {fileID: 9008745641772614235}
+        value: 25
+  activateOnStart: 0
+  roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
+  enemyStates:
+    dictionary:
+    - key: 0
+      value: {fileID: 8018810378253527400}
+    - key: 1
+      value: {fileID: 7501019873870035100}
+    - key: 2
+      value: {fileID: 1290536258943890374}
+  defaultState: 0
+  aggroState: 1
+  unAggroState: 0
+  movement: {fileID: 3240085754061577288}
+--- !u!114 &1290536258943890374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f209ad97556e2254b96ec6cb978bd7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7501019873870035100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155cb63f2592ed946abd18da90535864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8018810378253527400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3240085754061577291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0bb1ed5ab0d1cd47858107070c9f203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderDistance: 5
+  pauseTime: 1
 --- !u!1 &3240085754159558672
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,7 +539,7 @@ GameObject:
   - component: {fileID: 3240085754159558667}
   - component: {fileID: 3240085754159558668}
   - component: {fileID: 3240085754159558669}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Arm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +978,7 @@ GameObject:
   - component: {fileID: 3240085755467808582}
   - component: {fileID: 3240085755467808583}
   - component: {fileID: 3240085755467808584}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: Arm2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1368,3 +1400,135 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &6596125748393114041
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555226448069307442}
+  - component: {fileID: 9008745641772614235}
+  m_Layer: 0
+  m_Name: DoubleBarrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &555226448069307442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6596125748393114041}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8684878184082703764}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9008745641772614235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6596125748393114041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c94131561e154045bd0bba61caf9ea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 1
+  rotateWhileAttacking: 1
+  hasMaxRange: 1
+  maxRange: 10
+  removeFromPoolWhenActive: 0
+  source: {fileID: 3240085754061577283}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  laserAttackerOptions: {fileID: 11400000, guid: d5989df28c06d924d9dad1b2bea73604,
+    type: 2}
+  set:
+  - {fileID: 3240085754159558671}
+  - {fileID: 3240085755467808586}
+--- !u!1 &7853191213598807619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 193775052383505525}
+  - component: {fileID: 4308688546929136318}
+  m_Layer: 0
+  m_Name: SingleBarrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &193775052383505525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853191213598807619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8684878184082703764}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4308688546929136318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7853191213598807619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c3a41628b583444be2a81e060dac83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 1
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 1
+  rotateWhileAttacking: 1
+  hasMaxRange: 1
+  maxRange: 10
+  removeFromPoolWhenActive: 0
+  source: {fileID: 3240085754061577283}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  laserAttackerOptions: {fileID: 11400000, guid: d5989df28c06d924d9dad1b2bea73604,
+    type: 2}
+  barrel: {fileID: 3240085754159558671}

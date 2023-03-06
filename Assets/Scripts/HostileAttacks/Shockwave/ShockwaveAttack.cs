@@ -13,6 +13,7 @@ public class ShockwaveAttack : Attack
     [SerializeField] private float expansionSpeed;
     [SerializeField] private float damage;
     [SerializeField] private LayerMask canHit;
+    private LayerMask ground;
 
     [SerializeField] private ImpulseSourceData impulseSourceData;
 
@@ -22,14 +23,9 @@ public class ShockwaveAttack : Attack
 
     private List<ShockwaveRing> spawnedRings;
 
-    public override void Interrupt()
+    private void Awake()
     {
-        foreach (ShockwaveRing ring in spawnedRings)
-        {
-            Destroy(ring.gameObject);
-        }
-
-        base.Interrupt();
+        ground = LayerMask.GetMask("Ground");
     }
 
     protected override IEnumerator ExecuteAttack(Transform target)
@@ -41,24 +37,32 @@ public class ShockwaveAttack : Attack
             // Audio
             emitClip.PlayOneShot(source);
 
-            ShockwaveRing spawned = Instantiate(ring, transform.position + Vector3.up * spawnAtYOffset, Quaternion.identity);
+            RaycastHit hit;
+            Physics.Raycast(transform.position, Vector3.down, out hit, ground);
+
+            ShockwaveRing spawned = Instantiate(ring, hit.point + Vector3.up * spawnAtYOffset, Quaternion.identity);
             spawnedRings.Add(spawned);
 
-            StartCoroutine(spawned.ExecuteThump(() =>
+            spawned.StartCoroutine(spawned.ExecuteThump(() =>
             {
                 spawnedRings.Remove(spawned);
-
-                Destroy(spawned.gameObject);
+                spawned.FadeOut();
                 // Debug.Log("Removed: " + spawned + ", Remaining: " + spawnedRings.Count);
             }, maxRadius, height, expansionSpeed, damage, canHit, impulseSourceData));
+
+            if (executionInterrupted)
+                break;
 
             if (i != numThumps - 1)
                 yield return new WaitForSeconds(timeBetweenThumps);
         }
 
-        yield return new WaitUntil(() => spawnedRings.Count == 0);
+        if (!executionInterrupted)
+        {
+            yield return new WaitUntil(() => spawnedRings.Count == 0);
 
-        // Audio
-        endClip.PlayOneShot(source);
+            // Audio
+            endClip.PlayOneShot(source);
+        }
     }
 }

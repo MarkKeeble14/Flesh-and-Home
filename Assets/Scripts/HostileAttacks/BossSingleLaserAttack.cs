@@ -20,6 +20,8 @@ public class BossSingleLaserAttack : BossLaserAttack
     protected override IEnumerator ExecuteAttack(Transform target)
     {
         LaserBarrel selected = options[Random.Range(0, options.Count)];
-        yield return StartCoroutine(LaserFrom(selected, bossPhaseManager.ShellEnemyMovement.transform));
+        StartCoroutine(LaserFrom(selected, bossPhaseManager.ShellEnemyMovement.transform));
+        yield return new WaitUntil(() => selected.IsFiring);
+        yield return new WaitUntil(() => !selected.IsFiring);
     }
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1911636}
   - component: {fileID: 1911638}
   - component: {fileID: 1911639}
-  m_Layer: 0
+  m_Layer: 25
   m_Name: FlamethrowerTriggerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 16449463
+    m_Bits: 67108791
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_VerticalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 40
+    m_MaxSpeed: 45.82903
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse Y
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_HorizontalAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 75
+    m_MaxSpeed: 91.65805
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -755,6 +755,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7362887213996669586}
+  - component: {fileID: 2133179426}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -780,6 +781,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2133179426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887213996669587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a70a61a95705cbd41876595679a34d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPosition: 0
+  spawnPositionDictionary:
+    dictionary:
+    - key: 0
+      value:
+        position: {x: -425, y: 0, z: -115}
+        eulerAngles: {x: 0, y: 0, z: 0}
+    - key: 1
+      value:
+        position: {x: -155, y: 0, z: 0}
+        eulerAngles: {x: 0, y: 90, z: 0}
+    - key: 2
+      value:
+        position: {x: 200, y: 0, z: 0}
+        eulerAngles: {x: 0, y: 90, z: 0}
+  playerObject: {fileID: 7362887214131378889}
 --- !u!1 &7362887214131378890
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,6 +840,7 @@ GameObject:
   - component: {fileID: 7362887214131377447}
   - component: {fileID: 7362887214131378897}
   - component: {fileID: 652312800}
+  - component: {fileID: 362620655}
   m_Layer: 9
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -961,7 +991,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
+  fuelStore: {fileID: 11400000, guid: 755aa0540384a8b4abc6a0e2433136a6, type: 2}
   fuelConsumptionRate: 3
   jetpackParticles: {fileID: 7064955444343372906}
   jetpackAudioSource: {fileID: 7362887214131378911}
@@ -1003,11 +1033,13 @@ MonoBehaviour:
   destroyOnDeath: 1
   rigidbody: {fileID: 652312800}
   rigidbodiesToEnableOnDeath: []
+  renderer: {fileID: 0}
   onTakeDamageClip:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
   playerHpBar: {fileID: 0}
+  hpStore: {fileID: 11400000, guid: 88d987135f5b8bc4d9270160a39c920f, type: 2}
 --- !u!114 &2567597695663198020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1045,7 +1077,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 1344541519311774957}
   lazerMat: {fileID: 2100000, guid: f68f8c3a3d76fb74cbb880d372c81620, type: 2}
   shootSound:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: ddbbd377b39d27b4282cc56ecc01c18e, type: 3}
     volume: 1
     pitch: 1
   overheatConstantSound: {fileID: 7362887214131378911}
@@ -1066,7 +1098,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7362887214131378890}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ebfbb7c850940f44aa4be605b10bc35, type: 3}
   m_Name: 
@@ -1105,7 +1137,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 564224
     crosshairSpread: 0.4
-  fuelStore: {fileID: 11400000, guid: e2dd4660f5cf6634faed90506a5eb4ea, type: 2}
+  fuelStore: {fileID: 11400000, guid: 755aa0540384a8b4abc6a0e2433136a6, type: 2}
   fuelConsumptionRate: 5
   flamethrowerParticleSystem: {fileID: 7362887214417341358}
   trigger: {fileID: 1911639}
@@ -1188,24 +1220,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   color: {r: 0.12882876, g: 1, b: 0, a: 1}
-  settings:
-    damage: 10
-    timeBetweenPulses: 0.34
-    pulses: 3
-    shootForce: 1000
-    activateOnCollideWith:
-      serializedVersion: 2
-      m_Bits: 3079552
-    canDamage:
-      serializedVersion: 2
-      m_Bits: 432128
-    crosshairSpread: 50
-    pulseSpeed: 5
-    pulseRadius: 10
-    pulseKnockbackForce: 50
-    pulseStayDuration: 2
-    pulseScaleOut: 1
-    pulseScaleOutSpeed: 100
+  settings: {fileID: 11400000, guid: 082bbd092cd5d804fad2495c74d2d741, type: 2}
   grenadeSpawnPos: {fileID: 8910433488196863823}
   pulseGrenadePrefab: {fileID: 7492071582286756199, guid: 802c372d5242ff34bb8055ccce4504cc,
     type: 3}
@@ -1960,6 +1975,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &362620655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887214131378890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7f4a7a3483fa445821b4e2cf3ea526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomTriggerLayer:
+    serializedVersion: 2
+    m_Bits: 4194304
 --- !u!1 &7362887214680791727
 GameObject:
   m_ObjectHideFlags: 0
