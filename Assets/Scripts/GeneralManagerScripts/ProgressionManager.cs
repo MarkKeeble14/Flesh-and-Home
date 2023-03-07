@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using System;
 
 public class ProgressionManager : MonoBehaviour
@@ -25,14 +23,9 @@ public class ProgressionManager : MonoBehaviour
     private bool laserCutterUnlocked;
     private bool pulseGrenadeLauncherUnlocked;
 
-
     [Header("Settings")]
     [SerializeField] private bool unlockAllOnStart;
     [SerializeField] private float unlockTextDuration = 3f;
-
-    [Header("References")]
-    [SerializeField] private TextMeshProUGUI onUnlockPopupText;
-    [SerializeField] private Transform spawnedTextParent;
 
     [SerializeField] private RadialMenu weaponAttachmentMenu;
     [SerializeField] private GameObject currentWeaponAttachmentDisplay;
@@ -80,8 +73,10 @@ public class ProgressionManager : MonoBehaviour
 
         currentUnlocks.Add(UnlockType.JETPACK);
 
+        GameManager._Instance.PlayerUseFuel = true;
+
         // Spawn text
-        StartCoroutine(SpawnText("Jetpack"));
+        TextPopupManager._Instance.SpawnText("Jetpack\nPress space when in the air to fly", unlockTextDuration);
     }
 
     [ContextMenu("Unlock/Flamethrower")]
@@ -105,8 +100,10 @@ public class ProgressionManager : MonoBehaviour
 
         currentUnlocks.Add(UnlockType.FLAMETHROWER);
 
+        GameManager._Instance.PlayerUseFuel = true;
+
         // Spawn text
-        StartCoroutine(SpawnText("Flamethrower"));
+        TextPopupManager._Instance.SpawnText("Unlocked the Flamethrower\nHold Tab to Select, Hold Q to Use\nBurn travelling flesh to prevent other enemies from getting stronger", unlockTextDuration + 5f);
     }
 
     [ContextMenu("Unlock/LaserCutter")]
@@ -128,7 +125,7 @@ public class ProgressionManager : MonoBehaviour
         currentUnlocks.Add(UnlockType.LASER_CUTTER);
 
         // Spawn text
-        StartCoroutine(SpawnText("Laser Cutter"));
+        TextPopupManager._Instance.SpawnText("Unlocked the Laser Cutter\nYou can now laser through certain materials", unlockTextDuration);
     }
 
     [ContextMenu("Unlock/PulseGrenadeLauncher")]
@@ -150,7 +147,7 @@ public class ProgressionManager : MonoBehaviour
         currentUnlocks.Add(UnlockType.PULSE_GRENADE_LAUNCHER);
 
         // Spawn text
-        StartCoroutine(SpawnText("Pulse Grenade Launcher"));
+        TextPopupManager._Instance.SpawnText("Pulse Grenade Launcher\nArea of effect damage", unlockTextDuration);
     }
 
     [ContextMenu("Unlock/All")]
@@ -160,14 +157,6 @@ public class ProgressionManager : MonoBehaviour
         UnlockFlamethrower();
         UnlockLaserCutter();
         UnlockPulseGrenadeLauncher();
-    }
-
-    public IEnumerator SpawnText(string unlocked)
-    {
-        TextMeshProUGUI spawned = Instantiate(onUnlockPopupText, spawnedTextParent);
-        spawned.text = "Unlocked: " + unlocked + "!";
-        yield return new WaitForSeconds(unlockTextDuration);
-        spawned.GetComponent<Animator>().SetTrigger("Done");
     }
 
     public bool HasAllUnlocks(List<UnlockType> requiredUnlocks)

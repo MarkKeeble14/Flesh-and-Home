@@ -5,8 +5,31 @@ using TMPro;
 public abstract class TextPromptKeyTrigger : EventTrigger
 {
     private string prefix = "'E' to ";
+    public virtual string Prefix
+    {
+        get
+        {
+            return prefix;
+        }
+        set
+        {
+            prefix = value;
+        }
+    }
+    private string suffix = "";
+    protected virtual string Suffix
+    {
+        get
+        {
+            return suffix;
+        }
+        set
+        {
+            suffix = value;
+        }
+    }
     [SerializeField] protected string activePrompt;
-    protected virtual string Suffix { get => ""; }
+
     protected TriggerHelperText helperText;
     protected bool showText = true;
 
@@ -53,7 +76,7 @@ public abstract class TextPromptKeyTrigger : EventTrigger
 
     protected string GetHelperTextString()
     {
-        return prefix + activePrompt + Suffix;
+        return Prefix + activePrompt + Suffix;
     }
 
     protected override void CallActivate(InputAction.CallbackContext ctx)

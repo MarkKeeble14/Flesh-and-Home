@@ -325,6 +325,12 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 50
   acceptDamage: 1
+  spawnHealthTrigger: 0
+  healthTrigger: {fileID: 0}
+  chanceToSpawnHealthTrigger: {x: 1, y: 6}
+  spawnFuelTrigger: 0
+  fuelTrigger: {fileID: 0}
+  chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
   destroyOnDeath: 1
   rigidbody: {fileID: 5586152732048071819}
@@ -361,5 +367,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}

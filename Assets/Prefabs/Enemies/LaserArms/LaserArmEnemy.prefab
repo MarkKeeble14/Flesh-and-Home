@@ -417,6 +417,14 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 50
   acceptDamage: 1
+  spawnHealthTrigger: 1
+  healthTrigger: {fileID: 5708385125351423535, guid: 66c11f9f9898a664381a8d81e397204a,
+    type: 3}
+  chanceToSpawnHealthTrigger: {x: 1, y: 6}
+  spawnFuelTrigger: 1
+  fuelTrigger: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
   destroyOnDeath: 0
   rigidbody: {fileID: 3240085754061577280}
