@@ -20,10 +20,11 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
     private Vector3 openPosition;
     private Coroutine animationCoroutine;
 
-    protected override string Suffix => (isOpen ? " Close" : " Open") + " Door";
     [SerializeField] private bool allowPlayerControl = true;
 
     protected override bool AllowShowText => allowPlayerControl;
+
+    [SerializeField] private Renderer triggerRenderer;
 
     private new void Awake()
     {
@@ -150,5 +151,20 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
         }
 
         onClosed?.Invoke();
+    }
+
+    private void Update()
+    {
+        if (!allowPlayerControl)
+        {
+            Prefix = "Door Locked";
+            Suffix = "";
+        }
+        else
+        {
+            Prefix = "'E' to";
+            Suffix = (isOpen ? " Close" : " Open") + " Door";
+        }
+        triggerRenderer.enabled = allowPlayerControl;
     }
 }

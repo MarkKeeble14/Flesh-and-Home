@@ -210,6 +210,7 @@ MonoBehaviour:
   shakeSource: {fileID: 9080569573715557851}
   shakeStrength: 3
   allowPlayerControl: 1
+  triggerRenderer: {fileID: 5767323205614926793}
 --- !u!1 &1891597537356711763
 GameObject:
   m_ObjectHideFlags: 0

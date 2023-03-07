@@ -43,7 +43,15 @@ public class KillableEntity : EndableEntity
         }
     }
 
+    [SerializeField] private bool spawnHealthTrigger;
+    [SerializeField] private EventTrigger healthTrigger;
+    [SerializeField] private Vector2 chanceToSpawnHealthTrigger = new Vector2(1, 6);
+    [SerializeField] private bool spawnFuelTrigger;
+    [SerializeField] private EventTrigger fuelTrigger;
+    [SerializeField] private Vector2 chanceToSpawnFuelTrigger = new Vector2(1, 6);
+
     public virtual bool IsDead => currentHealth <= 0;
+    public bool IsFull => currentHealth == maxHealth;
 
     [SerializeField] private bool acceptKnockback;
 
@@ -100,6 +108,22 @@ public class KillableEntity : EndableEntity
             rb.transform.parent = null;
             rb.useGravity = true;
             rb.isKinematic = false;
+        }
+
+        if (spawnHealthTrigger && !GameManager._Instance.PlayerHealth.IsFull)
+        {
+            if (RandomHelper.EvaluateChanceTo(chanceToSpawnHealthTrigger))
+            {
+                Instantiate(healthTrigger, transform.position, Quaternion.identity);
+            }
+        }
+
+        if (spawnFuelTrigger && GameManager._Instance.PlayerUseFuel)
+        {
+            if (RandomHelper.EvaluateChanceTo(chanceToSpawnFuelTrigger))
+            {
+                Instantiate(fuelTrigger, transform.position, Quaternion.identity);
+            }
         }
 
         // Destroy

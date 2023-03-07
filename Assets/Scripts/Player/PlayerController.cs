@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            return jetpackDashCooldownTimer <= 0;
+            return jetpackDashCooldownTimer <= 0 && !isGrounded;
         }
     }
 

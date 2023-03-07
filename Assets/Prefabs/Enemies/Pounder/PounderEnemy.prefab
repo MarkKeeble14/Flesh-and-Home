@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
-  timeBetweenAttacks: 1
+  timeBetweenAttacks: 2
   disableMoveWhileBetweenAttacks: 0
   disableMovementWhileAttacking: 0
   followWhileAttacking: 0
@@ -119,8 +119,8 @@ MonoBehaviour:
   maxRadius: 25
   height: 10
   spawnAtYOffset: 0.5
-  expansionSpeed: 15
-  damage: 10
+  expansionSpeed: 7.5
+  damage: 5
   canHit:
     serializedVersion: 2
     m_Bits: 65536
@@ -609,6 +609,14 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 50
   acceptDamage: 1
+  spawnHealthTrigger: 1
+  healthTrigger: {fileID: 5708385125351423535, guid: 66c11f9f9898a664381a8d81e397204a,
+    type: 3}
+  chanceToSpawnHealthTrigger: {x: 1, y: 6}
+  spawnFuelTrigger: 1
+  fuelTrigger: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
   destroyOnDeath: 0
   rigidbody: {fileID: 959702198628339923}

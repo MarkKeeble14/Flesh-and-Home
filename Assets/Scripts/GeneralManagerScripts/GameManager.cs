@@ -13,8 +13,9 @@ public class GameManager : MonoBehaviour
         _Instance = this;
 
         // Find Player
+        playerHealth = FindObjectOfType<PlayerHealth>();
         playerTransform = FindObjectOfType<PlayerController>().transform;
-        playerAimAt = FindObjectOfType<PlayerHealth>().transform;
+        playerAimAt = playerHealth.transform;
     }
 
     [SerializeField] private GameObject loseScreen;
@@ -39,4 +40,8 @@ public class GameManager : MonoBehaviour
 
     private Transform playerAimAt;
     public Transform PlayerAimAt => playerAimAt;
+    private KillableEntity playerHealth;
+    public KillableEntity PlayerHealth => playerHealth;
+
+    public bool PlayerUseFuel { get; set; }
 }

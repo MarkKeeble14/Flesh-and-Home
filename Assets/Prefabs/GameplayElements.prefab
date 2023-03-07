@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: 8294953404381728607}
   - component: {fileID: 8294953404381728545}
   - component: {fileID: 8294953404381728547}
+  - component: {fileID: 3733931337376097035}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -611,10 +612,10 @@ MonoBehaviour:
   sfxVolumeSlider: {fileID: 1872439819766147352}
   defaultSFXVolume: 0.8
   mouseSensitivitySlider: {fileID: 1872439818567648853}
-  minMaxMouseSensitivity: {x: 15, y: 100}
-  defaultMouseSensitivity: 40
-  playerPOVCam: {fileID: 1527743667584746842}
-  axisMultipliers: {x: 2, y: 1}
+  minMaxMouseSensitivity: {x: 50, y: 200}
+  defaultMouseSensitivity: 80
+  playerPOVCam: {fileID: 6619864381651831568}
+  axisMultipliers: {x: 1.25, y: 1}
 --- !u!114 &8294953404381728547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -629,6 +630,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeInOnAwake: 1
   anim: {fileID: 8294953403535463069}
+--- !u!114 &3733931337376097035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294953404381728606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220bf1ecd35678d49940b9cc46d6d82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onUnlockPopupText: {fileID: 2012528630382652088, guid: 819840c2741016c43be1e26884a11ac0,
+    type: 3}
+  spawnedTextParent: {fileID: 3666679379405958904}
 --- !u!1 &8294953404405183333
 GameObject:
   m_ObjectHideFlags: 0
@@ -2820,8 +2836,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1249643455432044940, guid: 744201fcd078a044785f9b80c0511449,
         type: 3}
-      propertyPath: m_AnchoredPosition.y
+      propertyPath: m_AnchoredPosition.x
       value: -12.499939
+      objectReference: {fileID: 0}
+    - target: {fileID: 1249643455432044940, guid: 744201fcd078a044785f9b80c0511449,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -12.5
       objectReference: {fileID: 0}
     - target: {fileID: 2555487385304265957, guid: 744201fcd078a044785f9b80c0511449,
         type: 3}
@@ -3503,6 +3524,11 @@ PrefabInstance:
       propertyPath: attachmentEquippedDisplay
       value: 
       objectReference: {fileID: 8542622166105846832}
+    - target: {fileID: 517505174329959752, guid: 2e51a32172a1d8044bacef59976b21b7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2567597695663198020, guid: 2e51a32172a1d8044bacef59976b21b7,
         type: 3}
       propertyPath: showOverheatBar
@@ -3516,7 +3542,7 @@ PrefabInstance:
     - target: {fileID: 7362887213531304019, guid: 2e51a32172a1d8044bacef59976b21b7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7362887213531304019, guid: 2e51a32172a1d8044bacef59976b21b7,
         type: 3}
@@ -3639,9 +3665,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8294953404979567516}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1527743667584746842 stripped
+--- !u!114 &6619864381651831568 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7362887213904076486, guid: 2e51a32172a1d8044bacef59976b21b7,
+  m_CorrespondingSourceObject: {fileID: 2937441764571025548, guid: 2e51a32172a1d8044bacef59976b21b7,
     type: 3}
   m_PrefabInstance: {fileID: 8294953404979567516}
   m_PrefabAsset: {fileID: 0}
