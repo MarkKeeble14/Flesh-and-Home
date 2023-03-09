@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
             if (!hasLanded)
             {
                 hasLanded = true;
-                source.PlayOneShot(landClip);
+                PlayLandingSound();
                 jetpackTimer = 0;
             }
             playerVelocity.y = 0f;
@@ -404,11 +404,7 @@ public class PlayerController : MonoBehaviour
     
     private void PlayFootStepAudio()
         {
-            if (isGrounded)
-            {
-                return;
-            }
-            Debug.Log("PEW");
+          
             // pick & play a random footstep sound from the array,
             // excluding sound at index 0
             int n = Random.Range(1, m_FootstepSounds.Length);
@@ -424,7 +420,7 @@ public class PlayerController : MonoBehaviour
             
             Vector2 movement = inputManager.GetPlayerMovement();
             // Debug.Log(movementVector);
-            if ((movementVector.x != 0 && movementVector.z != 0) &&(movement.x != 0 || movement.y != 0))
+            if ((movementVector.x != 0 && movementVector.z != 0) && isGrounded)
             {
                 m_StepCycle += (controller.velocity.magnitude + (speed*(movementVector != Vector3.zero ? 1f : m_RunstepLenghten)))*
                              Time.fixedDeltaTime;
