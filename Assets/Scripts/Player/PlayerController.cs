@@ -31,6 +31,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip landClip;
     [SerializeField] private AudioSource footstepsSource;
 
+    [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
+    [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
+    [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+    public AudioSource m_AudioSource;
+    [SerializeField] private float m_StepCycle;
+    [SerializeField] private float m_NextStep;
+    [SerializeField] private float m_StepInterval;
+
+    [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
+
     #endregion
 
     [Header("Bobbing")]
@@ -145,6 +155,9 @@ public class PlayerController : MonoBehaviour
         inputManager = InputManager._Instance;
         inputManager.PlayerInputActions.Player.Jump.performed += Jump;
         inputManager.PlayerInputActions.Player.Sprint.performed += TryDash;
+
+        m_StepCycle = 0f;
+        m_NextStep = m_StepCycle/2f;
     }
 
     private void OnDestroy()
@@ -233,6 +246,12 @@ public class PlayerController : MonoBehaviour
 
         // Headbobbing
         ExecuteHeadbob();
+
+        
+    }
+
+    private void FixedUpdate(){
+        ProgressStepCycle(MoveSpeed);
     }
 
     private void ExecuteHeadbob()
@@ -278,7 +297,8 @@ public class PlayerController : MonoBehaviour
             hasLanded = false;
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -mass * gravityValue);
 
-            source.PlayOneShot(jumpClip);
+            //source.PlayOneShot(jumpClip);
+            PlayJumpSound();
         }
         else if (hasJetpack && !flying)
         {
@@ -367,4 +387,57 @@ public class PlayerController : MonoBehaviour
         // Set cooldown
         jetpackDashCooldownTimer = jetpackDashCooldown;
     }
+
+    private void PlayLandingSound()
+        {
+            m_AudioSource.clip = m_LandSound;
+            m_AudioSource.Play();
+            m_NextStep = m_StepCycle + .5f;
+        }
+    
+    private void PlayJumpSound()
+        {
+            Debug.Log("JUMP");
+            m_AudioSource.clip = m_JumpSound;
+            m_AudioSource.Play();
+        }
+    
+    private void PlayFootStepAudio()
+        {
+            if (isGrounded)
+            {
+                return;
+            }
+            Debug.Log("PEW");
+            // pick & play a random footstep sound from the array,
+            // excluding sound at index 0
+            int n = Random.Range(1, m_FootstepSounds.Length);
+            m_AudioSource.clip = m_FootstepSounds[n];
+            m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            // move picked sound to index 0 so it's not picked next time
+            m_FootstepSounds[n] = m_FootstepSounds[0];
+            m_FootstepSounds[0] = m_AudioSource.clip;
+        }
+
+    private void ProgressStepCycle(float speed)
+        {
+            
+            Vector2 movement = inputManager.GetPlayerMovement();
+            // Debug.Log(movementVector);
+            if ((movementVector.x != 0 && movementVector.z != 0) &&(movement.x != 0 || movement.y != 0))
+            {
+                m_StepCycle += (controller.velocity.magnitude + (speed*(movementVector != Vector3.zero ? 1f : m_RunstepLenghten)))*
+                             Time.fixedDeltaTime;
+                
+            }
+
+            if (!(m_StepCycle > m_NextStep))
+            {
+                return;
+            }
+
+            m_NextStep = m_StepCycle + m_StepInterval;
+
+            PlayFootStepAudio();
+        }
 }
