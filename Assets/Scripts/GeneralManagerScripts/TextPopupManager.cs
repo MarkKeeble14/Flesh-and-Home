@@ -23,7 +23,12 @@ public class TextPopupManager : MonoBehaviour
     {
         TextMeshProUGUI spawned = Instantiate(onUnlockPopupText, spawnedTextParent);
         spawned.text = text;
-        yield return new WaitForSeconds(duration);
+
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            yield return null;
+        }
+
         spawned.GetComponent<Animator>().SetTrigger("Done");
     }
 }

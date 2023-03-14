@@ -102,7 +102,7 @@ MonoBehaviour:
   followWhileAttacking: 0
   rotateWhileAttacking: 0
   hasMaxRange: 1
-  maxRange: 10
+  maxRange: 15
   removeFromPoolWhenActive: 0
   source: {fileID: 959702198628339920}
   onStartClip:
@@ -117,10 +117,10 @@ MonoBehaviour:
   numThumps: 1
   timeBetweenThumps: 0
   maxRadius: 25
-  height: 10
-  spawnAtYOffset: 0.5
-  expansionSpeed: 7.5
-  damage: 5
+  height: 25
+  spawnAtYOffset: 0
+  expansionSpeed: 15
+  damage: 2.5
   canHit:
     serializedVersion: 2
     m_Bits: 65536

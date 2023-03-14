@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using Cinemachine;
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager _Instance { get; private set; }
     public PlayerInputActions PlayerInputActions;
+    [SerializeField] private CinemachineInputProvider mouseInput;
     private void Awake()
     {
         _Instance = this;
@@ -30,6 +32,7 @@ public class InputManager : MonoBehaviour
         // Move and Look
         PlayerInputActions.Player.Move.Enable();
         PlayerInputActions.Player.Look.Enable();
+        mouseInput.enabled = true;
 
         // Actions
         PlayerInputActions.Player.Sprint.Enable();
@@ -52,10 +55,10 @@ public class InputManager : MonoBehaviour
     public void DisableInput()
     {
         // Player controls
-
         // Move and Look
         PlayerInputActions.Player.Move.Disable();
         PlayerInputActions.Player.Look.Disable();
+        mouseInput.enabled = false;
 
         // Actions
         PlayerInputActions.Player.Sprint.Disable();

@@ -34,6 +34,7 @@ public class ProgressionManager : MonoBehaviour
     [Header("Jetpack")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private GameObject hasJetpackIcon;
+    [SerializeField] private GameObject jetpackSliderBar;
 
     [Header("Flamethrower")]
     [SerializeField] private GameObject flamethrowerCrosshair;
@@ -65,8 +66,10 @@ public class ProgressionManager : MonoBehaviour
         // Set fuel display to be active
         fuelDisplay.SetActive(true);
 
+        jetpackSliderBar.SetActive(true);
+
         // Turn on icon so player knows they have jetpack
-        hasJetpackIcon.SetActive(true);
+        // hasJetpackIcon.SetActive(true);
 
         // Allow player to use jetpack
         playerController.AquireJetpack();
