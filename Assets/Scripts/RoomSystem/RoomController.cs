@@ -75,10 +75,11 @@ public class RoomController : MonoBehaviour
         // 
         //  Debug.Log(name + " Exited");
 
+        /*
         foreach (RoomEnemy roomEnemy in roomEnemies)
         {
             roomEnemy.OnPlayerLeaveRoom();
-        }
+        */
 
         ToggleParticles(false);
     }

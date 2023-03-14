@@ -44,6 +44,7 @@ public class PauseMenuManager : MonoBehaviour
             Time.timeScale = 0;
 
             UIManager._Instance.OpenPauseMenu();
+            Cursor.visible = true;
 
             InputManager._Instance.DisableInput();
 
@@ -53,6 +54,8 @@ public class PauseMenuManager : MonoBehaviour
         {
             Time.timeScale = 0;
             UIManager._Instance.OpenPauseMenu();
+
+            Cursor.visible = true;
 
             InputManager._Instance.DisableInput();
 
@@ -64,6 +67,8 @@ public class PauseMenuManager : MonoBehaviour
 
             UIManager._Instance.CloseCanvas(CanvasFunction.PAUSE);
             UIManager._Instance.CloseCanvas(CanvasFunction.SETTINGS);
+
+            Cursor.visible = false;
 
             InputManager._Instance.EnableInput();
 

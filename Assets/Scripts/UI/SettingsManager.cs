@@ -27,9 +27,9 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private Vector2 minMaxMouseSensitivity;
     [SerializeField] private float defaultMouseSensitivity;
     [SerializeField] private CinemachineVirtualCamera playerPOVCam;
-    [Tooltip("The amount to multiply each axis by to make it so x is sensitivity is relative to y")]
-    [SerializeField] private Vector2 axisMultipliers = new Vector2(2, 0.34f);
     private CinemachinePOV playerPOV;
+    private float defaultHorizontalMouseSpeed;
+    private float defaultVerticalMouseSpeed;
 
     private void Awake()
     {
@@ -53,9 +53,13 @@ public class SettingsManager : MonoBehaviour
 
     public void SetMouseSensitivity(float percent)
     {
+        // Get player POV
+        if (!playerPOV)
+            playerPOV = playerPOVCam.GetCinemachineComponent<CinemachinePOV>();
+
         PlayerPrefs.SetFloat(mouseSensitivityKey, percent);
-        playerPOV.m_HorizontalAxis.m_MaxSpeed = axisMultipliers.x * Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
-        playerPOV.m_VerticalAxis.m_MaxSpeed = axisMultipliers.y * Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
+        playerPOV.m_HorizontalAxis.m_MaxSpeed = Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
+        playerPOV.m_VerticalAxis.m_MaxSpeed = Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
         mouseSensitivitySlider.value = percent;
     }
 
