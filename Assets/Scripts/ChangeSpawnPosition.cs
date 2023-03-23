@@ -16,7 +16,6 @@ public class ChangeSpawnPosition : MonoBehaviour
     public void ChangePosition(SpawnPosition spawnPosition)
     {
         SpawnPositionData data = spawnPositionDictionary[spawnPosition];
-
         transform.position = data.position;
         playerObject.localPosition = Vector3.zero + Vector3.up / 2;
         transform.localEulerAngles = data.eulerAngles;
