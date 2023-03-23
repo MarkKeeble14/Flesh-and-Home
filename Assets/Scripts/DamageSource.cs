@@ -1,0 +1,12 @@
+﻿public enum DamageSource
+{
+    RIFLE,
+    FLAMETHROWER,
+    LASER_CUTTER,
+    PULSE_GRENADE_LAUNCHER,
+    ENEMY_CONTACT,
+    ENEMY_SHOCKWAVE,
+    ENEMY_LASER,
+    ENEMY_SWARM,
+    OVERHEAT
+}

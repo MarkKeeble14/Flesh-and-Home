@@ -35,6 +35,9 @@ public class OverheatableEntity : EndableEntity
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onHeatClip;
 
+    [SerializeField] private bool spawnDamageText;
+    [SerializeField] private DamagePopupText damagePopupText;
+
     private new void Awake()
     {
         // Get a reference to the instantiated material
@@ -76,17 +79,21 @@ public class OverheatableEntity : EndableEntity
         }
         currentColor = visuals.GetLerpedColor(percent);
         material.color = currentColor;
+
         if (emissionEnabled)
             material.SetColor("_EmissionColor", visuals.GetEmmissiveColor(currentColor, percent));
         else
             material.SetColor("_EmissionColor", Color.black);
     }
 
-    public override void Damage(float damage)
+    public override void Damage(float damage, DamageSource damageSource)
     {
         if (!acceptDamage) return;
         // Add heat
         currentHeat += damage;
+
+        if (spawnDamageText)
+            Instantiate(damagePopupText, transform.position + (Vector3.up * transform.localScale.y / 2), Quaternion.identity).Set(damage, damageSource);
 
         // Audio
         onHeatClip.PlayOneShot(source);
@@ -102,9 +109,9 @@ public class OverheatableEntity : EndableEntity
         dissapateAfterTimer = overheatSettings.dissapateAfter;
     }
 
-    public override void Damage(float damage, Vector3 force)
+    public override void Damage(float damage, Vector3 force, DamageSource source)
     {
-        Damage(damage);
+        Damage(damage, source);
         rigidbody.AddForce(force);
     }
 

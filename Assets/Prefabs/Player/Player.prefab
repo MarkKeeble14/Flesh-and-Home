@@ -276,9 +276,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 555614854346664237}
-  - component: {fileID: 7918562044240042105}
   - component: {fileID: 1330392026440316999}
   - component: {fileID: 503775771}
+  - component: {fileID: 4849305479622933382}
   m_Layer: 16
   m_Name: PlayerHitbox
   m_TagString: Untagged
@@ -294,26 +294,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7166828130188408020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7362887214131378889}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7918562044240042105
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7166828130188408020}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75, z: 0.75}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1330392026440316999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +330,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &4849305479622933382
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166828130188408020}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7362887213531304022
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,8 +371,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7362887213531304022}
-  m_LocalRotation: {x: -0.09195997, y: -0.68816173, z: -0.08860342, w: 0.71423125}
-  m_LocalPosition: {x: 139.98941, y: 1.7767417, z: 108.12756}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -627,6 +628,19 @@ MonoBehaviour:
       value:
         position: {x: 200, y: 0, z: 0}
         eulerAngles: {x: 0, y: 90, z: 0}
+    - key: 5
+      value:
+        position: {x: 50, y: 75, z: 175}
+        eulerAngles: {x: 0, y: 0, z: 0}
+    - key: 6
+      value:
+        position: {x: 375, y: 75, z: -275}
+        eulerAngles: {x: 0, y: -90, z: 0}
+    - key: 7
+      value:
+        position: {x: 475, y: 0, z: 0}
+        eulerAngles: {x: 0, y: 90, z: 0}
+  playerObject: {fileID: 7362887214131378889}
 --- !u!1 &7362887214131378890
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +714,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7362887214131378890}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -863,6 +877,10 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  spawnDamageText: 0
+  damagePopupText: {fileID: 0}
+  particlesOnHit: []
+  particlesOnDeath: []
   playerHpBar: {fileID: 0}
   hpStore: {fileID: 11400000, guid: 88d987135f5b8bc4d9270160a39c920f, type: 2}
 --- !u!114 &2567597695663198020
@@ -988,12 +1006,12 @@ MonoBehaviour:
     pitch: 1
   color: {r: 0.31347656, g: 0, b: 1, a: 1}
   laserSettings:
-    damage: 50
+    damage: 2.5
     tickRate: 0.05
     maxDistance: 100
     canHit:
       serializedVersion: 2
-      m_Bits: 24576
+      m_Bits: 424960
     crosshairSpread: 0.05
     beamSettings:
       fullWidth: 1
@@ -2250,7 +2268,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8639363921639043213}
   m_LocalRotation: {x: 0.15323302, y: -0.090873584, z: 0.014155157, w: 0.9839011}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2667,6 +2685,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03adfb2c5e81daf4c8520356c06af1ab, type: 2}
+    - target: {fileID: 2300002, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03adfb2c5e81daf4c8520356c06af1ab, type: 2}
+    - target: {fileID: 2300004, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03adfb2c5e81daf4c8520356c06af1ab, type: 2}
+    - target: {fileID: 2300006, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03adfb2c5e81daf4c8520356c06af1ab, type: 2}
+    - target: {fileID: 2300008, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03adfb2c5e81daf4c8520356c06af1ab, type: 2}
+    - target: {fileID: 2300010, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03adfb2c5e81daf4c8520356c06af1ab, type: 2}
+    - target: {fileID: 2300012, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03adfb2c5e81daf4c8520356c06af1ab, type: 2}
+    - target: {fileID: 2300014, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 03adfb2c5e81daf4c8520356c06af1ab, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dc2a27ad3a63d24bad7f1c6d159013e, type: 3}
 --- !u!4 &4876248169073298494 stripped

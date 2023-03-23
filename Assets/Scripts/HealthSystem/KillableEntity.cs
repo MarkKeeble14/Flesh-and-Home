@@ -67,16 +67,35 @@ public class KillableEntity : EndableEntity
     [Header("Audio")]
     [SerializeField] private AudioClipContainer onTakeDamageClip;
 
+    [SerializeField] private bool spawnDamageText;
+    [SerializeField] private DamagePopupText damagePopupText;
+    protected DamageSource lastHitBy;
+
+    [SerializeField] private GameObject[] particlesOnHit;
+    [SerializeField] private GameObject[] particlesOnDeath;
+
     private void OnEnable()
     {
         // Set current health to max health
         CurrentHealth = maxHealth;
     }
 
-    public override void Damage(float damage)
+    public override void Damage(float damage, DamageSource source)
     {
         if (!acceptDamage) return;
         CurrentHealth -= damage;
+
+        // Spawn particles
+        foreach (GameObject obj in particlesOnHit)
+        {
+            Instantiate(obj, transform.position, Quaternion.identity);
+        }
+
+        lastHitBy = source;
+        if (spawnDamageText)
+        {
+            Instantiate(damagePopupText, transform.position + (Vector3.up * transform.localScale.y / 2), Quaternion.identity).Set(damage, source);
+        }
 
         // Audio
         Instantiate(tempSource, transform.position, Quaternion.identity).Play(onTakeDamageClip);
@@ -87,9 +106,9 @@ public class KillableEntity : EndableEntity
         }
     }
 
-    public override void Damage(float damage, Vector3 force)
+    public override void Damage(float damage, Vector3 force, DamageSource source)
     {
-        Damage(damage);
+        Damage(damage, source);
 
         if (acceptKnockback)
             rigidbody.AddForce(force);
@@ -108,6 +127,7 @@ public class KillableEntity : EndableEntity
             rb.transform.parent = null;
             rb.useGravity = true;
             rb.isKinematic = false;
+            rb.AddForce(Random.onUnitSphere * RandomHelper.RandomFloat(100, 200));
         }
 
         if (spawnHealthTrigger && !GameManager._Instance.PlayerHealth.IsFull)
@@ -129,7 +149,7 @@ public class KillableEntity : EndableEntity
         // Destroy
         if (destroyOnDeath)
         {
-            Destroy(gameObject);
+            Die();
         }
 
         // Stop basic enemy functions such as attacking
@@ -143,6 +163,15 @@ public class KillableEntity : EndableEntity
         {
             movement.SetMove(false);
         }
+    }
+
+    protected void Die()
+    {
+        foreach (GameObject obj in particlesOnDeath)
+        {
+            Instantiate(obj, transform.position, Quaternion.identity);
+        }
+        Destroy(gameObject);
     }
 
     public void ResetHealth()

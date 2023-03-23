@@ -15,6 +15,10 @@ public class ShockwaveAttack : Attack
     [SerializeField] private LayerMask canHit;
     private LayerMask ground;
 
+    [SerializeField] private float heightGrowth;
+    [SerializeField] private float radiusGrowth;
+    [SerializeField] private float damageGrowth;
+
     [SerializeField] private ImpulseSourceData impulseSourceData;
 
     [Header("Audio")]
@@ -22,6 +26,17 @@ public class ShockwaveAttack : Attack
     [SerializeField] private AudioClipContainer endClip;
 
     private List<ShockwaveRing> spawnedRings;
+
+    public override void Boost()
+    {
+        // radius
+        maxRadius += radiusGrowth;
+        // height
+        height += heightGrowth;
+        // damage
+        damage += damageGrowth;
+        base.Boost();
+    }
 
     private void Awake()
     {

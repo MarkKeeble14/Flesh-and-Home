@@ -9,6 +9,12 @@ public class BossSetLaserProjectileAttack : Attack
     [SerializeField] private BossLaserProjectileSettings settings;
     [SerializeField] private Vector2 minMaxTimeBetweenShots = new Vector2(.025f, .1f);
 
+    public override void Boost()
+    {
+        throw new System.NotImplementedException();
+        // base.Boost();
+    }
+
     private void Awake()
     {
         // Get Barrels

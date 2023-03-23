@@ -169,7 +169,7 @@ public class LaserCutterSettings : WeaponAttachmentController
                     // Debug.Log("Has Damageable Component: " + damageable + "; Dealing Damage to: " + rayHitting);
 
                     // Deal damage
-                    damageable.Damage(laserSettings.damage);
+                    damageable.Damage(laserSettings.damage, DamageSource.LASER_CUTTER);
 
                     // Add to dictionary so we know not to hit again too quickly
                     hitTickBetweenTimer.Add(rayHitting, laserSettings.tickRate);
@@ -202,7 +202,7 @@ public class LaserCutterSettings : WeaponAttachmentController
         overheatStartSound.PlayOneShot(source);
 
         // Deal damage to play if they overheat
-        playerDamageable.Damage(laserSettings.overheatSettings.overheatDamage);
+        playerDamageable.Damage(laserSettings.overheatSettings.overheatDamage, DamageSource.OVERHEAT);
 
         // Wait until Overheat has cooled down
         yield return new WaitUntil(() => trackOverheatTimer <= 0);

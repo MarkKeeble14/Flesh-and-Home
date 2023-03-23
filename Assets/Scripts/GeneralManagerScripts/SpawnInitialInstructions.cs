@@ -6,6 +6,6 @@ public class SpawnInitialInstructions : MonoBehaviour
 
     private void Start()
     {
-        TextPopupManager._Instance.SpawnText("Press Space to Jump\nPress Left Shift in the Air to Dash\nPress Escape for Settings", duration);
+        TextPopupManager._Instance.SpawnText("Press Space to Jump\nPress Left Shift in the Air to Dash in the Direction of Movement\nPress Escape for Settings", duration);
     }
 }

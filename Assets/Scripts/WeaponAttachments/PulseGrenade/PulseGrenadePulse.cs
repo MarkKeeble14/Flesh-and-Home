@@ -15,7 +15,7 @@ public class PulseGrenadePulse : MonoBehaviour
         if (hasHitList.Contains(other)) return;
         if (other.TryGetComponent(out IDamageable damageable))
         {
-            damageable.Damage(settings.damage, settings.pulseKnockbackForce * (other.transform.position - transform.position).normalized);
+            damageable.Damage(settings.damage, settings.pulseKnockbackForce * (other.transform.position - transform.position).normalized, DamageSource.PULSE_GRENADE_LAUNCHER);
             hasHitList.Add(other);
         }
     }

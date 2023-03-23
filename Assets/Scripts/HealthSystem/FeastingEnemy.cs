@@ -9,6 +9,7 @@ public class FeastingEnemy : MonoBehaviour
     [SerializeField] private float onFeastSizeChange;
     [Tooltip("Multiplicative")]
     [SerializeField] private float onFeastHPChange;
+    [SerializeField] private Attack[] onFeastAttacksToBoost;
 
     private KillableEntity health;
     public KillableEntity Health => health;
@@ -47,6 +48,11 @@ public class FeastingEnemy : MonoBehaviour
         }
     }
 
+    public void FeastOnEntity(KillableEntity killableEntity)
+    {
+        DoOnFeast();
+    }
+
     public void DoOnFeast()
     {
         targetScale += Vector3.one * onFeastSizeChange;
@@ -54,6 +60,12 @@ public class FeastingEnemy : MonoBehaviour
         {
             health.MaxHealth *= onFeastHPChange;
         }
+
+        foreach (Attack attack in onFeastAttacksToBoost)
+        {
+            attack.Boost();
+        }
+
         health.ResetHealth();
         feastLevel++;
     }

@@ -18,7 +18,7 @@ MonoBehaviour:
   canHit:
     serializedVersion: 2
     m_Bits: 2122624
-  laserRadius: 0.025
+  laserRadius: 0.05
   beamSettings:
     fullWidth: 0.25
     beamGrowSpeed: 0.1
@@ -30,3 +30,5 @@ MonoBehaviour:
   followPlayerSpeed: 0.45
   chanceToTargetPlayer: {x: 1, y: 1}
   minMaxLaserOffset: {x: 0.05, y: 0.15}
+  damageBoost: 1
+  radiusBoost: 0.025

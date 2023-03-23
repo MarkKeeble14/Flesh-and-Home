@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1929353568791620470}
   - component: {fileID: 8806300354988634029}
   - component: {fileID: 6150031235969633033}
-  m_Layer: 15
+  m_Layer: 0
   m_Name: BossFleshyTraveller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4662f03a22352524c9204e7acc6d8159, type: 2}
+  - {fileID: 2100000, guid: c35836d0a1fefb24da6032ccfa70d12f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

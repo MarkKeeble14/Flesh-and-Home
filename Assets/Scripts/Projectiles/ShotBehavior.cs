@@ -21,7 +21,7 @@ public class ShotBehavior : MonoBehaviour
             {
                 if (collision.gameObject.TryGetComponent(out IDamageable damageable))
                 {
-                    damageable.Damage(damage, -collision.GetContact(0).normal * impactForce);
+                    damageable.Damage(damage, -collision.GetContact(0).normal * impactForce, DamageSource.RIFLE);
                 }
             }
         }

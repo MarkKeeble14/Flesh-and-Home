@@ -21,9 +21,9 @@ public class TransitionManager : MonoBehaviour
 
     [SerializeField] private Animator anim;
 
-    public void FadeOut(Action action)
+    public void FadeOut(Action action, float timeBetween = 0)
     {
-        StartCoroutine(PlayAnimationThenDoAction("FadeOut", action));
+        StartCoroutine(PlayAnimationThenDoAction("FadeOut", action, timeBetween));
     }
 
     public void FadeOut()
@@ -31,9 +31,9 @@ public class TransitionManager : MonoBehaviour
         anim.CrossFade("FadeOut", 0, 0);
     }
 
-    public void FadeIn(Action action)
+    public void FadeIn(Action action, float timeBetween = 0)
     {
-        StartCoroutine(PlayAnimationThenDoAction("FadeIn", action));
+        StartCoroutine(PlayAnimationThenDoAction("FadeIn", action, timeBetween));
     }
 
     public void FadeIn()
@@ -41,12 +41,13 @@ public class TransitionManager : MonoBehaviour
         anim.CrossFade("FadeIn", 0, 0);
     }
 
-    private IEnumerator PlayAnimationThenDoAction(string animationName, Action action)
+    private IEnumerator PlayAnimationThenDoAction(string animationName, Action action, float timeBetween = 0)
     {
         // Debug.Log("Playing: " + animationName);
         anim.CrossFade(animationName, 0, 0);
 
         yield return new WaitUntil(() => AnimationHelper.AnimatorIsPlayingClip(anim, animationName));
+        yield return new WaitForSecondsRealtime(timeBetween);
         yield return new WaitUntil(() => !AnimationHelper.AnimatorIsPlayingClip(anim, animationName));
 
         action();
