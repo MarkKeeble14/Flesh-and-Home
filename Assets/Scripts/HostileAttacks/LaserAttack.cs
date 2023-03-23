@@ -8,6 +8,12 @@ public abstract class LaserAttack : Attack
     [SerializeField] protected LaserAttackOptions laserAttackerOptions;
     protected List<LaserBarrel> attackingFrom = new List<LaserBarrel>();
 
+    public override void Boost()
+    {
+        laserAttackerOptions.Boost();
+        base.Boost();
+    }
+
     public override void Interrupt()
     {
         foreach (LaserBarrel barrel in attackingFrom)
@@ -200,7 +206,7 @@ public abstract class LaserAttack : Attack
                 }
 
                 // Damage
-                damageable.Damage(laserAttackerOptions.Damage);
+                damageable.Damage(laserAttackerOptions.Damage, DamageSource.ENEMY_LASER);
 
                 // Debug.Log("Damaged: " + damageable);
 

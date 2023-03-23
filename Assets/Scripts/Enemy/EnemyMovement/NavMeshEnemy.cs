@@ -10,7 +10,7 @@ public class NavMeshEnemy : EnemyMovement
     public bool IsActive { get; protected set; }
 
     [SerializeField] private bool alterRigidbody = true;
-    private Rigidbody rb;
+    protected Rigidbody rb;
 
     private void Awake()
     {

@@ -10,7 +10,7 @@ public class DamageOtherOnTouch : MonoBehaviour, IDamageOthers
     public void DealDamage(IDamageable damageable)
     {
         // Debug.Log("Damaging: " + damageable);
-        damageable.Damage(damage);
+        damageable.Damage(damage, DamageSource.ENEMY_CONTACT);
         hasDamagedRecently.Add(damageable, tickRate);
     }
 

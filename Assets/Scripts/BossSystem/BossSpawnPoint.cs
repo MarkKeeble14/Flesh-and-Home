@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public abstract class BossSpawnPoint : MonoBehaviour
+public class BossSpawnPoint : MonoBehaviour
 {
     public bool SpawnedOn { get; set; }
     public Vector3 InitPosition { get; private set; }

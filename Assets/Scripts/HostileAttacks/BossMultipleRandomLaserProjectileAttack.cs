@@ -12,6 +12,12 @@ public class BossMultipleRandomLaserProjectileAttack : Attack
     [SerializeField] private int maxLaserCalls = 8;
     [SerializeField] private Vector2 minMaxTimeBetweenShots = new Vector2(.025f, .1f);
 
+    public override void Boost()
+    {
+        throw new System.NotImplementedException();
+        // base.Boost();
+    }
+
     private void Awake()
     {
         // Fetch and add all options

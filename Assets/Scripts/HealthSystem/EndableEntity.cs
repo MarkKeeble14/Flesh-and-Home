@@ -33,6 +33,6 @@ public abstract class EndableEntity : MonoBehaviour, IDamageable
         tempSource.Play(onEndClip);
     }
 
-    public abstract void Damage(float damage);
-    public abstract void Damage(float damage, Vector3 force);
+    public abstract void Damage(float damage, DamageSource source);
+    public abstract void Damage(float damage, Vector3 force, DamageSource source);
 }

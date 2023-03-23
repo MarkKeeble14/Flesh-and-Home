@@ -6,7 +6,7 @@ public class PulseGrenade : MonoBehaviour
 {
     [SerializeField] private PulseGrenadePulse pulsePrefab;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Collider collider;
+    [SerializeField] private new Collider collider;
     private PulseGrenadeSettings settings;
 
     private LayerMask activateOnCollideWith;

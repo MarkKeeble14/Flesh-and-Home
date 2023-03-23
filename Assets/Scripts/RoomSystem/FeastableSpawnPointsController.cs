@@ -8,22 +8,21 @@ public class FeastableSpawnPointsController : MonoBehaviour
 
     public void SetArray()
     {
-        spawnPoints = GetComponentsInChildren<FeastableSpawnPoint>();
+        spawnPoints = GetComponentsInChildren<FeastableSpawnPoint>(true);
     }
-
 
     public FeastableSpawnPoint GetSpawnPoint()
     {
         return RandomHelper.GetRandomFromArray(spawnPoints);
     }
 
-    public FeastableEntity Emit(FeastableEntity toEmit, bool useRandomOffset)
+    public GameObject Emit(GameObject toEmit, bool useRandomOffset)
     {
         FeastableSpawnPoint spawnPoint = GetSpawnPoint();
         return Emit(toEmit, spawnPoint, useRandomOffset);
     }
 
-    public FeastableEntity Emit(FeastableEntity toEmit, FeastableSpawnPoint spawnPoint, bool useRandomOffset)
+    public GameObject Emit(GameObject toEmit, FeastableSpawnPoint spawnPoint, bool useRandomOffset)
     {
         return spawnPoint.Spawn(toEmit, useRandomOffset);
     }

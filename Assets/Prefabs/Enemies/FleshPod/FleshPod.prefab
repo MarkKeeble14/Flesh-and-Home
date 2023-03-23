@@ -184,6 +184,14 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 100
   acceptDamage: 1
+  spawnHealthTrigger: 0
+  healthTrigger: {fileID: 5708385125351423535, guid: 66c11f9f9898a664381a8d81e397204a,
+    type: 3}
+  chanceToSpawnHealthTrigger: {x: 1, y: 6}
+  spawnFuelTrigger: 1
+  fuelTrigger: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
   destroyOnDeath: 1
   rigidbody: {fileID: 8287840866634462593}
@@ -193,13 +201,13 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  fleshyTraveller: {fileID: -1068128480174535724, guid: 1ec8123e792c42d49ba10fba5255660d,
+  spawnDamageText: 1
+  damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
     type: 3}
-  travellerHP: 50
-  detectionRange: 50
-  feastingEnemyLayer:
-    serializedVersion: 2
-    m_Bits: 131072
+  particlesOnHit:
+  - {fileID: 6555892946277273035, guid: 90b3a9ca400ecc54db2d1747866a92a7, type: 3}
+  particlesOnDeath:
+  - {fileID: 6555892946277273035, guid: 2c175e6297156174cb42ffa7aa9f1272, type: 3}
   maxCapacity: 100
   capacity: 100
   capacityPerCritter: 2.5

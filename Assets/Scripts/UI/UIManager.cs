@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     private int escapeToggle;
     [SerializeField] private SerializableDictionary<CanvasFunction, GameObject> canvases = new SerializableDictionary<CanvasFunction, GameObject>();
 
+
     [SerializeField] private Animator blackBars;
     private void Start()
     {
@@ -25,6 +26,12 @@ public class UIManager : MonoBehaviour
     }
 
     [SerializeField] private GameObject[] disableObjectsWhenBlackBarsAreActive;
+
+    [SerializeField] private SerializableDictionary<DamageSource, Color> damageSourceTextColorDictionary = new SerializableDictionary<DamageSource, Color>();
+    public Color GetDamageSourceColor(DamageSource source)
+    {
+        return damageSourceTextColorDictionary[source];
+    }
 
     public void OpenSettingsMenu()
     {

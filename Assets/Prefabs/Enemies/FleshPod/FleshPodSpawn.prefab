@@ -482,6 +482,12 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 10
   acceptDamage: 1
+  spawnHealthTrigger: 0
+  healthTrigger: {fileID: 0}
+  chanceToSpawnHealthTrigger: {x: 1, y: 6}
+  spawnFuelTrigger: 0
+  fuelTrigger: {fileID: 0}
+  chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
   destroyOnDeath: 1
   rigidbody: {fileID: 5023724996855043179}
@@ -491,6 +497,13 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  spawnDamageText: 1
+  damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
+    type: 3}
+  particlesOnHit:
+  - {fileID: 6555892946277273035, guid: 90b3a9ca400ecc54db2d1747866a92a7, type: 3}
+  particlesOnDeath:
+  - {fileID: 6555892946277273035, guid: 2c175e6297156174cb42ffa7aa9f1272, type: 3}
 --- !u!114 &5023724996855043176
 MonoBehaviour:
   m_ObjectHideFlags: 0

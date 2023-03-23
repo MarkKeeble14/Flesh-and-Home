@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            return jetpackDashCooldownTimer <= 0;
+            return jetpackDashCooldownTimer >= jetpackDashCooldown && !isGrounded;
         }
     }
 
@@ -128,6 +128,7 @@ public class PlayerController : MonoBehaviour
         fuelStore.Reset();
 
         // Update UI
+        jetpackDashCooldownTimer = jetpackDashCooldown;
         jetpackDisplay.Set(0, maxJetpackDuration);
     }
 
@@ -172,7 +173,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // if is bonking; zero out y
-        if (isBonking)
+        if (isBonking && playerVelocity.y >= 0)
         {
             playerVelocity.y = 0;
         }
@@ -221,9 +222,9 @@ public class PlayerController : MonoBehaviour
         }
 
         // Subtract from air dash timer
-        if (jetpackDashCooldownTimer > 0)
+        if (jetpackDashCooldownTimer < jetpackDashCooldown)
         {
-            jetpackDashCooldownTimer -= Time.deltaTime;
+            jetpackDashCooldownTimer += Time.deltaTime;
         }
 
         // Debug.Log("Velocity: " + playerVelocity);
@@ -345,11 +346,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!CanUseDash)
         {
-            if (jetpackDashCooldownTimer > 0)
-            {
-                // Debug.Log("Air Dash On Cooldown; Can't use Air Dash");
-                return;
-            }
+            return;
         }
 
         // Debug.Log("Activate Air Dash");
@@ -365,6 +362,6 @@ public class PlayerController : MonoBehaviour
         Instantiate(dashParticleSystem, transform.position, Quaternion.LookRotation(-dashForce)).Play();
 
         // Set cooldown
-        jetpackDashCooldownTimer = jetpackDashCooldown;
+        jetpackDashCooldownTimer = 0;
     }
 }

@@ -9,11 +9,15 @@ public class FeastableSpawnPoint : MonoBehaviour
     [SerializeField] private float addForceStrength;
     [SerializeField] private Vector3 randomOffsetRange = new Vector3(.25f, .25f, .25f);
 
-    public FeastableEntity Spawn(FeastableEntity feastable, bool useOffset)
+    public GameObject Spawn(GameObject feastable, bool useOffset)
     {
-        FeastableEntity spawned = Instantiate(feastable, transform.position +
+        GameObject spawned = Instantiate(feastable, transform.position +
             (useOffset ? RandomHelper.RandomOffset(randomOffsetRange.x, randomOffsetRange.y, randomOffsetRange.z) : Vector3.zero), Quaternion.identity);
-        AddForce(spawned.Rigidbody);
+
+        if (spawned.TryGetComponent(out Rigidbody rb))
+        {
+            AddForce(rb);
+        }
         return spawned;
     }
 

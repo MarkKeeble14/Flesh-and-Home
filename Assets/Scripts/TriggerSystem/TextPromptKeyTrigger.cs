@@ -5,8 +5,31 @@ using TMPro;
 public abstract class TextPromptKeyTrigger : EventTrigger
 {
     private string prefix = "'E' to ";
+    public virtual string Prefix
+    {
+        get
+        {
+            return prefix;
+        }
+        set
+        {
+            prefix = value;
+        }
+    }
+    private string suffix = "";
+    protected virtual string Suffix
+    {
+        get
+        {
+            return suffix;
+        }
+        set
+        {
+            suffix = value;
+        }
+    }
     [SerializeField] protected string activePrompt;
-    protected virtual string Suffix { get => ""; }
+
     protected TriggerHelperText helperText;
     protected bool showText = true;
 
@@ -20,13 +43,18 @@ public abstract class TextPromptKeyTrigger : EventTrigger
 
     [SerializeField] private bool destroyOnActivate = true;
 
-    protected void Awake()
+    protected new void Awake()
     {
         if (destroyOnActivate)
+        {
+
             onActivate += () => Destroy(gameObject);
+        }
+
+        base.Awake();
     }
 
-    private void Start()
+    protected void Start()
     {
         // Find Helper Text
         helperText = FindObjectOfType<TriggerHelperText>();
@@ -47,19 +75,23 @@ public abstract class TextPromptKeyTrigger : EventTrigger
     {
         helperText.Hide(this);
 
+        //
         // Remove Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
     }
 
     protected string GetHelperTextString()
     {
-        return prefix + activePrompt + Suffix;
+        return Prefix + activePrompt + Suffix;
     }
 
     protected override void CallActivate(InputAction.CallbackContext ctx)
     {
-        helperText.Hide(this);
-        InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
+        if (destroyOnActivate)
+        {
+            helperText.Hide(this);
+            InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
+        }
         base.CallActivate(ctx);
     }
 }

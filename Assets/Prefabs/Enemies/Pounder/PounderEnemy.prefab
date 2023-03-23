@@ -96,13 +96,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasTimeBetweenAttacks: 1
-  timeBetweenAttacks: 1
+  timeBetweenAttacks: 2
   disableMoveWhileBetweenAttacks: 0
   disableMovementWhileAttacking: 0
   followWhileAttacking: 0
   rotateWhileAttacking: 0
   hasMaxRange: 1
-  maxRange: 10
+  maxRange: 7.5
   removeFromPoolWhenActive: 0
   source: {fileID: 959702198628339920}
   onStartClip:
@@ -113,17 +113,21 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 1
   ring: {fileID: 5268082847997902403, guid: 5a1ba1319e0802843b622f654e126215, type: 3}
   numThumps: 1
   timeBetweenThumps: 0
-  maxRadius: 25
-  height: 10
-  spawnAtYOffset: 0.5
+  maxRadius: 10
+  height: 5
+  spawnAtYOffset: 0
   expansionSpeed: 15
-  damage: 10
+  damage: 5
   canHit:
     serializedVersion: 2
     m_Bits: 65536
+  heightGrowth: 1
+  radiusGrowth: 5
+  damageGrowth: 3
   impulseSourceData:
     verticalMinMaxImpulse: {x: -1, y: 1}
     horizontalMinMaxImpulse: {x: -0.5, y: 0.5}
@@ -609,6 +613,14 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 50
   acceptDamage: 1
+  spawnHealthTrigger: 1
+  healthTrigger: {fileID: 5708385125351423535, guid: 66c11f9f9898a664381a8d81e397204a,
+    type: 3}
+  chanceToSpawnHealthTrigger: {x: 1, y: 6}
+  spawnFuelTrigger: 1
+  fuelTrigger: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+    type: 3}
+  chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
   destroyOnDeath: 0
   rigidbody: {fileID: 959702198628339923}
@@ -620,6 +632,13 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  spawnDamageText: 1
+  damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
+    type: 3}
+  particlesOnHit:
+  - {fileID: 6555892946277273035, guid: 90b3a9ca400ecc54db2d1747866a92a7, type: 3}
+  particlesOnDeath:
+  - {fileID: 6555892946277273035, guid: 2c175e6297156174cb42ffa7aa9f1272, type: 3}
   fleshyTraveller: {fileID: -1068128480174535724, guid: 1ec8123e792c42d49ba10fba5255660d,
     type: 3}
   travellerHP: 50
@@ -641,8 +660,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scaleSpeed: 2.5
   feastLevel: 1
-  onFeastSizeChange: 1.25
+  onFeastSizeChange: 0.5
   onFeastHPChange: 1.4
+  onFeastAttacksToBoost:
+  - {fileID: 8898761843540015141}
 --- !u!114 &8899907301702536468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,6 +733,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wanderDistance: 5
   pauseTime: 1
+  roomTriggerMask:
+    serializedVersion: 2
+    m_Bits: 4194304
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &2520789080553671185
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +801,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 04057e26d67aa6949a90fb5e2f6da68e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -871,7 +898,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 04057e26d67aa6949a90fb5e2f6da68e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1050,7 +1077,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 04057e26d67aa6949a90fb5e2f6da68e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1147,7 +1174,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 04057e26d67aa6949a90fb5e2f6da68e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

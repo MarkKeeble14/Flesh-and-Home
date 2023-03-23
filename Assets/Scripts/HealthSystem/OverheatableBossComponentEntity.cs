@@ -6,11 +6,11 @@ public class OverheatableBossComponentEntity : OverheatableEntity
 {
     public ImageSliderBar HPBar { get; private set; }
 
-    public override void Damage(float damage)
+    public override void Damage(float damage, DamageSource source)
     {
         if (HPBar != null)
             HPBar.Set(currentHeat, overheatSettings.overheatAfter);
-        base.Damage(damage);
+        base.Damage(damage, source);
     }
 
     public virtual void SetHPBar(ImageSliderBar hpBar)

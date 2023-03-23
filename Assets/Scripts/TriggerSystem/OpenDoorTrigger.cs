@@ -20,10 +20,11 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
     private Vector3 openPosition;
     private Coroutine animationCoroutine;
 
-    protected override string Suffix => (isOpen ? " Close" : " Open") + " Door";
     [SerializeField] private bool allowPlayerControl = true;
 
     protected override bool AllowShowText => allowPlayerControl;
+
+    [SerializeField] private Renderer triggerRenderer;
 
     private new void Awake()
     {
@@ -49,7 +50,7 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
             if (!allowPlayerControl) return;
             if (!isOpen)
             {
-                Open(null);
+                LockOpened();
             }
             else
             {
@@ -77,8 +78,10 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
     public void LockOpened()
     {
         Open(null);
+        Active = false;
         allowPlayerControl = false;
         showText = false;
+        helperText.Hide(this);
     }
 
     public void Open(Action onOpened)
@@ -91,8 +94,6 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
         if (isSlidingDoor)
         {
             animationCoroutine = StartCoroutine(SlideOpen(onOpened));
-            allowPlayerControl = false;
-            showText = false;
         }
     }
 
@@ -150,5 +151,21 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
         }
 
         onClosed?.Invoke();
+    }
+
+    private new void Update()
+    {
+        if (!allowPlayerControl)
+        {
+            Prefix = "Door Locked";
+            Suffix = "";
+        }
+        else
+        {
+            Prefix = "'E' to";
+            Suffix = (isOpen ? " Close" : " Open") + " Door";
+        }
+        triggerRenderer.enabled = allowPlayerControl;
+        base.Update();
     }
 }
