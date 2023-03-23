@@ -372,7 +372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7362887213531304022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 6, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -576,6 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7362887213996669586}
   - component: {fileID: 2133179426}
+  - component: {fileID: 829981121756634310}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -645,6 +646,19 @@ MonoBehaviour:
         position: {x: -100, y: 0, z: -100}
         eulerAngles: {x: 0, y: -45, z: 0}
   playerObject: {fileID: 7362887214131378889}
+--- !u!114 &829981121756634310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362887213996669587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f793fa60371e1ab4188a177cfcebd2ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frameRate: 60
 --- !u!1 &7362887214131378890
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 10
   sprintSpeed: 1.05
-  airStrafeSpeed: 15
+  airStrafeSpeed: 20
   jumpHeight: 0.075
   mass: 50
   gravityValue: -9.81
