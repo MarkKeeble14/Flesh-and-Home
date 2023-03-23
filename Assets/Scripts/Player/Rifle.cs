@@ -205,7 +205,7 @@ public class Rifle : MonoBehaviour
         overheatStartSound.PlayOneShot(source);
 
         // Deal damage to play if they overheat
-        playerDamageable.Damage(rifleSettings.overheatSettings.overheatDamage);
+        playerDamageable.Damage(rifleSettings.overheatSettings.overheatDamage, DamageSource.OVERHEAT);
 
         // Wait until Overheat has cooled down
         yield return new WaitUntil(() => trackOverheatTimer <= 0);

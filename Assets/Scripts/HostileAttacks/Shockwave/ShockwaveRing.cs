@@ -6,6 +6,7 @@ using Cinemachine;
 
 public class ShockwaveRing : MonoBehaviour
 {
+    [SerializeField] private ShockwaveRingColliderCheck colliderCheck;
     [SerializeField] private List<Collider> hasCollidedWith = new List<Collider>();
     [SerializeField] private float fadeOutSpeed;
     [SerializeField] private float minAlpha = .1f;
@@ -18,6 +19,11 @@ public class ShockwaveRing : MonoBehaviour
     private float damage;
     private ImpulseSourceData impulseSourceData;
     [SerializeField] private CinemachineImpulseSource collideWithPlayerImpulseSource;
+
+    public void AddColliderToHasCollidedWith(Collider col)
+    {
+        hasCollidedWith.Add(col);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -38,12 +44,14 @@ public class ShockwaveRing : MonoBehaviour
                     RandomHelper.RandomFloat(impulseSourceData.verticalMinMaxImpulse),
                     0) * impulseSourceData.impulseMultiplier
                 );
-            damageable.Damage(damage);
+            damageable.Damage(damage, DamageSource.ENEMY_SHOCKWAVE);
         }
     }
 
     public IEnumerator ExecuteThump(Action onEnd, float maxRadius, float height, float expansionSpeed, float damage, LayerMask canHit, ImpulseSourceData impulseSourceData)
     {
+        colliderCheck.canHit = canHit;
+
         this.damage = damage;
         this.canHit = canHit;
         this.impulseSourceData = impulseSourceData;

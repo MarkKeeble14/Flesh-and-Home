@@ -53,7 +53,7 @@ public class FlamethrowerTrigger : MonoBehaviour
             // Debug.Log("Damageing:" + damageable);
             // Debug.Log("Damaging: " + damageable);
 
-            damageable.Damage(settings.damage);
+            damageable.Damage(settings.damage, DamageSource.FLAMETHROWER);
             hitTickBetweenTimer.Add(other, settings.tickRate);
         }
     }

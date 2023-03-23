@@ -23,6 +23,7 @@ public class TransitionCameraHintTrigger : TextPromptKeyTrigger
             if (!Active) return;
             StartCoroutine(OnActivate());
             Active = false;
+            helperText.Hide(this);
         };
         base.Awake();
     }

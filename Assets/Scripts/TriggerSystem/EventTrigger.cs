@@ -12,6 +12,14 @@ public abstract class EventTrigger : MonoBehaviour
         set { active = value; }
     }
 
+    private new Renderer renderer;
+    [SerializeField] private bool useRenderer = true;
+
+    protected void Awake()
+    {
+        renderer = GetComponent<Renderer>();
+    }
+
     public void AddOnActivate(Action action)
     {
         onActivate += action;
@@ -39,6 +47,11 @@ public abstract class EventTrigger : MonoBehaviour
     protected virtual void OnStay(Collider other)
     {
         //
+    }
+
+    protected void Update()
+    {
+        renderer.enabled = active && useRenderer;
     }
 
     private void OnTriggerEnter(Collider other)

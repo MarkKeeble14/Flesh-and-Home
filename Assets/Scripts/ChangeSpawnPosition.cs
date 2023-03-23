@@ -6,6 +6,7 @@ public class ChangeSpawnPosition : MonoBehaviour
 {
     [SerializeField] private SpawnPosition spawnPosition;
     [SerializeField] private SerializableDictionary<SpawnPosition, SpawnPositionData> spawnPositionDictionary = new SerializableDictionary<SpawnPosition, SpawnPositionData>();
+    [SerializeField] private Transform playerObject;
 
     public void Start()
     {
@@ -16,24 +17,7 @@ public class ChangeSpawnPosition : MonoBehaviour
     {
         SpawnPositionData data = spawnPositionDictionary[spawnPosition];
         transform.position = data.position;
+        playerObject.localPosition = Vector3.zero + Vector3.up / 2;
         transform.localEulerAngles = data.eulerAngles;
-    }
-
-    public enum SpawnPosition
-    {
-        RUIN_START,
-        HUB,
-        BOSS_ROOM,
-        OVERWORLD,
-        UNLOCK1,
-        UNLOCK2,
-        UNLOCK3
-    }
-
-    [System.Serializable]
-    public struct SpawnPositionData
-    {
-        public Vector3 position;
-        public Vector3 eulerAngles;
     }
 }

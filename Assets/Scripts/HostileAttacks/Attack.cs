@@ -50,6 +50,12 @@ public abstract class Attack : MonoBehaviour
     [SerializeField] private AudioClipContainer onEndClip;
     protected bool executionInterrupted;
 
+    [SerializeField] private float rangeIncreaseOnBoost;
+    public virtual void Boost()
+    {
+        maxRange += rangeIncreaseOnBoost;
+    }
+
     public IEnumerator StartAttack(Transform target, AttackingEnemy enemy)
     {
         startedAttacking = true;

@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // if is bonking; zero out y
-        if (isBonking)
+        if (isBonking && playerVelocity.y >= 0)
         {
             playerVelocity.y = 0;
         }

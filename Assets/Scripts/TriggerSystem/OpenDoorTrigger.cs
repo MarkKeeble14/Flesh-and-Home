@@ -50,7 +50,7 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
             if (!allowPlayerControl) return;
             if (!isOpen)
             {
-                Open(null);
+                LockOpened();
             }
             else
             {
@@ -78,8 +78,10 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
     public void LockOpened()
     {
         Open(null);
+        Active = false;
         allowPlayerControl = false;
         showText = false;
+        helperText.Hide(this);
     }
 
     public void Open(Action onOpened)
@@ -92,8 +94,6 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
         if (isSlidingDoor)
         {
             animationCoroutine = StartCoroutine(SlideOpen(onOpened));
-            allowPlayerControl = false;
-            showText = false;
         }
     }
 
@@ -153,7 +153,7 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
         onClosed?.Invoke();
     }
 
-    private void Update()
+    private new void Update()
     {
         if (!allowPlayerControl)
         {
@@ -166,5 +166,6 @@ public class OpenDoorTrigger : TextPromptKeyTrigger
             Suffix = (isOpen ? " Close" : " Open") + " Door";
         }
         triggerRenderer.enabled = allowPlayerControl;
+        base.Update();
     }
 }

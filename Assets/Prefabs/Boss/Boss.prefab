@@ -1621,6 +1621,12 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 1000
   acceptDamage: 0
+  spawnHealthTrigger: 0
+  healthTrigger: {fileID: 0}
+  chanceToSpawnHealthTrigger: {x: 1, y: 6}
+  spawnFuelTrigger: 0
+  fuelTrigger: {fileID: 0}
+  chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
   destroyOnDeath: 0
   rigidbody: {fileID: 4559155298250650245}
@@ -1630,6 +1636,9 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  spawnDamageText: 1
+  damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
+    type: 3}
 --- !u!82 &193684192667313155
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2157,8 +2166,7 @@ MonoBehaviour:
   numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 2754082744787138833}
   timeBetweenAttacks: 5
-  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
-    type: 3}
+  returnToSpawnSpeed: 25
   availableAddOns:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
@@ -2460,8 +2468,7 @@ MonoBehaviour:
   numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 54373864176638256}
   timeBetweenAttacks: 3
-  dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
-    type: 3}
+  returnToSpawnSpeed: 25
   availableAddOns:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
@@ -2955,6 +2962,12 @@ MonoBehaviour:
     pitch: 1
   maxHealth: 500
   acceptDamage: 1
+  spawnHealthTrigger: 0
+  healthTrigger: {fileID: 0}
+  chanceToSpawnHealthTrigger: {x: 1, y: 6}
+  spawnFuelTrigger: 0
+  fuelTrigger: {fileID: 0}
+  chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
   destroyOnDeath: 1
   rigidbody: {fileID: 1200041713}
@@ -2964,6 +2977,9 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  spawnDamageText: 1
+  damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
+    type: 3}
 --- !u!82 &6692938010683863987
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4674,7 +4690,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: spawnAtYOffset
-      value: 1
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -4796,7 +4812,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: height
-      value: 25
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -9458,7 +9474,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: height
-      value: 25
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
@@ -10535,7 +10551,7 @@ PrefabInstance:
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}
       propertyPath: height
-      value: 25
+      value: 12.5
       objectReference: {fileID: 0}
     - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
         type: 3}

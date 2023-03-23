@@ -39,13 +39,16 @@ public class PlayerAttachmentHandler : MonoBehaviour
 
         attachmentMenu.gameObject.SetActive(true);
 
-        Cursor.visible = true;
+        // Cursor.visible = true;
+        Time.timeScale = 0.1f;
 
         InputManager._Instance.PlayerInputActions.Player.Look.Disable();
 
         yield return new WaitUntil(() => !InputManager._Instance.PlayerInputActions.Player.Tab.IsPressed());
 
-        Cursor.visible = false;
+        // Cursor.visible = false;
+
+        Time.timeScale = 1f;
 
         InputManager._Instance.PlayerInputActions.Player.Look.Enable();
 

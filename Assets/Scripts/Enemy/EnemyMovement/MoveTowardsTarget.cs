@@ -10,7 +10,7 @@ public class MoveTowardsTarget : EnemyMovement
     [SerializeField] protected bool rotateTowardsMovementDirection;
 
     // Update is called once per frame
-    void Update()
+    private new void Update()
     {
         // Set Audio Source to be enabled/disabled based off of whether this enemy is moving or not
         movementSource.enabled = target && AllowMove;
@@ -28,6 +28,7 @@ public class MoveTowardsTarget : EnemyMovement
 
         // Move to target
         transform.position += (target.transform.position - transform.position).normalized * speed * Time.deltaTime;
+        base.Update();
     }
 
     public override void SetSpeed(float f)

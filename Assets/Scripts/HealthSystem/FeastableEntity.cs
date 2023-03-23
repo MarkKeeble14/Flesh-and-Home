@@ -14,6 +14,12 @@ public class FeastableEntity : KillableEntity
     {
         base.OnEnd();
 
+        if (lastHitBy == DamageSource.FLAMETHROWER)
+        {
+            Die();
+            return;
+        }
+
         FeastingEnemy target = FindNearestFeastingEnemy();
         KillableEntity spawned = Instantiate(fleshyTraveller, new Vector3(transform.position.x, TransformHelper.FindGroundPoint(transform), transform.position.z), Quaternion.identity);
 
@@ -28,7 +34,7 @@ public class FeastableEntity : KillableEntity
             // Debug.Log(name + ", Target: " + target);
 
             // Move to Enemy
-            spawnedMovement.OverrideTarget(target.transform, target.transform.localScale.x + .5f, true, false,
+            spawnedMovement.OverrideTarget(target.transform, target.transform.localScale.x / 2 + transform.localScale.x / 2 + .25f, true, false,
                 delegate
                 {
                     if (target.Health.IsDead)

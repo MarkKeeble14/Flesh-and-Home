@@ -10,6 +10,12 @@ public class PlayerHealth : KillableEntity
     public override float CurrentHealth { get => hpStore.CurrentFloat; set => hpStore.CurrentFloat = value; }
     public override float MaxHealth { get => hpStore.MaxFloat; }
 
+    public override void Damage(float damage, DamageSource source)
+    {
+        BloodSpatterSelector._Instance.CallSpatter();
+        base.Damage(damage, source);
+    }
+
     private void Start()
     {
         AddAdditionalOnEndAction(() => GameManager._Instance.OpenLoseScreen());

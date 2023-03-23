@@ -43,13 +43,18 @@ public abstract class TextPromptKeyTrigger : EventTrigger
 
     [SerializeField] private bool destroyOnActivate = true;
 
-    protected void Awake()
+    protected new void Awake()
     {
         if (destroyOnActivate)
+        {
+
             onActivate += () => Destroy(gameObject);
+        }
+
+        base.Awake();
     }
 
-    private void Start()
+    protected void Start()
     {
         // Find Helper Text
         helperText = FindObjectOfType<TriggerHelperText>();
@@ -70,6 +75,7 @@ public abstract class TextPromptKeyTrigger : EventTrigger
     {
         helperText.Hide(this);
 
+        //
         // Remove Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
     }
@@ -81,8 +87,11 @@ public abstract class TextPromptKeyTrigger : EventTrigger
 
     protected override void CallActivate(InputAction.CallbackContext ctx)
     {
-        helperText.Hide(this);
-        InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
+        if (destroyOnActivate)
+        {
+            helperText.Hide(this);
+            InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
+        }
         base.CallActivate(ctx);
     }
 }

@@ -6,13 +6,13 @@ public class TransferDamage : MonoBehaviour, IDamageable
 {
     [SerializeField] private EndableEntity damageable;
 
-    public void Damage(float damage)
+    public void Damage(float damage, DamageSource source)
     {
-        damageable.Damage(damage);
+        damageable.Damage(damage, source);
     }
 
-    public void Damage(float damage, Vector3 force)
+    public void Damage(float damage, Vector3 force, DamageSource source)
     {
-        damageable.Damage(damage, force);
+        damageable.Damage(damage, force, source);
     }
 }

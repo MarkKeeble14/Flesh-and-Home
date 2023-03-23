@@ -128,7 +128,7 @@ public class ProgressionManager : MonoBehaviour
         currentUnlocks.Add(UnlockType.LASER_CUTTER);
 
         // Spawn text
-        TextPopupManager._Instance.SpawnText("Unlocked the Laser Cutter\nYou can now laser through certain materials", unlockTextDuration);
+        TextPopupManager._Instance.SpawnText("Unlocked the Laser Cutter\nYou can now laser through Metal Platings", unlockTextDuration);
     }
 
     [ContextMenu("Unlock/PulseGrenadeLauncher")]

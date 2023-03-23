@@ -11,6 +11,43 @@ public class RoomController : MonoBehaviour
 
     private List<ParticleSystem> airParticles = new List<ParticleSystem>();
 
+    private ColumnCongifuration[] columnConfigurations;
+
+    private FeastableSpawnPointsController feastableSpawnPointsController;
+
+    [Header("Can Spawn Feastables")]
+    [SerializeField] private int maxSpawned = 2;
+    [SerializeField] private float timeBetweenSpawnAttempts = 10f;
+    [SerializeField] private Vector2 chanceToSpawn = new Vector2(1, 3);
+    [SerializeField] private KillableEntity feastableSpawn;
+    private Coroutine spawnLoop;
+
+    private IEnumerator TrySpawnLoop()
+    {
+        // Debug.Log(name + ": Try Spawn Loop");
+        if (feastableSpawnPointsController == null)
+        {
+            // Debug.Log(name + ": Try Spawn Loop: No Spawn Points");
+            yield break;
+        }
+
+        if (maxSpawned <= 0)
+        {
+            // Debug.Log(name + ": Try Spawn Loop: No More Spawns");
+            yield break;
+        }
+        yield return new WaitForSeconds(timeBetweenSpawnAttempts);
+
+        if (RandomHelper.EvaluateChanceTo(chanceToSpawn))
+        {
+            // Debug.Log(name + ": Try Spawn Loop: Spawn");
+            maxSpawned--;
+            feastableSpawnPointsController.Emit(feastableSpawn.gameObject, false);
+        }
+
+        StartCoroutine(TrySpawnLoop());
+    }
+
     private void Awake()
     {
         foreach (ParticleSystem particleSystem in GetComponentsInChildren<ParticleSystem>())
@@ -18,6 +55,21 @@ public class RoomController : MonoBehaviour
             airParticles.Add(particleSystem);
             particleSystem.Stop();
         }
+
+        feastableSpawnPointsController = GetComponentInChildren<FeastableSpawnPointsController>();
+        if (feastableSpawnPointsController)
+            feastableSpawnPointsController.SetArray();
+        columnConfigurations = GetComponentsInChildren<ColumnCongifuration>(true);
+    }
+
+    private void Start()
+    {
+        // Set a column configuration to be active
+        if (columnConfigurations.Length > 0)
+        {
+            columnConfigurations[RandomHelper.RandomIntExclusive(0, columnConfigurations.Length)].gameObject.SetActive(true);
+        }
+        BakeOnceColumnsAreGenerated._Instance.ColumnsLoaded();
     }
 
     private void ToggleParticles(bool trueIsOn)
@@ -56,6 +108,9 @@ public class RoomController : MonoBehaviour
             roomEnemy.GetComponent<KillableEntity>().AddAdditionalOnEndAction(() => roomEnemies.Remove(roomEnemy));
             roomEnemy.PlayerIsInRoom = true;
         }
+
+        // Debug.Log(name + ": Try Spawn Loop Started");
+        spawnLoop = StartCoroutine(TrySpawnLoop());
     }
 
     public void OnReenter()
@@ -68,6 +123,9 @@ public class RoomController : MonoBehaviour
         }
 
         ToggleParticles(true);
+
+        // Debug.Log(name + ": Try Spawn Loop Started");
+        spawnLoop = StartCoroutine(TrySpawnLoop());
     }
 
     public void OnExit()
@@ -82,5 +140,10 @@ public class RoomController : MonoBehaviour
         */
 
         ToggleParticles(false);
+
+        if (spawnLoop != null)
+            StopCoroutine(spawnLoop);
+        spawnLoop = null;
+        // Debug.Log(name + ": Try Spawn Loop Stopped");
     }
 }

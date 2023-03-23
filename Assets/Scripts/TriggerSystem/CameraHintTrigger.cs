@@ -8,6 +8,7 @@ public class CameraHintTrigger : EventTrigger
     [SerializeField] private List<UnlockType> requiredUnlocks = new List<UnlockType>();
     [SerializeField] private GameObject enableCamera;
     [SerializeField] private float duration;
+    [SerializeField] private OpenDoorTrigger openDoorOnActivate;
 
     private KillableEntity player;
 
@@ -33,6 +34,8 @@ public class CameraHintTrigger : EventTrigger
         enableCamera.SetActive(true);
 
         UIManager._Instance.SetBlackBars(true, false);
+
+        openDoorOnActivate.LockOpened();
 
         yield return new WaitForSeconds(duration);
 
