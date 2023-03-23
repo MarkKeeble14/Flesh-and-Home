@@ -4,86 +4,78 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class DialogueManager : MonoBehaviour
+public partial class DialogueManager : MonoBehaviour
 {
-    [Serializable]
-    public struct AffColor
+    public static DialogueManager _Instance { get; private set; }
+
+    private void Awake()
     {
-        public Affiliation aff;
-        public Color color;
+        if (_Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        _Instance = this;
+
+        // Set References
+        source = GetComponent<AudioSource>();
     }
 
-    //I can't figure out a way to force it to be the correct size.
-    //Dictionaries can't be serialized, so we'll do it this way.
     [Tooltip("This should have the same number of items as the Affiliation enum.")]
-    public List<AffColor> affiliationColorInput = new List<AffColor>();
-    Dictionary<Affiliation, Color> affColors= new Dictionary<Affiliation, Color>();
+    [SerializeField] private SerializableDictionary<Affiliation, Color> affColorDictionary = new SerializableDictionary<Affiliation, Color>();
+    [SerializeField] private TextAsset locFile;
+    [SerializeField] private TextMeshProUGUI targetText;
+    private AudioSource source;
 
-
-    public GameObject targetTextObject;
-    TextMeshProUGUI targetText;
-
-    public TextAsset locFile;
-
-    AudioSource audioSource;
-
-    // Start is called before the first frame update
-    void Start()
+    public void PlayDialogue(List<string> lineIds)
     {
-        foreach(var i in affiliationColorInput)
+        List<DialogueSnippet> dialogue = new List<DialogueSnippet>();
+
+        // Fetch Data
+        foreach (string id in lineIds)
         {
-            affColors[i.aff] = i.color;
+            dialogue.Add(DialogueSnippet.GetSnippetFromLocJSON(id, locFile));
         }
 
-        //Look for unassigned objects in this gameobject.
-        if (targetTextObject != null)
-        {
-            targetText = targetTextObject.GetComponent<TextMeshProUGUI>();
-        } else
-        {
-            targetText = GetComponent<TextMeshProUGUI>();
-        }
-        
-        if (audioSource == null)
-        {
-            audioSource = GetComponent<AudioSource>();
-        }
+        StartCoroutine(ExecuteDialogue(dialogue));
     }
 
-    //Needs to be called as a coroutine (which it is).
-    //Will play the snippets in turn to their full length, and finish when they are all done.
-    public IEnumerator ExecuteDialogue(List<DialogueSnippet> snippets)
+    // Needs to be called as a coroutine (which it is).
+    // Will play the snippets in turn to their full length, and finish when they are all done.
+    private IEnumerator ExecuteDialogue(List<DialogueSnippet> snippets)
     {
-        foreach(DialogueSnippet ds in snippets)
+        foreach (DialogueSnippet ds in snippets)
         {
             //These will get played in turn.
             yield return StartCoroutine(ExecuteSnippet(ds));
         }
     }
 
-    public IEnumerator ExecuteSnippet(DialogueSnippet ds)
+    private IEnumerator ExecuteSnippet(DialogueSnippet ds)
     {
         //Set subtitle text.
         SetTextDialogue(ds);
 
         //Rack and play the audio clip.
-        audioSource.clip = ds.speechClip;
-        audioSource.Play();
+        source.clip = ds.speechClip;
+        source.Play();
 
         //Wait the required time as per snippet description -
         //useful for cutting lines off or something like that.
         yield return new WaitForSeconds(ds.speakTime);
+
         //Clear subtitles after done talking.
         targetText.text = "";
     }
-    
+
     void SetTextDialogue(DialogueSnippet ds)
     {
         Color speakerColor;
 
-        try {
-            speakerColor = affColors[ds.iff];
-        } catch (Exception e)
+        try
+        {
+            speakerColor = affColorDictionary[ds.iff];
+        }
+        catch (Exception e)
         {
             speakerColor = Color.white;
             Debug.LogWarning("Incomplete affiliation color dictionary in DialogueManager: " + e.Message);
@@ -91,11 +83,5 @@ public class DialogueManager : MonoBehaviour
 
         targetText.text = "<color=#" + ColorUtility.ToHtmlStringRGBA(speakerColor) + ">" +
             ds.speaker + "</color>" + ": " + ds.text;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -25,6 +25,8 @@ public class ProgressionManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private bool unlockAllOnStart;
+    [SerializeField] private UnlockType[] unlockOnStart;
+
     [SerializeField] private float unlockTextDuration = 3f;
 
     [SerializeField] private RadialMenu weaponAttachmentMenu;
@@ -53,12 +55,30 @@ public class ProgressionManager : MonoBehaviour
         // Unlock everything on awake for testing
         if (unlockAllOnStart)
         {
-            UnlockAll();
+            UnlockAll(false);
+        }
+
+        foreach (UnlockType unlock in unlockOnStart)
+        {
+            switch (unlock)
+            {
+                case UnlockType.FLAMETHROWER:
+                    UnlockFlamethrower(false);
+                    break;
+                case UnlockType.LASER_CUTTER:
+                    UnlockLaserCutter(false);
+                    break;
+                case UnlockType.PULSE_GRENADE_LAUNCHER:
+                    UnlockPulseGrenadeLauncher(false);
+                    break;
+                case UnlockType.JETPACK:
+                    UnlockJetpack(false);
+                    break;
+            }
         }
     }
 
-    [ContextMenu("Unlock/Jetpack")]
-    public void UnlockJetpack()
+    public void UnlockJetpack(bool showText)
     {
         if (jetpackUnlocked) return;
         jetpackUnlocked = true;
@@ -79,11 +99,11 @@ public class ProgressionManager : MonoBehaviour
         GameManager._Instance.PlayerUseFuel = true;
 
         // Spawn text
-        TextPopupManager._Instance.SpawnText("Jetpack\nPress space when in the air to fly", unlockTextDuration);
+        if (showText)
+            TextPopupManager._Instance.SpawnText("Jetpack\nPress space when in the air to fly", unlockTextDuration);
     }
 
-    [ContextMenu("Unlock/Flamethrower")]
-    public void UnlockFlamethrower()
+    public void UnlockFlamethrower(bool showText)
     {
         if (flamethrowerUnlocked) return;
         flamethrowerUnlocked = true;
@@ -106,11 +126,35 @@ public class ProgressionManager : MonoBehaviour
         GameManager._Instance.PlayerUseFuel = true;
 
         // Spawn text
-        TextPopupManager._Instance.SpawnText("Unlocked the Flamethrower\nHold Tab to Select, Hold Q to Use\nBurn travelling flesh to prevent other enemies from getting stronger", unlockTextDuration + 5f);
+        if (showText)
+            TextPopupManager._Instance.SpawnText("Unlocked the Flamethrower\nHold Tab to Select, Hold Q to Use\nBurn travelling flesh to prevent other enemies from getting stronger", unlockTextDuration + 5f);
+    }
+
+    [ContextMenu("Unlock/Flamethrower")]
+    public void UnlockFlamethrower()
+    {
+        UnlockFlamethrower(false);
     }
 
     [ContextMenu("Unlock/LaserCutter")]
     public void UnlockLaserCutter()
+    {
+        UnlockLaserCutter(false);
+    }
+
+    [ContextMenu("Unlock/PulseGrenadeLauncher")]
+    public void UnlockPulseGrenadeLauncher()
+    {
+        UnlockPulseGrenadeLauncher(false);
+    }
+
+    [ContextMenu("Unlock/Jetpack")]
+    public void UnlockJetpack()
+    {
+        UnlockJetpack(false);
+    }
+
+    public void UnlockLaserCutter(bool showText)
     {
         if (laserCutterUnlocked) return;
         laserCutterUnlocked = true;
@@ -128,11 +172,11 @@ public class ProgressionManager : MonoBehaviour
         currentUnlocks.Add(UnlockType.LASER_CUTTER);
 
         // Spawn text
-        TextPopupManager._Instance.SpawnText("Unlocked the Laser Cutter\nYou can now laser through Metal Platings", unlockTextDuration);
+        if (showText)
+            TextPopupManager._Instance.SpawnText("Unlocked the Laser Cutter\nYou can now laser through Metal Platings", unlockTextDuration);
     }
 
-    [ContextMenu("Unlock/PulseGrenadeLauncher")]
-    public void UnlockPulseGrenadeLauncher()
+    public void UnlockPulseGrenadeLauncher(bool showText)
     {
         if (pulseGrenadeLauncherUnlocked) return;
         pulseGrenadeLauncherUnlocked = true;
@@ -150,16 +194,17 @@ public class ProgressionManager : MonoBehaviour
         currentUnlocks.Add(UnlockType.PULSE_GRENADE_LAUNCHER);
 
         // Spawn text
-        TextPopupManager._Instance.SpawnText("Pulse Grenade Launcher\nArea of effect damage", unlockTextDuration);
+        if (showText)
+            TextPopupManager._Instance.SpawnText("Pulse Grenade Launcher\nArea of effect damage", unlockTextDuration);
     }
 
     [ContextMenu("Unlock/All")]
-    private void UnlockAll()
+    private void UnlockAll(bool showText)
     {
-        UnlockJetpack();
-        UnlockFlamethrower();
-        UnlockLaserCutter();
-        UnlockPulseGrenadeLauncher();
+        UnlockJetpack(showText);
+        UnlockFlamethrower(showText);
+        UnlockLaserCutter(showText);
+        UnlockPulseGrenadeLauncher(showText);
     }
 
     public bool HasAllUnlocks(List<UnlockType> requiredUnlocks)

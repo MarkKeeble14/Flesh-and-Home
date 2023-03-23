@@ -663,6 +663,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 3688273097040236901}
@@ -728,6 +729,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelOptionHolders:
   - {fileID: 4559155297982300584}
   - {fileID: 6937021556066863655}
@@ -851,6 +853,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 1765267798185173455}
@@ -916,6 +919,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: 92995b6680f92984c8411af8b1f818ab,
     type: 2}
   maxLaserCalls: 32
@@ -985,6 +989,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   maxLaserCalls: 12
@@ -1108,6 +1113,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelSetHolder: {fileID: 4219836553912982098}
   settings:
     Damage: 5
@@ -1237,6 +1243,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 6599270303227461859}
@@ -1302,6 +1309,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelOptionHolders:
   - {fileID: 4559155297982300584}
   - {fileID: 6937021556066863655}
@@ -1380,6 +1388,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelOptionHolders:
   - {fileID: 4559155297982300584}
   - {fileID: 6937021556066863655}
@@ -1639,6 +1648,8 @@ MonoBehaviour:
   spawnDamageText: 1
   damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
     type: 3}
+  particlesOnHit: []
+  particlesOnDeath: []
 --- !u!82 &193684192667313155
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2700,7 +2711,7 @@ MonoBehaviour:
   shakeSource: {fileID: 1662478180}
   addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
+  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 2500}
   numAttacksAtOnce: 2
   timeBetweenAttacks: 0
   barrelHolder: {fileID: 4559155298250650246}
@@ -2980,6 +2991,8 @@ MonoBehaviour:
   spawnDamageText: 1
   damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
     type: 3}
+  particlesOnHit: []
+  particlesOnDeath: []
 --- !u!82 &6692938010683863987
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3282,6 +3295,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelSetHolder: {fileID: 2279130278040657870}
   settings:
     Damage: 5
@@ -3357,6 +3371,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelOptionHolders:
   - {fileID: 4559155297982300584}
   - {fileID: 6937021556066863655}
@@ -3489,6 +3504,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelSetHolder: {fileID: 3688273097040236901}
   settings:
     Damage: 5
@@ -3595,6 +3611,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 4219836553912982098}
@@ -3714,6 +3731,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelSetHolder: {fileID: 6599270303227461859}
   settings:
     Damage: 5
@@ -3873,6 +3891,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelSetHolder: {fileID: 6823342879682449955}
   settings:
     Damage: 5
@@ -3948,6 +3967,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 2279130278040657870}
@@ -4013,6 +4033,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: 92995b6680f92984c8411af8b1f818ab,
     type: 2}
   maxLaserCalls: 32
@@ -4136,6 +4157,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 6823342879682449955}
@@ -4201,6 +4223,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   barrelSetHolder: {fileID: 1765267798185173455}
   settings:
     Damage: 5
@@ -4330,6 +4353,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   maxLaserCalls: 12
@@ -4399,6 +4423,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelSetHolder: {fileID: 5023830293163225693}
@@ -4521,6 +4546,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
   barrelOptionHolders:

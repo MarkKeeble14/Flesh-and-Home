@@ -23,10 +23,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 169984
   crosshairSpread: 25
-  isSticky: 0
+  isSticky: 1
   pulseSpeed: 50
-  pulseRadius: 30
-  pulseKnockbackForce: 50
+  pulseRadius: 40
+  pulseKnockbackForce: 200
   pulseStayDuration: 0.25
   pulseScaleOut: 1
   pulseScaleOutSpeed: 75

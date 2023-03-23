@@ -1,18 +1,7 @@
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
 //using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
-using UnityEngine.Rendering.UI;
-
-public enum Affiliation
-{
-    Friend,
-    Neutral,
-    Enemy
-}
 
 [Serializable]
 public class DialogueSnippet
@@ -27,7 +16,7 @@ public class DialogueSnippet
     {
         speaker = string.Empty;
         text = string.Empty;
-        iff = Affiliation.Neutral;
+        iff = Affiliation.NEUTRAL;
         speakTime = 1;
         speechClip = null;
     }
@@ -53,13 +42,13 @@ public class DialogueSnippet
         switch (jsonSnippet["iff"].ToString())
         {
             case "friend":
-                result.iff = Affiliation.Friend; 
+                result.iff = Affiliation.FRIEND;
                 break;
             case "enemy":
-                result.iff = Affiliation.Enemy;
+                result.iff = Affiliation.ENEMY;
                 break;
             default:
-                result.iff = Affiliation.Neutral;
+                result.iff = Affiliation.NEUTRAL;
                 break;
         }
 
@@ -70,30 +59,5 @@ public class DialogueSnippet
         result.speechClip = Resources.Load<AudioClip>(voicelineRoot + "/" + jsonSnippet["speechClip"].ToString());
 
         return result;
-    }
-
-}
-
-//Useful as a test for the loader.
-public class DialogueUtils : MonoBehaviour
-{
-    public List<string> lineIDs = new List<string>();
-    public TextAsset loc;
-
-    public List<DialogueSnippet> snippets = new List<DialogueSnippet>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        foreach(var l in lineIDs)
-        {
-            snippets.Add(DialogueSnippet.GetSnippetFromLocJSON(l, loc));
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

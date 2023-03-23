@@ -122,10 +122,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private AudioSource source;
 
+    [SerializeField] private bool resetFuel = true;
+
     private void Awake()
     {
         // Set Fuel
-        fuelStore.Reset();
+        if (resetFuel)
+        {
+            fuelStore.Reset();
+        }
 
         // Update UI
         jetpackDashCooldownTimer = jetpackDashCooldown;

@@ -138,7 +138,7 @@ public class BossPhaseManager : MonoBehaviour
             Debug.Log("Out of Phases");
             isDone = true;
 
-            enterDoor.LockOpened();
+            // enterDoor.LockOpened();
             exitDoor.LockOpened();
 
             return null;

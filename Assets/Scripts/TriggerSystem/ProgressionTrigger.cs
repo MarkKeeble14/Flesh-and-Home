@@ -13,16 +13,16 @@ public class ProgressionTrigger : TextPromptKeyTrigger
             switch (unlock)
             {
                 case UnlockType.JETPACK:
-                    ProgressionManager._Instance.UnlockJetpack();
+                    ProgressionManager._Instance.UnlockJetpack(true);
                     break;
                 case UnlockType.FLAMETHROWER:
-                    ProgressionManager._Instance.UnlockFlamethrower();
+                    ProgressionManager._Instance.UnlockFlamethrower(true);
                     break;
                 case UnlockType.LASER_CUTTER:
-                    ProgressionManager._Instance.UnlockLaserCutter();
+                    ProgressionManager._Instance.UnlockLaserCutter(true);
                     break;
                 case UnlockType.PULSE_GRENADE_LAUNCHER:
-                    ProgressionManager._Instance.UnlockPulseGrenadeLauncher();
+                    ProgressionManager._Instance.UnlockPulseGrenadeLauncher(true);
                     break;
             }
         };
