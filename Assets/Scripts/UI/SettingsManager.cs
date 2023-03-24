@@ -28,14 +28,8 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private float defaultMouseSensitivity;
     [SerializeField] private CinemachineVirtualCamera playerPOVCam;
     private CinemachinePOV playerPOV;
-    private float defaultHorizontalMouseSpeed;
-    private float defaultVerticalMouseSpeed;
-
-    private void Awake()
-    {
-        // Get player POV
-        playerPOV = playerPOVCam.GetCinemachineComponent<CinemachinePOV>();
-    }
+    private float horizontalSpeedMultiplier = 1f;
+    private float verticalSpeedMultiplier = 1f;
 
     public void SetMusicVolume(float percent)
     {
@@ -58,13 +52,17 @@ public class SettingsManager : MonoBehaviour
             playerPOV = playerPOVCam.GetCinemachineComponent<CinemachinePOV>();
 
         PlayerPrefs.SetFloat(mouseSensitivityKey, percent);
-        playerPOV.m_HorizontalAxis.m_MaxSpeed = Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
-        playerPOV.m_VerticalAxis.m_MaxSpeed = Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
+        playerPOV.m_HorizontalAxis.m_MaxSpeed = horizontalSpeedMultiplier * Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
+        playerPOV.m_VerticalAxis.m_MaxSpeed = verticalSpeedMultiplier * Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
         mouseSensitivitySlider.value = percent;
     }
 
-    private void Start()
+    public void Set()
     {
+        // Get player POV
+        if (playerPOV == null)
+            playerPOV = playerPOVCam.GetCinemachineComponent<CinemachinePOV>();
+
         // Music Volume 
         InitFloatSetting(musicVolumeKey, defaultMusicVolume, musicVolumeSlider, v => SetMusicVolume(v));
 
@@ -73,6 +71,11 @@ public class SettingsManager : MonoBehaviour
 
         // Mouse Sensitivity
         InitFloatSetting(mouseSensitivityKey, defaultMouseSensitivity, mouseSensitivitySlider, v => SetMouseSensitivity(v));
+    }
+
+    private void Start()
+    {
+        Set();
     }
 
     private void InitFloatSetting(string key, float defaultValue, Slider slider, Action<float> InitAction)

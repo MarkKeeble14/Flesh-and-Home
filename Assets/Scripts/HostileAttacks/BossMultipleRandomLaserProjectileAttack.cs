@@ -11,11 +11,12 @@ public class BossMultipleRandomLaserProjectileAttack : Attack
     [SerializeField] private BossLaserProjectileSettings settings;
     [SerializeField] private int maxLaserCalls = 8;
     [SerializeField] private Vector2 minMaxTimeBetweenShots = new Vector2(.025f, .1f);
+    [SerializeField] private bool aimAtPlayer;
 
     public override void Boost()
     {
-        throw new System.NotImplementedException();
-        // base.Boost();
+        settings.Boost();
+        base.Boost();
     }
 
     private void Awake()
@@ -30,28 +31,14 @@ public class BossMultipleRandomLaserProjectileAttack : Attack
     protected override IEnumerator ExecuteAttack(Transform target)
     {
         int toCall = Random.Range(1, maxLaserCalls);
-        List<LaserBarrel> callOn = new List<LaserBarrel>();
 
-        // Picking a random number of random barrels
-        // Should potentially be a while loop so as to guarentee the maximum number of lasers being called; but dealing with the overlap of finding ones
-        // which are unused seems not worthwhile for now at least
         for (int i = 0; i < toCall; i++)
-        {
-            LaserBarrel selected = options[Random.Range(0, options.Count)];
-
-            // if a barrel has already been selected, ignore it
-            if (!callOn.Contains(selected))
-            {
-                callOn.Add(selected);
-            }
-        }
-
-        for (int i = 0; i < callOn.Count; i++)
         {
             if (executionInterrupted) break;
 
-            LaserBarrel selected = callOn[i];
-            selected.ShootLaser(settings.Visuals.GetEmmissiveColor(settings.Visuals.GetLerpedColor(i / callOn.Count)), settings.CanHit, settings.CanDamage, settings.Speed, settings.Damage, settings.HitForce);
+            LaserBarrel selected = options[Random.Range(0, options.Count)];
+            selected.ShootLaser(settings.Visuals.GetEmmissiveColor(settings.Visuals.GetLerpedColor(i / toCall)),
+                settings.CanHit, settings.CanDamage, settings.Speed, settings.Damage, settings.HitForce, aimAtPlayer);
             yield return new WaitForSeconds(RandomHelper.RandomFloat(minMaxTimeBetweenShots));
         }
     }

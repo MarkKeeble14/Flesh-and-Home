@@ -2,8 +2,14 @@
 using UnityEngine.InputSystem;
 using TMPro;
 
-public abstract class TextPromptKeyTrigger : EventTrigger
+public class TextPromptKeyTrigger : EventManager
 {
+    [SerializeField] protected string activePrompt;
+
+    protected TriggerHelperText helperText;
+
+    public override bool ActivateOnCollide { get { return false; } }
+
     private string prefix = "'E' to ";
     public virtual string Prefix
     {
@@ -16,43 +22,6 @@ public abstract class TextPromptKeyTrigger : EventTrigger
             prefix = value;
         }
     }
-    private string suffix = "";
-    protected virtual string Suffix
-    {
-        get
-        {
-            return suffix;
-        }
-        set
-        {
-            suffix = value;
-        }
-    }
-    [SerializeField] protected string activePrompt;
-
-    protected TriggerHelperText helperText;
-    protected bool showText = true;
-
-    protected virtual bool AllowShowText
-    {
-        get
-        {
-            return true;
-        }
-    }
-
-    [SerializeField] private bool destroyOnActivate = true;
-
-    protected new void Awake()
-    {
-        if (destroyOnActivate)
-        {
-
-            onActivate += () => Destroy(gameObject);
-        }
-
-        base.Awake();
-    }
 
     protected void Start()
     {
@@ -60,12 +29,37 @@ public abstract class TextPromptKeyTrigger : EventTrigger
         helperText = FindObjectOfType<TriggerHelperText>();
     }
 
+    protected void ShowText()
+    {
+        foreach (GameEvent gameEvent in gameEvents)
+        {
+            if (!gameEvent.UseText) continue;
+            helperText.Show(gameEvent, GetHelperTextString(gameEvent));
+        }
+    }
+
+    protected void HideText()
+    {
+        foreach (GameEvent gameEvent in gameEvents)
+        {
+            if (!gameEvent.UseText) continue;
+            helperText.Hide(gameEvent);
+        }
+    }
+
+    protected override void CallActivate(InputAction.CallbackContext ctx)
+    {
+        if (destroyOnActivate)
+        {
+            HideText();
+            InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
+        }
+        base.CallActivate(ctx);
+    }
+
     protected override void OnEnter(Collider other)
     {
-        if (showText && AllowShowText)
-        {
-            helperText.Show(this, GetHelperTextString());
-        }
+        ShowText();
 
         // Add Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started += CallActivate;
@@ -73,25 +67,15 @@ public abstract class TextPromptKeyTrigger : EventTrigger
 
     protected override void OnExit(Collider other)
     {
-        helperText.Hide(this);
+        HideText();
 
         //
         // Remove Activation Event
         InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
     }
 
-    protected string GetHelperTextString()
+    protected string GetHelperTextString(GameEvent gameEvent)
     {
-        return Prefix + activePrompt + Suffix;
-    }
-
-    protected override void CallActivate(InputAction.CallbackContext ctx)
-    {
-        if (destroyOnActivate)
-        {
-            helperText.Hide(this);
-            InputManager._Instance.PlayerInputActions.Player.Interact.started -= CallActivate;
-        }
-        base.CallActivate(ctx);
+        return Prefix + gameEvent.Label + gameEvent.EventString;
     }
 }

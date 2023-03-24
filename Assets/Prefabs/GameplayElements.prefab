@@ -579,6 +579,7 @@ MonoBehaviour:
     - key: 1
       value: {fileID: 8294953404357462814}
   blackBars: {fileID: 6125191554780394617}
+  settingsMenu: {fileID: 8294953404381728545}
   disableObjectsWhenBlackBarsAreActive:
   - {fileID: 3666679379405958908}
   - {fileID: 1527743666663912234}
@@ -3121,6 +3122,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c9e836467e11fb45b7a6e7922933164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1888553005322729025 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7577558023569020468, guid: 744201fcd078a044785f9b80c0511449,
+    type: 3}
+  m_PrefabInstance: {fileID: 8294953404480872565}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3300458173216154739 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6831975018246341638, guid: 744201fcd078a044785f9b80c0511449,
@@ -3504,6 +3517,10 @@ PrefabInstance:
       propertyPath: attachmentEquippedDisplay
       value: 
       objectReference: {fileID: 8542622166105846832}
+    - target: {fileID: 1426587104, guid: 2e51a32172a1d8044bacef59976b21b7, type: 3}
+      propertyPath: attachmentEquippedSpriteDisplay
+      value: 
+      objectReference: {fileID: 1888553005322729025}
     - target: {fileID: 517505174329959752, guid: 2e51a32172a1d8044bacef59976b21b7,
         type: 3}
       propertyPath: m_LocalPosition.z

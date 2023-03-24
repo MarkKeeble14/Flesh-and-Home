@@ -54,8 +54,8 @@ public class BossPhaseManager : MonoBehaviour
 
     private bool isDone;
 
-    [SerializeField] private OpenDoorTrigger enterDoor;
-    [SerializeField] private OpenDoorTrigger exitDoor;
+    [SerializeField] private OpenDoorGameEvent enterDoor;
+    [SerializeField] private OpenDoorGameEvent exitDoor;
 
     private void Awake()
     {

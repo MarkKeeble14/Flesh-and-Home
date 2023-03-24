@@ -2489,7 +2489,7 @@ MonoBehaviour:
     - key: {fileID: 2281779296839727250, guid: f825860b93212524a800d3b4f0c117fd, type: 3}
       value: 60
   spawnPointDistanceFromBoss: 30
-  minMaxNumAddOns: {x: 3, y: 6}
+  minMaxNumAddOns: {x: 4, y: 6}
   timeAddedOnKillEnemy: 7.5
   fleshTravellingPrefab: {fileID: 6674477849078441393, guid: e8b2d85827369604992b284913c025ae,
     type: 3}

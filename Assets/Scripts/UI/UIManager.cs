@@ -20,9 +20,11 @@ public class UIManager : MonoBehaviour
 
 
     [SerializeField] private Animator blackBars;
+    [SerializeField] private SettingsManager settingsMenu;
     private void Start()
     {
         InputManager._Instance.PlayerInputActions.Player.Escape.performed += Escape;
+        settingsMenu.Set();
     }
 
     [SerializeField] private GameObject[] disableObjectsWhenBlackBarsAreActive;

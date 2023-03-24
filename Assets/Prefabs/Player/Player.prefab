@@ -813,10 +813,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSpeed: 10
   sprintSpeed: 1.05
-  airStrafeSpeed: 20
-  jumpHeight: 0.075
+  airStrafeSpeed: 15
+  jumpHeight: 0.2
   mass: 50
-  gravityValue: -9.81
+  gravityValue: -19.62
   playerVelocity: {x: 0, y: 0, z: 0}
   jumpClip: {fileID: 8300000, guid: 9899a656da685824d8a375705a272712, type: 3}
   landClip: {fileID: 8300000, guid: be41aa26c99368546a68043ee05a3cc9, type: 3}
@@ -859,6 +859,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64896
   source: {fileID: 7362887214131378897}
+  resetFuel: 1
 --- !u!114 &532859800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -991,6 +992,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   color: {r: 1, g: 0, b: 0, a: 1}
+  sprite: {fileID: 21300000, guid: 038d2775f37af6849b97d4e8e3458f5e, type: 3}
   triggerSettings:
     damage: 5
     tickRate: 0.05
@@ -1023,6 +1025,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   color: {r: 0.31347656, g: 0, b: 1, a: 1}
+  sprite: {fileID: 21300000, guid: 1b9e06465e278644fb58e56df1897958, type: 3}
   laserSettings:
     damage: 2.5
     tickRate: 0.05
@@ -1081,6 +1084,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   color: {r: 0.12882876, g: 1, b: 0, a: 1}
+  sprite: {fileID: 21300000, guid: 448d70ea8dbbe404ba84d912c06d32c3, type: 3}
   settings: {fileID: 11400000, guid: 082bbd092cd5d804fad2495c74d2d741, type: 2}
   grenadeSpawnPos: {fileID: 8910433488196863823}
   pulseGrenadePrefab: {fileID: 7492071582286756199, guid: 802c372d5242ff34bb8055ccce4504cc,
@@ -1103,6 +1107,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   color: {r: 0, g: 0, b: 0, a: 0}
+  sprite: {fileID: 0}
 --- !u!114 &1426587104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1126,6 +1131,7 @@ MonoBehaviour:
     volume: 1
     pitch: 1
   attachmentEquippedDisplay: {fileID: 0}
+  attachmentEquippedSpriteDisplay: {fileID: 0}
   attachmentMenu: {fileID: 0}
 --- !u!114 &7362887214131378907
 MonoBehaviour:

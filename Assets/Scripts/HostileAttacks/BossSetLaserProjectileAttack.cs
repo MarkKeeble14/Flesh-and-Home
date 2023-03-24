@@ -8,11 +8,12 @@ public class BossSetLaserProjectileAttack : Attack
 
     [SerializeField] private BossLaserProjectileSettings settings;
     [SerializeField] private Vector2 minMaxTimeBetweenShots = new Vector2(.025f, .1f);
+    [SerializeField] private bool aimAtPlayer;
 
     public override void Boost()
     {
-        throw new System.NotImplementedException();
-        // base.Boost();
+        settings.Boost();
+        base.Boost();
     }
 
     private void Awake()
@@ -26,7 +27,8 @@ public class BossSetLaserProjectileAttack : Attack
         for (int i = 0; i < set.Length; i++)
         {
             LaserBarrel selected = set[i];
-            selected.ShootLaser(settings.Visuals.GetEmmissiveColor(settings.Visuals.GetLerpedColor(i / set.Length)), settings.CanHit, settings.CanDamage, settings.Speed, settings.Damage, settings.HitForce);
+            selected.ShootLaser(settings.Visuals.GetEmmissiveColor(settings.Visuals.GetLerpedColor(i / set.Length)),
+                settings.CanHit, settings.CanDamage, settings.Speed, settings.Damage, settings.HitForce, aimAtPlayer);
 
             if (executionInterrupted) break;
 

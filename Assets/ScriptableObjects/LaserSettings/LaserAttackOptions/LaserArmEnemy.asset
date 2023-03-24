@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770e8ea487f657d419976f05b8b31c02, type: 3}
   m_Name: LaserArmEnemy
   m_EditorClassIdentifier: 
-  damage: 1
-  tickSpeed: 0.05
+  damage: 1.5
+  tickSpeed: 0.25
   laserRange: 100
   canHit:
     serializedVersion: 2
     m_Bits: 2122624
-  laserRadius: 0.05
+  laserRadius: 0.1
   beamSettings:
     fullWidth: 0.25
     beamGrowSpeed: 0.1

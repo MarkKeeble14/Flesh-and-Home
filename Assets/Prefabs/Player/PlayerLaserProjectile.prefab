@@ -182,15 +182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cb039d3a64491f4ebfc852d25b5ee70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 75
   light: {fileID: 10825254}
   explosionParticleSystem: {fileID: 6074646103283631049, guid: 49ea45a6784bd054cae3f798a47dda54,
     type: 3}
   impactEffect: {fileID: 8335990208917815452, guid: 85b95fd7e20b09448a14952cbeed319f,
     type: 3}
-  canDamage:
-    serializedVersion: 2
-    m_Bits: 433152
 --- !u!114 &217147806400698992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +215,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136330}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 250, y: 250, z: 100}

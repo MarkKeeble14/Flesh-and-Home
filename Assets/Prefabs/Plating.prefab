@@ -151,6 +151,9 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  spawnDamageText: 1
+  damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
+    type: 3}
 --- !u!82 &-7774420107088475452
 AudioSource:
   m_ObjectHideFlags: 0

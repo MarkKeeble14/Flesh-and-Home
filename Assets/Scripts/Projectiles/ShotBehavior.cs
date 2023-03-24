@@ -10,23 +10,20 @@ public class ShotBehavior : MonoBehaviour
     private float damage, impactForce;
     private Color projectileColor;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!LayerMaskHelper.IsInLayerMask(collision.gameObject, canHit)) return;
+        if (!LayerMaskHelper.IsInLayerMask(other.gameObject, canHit)) return;
 
-        if (LayerMaskHelper.IsInLayerMask(collision.gameObject, canDamage))
+        if (LayerMaskHelper.IsInLayerMask(other.gameObject, canDamage))
         {
             // Try to do damage
-            if (LayerMaskHelper.IsInLayerMask(collision.gameObject, canHit))
+            if (other.gameObject.TryGetComponent(out IDamageable damageable))
             {
-                if (collision.gameObject.TryGetComponent(out IDamageable damageable))
-                {
-                    damageable.Damage(damage, -collision.GetContact(0).normal * impactForce, DamageSource.RIFLE);
-                }
+                damageable.Damage(damage, Vector3.zero, DamageSource.RIFLE);
             }
         }
 
-        Explode(collision);
+        Explode();
     }
 
     private IEnumerator Travel(Vector3 target, float speed)
@@ -37,6 +34,7 @@ public class ShotBehavior : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, step);
             yield return null;
         }
+        Debug.Log(name + ", Destroying After Reach Target");
         Destroy(gameObject);
     }
 
@@ -51,18 +49,12 @@ public class ShotBehavior : MonoBehaviour
         StartCoroutine(Travel(target, speed));
     }
 
-    void Explode(Collision collision)
+    void Explode()
     {
-        ContactPoint point = collision.GetContact(0);
-
         // Spawn Particles
         // Explosion
-        PlayerLaserExplosiveParticleSystem explosion = Instantiate(explosionParticleSystem, point.point, Quaternion.identity);
+        PlayerLaserExplosiveParticleSystem explosion = Instantiate(explosionParticleSystem, transform.position, Quaternion.identity);
         explosion.SetColors(projectileColor, projectileColor, projectileColor);
-
-        // Metal
-        // Eventually could do a dictionary with different layers to pick out different particles (so hitting different surfaces would produce different particles
-        Instantiate(impactEffect, point.point, Quaternion.LookRotation(point.normal));
 
         Destroy(gameObject);
     }

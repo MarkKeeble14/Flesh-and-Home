@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 5767323205614926793}
   - component: {fileID: 7295502765654808523}
   - component: {fileID: 9080569573715557851}
-  - component: {fileID: 7390371790218163411}
+  - component: {fileID: 4498876895493621153}
+  - component: {fileID: 7143263843975954654}
   m_Layer: 20
   m_Name: Trigger
   m_TagString: Untagged
@@ -188,7 +189,7 @@ MonoBehaviour:
     m_DissipationDistance: 5
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 1, y: 1, z: 1}
---- !u!114 &7390371790218163411
+--- !u!114 &4498876895493621153
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,20 +198,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 156251065368912402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f8f3e7a870849846b5f4c62415d7224, type: 3}
+  m_Script: {fileID: 11500000, guid: fbb7453023df865499aea1f6c1daed44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePrompt: 
-  destroyOnActivate: 0
-  door: {fileID: 2041011343539784274}
+  label: 
   isSlidingDoor: 1
+  allowPlayerControl: 1
   slideDirection: 2
   slideSpeed: 1
   nudgeAmount: 0.125
   shakeSource: {fileID: 9080569573715557851}
-  shakeStrength: 3
-  allowPlayerControl: 1
-  triggerRenderer: {fileID: 5767323205614926793}
+  shakeStrength: 5
+  door: {fileID: 2041011343539784274}
+--- !u!114 &7143263843975954654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156251065368912402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd138dd7de48257479cafc21ee5051c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useRenderer: 1
+  destroyOnActivate: 0
+  triggerColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0.2509804}
+  activePrompt: 
 --- !u!1 &1891597537356711763
 GameObject:
   m_ObjectHideFlags: 0

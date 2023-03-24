@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-
         // Get References
         lazerParentOrigin = lazerParent.localPosition;
 
@@ -239,6 +238,11 @@ public class PlayerController : MonoBehaviour
 
         // Headbobbing
         ExecuteHeadbob();
+    }
+
+    public void AddVelocity(Vector3 velocity)
+    {
+        playerVelocity += velocity;
     }
 
     private void ExecuteHeadbob()

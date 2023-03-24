@@ -234,10 +234,10 @@ MonoBehaviour:
     pitch: 1
   overheatSettings:
     overheatDamage: 0
-    overheatAfter: 500
+    overheatAfter: 300
     dissapateAfter: 10
     heatAccrualRate: 0
-    heatDissapationRate: 0.05
+    heatDissapationRate: 1
   acceptDamage: 0
   setDefaultMaterialColorAsDefaultVisualColor: 1
   visuals: {fileID: 11400000, guid: 35f003d074d49364a864801f538214c5, type: 2}
@@ -247,3 +247,6 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  spawnDamageText: 1
+  damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
+    type: 3}

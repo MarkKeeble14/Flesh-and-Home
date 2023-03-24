@@ -6,39 +6,312 @@
     "speakTime": "1",
     "speechClip": "EN/"
   },
-  "TestClip1": {
-    "speaker": "LCDR Lennox",
-    "text": "Comms check.",
+  "IntroConv1": {
+    "speaker": "Controller",
+    "text": "Surface party be advised, you are now entering the AO. Clock is running. No unexpected signatures or indications of sapient hostiles so far, but there might be movement at the dig site - watch for scientists and, or wildlife. Shouldn’t be too hard to tell which is which.",
     "iff": "friend",
-    "speakTime": "2.5",
-    "speechClip": "EN/TestClip1"
+    "speakTime": "12.5",
+    "speechClip": "EN/"
   },
-  "TestClip2": {
-    "speaker": "No. 2",
-    "text": "Second test clip.",
-    "iff": "enemy",
-    "speakTime": "15",
-    "speechClip": ""
-  },
-  "DemoConv_Controller_AskWeather": {
-    "speaker": "LCDR Lennox",
-    "text": "Hm. Surface party, what's the weather looking like? Any aerial phenomena?",
+  "IntroConv2": {
+    "speaker": "Hero",
+    "text": "Copy that. Any info on what they were looking for?",
     "iff": "friend",
-    "speakTime": "6",
-    "speechClip": "EN/DemoConv_Controller_AskWeather"
+    "speakTime": "5",
+    "speechClip": "EN/"
   },
-  "DemoConv_Spaceman_NoChanges": {
-    "speaker": "LT Keller",
-    "text": "Nothing unusual.",
+  "IntroConv3": {
+    "speaker": "Controller",
+    "text": "Negative, Surface. There's the ruins, but we don't know what's inside. That being said, archaeologists don't normally go missing like this, so watch your back. And, for that matter, all your other directions too.",
     "iff": "friend",
-    "speakTime": "2",
-    "speechClip": "EN/DemoConv_Spaceman_NothingUnusual"
+    "speakTime": "10",
+    "speechClip": "EN/"
   },
-  "DemoConv_Controller_RespondSensorGlitch": {
-    "speaker": "LCDR Lennox",
-    "text": "Copy that. Looks like our sensors are going bad.",
+  "WildlifeContact1": {
+    "speaker": "Hero",
+    "text": "Hostile contact. Looks like local wildlife.",
     "iff": "friend",
     "speakTime": "3",
-    "speechClip": "EN/DemoConv_Controller_RespondSensorGlitch"
+    "speechClip": "EN/"
+  },
+  "WildlifeContact2": {
+    "speaker": "Controller",
+    "text": "Understood. Recommend shooting anything that tries to eat your face.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "WeaponFiredBeforeContact": {
+    "speaker": "Controller",
+    "text": "Good to know your weapons still work.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "WeaponFiredBeforeContactIntoGround": {
+    "speaker": "Controller",
+    "text": "Yup, that sand looks pretty dead to me.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "HeroTriesToLeaveArea": {
+    "speaker": "Controller",
+    "text": "You're going the wrong way. Turn back around.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "HeroTriesToLeaveAreaAgain": {
+    "speaker": "Controller",
+    "text": "Wrong way again. You're looking for the big gray thing.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "HeroTriesToLeaveAreaYetAgain": {
+    "speaker": "Controller",
+    "text": "I have no idea what you're trying to accomplish. The ruins behind you are the only interesting thing on this planet.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "WildlifeDead": {
+    "speaker": "Controller",
+    "text": "Okay, that seems to be all of them. See if you can get inside now.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "DoorFlamethrowerRecommendation1": {
+    "speaker": "Hero",
+    "text": "I won't get through that easily.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "DoorFlamethrowerRecommendation2": {
+    "speaker": "Controller",
+    "text": "What the hell is that stuff? It looks weirdly organic... I recommend setting it on fire. There should be a flamethrower back in the shuttle.",
+    "iff": "friend",
+    "speakTime": "10",
+    "speechClip": "EN/"
+  },
+  "DoorFlamethrowerRecommendation3": {
+    "speaker": "Hero",
+    "text": "Copy. It should be useful underground too.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "FlamethrowerFiredNoTarget": {
+    "speaker": "Hero",
+    "text": "Weapon system nominal.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "FlamethrowerFiredAtDoor1": {
+    "speaker": "Hero",
+    "text": "This should do it.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "FlamethrowerFiredAtDoor2": {
+    "speaker": "Controller",
+    "text": "Sure looks like it. There should be some more fuel nearby - you might want to reload.",
+    "iff": "friend",
+    "speakTime": "8",
+    "speechClip": "EN/"
+  },
+  "FoundFuelToReplenish": {
+    "speaker": "Hero",
+    "text": "There's my fuel.",
+    "iff": "friend",
+    "speakTime": "1",
+    "speechClip": "EN/"
+  },
+  "EnteringRuins1": {
+    "speaker": "Hero",
+    "text": "I'm going in.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "EnteringRuins2": {
+    "speaker": "Controller",
+    "text": "Copy that. Keep in touch and make sure to report anything unusual.",
+    "iff": "friend",
+    "speakTime": "7",
+    "speechClip": "EN/"
+  },
+  "RuinsCommsLoss1": {
+    "speaker": "Controller",
+    "text": "Positioning's bugging out. Something's interfering with the comms.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "RuinsCommsLoss2": {
+    "speaker": "Hero",
+    "text": "Voice is going down too. I'm probably getting shielded by the rocks.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "RuinsCommsLoss3": {
+    "speaker": "Controller",
+    "text": "*static*",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "RuinsEnemyEncounter": {
+    "speaker": "Hero",
+    "text": "The hell's that?",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "RuinsFirstEnemyDead1": {
+    "speaker": "Controller",
+    "text": "What the hell have you been up to?",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "RuinsFirstEnemyDead2": {
+    "speaker": "Hero",
+    "text": "It attacked me. Looks a lot like the ones up on the surface.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "RuinsFirstEnemyDead3": {
+    "speaker": "Controller",
+    "text": "Hm, copy that. Proceed further inside.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "RuinsTravellingFleshTutorial1": {
+    "speaker": "Controller",
+    "text": "These blobs seem to be helping the surviving creatures.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "RuinsTravellingFleshTutorial2": {
+    "speaker": "Hero",
+    "text": "Fire should help.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "RuinsTravellingFleshTutorial3": {
+    "speaker": "Controller",
+    "text": "That's your solution to everything, isn't it?",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "RuinsTravellingFleshTutorial4": {
+    "speaker": "Hero",
+    "text": "It's been a winning formula so far so...",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "HubStareAtUpperDoor": {
+    "speaker": "Controller",
+    "text": "No way you're getting up there right now. Try looking around, see if you can find something useful.",
+    "iff": "friend",
+    "speakTime": "7",
+    "speechClip": "EN/"
+  },
+  "HubStareAtArmoredDoor": {
+    "speaker": "Controller",
+    "text": "That looks too think for your rifle. On the bright side, archaeologists often carry laser cutters, so there might be one in these ruins somewhere.",
+    "iff": "friend",
+    "speakTime": "8",
+    "speechClip": "EN/"
+  },
+  "HubStareAtBossDoor1": {
+    "speaker": "Controller",
+    "text": "This door isn't opening. Looks different from the others, too.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "HubStareAtBossDoor2": {
+    "speaker": "Hero",
+    "text": "It has to open somehow. I'll look around.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "PickUpJetpack1": {
+    "speaker": "Hero",
+    "text": "This'll come in handy.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "PickUpJetpack2": {
+    "speaker": "Controller",
+    "text": "Just watch your head with this thing in here.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "StareAtUpperDoorWithJetpack": {
+    "speaker": "Controller",
+    "text": "Looks like something might be up there. You might wanna check it out.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "SwarmerEncounter": {
+    "speaker": "Controller",
+    "text": "Watch out, the small ones will tear you apart!",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "PickUpLaserCutter1": {
+    "speaker": "Controller",
+    "text": "Looks like a laser cutter module - good for getting through armor.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "PickUpLaserCutter2": {
+    "speaker": "Hero",
+    "text": "Or barricades.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "ReturnToArmoredDoor": {
+    "speaker": "Hero",
+    "text": "That looks like it might be covering something. This cutter should help getting through.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "PickUpGrenadeLauncher1": {
+    "speaker": "Hero",
+    "text": "Is that a grenade launcher?",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "PickUpGrenadeLauncher2": {
+    "speaker": "Controller",
+    "text": "Looks like a grenade launcher. Why would the archaeologists need that?",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
   }
 }

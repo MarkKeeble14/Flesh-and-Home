@@ -44,10 +44,10 @@ public class KillableEntity : EndableEntity
     }
 
     [SerializeField] private bool spawnHealthTrigger;
-    [SerializeField] private EventTrigger healthTrigger;
+    [SerializeField] private EventManager healthTrigger;
     [SerializeField] private Vector2 chanceToSpawnHealthTrigger = new Vector2(1, 6);
     [SerializeField] private bool spawnFuelTrigger;
-    [SerializeField] private EventTrigger fuelTrigger;
+    [SerializeField] private EventManager fuelTrigger;
     [SerializeField] private Vector2 chanceToSpawnFuelTrigger = new Vector2(1, 6);
 
     public virtual bool IsDead => currentHealth <= 0;

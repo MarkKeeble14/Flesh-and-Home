@@ -32,8 +32,6 @@ public class DialogueSnippet
         //Load the relevant object from the localization JSON by ID.
         JObject jsonSnippet = (JObject)JObject.Parse(locJSON.text)[id];
 
-        //Debug.Log(jsonSnippet);
-
         //Text values are easy.
         result.speaker = jsonSnippet["speaker"].ToString();
         result.text = jsonSnippet["text"].ToString();

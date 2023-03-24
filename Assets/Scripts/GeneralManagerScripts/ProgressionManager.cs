@@ -26,6 +26,8 @@ public class ProgressionManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private bool unlockAllOnStart;
     [SerializeField] private UnlockType[] unlockOnStart;
+    [SerializeField] private bool shouldEquipOnStart;
+    [SerializeField] private UnlockType equipOnStart;
 
     [SerializeField] private float unlockTextDuration = 3f;
 
@@ -76,6 +78,24 @@ public class ProgressionManager : MonoBehaviour
                     break;
             }
         }
+
+        if (shouldEquipOnStart)
+        {
+            switch (equipOnStart)
+            {
+                case UnlockType.FLAMETHROWER:
+                    weaponAttachmentMenu.SetButton(flamethrowerButton);
+                    break;
+                case UnlockType.LASER_CUTTER:
+                    weaponAttachmentMenu.AddButtion(laserCutterButton);
+                    break;
+                case UnlockType.PULSE_GRENADE_LAUNCHER:
+                    weaponAttachmentMenu.AddButtion(pulseGrenadeLauncherButton);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void UnlockJetpack(bool showText)
@@ -114,9 +134,8 @@ public class ProgressionManager : MonoBehaviour
         // Set weapon display to be active
         currentWeaponAttachmentDisplay.SetActive(true);
 
-        // Add and select new attachment
+        // Add new attachment
         weaponAttachmentMenu.AddButtion(flamethrowerButton);
-        weaponAttachmentMenu.SetButton(flamethrowerButton);
 
         // Enable crosshair
         flamethrowerCrosshair.gameObject.SetActive(true);
@@ -127,7 +146,7 @@ public class ProgressionManager : MonoBehaviour
 
         // Spawn text
         if (showText)
-            TextPopupManager._Instance.SpawnText("Unlocked the Flamethrower\nHold Tab to Select, Hold Q to Use\nBurn travelling flesh to prevent other enemies from getting stronger", unlockTextDuration + 5f);
+            TextPopupManager._Instance.SpawnText("Unlocked the Flamethrower\nHold Tab to Select, Hold Q to Use", unlockTextDuration + 5f);
     }
 
     [ContextMenu("Unlock/Flamethrower")]
@@ -162,9 +181,8 @@ public class ProgressionManager : MonoBehaviour
         // Set weapon display to be active
         currentWeaponAttachmentDisplay.SetActive(true);
 
-        // Add and select new attachment
+        // Add new attachment
         weaponAttachmentMenu.AddButtion(laserCutterButton);
-        weaponAttachmentMenu.SetButton(laserCutterButton);
 
         // Enable crosshair
         laserCutterCrosshair.gameObject.SetActive(true);
@@ -184,9 +202,8 @@ public class ProgressionManager : MonoBehaviour
         // Set weapon display to be active
         currentWeaponAttachmentDisplay.SetActive(true);
 
-        // Add and select new attachment
+        // Add new attachment
         weaponAttachmentMenu.AddButtion(pulseGrenadeLauncherButton);
-        weaponAttachmentMenu.SetButton(pulseGrenadeLauncherButton);
 
         // Enable crosshair
         pulseGrenadeLauncherCrosshair.gameObject.SetActive(true);
@@ -214,5 +231,43 @@ public class ProgressionManager : MonoBehaviour
             if (!currentUnlocks.Contains(type)) return false;
         }
         return true;
+    }
+
+    public void Unlock(UnlockType unlock, bool showText)
+    {
+        switch (unlock)
+        {
+            case UnlockType.JETPACK:
+                UnlockJetpack(showText);
+                break;
+            case UnlockType.FLAMETHROWER:
+                UnlockFlamethrower(showText);
+                break;
+            case UnlockType.LASER_CUTTER:
+                UnlockLaserCutter(showText);
+                break;
+            case UnlockType.PULSE_GRENADE_LAUNCHER:
+                UnlockPulseGrenadeLauncher(showText);
+                break;
+            default:
+                throw new UnhandledSwitchCaseException();
+        }
+    }
+
+    public static string GetUnlockTypeString(UnlockType unlock)
+    {
+        switch (unlock)
+        {
+            case UnlockType.JETPACK:
+                return "Jetpack";
+            case UnlockType.FLAMETHROWER:
+                return "Flamethrower";
+            case UnlockType.LASER_CUTTER:
+                return "Laser Cutter";
+            case UnlockType.PULSE_GRENADE_LAUNCHER:
+                return "Pulse Grenade Launcher";
+            default:
+                throw new UnhandledSwitchCaseException();
+        }
     }
 }

@@ -17,6 +17,7 @@ public class PlayerAttachmentHandler : MonoBehaviour
     [SerializeField] private AudioClipContainer onSwitchClip;
 
     [SerializeField] private Image attachmentEquippedDisplay;
+    [SerializeField] private Image attachmentEquippedSpriteDisplay;
     [SerializeField] private RadialMenu attachmentMenu;
 
     private void Start()
@@ -88,5 +89,7 @@ public class PlayerAttachmentHandler : MonoBehaviour
 
         // Change Color of UI
         attachmentEquippedDisplay.color = currentWeaponAttachment.Color;
+        // Change Icon on UI
+        attachmentEquippedSpriteDisplay.sprite = currentWeaponAttachment.Sprite;
     }
 }

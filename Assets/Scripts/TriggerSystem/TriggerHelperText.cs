@@ -6,9 +6,9 @@ public class TriggerHelperText : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textPrefab;
     [SerializeField] private Transform textHolder;
-    private Dictionary<TextPromptKeyTrigger, TextMeshProUGUI> spawnedTexts = new Dictionary<TextPromptKeyTrigger, TextMeshProUGUI>();
+    private Dictionary<GameEvent, TextMeshProUGUI> spawnedTexts = new Dictionary<GameEvent, TextMeshProUGUI>();
 
-    public void Show(TextPromptKeyTrigger trigger, string text)
+    public void Show(GameEvent trigger, string text)
     {
         if (spawnedTexts.ContainsKey(trigger)) return;
         TextMeshProUGUI spawned = Instantiate(textPrefab, textHolder);
@@ -16,7 +16,7 @@ public class TriggerHelperText : MonoBehaviour
         spawned.text = text;
     }
 
-    public void Hide(TextPromptKeyTrigger trigger)
+    public void Hide(GameEvent trigger)
     {
         if (!spawnedTexts.ContainsKey(trigger)) return;
         Destroy(spawnedTexts[trigger].gameObject);

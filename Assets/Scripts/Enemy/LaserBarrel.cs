@@ -91,10 +91,20 @@ public class LaserBarrel : MonoBehaviour
         lineRenderer.enabled = isFiring;
     }
 
-    public void ShootLaser(Color color, LayerMask canHit, LayerMask canDamage, float speed, float damage, float force)
+    public void ShootLaser(Color color, LayerMask canHit, LayerMask canDamage, float speed, float damage, float force, bool aimAtPlayer)
     {
         ShotBehavior spawned = Instantiate(laserProjectile, transform.position, Quaternion.identity);
-        spawned.SetTarget(transform.forward * 999f, color, canHit, canDamage, speed, damage, force);
-        spawned.transform.LookAt(transform.forward * 999f);
+
+        if (aimAtPlayer)
+        {
+            Vector3 direction = (GameManager._Instance.PlayerAimAt.position - transform.position).normalized;
+            spawned.SetTarget(GameManager._Instance.PlayerAimAt.position + direction * 999f, color, canHit, canDamage, speed, damage, force);
+            spawned.transform.LookAt(GameManager._Instance.PlayerAimAt.position);
+        }
+        else
+        {
+            spawned.SetTarget(transform.forward * 999f, color, canHit, canDamage, speed, damage, force);
+            spawned.transform.LookAt(transform.forward * 999f);
+        }
     }
 }

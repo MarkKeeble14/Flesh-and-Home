@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 356225051794016204}
   - component: {fileID: 356225051794016195}
   - component: {fileID: 356225051794016194}
-  - component: {fileID: 5708385125351423535}
+  - component: {fileID: -5896302889873632466}
+  - component: {fileID: -5668555828220567238}
   m_Layer: 0
   m_Name: AddHealthTrigger
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7ef1bffb069c1d64a90bc4e87714769b, type: 2}
+  - {fileID: 2100000, guid: 71ea731012235854c85a966a48d32f14, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5708385125351423535
+--- !u!114 &-5896302889873632466
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,9 +108,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 356225051794016193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 741d9f7f59709a143bf142dc1ab36a51, type: 3}
+  m_Script: {fileID: 11500000, guid: fd138dd7de48257479cafc21ee5051c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePrompt: Restore Health
-  hpStore: {fileID: 11400000, guid: 88d987135f5b8bc4d9270160a39c920f, type: 2}
-  hpRestore: 10
+  useRenderer: 1
+  destroyOnActivate: 1
+  triggerColor: {r: 1, g: 0, b: 0, a: 0.2509804}
+  activePrompt: 
+--- !u!114 &-5668555828220567238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356225051794016193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343fc8108c1304d48bc7c135dcdbca09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: Restore Health
+  fuelStore: {fileID: 11400000, guid: 88d987135f5b8bc4d9270160a39c920f, type: 2}
+  fuelAmount: 25

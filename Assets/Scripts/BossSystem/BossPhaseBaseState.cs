@@ -29,7 +29,7 @@ public abstract class BossPhaseBaseState : AttackingEnemy
 
     // Spawning
     private List<BossSpawnPoint> fuelSpawnPoints = new List<BossSpawnPoint>();
-    [SerializeField] private EventTrigger addFuelTriggerPrefab;
+    [SerializeField] private EventManager addFuelTriggerPrefab;
     private Vector2 chanceToSpawnFuelTrigger;
     [SerializeField] private Vector2 chanceToSpawnFuelTriggerPerSpawnpoint = new Vector2(1, 10000);
 
@@ -71,7 +71,7 @@ public abstract class BossPhaseBaseState : AttackingEnemy
             if (Random.value <= chanceToSpawnFuelTrigger.x / chanceToSpawnFuelTrigger.y)
             {
                 spawnPoint.SpawnedOn = true;
-                EventTrigger spawned = Instantiate(addFuelTriggerPrefab, spawnPoint.transform.position, Quaternion.identity);
+                EventManager spawned = Instantiate(addFuelTriggerPrefab, spawnPoint.transform.position, Quaternion.identity);
                 spawned.AddOnActivate(() =>
                 {
                     spawnPoint.SpawnedOn = false;

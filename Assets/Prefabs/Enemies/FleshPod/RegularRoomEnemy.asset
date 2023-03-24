@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RegularRoomEnemy
   m_EditorClassIdentifier: 
   inactiveColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
-  activeColor: {r: 0, g: 1, b: 0, a: 1}
-  colorIntensity: 5
+  activeColor: {r: 1, g: 0, b: 0.8585882, a: 1}
+  colorIntensity: 0

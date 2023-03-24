@@ -9,6 +9,8 @@ public abstract class WeaponAttachmentController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Color color;
     public Color Color => color;
+    [SerializeField] private Sprite sprite;
+    public Sprite Sprite => sprite;
 
     public virtual void EnterState(PlayerAttachmentHandler handler)
     {

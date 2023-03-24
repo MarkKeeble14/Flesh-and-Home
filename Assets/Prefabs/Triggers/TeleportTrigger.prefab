@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 356225051794016204}
   - component: {fileID: 356225051794016195}
   - component: {fileID: 356225051794016194}
-  - component: {fileID: 6575359901184704423}
+  - component: {fileID: -5906215742055879848}
+  - component: {fileID: -6518553905809226611}
   m_Layer: 24
   m_Name: TeleportTrigger
   m_TagString: Untagged
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c177c4bbe05028c46b5bf1bc0fe23cb8, type: 2}
+  - {fileID: 2100000, guid: 71ea731012235854c85a966a48d32f14, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +99,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6575359901184704423
+--- !u!114 &-5906215742055879848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,10 +108,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 356225051794016193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5acd3e6f0311323488947e3d0c914318, type: 3}
+  m_Script: {fileID: 11500000, guid: fd138dd7de48257479cafc21ee5051c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activePrompt: 'Teleport To the '
+  useRenderer: 1
   destroyOnActivate: 1
+  triggerColor: {r: 0.7547908, g: 0, b: 1, a: 0.2509804}
+  activePrompt: 
+--- !u!114 &-6518553905809226611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356225051794016193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e5b2d017306cb44be609bdfa7c36f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  label: 'Teleport to '
   requiredUnlocks: 
-  teleportTo: 1
+  teleportTo: 0
+  fadeDuration: 1

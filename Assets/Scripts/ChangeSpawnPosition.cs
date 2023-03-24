@@ -20,4 +20,27 @@ public class ChangeSpawnPosition : MonoBehaviour
         playerObject.localPosition = Vector3.zero + Vector3.up / 2;
         transform.localEulerAngles = data.eulerAngles;
     }
+
+    public static string GetTeleportLocationString(SpawnPosition position)
+    {
+        switch (position)
+        {
+            case SpawnPosition.BOSS_ROOM:
+                return "Boss Room";
+            case SpawnPosition.HUB:
+                return "Hub";
+            case SpawnPosition.OVERWORLD:
+                return "Overworld Spawn";
+            case SpawnPosition.RUIN_START:
+                return "Ruins Start";
+            case SpawnPosition.UNLOCK1:
+                return "First Unlock";
+            case SpawnPosition.UNLOCK2:
+                return "Second Unlock";
+            case SpawnPosition.UNLOCK3:
+                return "Third Unlock";
+            default:
+                throw new UnhandledSwitchCaseException();
+        }
+    }
 }
