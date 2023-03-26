@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
@@ -100,6 +101,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ParticleSystem dashParticleSystem;
     #endregion
 
+    private Scene currentScene;
+
     private float MoveSpeed
     {
         get
@@ -158,6 +161,10 @@ public class PlayerController : MonoBehaviour
 
         m_StepCycle = 0f;
         m_NextStep = m_StepCycle/2f;
+
+        // Get current active scene and select correct footstep audio
+        currentScene = SceneManager.GetActiveScene();
+        SelectFoodstepAudio();
     }
 
     private void OnDestroy()
@@ -436,4 +443,14 @@ public class PlayerController : MonoBehaviour
 
             PlayFootStepAudio();
         }
+
+    private void SelectFoodstepAudio()
+    {
+        if (currentScene.name == "OverworldScene")
+        {
+            // play overworld footstep audio
+        }
+        
+        // more scenes
+    }    
 }
