@@ -814,9 +814,9 @@ MonoBehaviour:
   baseSpeed: 10
   sprintSpeed: 1.05
   airStrafeSpeed: 15
-  jumpHeight: 0.2
+  jumpHeight: 0.1
   mass: 50
-  gravityValue: -19.62
+  gravityValue: -14.715
   playerVelocity: {x: 0, y: 0, z: 0}
   jumpClip: {fileID: 8300000, guid: 9899a656da685824d8a375705a272712, type: 3}
   landClip: {fileID: 8300000, guid: be41aa26c99368546a68043ee05a3cc9, type: 3}

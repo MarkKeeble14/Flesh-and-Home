@@ -313,5 +313,124 @@
     "iff": "friend",
     "speakTime": "5",
     "speechClip": "EN/"
+  },
+  "OverrideConsole": {
+    "speaker": "Controller",
+    "text": "This should help you get through that door. Just hit the switch.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "OverrideConsoleDone": {
+    "speaker": "Hero",
+    "text": "Let's see what's in there.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "BossDoorEnter": {
+    "speaker": "Controller",
+    "text": "Almost there.",
+    "iff": "friend",
+    "speakTime": "2",
+    "speechClip": "EN/"
+  },
+  "SeeBoss1": {
+    "speaker": "Hero",
+    "text": "What the hell's that?",
+    "iff": "friend",
+    "speakTime": "2",
+    "speechClip": "EN/"
+  },
+  "SeeBoss2": {
+    "speaker": "Controller",
+    "text": "It's probably friendly. You should step closer to it.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "SeeBoss3": {
+    "speaker": "Hero",
+    "text": "...What?",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "SeeBoss4": {
+    "speaker": "Controller",
+    "text": "Put down your weapons.",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "SeeBoss5": {
+    "speaker": "Controller",
+    "text": "Cease fire.",
+    "iff": "neutral",
+    "speakTime": "2",
+    "speechClip": "EN/"
+  },
+  "SeeBoss6": {
+    "speaker": "Controller",
+    "text": "Come closer.",
+    "iff": "enemy",
+    "speakTime": "2",
+    "speechClip": "EN/"
+  },
+  "SeeBoss7": {
+    "speaker": "Boss",
+    "text": "Give up.",
+    "iff": "enemy",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "BossExplanationArmor": {
+    "speaker": "Hero",
+    "text": "I found a cutter, remember?",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "BossExplanationSoft": {
+    "speaker": "Hero",
+    "text": "Looks pretty soft now. Just like the ones I just shot up.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "BossExplanationMinions": {
+    "speaker": "Hero",
+    "text": "Meat shields?",
+    "iff": "friend",
+    "speakTime": "2",
+    "speechClip": "EN/"
+  },
+  "BossEndControllerBack1": {
+    "speaker": "Controller",
+    "text": "Oh hey, comms are back online... what the hell's that? How did you get that deep?",
+    "iff": "friend",
+    "speakTime": "7",
+    "speechClip": "EN/"
+  },
+  "BossEndControllerBack2": {
+    "speaker": "Hero",
+    "text": "You didn't see it?",
+    "iff": "friend",
+    "speakTime": "3",
+    "speechClip": "EN/"
+  },
+  "BossEndControllerBack3": {
+    "speaker": "Controller",
+    "text": "You've been offline for a good while. Anything I should know?",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
+  },
+  "BossEndControllerBack4": {
+    "speaker": "Hero",
+    "text": "...I'll fill you in at the debrief.",
+    "iff": "friend",
+    "speakTime": "5",
+    "speechClip": "EN/"
   }
 }
