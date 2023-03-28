@@ -636,6 +636,7 @@ MonoBehaviour:
   minMaxMouseSensitivity: {x: 1.25, y: 10}
   defaultMouseSensitivity: 80
   playerPOVCam: {fileID: 4791854496528155088}
+  holdDownMouseSpeed: 0.25
 --- !u!114 &8294953404381728547
 MonoBehaviour:
   m_ObjectHideFlags: 0

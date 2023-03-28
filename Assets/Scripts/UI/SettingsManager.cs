@@ -33,7 +33,7 @@ public class SettingsManager : MonoBehaviour
     private float verticalSpeedMultiplier = 1f;
     private InputManager inputManager;
     private bool holdBreath;
-
+    [SerializeField]
     private float holdDownMouseSpeed;
 
     public void SetMusicVolume(float percent)
@@ -92,7 +92,7 @@ public class SettingsManager : MonoBehaviour
 
     private void Update() {
         if (inputManager.PlayerInputActions.Player.HoldBreath.IsPressed()) {
-            holdDownMouseSpeed = .25f;
+            holdDownMouseSpeed = .1f;
         } else {
             holdDownMouseSpeed = 1f;
         }
