@@ -90,14 +90,19 @@ public class SettingsManager : MonoBehaviour
 
     }
 
-    private void Update() {
-        if (inputManager.PlayerInputActions.Player.HoldBreath.IsPressed()) {
-            holdDownMouseSpeed = .1f;
-        } else {
-            holdDownMouseSpeed = 1f;
+    private void Update()
+    {
+        if (inputManager.PlayerInputActions.Player.HoldBreath.IsPressed())
+        {
+            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * holdDownMouseSpeed;
+            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * holdDownMouseSpeed;
         }
-        playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * holdDownMouseSpeed;
-        playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * holdDownMouseSpeed;
+        else
+        {
+            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed;
+            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed;
+        }
+
     }
 
     private void InitFloatSetting(string key, float defaultValue, Slider slider, Action<float> InitAction)
