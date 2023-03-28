@@ -633,7 +633,7 @@ MonoBehaviour:
   sfxVolumeSlider: {fileID: 1872439819766147352}
   defaultSFXVolume: 0.8
   mouseSensitivitySlider: {fileID: 1872439818567648853}
-  minMaxMouseSensitivity: {x: 1.25, y: 3}
+  minMaxMouseSensitivity: {x: 1.25, y: 10}
   defaultMouseSensitivity: 80
   playerPOVCam: {fileID: 4791854496528155088}
 --- !u!114 &8294953404381728547
@@ -2864,6 +2864,31 @@ PrefabInstance:
       propertyPath: onPressEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8294953403587405436}
+    - target: {fileID: 1249643455432044940, guid: 744201fcd078a044785f9b80c0511449,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144115936719599873, guid: 744201fcd078a044785f9b80c0511449,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144115936719599873, guid: 744201fcd078a044785f9b80c0511449,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144115936719599873, guid: 744201fcd078a044785f9b80c0511449,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144115936719599873, guid: 744201fcd078a044785f9b80c0511449,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2555487385304265957, guid: 744201fcd078a044785f9b80c0511449,
         type: 3}
       propertyPath: m_AnchorMax.y

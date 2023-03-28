@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using Cinemachine;
 using System;
+using UnityEngine.InputSystem;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class SettingsManager : MonoBehaviour
     private CinemachinePOV playerPOV;
     private float horizontalSpeedMultiplier = 1f;
     private float verticalSpeedMultiplier = 1f;
+    private InputManager inputManager;
+    private bool holdBreath;
+
+    private float holdDownMouseSpeed;
 
     public void SetMusicVolume(float percent)
     {
@@ -45,6 +50,9 @@ public class SettingsManager : MonoBehaviour
         sfxVolumeSlider.value = percent;
     }
 
+
+    private float xMaxSpeed;
+    private float yMaxSpeed;
     public void SetMouseSensitivity(float percent)
     {
         // Get player POV
@@ -52,8 +60,9 @@ public class SettingsManager : MonoBehaviour
             playerPOV = playerPOVCam.GetCinemachineComponent<CinemachinePOV>();
 
         PlayerPrefs.SetFloat(mouseSensitivityKey, percent);
-        playerPOV.m_HorizontalAxis.m_MaxSpeed = horizontalSpeedMultiplier * Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
-        playerPOV.m_VerticalAxis.m_MaxSpeed = verticalSpeedMultiplier * Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
+        xMaxSpeed = horizontalSpeedMultiplier * Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
+        yMaxSpeed = verticalSpeedMultiplier * Mathf.Lerp(minMaxMouseSensitivity.x, minMaxMouseSensitivity.y, percent);
+
         mouseSensitivitySlider.value = percent;
     }
 
@@ -69,13 +78,26 @@ public class SettingsManager : MonoBehaviour
         // SFX Volume
         InitFloatSetting(sfxVolumeKey, defaultSFXVolume, sfxVolumeSlider, v => SetSFXVolume(v));
 
+
         // Mouse Sensitivity
         InitFloatSetting(mouseSensitivityKey, defaultMouseSensitivity, mouseSensitivitySlider, v => SetMouseSensitivity(v));
     }
 
     private void Start()
     {
+        inputManager = InputManager._Instance;
         Set();
+
+    }
+
+    private void Update() {
+        if (inputManager.PlayerInputActions.Player.HoldBreath.IsPressed()) {
+            holdDownMouseSpeed = .25f;
+        } else {
+            holdDownMouseSpeed = 1f;
+        }
+        playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * holdDownMouseSpeed;
+        playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * holdDownMouseSpeed;
     }
 
     private void InitFloatSetting(string key, float defaultValue, Slider slider, Action<float> InitAction)
@@ -92,5 +114,6 @@ public class SettingsManager : MonoBehaviour
             slider.value = value;
         }
     }
+
 }
 

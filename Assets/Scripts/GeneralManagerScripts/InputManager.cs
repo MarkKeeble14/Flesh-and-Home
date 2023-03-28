@@ -33,6 +33,7 @@ public class InputManager : MonoBehaviour
         PlayerInputActions.Player.Move.Enable();
         PlayerInputActions.Player.Look.Enable();
         mouseInput.enabled = true;
+        PlayerInputActions.Player.HoldBreath.Enable();
 
         // Actions
         PlayerInputActions.Player.Sprint.Enable();
@@ -59,6 +60,7 @@ public class InputManager : MonoBehaviour
         PlayerInputActions.Player.Move.Disable();
         PlayerInputActions.Player.Look.Disable();
         mouseInput.enabled = false;
+        PlayerInputActions.Player.HoldBreath.Disable();
 
         // Actions
         PlayerInputActions.Player.Sprint.Disable();
