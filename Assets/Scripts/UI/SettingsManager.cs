@@ -32,7 +32,6 @@ public class SettingsManager : MonoBehaviour
     private float horizontalSpeedMultiplier = 1f;
     private float verticalSpeedMultiplier = 1f;
     private InputManager inputManager;
-    private bool holdBreath;
     [SerializeField]
     private float holdDownMouseSpeed;
 
