@@ -257,7 +257,7 @@
                     "id": "440adf3b-8bef-495d-b086-35cbde4682d9",
                     "path": "<Mouse>/delta",
                     "interactions": "",
-                    "processors": "StickDeadzone",
+                    "processors": "StickDeadzone,DeltaTimeScale",
                     "groups": "",
                     "action": "Look",
                     "isComposite": false,

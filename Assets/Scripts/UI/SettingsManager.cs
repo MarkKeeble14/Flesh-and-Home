@@ -93,13 +93,13 @@ public class SettingsManager : MonoBehaviour
     {
         if (inputManager.PlayerInputActions.Player.HoldBreath.IsPressed())
         {
-            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * holdDownMouseSpeed;
-            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * holdDownMouseSpeed;
+            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * holdDownMouseSpeed * 0.025f;
+            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * holdDownMouseSpeed * 0.025f;
         }
         else
         {
-            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed;
-            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed;
+            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * 0.025f;
+            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * 0.025f;
         }
 
     }
