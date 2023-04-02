@@ -23,17 +23,6 @@ public class LaserAttackOptions : ScriptableObject
     [SerializeField] private Vector2 chanceToTargetPlayer;
     [SerializeField] private Vector2 minMaxLaserOffset = new Vector2(2.5f, 5f);
 
-    [SerializeField] private float damageBoost;
-    [SerializeField] private float radiusBoost;
-
-    public void Boost()
-    {
-        // damage
-        damage += damageBoost;
-        // radius
-        laserRadius += radiusBoost;
-    }
-
     public float Damage { get => damage; }
     public float TickSpeed { get => tickSpeed; }
     public float LaserRange { get => laserRange; }

@@ -8,7 +8,7 @@ public class ProgressionGameEvent : GameEvent
 
     protected override void Activate()
     {
-        Debug.Log("Activating");
+        // Debug.Log("Activating");
         ProgressionManager._Instance.Unlock(unlock, true);
     }
 }

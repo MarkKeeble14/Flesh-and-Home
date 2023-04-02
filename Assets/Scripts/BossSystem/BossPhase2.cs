@@ -49,6 +49,11 @@ public class BossPhase2 : BossAttackingPhase
             yield return StartCoroutine(CallAttacks(boss, GameManager._Instance.PlayerAimAt));
         }
 
+        if (waitForIdleDialogueBeforeExit)
+        {
+            yield return new WaitUntil(() => DialogueManager._Instance.Idle);
+        }
+
         // Switch State
         boss.LoadNextPhase();
     }

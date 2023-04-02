@@ -12,23 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770e8ea487f657d419976f05b8b31c02, type: 3}
   m_Name: LaserArmEnemy
   m_EditorClassIdentifier: 
-  damage: 1.5
-  tickSpeed: 0.25
+  damage: 0.25
+  tickSpeed: 0.125
   laserRange: 100
   canHit:
     serializedVersion: 2
     m_Bits: 2122624
-  laserRadius: 0.1
+  laserRadius: 0.40000007
   beamSettings:
     fullWidth: 0.25
-    beamGrowSpeed: 0.1
+    beamGrowSpeed: 0.05
     beamCollapseSpeed: 3
     beamOverheatCollapseSpeed: 0
-  laserStayDuration: 1
+  laserStayDuration: 3
   visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
   canTargetPlayer: 1
   followPlayerSpeed: 0.45
   chanceToTargetPlayer: {x: 1, y: 1}
   minMaxLaserOffset: {x: 0.05, y: 0.15}
-  damageBoost: 1
-  radiusBoost: 0.025

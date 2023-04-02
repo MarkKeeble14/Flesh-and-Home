@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fff9ec6f7923c54e9d5b52fed8b34ca, type: 3}
   m_Name: RegularRoomEnemy
   m_EditorClassIdentifier: 
-  inactiveColor: {r: 0.43529412, g: 0.43529412, b: 0.43529412, a: 1}
+  inactiveColor: {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
   activeColor: {r: 1, g: 0, b: 0.8585882, a: 1}
   colorIntensity: 0

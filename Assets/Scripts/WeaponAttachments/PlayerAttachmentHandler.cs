@@ -23,7 +23,7 @@ public class PlayerAttachmentHandler : MonoBehaviour
     private void Start()
     {
         // Set character to initially have no weapon attachment
-        currentWeaponAttachment = noWeaponAttachment;
+        // currentWeaponAttachment = noWeaponAttachment;
 
         // Add Controls
         InputManager._Instance.PlayerInputActions.Player.Tab.performed += OpenAttachmentMenu;
@@ -77,18 +77,23 @@ public class PlayerAttachmentHandler : MonoBehaviour
 
     public void SwitchAttatchment(WeaponAttachmentController attachment)
     {
+        // Debug.Log("Switching Attachment to: " + attachment.GetType().ToString());
         // Exit
         if (currentWeaponAttachment != null)
+        {
             currentWeaponAttachment.ExitState(this);
+        }
 
         // Switch
-        currentWeaponAttachment = attachment;
+        // Debug.Log("Switching Attachment - Current: " + currentWeaponAttachment);
 
         // Enter
-        currentWeaponAttachment.EnterState(this);
+        attachment.EnterState(this);
+        currentWeaponAttachment = attachment;
 
         // Change Color of UI
         attachmentEquippedDisplay.color = currentWeaponAttachment.Color;
+
         // Change Icon on UI
         attachmentEquippedSpriteDisplay.sprite = currentWeaponAttachment.Sprite;
     }

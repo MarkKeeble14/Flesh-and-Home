@@ -127,6 +127,7 @@ public class LaserCutterSettings : WeaponAttachmentController
         // While the player has the button pressed
         while (InputManager._Instance.PlayerInputActions.Player.FireAttachment.IsPressed())
         {
+            Firing = true;
             trackOverheatTimer += Time.deltaTime * laserSettings.overheatSettings.heatAccrualRate;
 
             // Interpolate Color based on how close we are to overheating
@@ -193,6 +194,8 @@ public class LaserCutterSettings : WeaponAttachmentController
 
         // Signifiy ended
         laserEndSound.PlayOneShot(source);
+
+        Firing = false;
 
         active = false;
     }

@@ -154,6 +154,11 @@ MonoBehaviour:
   spawnDamageText: 1
   damagePopupText: {fileID: 4595650775008487435, guid: f13ec563494a9964a8ff5cb5fe65efda,
     type: 3}
+  onTakeDamageEvents: []
+  particlesOnHit:
+  - {fileID: 6555892946277273035, guid: 0ee2121e994dfa84fab1bb73b7a11fd7, type: 3}
+  particlesOnDeath:
+  - {fileID: 6555892946277273035, guid: f9599198d0eb34f4da19711767994f2d, type: 3}
 --- !u!82 &-7774420107088475452
 AudioSource:
   m_ObjectHideFlags: 0

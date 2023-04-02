@@ -12,6 +12,7 @@ public class OpenDoorGameEvent : GameEvent
     [Header("Sliding Settings")]
     [SerializeField] private SlideDirection slideDirection;
     [SerializeField] private float slideSpeed = 1.0f;
+
     [SerializeField] private float nudgeAmount = .125f;
 
     [Header("Shaking")]
@@ -159,5 +160,10 @@ public class OpenDoorGameEvent : GameEvent
         {
             EventString = "Door Locked";
         }
+    }
+
+    public void EnablePlayerControl()
+    {
+        allowPlayerControl = true;
     }
 }

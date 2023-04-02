@@ -10,6 +10,7 @@ public class BossPhase3 : BossAttackingPhase
     [SerializeField] private KillableBossComponentEntity bossFlesh;
     [SerializeField] private float timeBeforeFleshySpawns = 3f;
     [SerializeField] private float timeAfterFleshyKillBeforeDropBarrels;
+    [SerializeField] private BossFleshySpawnerOrb turnOff;
 
     [Header("Plates")]
     [SerializeField] private Transform parentToUnequipped;
@@ -32,6 +33,8 @@ public class BossPhase3 : BossAttackingPhase
     public override void EnterState(BossPhaseManager boss)
     {
         Debug.Log("Entering State 3");
+
+        turnOff.Enabled = false;
 
         // And also to set complete to true when done
         bossFlesh.AddAdditionalOnEndAction(() =>
@@ -153,6 +156,11 @@ public class BossPhase3 : BossAttackingPhase
             {
                 Destroy(enemy.gameObject);
             }
+        }
+
+        if (waitForIdleDialogueBeforeExit)
+        {
+            yield return new WaitUntil(() => DialogueManager._Instance.Idle);
         }
 
         boss.LoadNextPhase();

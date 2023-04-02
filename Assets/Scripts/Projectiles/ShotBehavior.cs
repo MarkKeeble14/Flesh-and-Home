@@ -34,7 +34,7 @@ public class ShotBehavior : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, target, step);
             yield return null;
         }
-        Debug.Log(name + ", Destroying After Reach Target");
+        // Debug.Log(name + ", Destroying After Reach Target");
         Destroy(gameObject);
     }
 

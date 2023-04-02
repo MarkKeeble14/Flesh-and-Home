@@ -102,7 +102,7 @@ public class KillableEntity : EndableEntity
 
         if (CurrentHealth <= 0)
         {
-            onEndAction();
+            onEndAction?.Invoke();
         }
     }
 
@@ -138,7 +138,7 @@ public class KillableEntity : EndableEntity
             }
         }
 
-        if (spawnFuelTrigger && GameManager._Instance.PlayerUseFuel)
+        if (spawnFuelTrigger && GameManager._Instance.PlayerUseFuel && !GameManager._Instance.FuelFull)
         {
             if (RandomHelper.EvaluateChanceTo(chanceToSpawnFuelTrigger))
             {

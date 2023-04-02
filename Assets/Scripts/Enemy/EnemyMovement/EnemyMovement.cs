@@ -26,6 +26,9 @@ public abstract class EnemyMovement : MonoBehaviour
     private Stack<Transform> availableDummyPoints = new Stack<Transform>();
     private List<Transform> spawnedDummyPoints = new List<Transform>();
 
+    [SerializeField] private Animator anim;
+    [SerializeField] private string walkAnimBoolParamter;
+
     public abstract void SetSpeed(float f);
     public abstract float GetSpeed();
 
@@ -46,6 +49,14 @@ public abstract class EnemyMovement : MonoBehaviour
             this.overrideIgnoreY = overrideIgnoreY;
             this.overrideAcceptableDistanceBetweenTargetAndMover = overrideAcceptableDistanceBetweenTargetAndMover;
             this.destroyOnReachTarget = destroyOnReachTarget;
+        }
+    }
+
+    protected void SetAnimWalk(bool v)
+    {
+        if (anim != null)
+        {
+            anim.SetBool(walkAnimBoolParamter, v);
         }
     }
 
@@ -109,6 +120,7 @@ public abstract class EnemyMovement : MonoBehaviour
     {
         foreach (Transform dummyPoint in spawnedDummyPoints)
         {
+            if (dummyPoint == null) continue;
             Destroy(dummyPoint.gameObject);
         }
     }

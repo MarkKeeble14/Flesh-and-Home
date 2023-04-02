@@ -8,9 +8,22 @@ public abstract class LaserAttack : Attack
     [SerializeField] protected LaserAttackOptions laserAttackerOptions;
     protected List<LaserBarrel> attackingFrom = new List<LaserBarrel>();
 
+    [SerializeField] private float damageBoost;
+    [SerializeField] private float radiusBoost;
+    public float Damage { get; set; }
+    public float Radius { get; set; }
+
+    private void Awake()
+    {
+        Damage = laserAttackerOptions.Damage;
+        Radius = laserAttackerOptions.LaserRadius;
+    }
+
+
     public override void Boost()
     {
-        laserAttackerOptions.Boost();
+        Damage += damageBoost;
+        Radius += radiusBoost;
         base.Boost();
     }
 
@@ -187,7 +200,7 @@ public abstract class LaserAttack : Attack
     private void DamageLaserCast(Ray ray, LineRenderer line, TimerDictionary<Collider> hasHit)
     {
         RaycastHit hit;
-        Physics.SphereCast(ray.origin + ray.direction, laserAttackerOptions.LaserRadius, ray.direction, out hit, laserAttackerOptions.LaserRange, laserAttackerOptions.CanHit);
+        Physics.SphereCast(ray.origin + ray.direction, Radius, ray.direction, out hit, laserAttackerOptions.LaserRange, laserAttackerOptions.CanHit);
         line.SetPosition(1, hit.collider == null ? ray.GetPoint(laserAttackerOptions.LaserRange) : hit.point);
 
         if (hit.collider != null)
@@ -206,7 +219,7 @@ public abstract class LaserAttack : Attack
                 }
 
                 // Damage
-                damageable.Damage(laserAttackerOptions.Damage, DamageSource.ENEMY_LASER);
+                damageable.Damage(Damage, DamageSource.ENEMY_LASER);
 
                 // Debug.Log("Damaged: " + damageable);
 

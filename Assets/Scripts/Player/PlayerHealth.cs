@@ -12,6 +12,7 @@ public class PlayerHealth : KillableEntity
 
     public override void Damage(float damage, DamageSource source)
     {
+        if (!acceptDamage) return;
         BloodSpatterSelector._Instance.CallSpatter();
         base.Damage(damage, source);
     }
@@ -29,5 +30,12 @@ public class PlayerHealth : KillableEntity
     private void Update()
     {
         SetHPBar();
+    }
+
+    protected override void OnEnd()
+    {
+        playerHpBar.SetValue(0);
+        InputManager._Instance.DisableInput();
+        base.OnEnd();
     }
 }

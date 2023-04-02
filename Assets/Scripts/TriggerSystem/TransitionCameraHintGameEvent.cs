@@ -2,13 +2,14 @@
 using Cinemachine;
 using System.Collections;
 
+
 public class TransitionCameraHintGameEvent : GameEvent
 {
     [SerializeField] private CinemachineVirtualCamera enableCamera;
     [SerializeField] private float duration;
     private KillableEntity player;
 
-    [SerializeField] private OpenDoorGameEvent openDoor;
+    [SerializeField] private GameEvent[] postTransitionGameEvents;
 
     [SerializeField] private UnlockType unlock;
     [SerializeField] private MonoBehaviour dummyObj;
@@ -53,11 +54,6 @@ public class TransitionCameraHintGameEvent : GameEvent
         });
         yield return new WaitUntil(() => hasFaded);
 
-        if (openDoor)
-        {
-            openDoor.LockOpened();
-        }
-
         yield return new WaitForSeconds(duration);
 
         hasFaded = false;
@@ -83,6 +79,11 @@ public class TransitionCameraHintGameEvent : GameEvent
 
         InputManager._Instance.EnableInput();
         player.AcceptDamage = true;
+
+        foreach (GameEvent gameEvent in postTransitionGameEvents)
+        {
+            gameEvent.Call();
+        }
 
         Destroy(spawnedDummy.gameObject);
     }

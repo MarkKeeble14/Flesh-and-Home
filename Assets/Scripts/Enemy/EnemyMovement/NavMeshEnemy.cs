@@ -31,6 +31,7 @@ public class NavMeshEnemy : EnemyMovement
         if (!IsActive || !navMeshAgent.isOnNavMesh)
         {
             movementSource.enabled = false;
+            SetAnimWalk(false);
             // Debug.Log("Not Active");
             return;
         };
@@ -48,6 +49,7 @@ public class NavMeshEnemy : EnemyMovement
         {
             movementSource.enabled = false;
             // Debug.Log("Not Supposed to Move");
+            SetAnimWalk(false);
             return;
         };
 
@@ -56,15 +58,15 @@ public class NavMeshEnemy : EnemyMovement
         if (!target)
         {
             // Debug.Log("No Target Set");
-
             movementSource.enabled = false;
+            SetAnimWalk(false);
             return;
         };
-
 
         // Move to target
         navMeshAgent.SetDestination(target.transform.position);
         movementSource.enabled = true;
+        SetAnimWalk(true);
     }
 
     public void DisableNavMeshAgent()
