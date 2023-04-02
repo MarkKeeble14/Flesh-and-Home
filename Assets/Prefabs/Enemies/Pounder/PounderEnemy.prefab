@@ -131,7 +131,7 @@ MonoBehaviour:
   impulseSourceData:
     verticalMinMaxImpulse: {x: -1, y: 1}
     horizontalMinMaxImpulse: {x: -0.5, y: 0.5}
-    impulseMultiplier: 1
+    impulseMultiplier: 2.5
   emitClip:
     clip: {fileID: 0}
     volume: 1
@@ -664,6 +664,7 @@ MonoBehaviour:
   onFeastHPChange: 1.4
   onFeastAttacksToBoost:
   - {fileID: 8898761843540015141}
+  - {fileID: 1161270424339828263}
 --- !u!114 &8899907301702536468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,7 +681,9 @@ MonoBehaviour:
     available:
       percentageMap:
       - key: {fileID: 8898761843540015141}
-        value: 100
+        value: 70
+      - key: {fileID: 1161270424339828263}
+        value: 30
   activateOnStart: 0
   roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
   enemyStates:
@@ -1012,6 +1015,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2854728007549927425}
+  - {fileID: 323391913545534318}
   m_Father: {fileID: 959702198628339927}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1209,3 +1213,182 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &8057982335376628523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 323391913545534318}
+  - component: {fileID: 1161270424339828263}
+  - component: {fileID: 4122855729616910786}
+  m_Layer: 0
+  m_Name: Shockwave2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &323391913545534318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057982335376628523}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1820808212177247977}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161270424339828263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057982335376628523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8f675b11c64774286e887eb25b0702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasTimeBetweenAttacks: 1
+  timeBetweenAttacks: 2
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
+  followWhileAttacking: 0
+  rotateWhileAttacking: 0
+  hasMaxRange: 1
+  maxRange: 7.5
+  removeFromPoolWhenActive: 0
+  source: {fileID: 959702198628339920}
+  onStartClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onEndClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  rangeIncreaseOnBoost: 1
+  ring: {fileID: 5268082847997902403, guid: 5a1ba1319e0802843b622f654e126215, type: 3}
+  numThumps: 2
+  timeBetweenThumps: 1
+  maxRadius: 15
+  height: 5
+  spawnAtYOffset: 0
+  expansionSpeed: 10
+  damage: 3.5
+  canHit:
+    serializedVersion: 2
+    m_Bits: 65536
+  heightGrowth: 1
+  radiusGrowth: 5
+  damageGrowth: 1.5
+  impulseSourceData:
+    verticalMinMaxImpulse: {x: -1, y: 1}
+    horizontalMinMaxImpulse: {x: -0.5, y: 0.5}
+    impulseMultiplier: 2.5
+  emitClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  endClip:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+--- !u!114 &4122855729616910786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8057982335376628523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 2
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 3
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 11400000, guid: 20a705aea2d80e0478fb89b6f43d8530, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1
+          outSlope: 1
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: -1.0516651
+          outSlope: -1.0516651
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 0
+          inSlope: -1.0516651
+          outSlope: -1.0516651
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0.25
+      m_SustainTime: 0.25
+      m_DecayTime: 0.25
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: -1, z: 0}

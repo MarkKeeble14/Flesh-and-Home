@@ -10,7 +10,7 @@ public abstract class RoomEnemy : AttackingEnemy, IRoomContent
     private KillableEntity killableEntity;
 
     public RoomController SpawnRoom { get; set; }
-    private new Renderer renderer;
+    [SerializeField] private new Renderer renderer;
 
     public bool PlayerIsInRoom { get; set; }
     public bool HasBeenActivated { get; private set; }
@@ -18,11 +18,12 @@ public abstract class RoomEnemy : AttackingEnemy, IRoomContent
 
     protected void Awake()
     {
-        renderer = GetComponent<Renderer>();
+        if (renderer == null)
+            renderer = GetComponent<Renderer>();
         killableEntity = GetComponent<KillableEntity>();
         killableEntity.AcceptDamage = false;
 
-        SpawnRoom = Physics.OverlapSphere(transform.position, .1f, LayerMask.GetMask("RoomTrigger"))[0].GetComponent<RoomController>();
+        // SpawnRoom = Physics.OverlapSphere(transform.position, .1f, LayerMask.GetMask("RoomTrigger"))[0].GetComponent<RoomController>();
     }
 
     protected void Start()

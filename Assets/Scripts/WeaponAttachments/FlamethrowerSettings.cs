@@ -43,6 +43,8 @@ public class FlamethrowerSettings : WeaponAttachmentController
 
         while (InputManager._Instance.PlayerInputActions.Player.FireAttachment.IsPressed() && fuelStore.CurrentFloat > 0)
         {
+            Firing = true;
+
             // Spread Crosshair
             CrosshairManager._Instance.Spread(CrosshairType.FLAMETHROWER, triggerSettings.crosshairSpread);
 
@@ -51,6 +53,8 @@ public class FlamethrowerSettings : WeaponAttachmentController
 
             yield return null;
         }
+
+        Firing = false;
 
         // Stop playing
         flamethrowerParticleSystem.Stop();

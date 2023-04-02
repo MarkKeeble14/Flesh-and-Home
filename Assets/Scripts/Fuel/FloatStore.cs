@@ -44,7 +44,8 @@ public class FloatStore : ScriptableObject
     public void Reset()
     {
         // Set Fuel
+        // Debug.Log("To Reset: " + currentFloat + ", " + startingFloat);
         currentFloat = startingFloat;
+        // Debug.Log("Reset: " + currentFloat);
     }
 }
-

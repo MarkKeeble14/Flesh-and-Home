@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showMesh: 0
+  meshColor: {r: 0, g: 0, b: 0, a: 0}
   collider: {fileID: 1911638}
   renderer: {fileID: 1911636}
 --- !u!1 &2385147843818516131
@@ -372,7 +373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7362887213531304022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -425, y: 1, z: -115}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -814,7 +815,7 @@ MonoBehaviour:
   baseSpeed: 10
   sprintSpeed: 1.05
   airStrafeSpeed: 15
-  jumpHeight: 0.1
+  jumpHeight: 0.15
   mass: 50
   gravityValue: -14.715
   playerVelocity: {x: 0, y: 0, z: 0}
@@ -828,7 +829,7 @@ MonoBehaviour:
   bobMovingStrength: 0.02
   bobSprintingStrength: 0.05
   lazerParent: {fileID: 7362887214866606261}
-  jetpackForce: 0.2
+  jetpackForce: 0.35
   maxJetpackDuration: 10
   jetpackDashPower: 2
   dashVelocityFalloffSpeedFlying: 1
@@ -888,7 +889,7 @@ MonoBehaviour:
   fuelTrigger: {fileID: 0}
   chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0
-  destroyOnDeath: 1
+  destroyOnDeath: 0
   rigidbody: {fileID: 652312800}
   rigidbodiesToEnableOnDeath: []
   renderer: {fileID: 0}
@@ -2277,6 +2278,7 @@ GameObject:
   - component: {fileID: 8842333623385035944}
   - component: {fileID: 3575170268958693964}
   - component: {fileID: 5712229453950044522}
+  - component: {fileID: 2312824805138181221}
   m_Layer: 0
   m_Name: PlayerVCam
   m_TagString: Untagged
@@ -2354,6 +2356,29 @@ MonoBehaviour:
   AutoEnableInputs: 1
   XYAxis: {fileID: -6642537398809759920, guid: 57589074a67d3ce4c861a0e470376694, type: 3}
   ZAxis: {fileID: 0}
+--- !u!114 &2312824805138181221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8639363921639043213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ApplyAfter: 2
+  m_ChannelMask: 1
+  m_Gain: 1
+  m_Use2DDistance: 0
+  m_UseCameraSpace: 1
+  m_ReactionSettings:
+    m_SecondaryNoise: {fileID: 11400000, guid: a3dacaec0287d7444b4bd276816e1666, type: 2}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &347598047262637002
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,12 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public partial class DialogueManager
+[Serializable]
+public struct AffColor
 {
-    [Serializable]
-    public struct AffColor
-    {
-        public Affiliation aff;
-        public Color color;
-    }
+    public Affiliation aff;
+    public Color color;
 }

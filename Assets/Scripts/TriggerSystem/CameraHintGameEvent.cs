@@ -8,8 +8,8 @@ public class CameraHintGameEvent : GameEvent
     [SerializeField] private List<UnlockType> requiredUnlocks = new List<UnlockType>();
     [SerializeField] private GameObject enableCamera;
     [SerializeField] private float duration;
-    [SerializeField] private OpenDoorGameEvent openDoorOnActivate;
-    private KillableEntity player;
+    [SerializeField] private GameEvent[] preHintEvents;
+    [SerializeField] private GameEvent[] postHintEvents;
     [SerializeField] private MonoBehaviour dummyObj;
     private MonoBehaviour spawnedDummy;
 
@@ -32,10 +32,9 @@ public class CameraHintGameEvent : GameEvent
         activeCamera.VirtualCameraGameObject.SetActive(false);
         enableCamera.SetActive(true);
 
-        // Open door if defined to
-        if (openDoorOnActivate != null)
+        foreach (GameEvent gameEvent in preHintEvents)
         {
-            openDoorOnActivate.LockOpened();
+            gameEvent.Call();
         }
 
         // Wait some time
@@ -51,6 +50,11 @@ public class CameraHintGameEvent : GameEvent
         // Re-enable player
         InputManager._Instance.EnableInput();
         GameManager._Instance.PlayerHealth.AcceptDamage = true;
+
+        foreach (GameEvent gameEvent in postHintEvents)
+        {
+            gameEvent.Call();
+        }
 
         // Destroy the object with which the coroutine is running on
         Destroy(spawnedDummy.gameObject);

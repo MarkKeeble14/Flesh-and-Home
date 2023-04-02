@@ -71,7 +71,6 @@ public class UIManager : MonoBehaviour
         {
             blackBars.Play(v ? "Show" : "Hide", 0, 1);
         }
-
     }
 
     public void Escape(InputAction.CallbackContext ctx)

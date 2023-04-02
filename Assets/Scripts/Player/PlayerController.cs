@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float airStrafeSpeed = .5f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float mass = 3.0f;
+
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private Vector3 playerVelocity;
 
@@ -243,6 +245,11 @@ public class PlayerController : MonoBehaviour
     public void AddVelocity(Vector3 velocity)
     {
         playerVelocity += velocity;
+    }
+
+    public void CancelVelocity()
+    {
+        playerVelocity = Vector3.zero;
     }
 
     private void ExecuteHeadbob()

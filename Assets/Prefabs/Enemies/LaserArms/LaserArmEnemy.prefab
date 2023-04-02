@@ -1657,6 +1657,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 2.5
   laserAttackerOptions: {fileID: 11400000, guid: d5989df28c06d924d9dad1b2bea73604,
     type: 2}
+  damageBoost: 0.05
+  radiusBoost: 0.05
   set:
   - {fileID: 3240085754159558671}
   - {fileID: 3240085755467808586}
@@ -1725,6 +1727,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 2.5
   laserAttackerOptions: {fileID: 11400000, guid: d5989df28c06d924d9dad1b2bea73604,
     type: 2}
+  damageBoost: 0.1
+  radiusBoost: 0.05
   barrel: {fileID: 3240085754159558671}
 --- !u!1 &8616931214961955765
 GameObject:

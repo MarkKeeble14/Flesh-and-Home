@@ -38,6 +38,9 @@ public class OverheatableEntity : EndableEntity
     [SerializeField] private bool spawnDamageText;
     [SerializeField] private DamagePopupText damagePopupText;
 
+    [SerializeField] private GameEvent[] onTakeDamageEvents;
+    private bool hasPlayedOnTakeDamageEvents;
+
     private new void Awake()
     {
         // Get a reference to the instantiated material
@@ -89,6 +92,17 @@ public class OverheatableEntity : EndableEntity
     public override void Damage(float damage, DamageSource damageSource)
     {
         if (!acceptDamage) return;
+
+        if (!hasPlayedOnTakeDamageEvents)
+        {
+            hasPlayedOnTakeDamageEvents = true;
+            foreach (GameEvent gameEvent in onTakeDamageEvents)
+            {
+                if (gameEvent == null) continue;
+                gameEvent.Call();
+            }
+        }
+
         // Add heat
         currentHeat += damage;
 

@@ -76,6 +76,11 @@ public class BossPhase1 : BossAttackingPhase
 
         // Debug.Log("Boss Bar is Full");
 
+        if (waitForIdleDialogueBeforeExit)
+        {
+            yield return new WaitUntil(() => DialogueManager._Instance.Idle);
+        }
+
         // Switch State
         boss.LoadNextPhase();
     }
