@@ -101,7 +101,7 @@
     "speaker": "Hero",
     "text": "Copy. It should be useful underground too.",
     "iff": "friend",
-    "speakTime": "3",
+    "speakTime": "2",
     "speechClip": "EN/"
   },
   "FlamethrowerFiredNoTarget": {
@@ -183,7 +183,7 @@
   },
   "RuinsFirstEnemyDead2": {
     "speaker": "Hero",
-    "text": "Yeah, something attacked me. Looked a lot like the our friends blocking the doorway up on the surface.",
+    "text": "Yeah, something attacked me. Looked a lot like what was blocking the doorway up on the surface.",
     "iff": "friend",
     "speakTime": "4",
     "speechClip": "EN/"
@@ -314,6 +314,13 @@
     "speakTime": "3",
     "speechClip": "EN/"
   },
+  "PickUpGrenadeLauncher3": {
+    "speaker": "Controller",
+    "text": "Anyway, that door in the hub seemed to open. I'd recommend checking out wherever it leads to next.",
+    "iff": "friend",
+    "speakTime": "4",
+    "speechClip": "EN/"
+  },
   "OverrideConsole": {
     "speaker": "Controller",
     "text": "This should help you get through that door. Just hit the switch.",
@@ -379,7 +386,7 @@
   },
   "BossSpinUp4": {
     "speaker": "Boss",
-    "text": "You'll meet the same fate as those who came before. Those who come to pilfer and descrate shall pay for their transgressions.",
+    "text": "You'll meet the same fate as those who came before. Join them in my flesh.",
     "iff": "enemy",
     "speakTime": "6",
     "speechClip": "EN/"

@@ -41,6 +41,9 @@ public class OverheatableEntity : EndableEntity
     [SerializeField] private GameEvent[] onTakeDamageEvents;
     private bool hasPlayedOnTakeDamageEvents;
 
+    [SerializeField] private GameObject[] particlesOnHit;
+    [SerializeField] private GameObject[] particlesOnDeath;
+
     private new void Awake()
     {
         // Get a reference to the instantiated material
@@ -103,6 +106,11 @@ public class OverheatableEntity : EndableEntity
             }
         }
 
+        foreach (GameObject obj in particlesOnHit)
+        {
+            Instantiate(obj, transform.position, Quaternion.identity);
+        }
+
         // Add heat
         currentHeat += damage;
 
@@ -132,6 +140,11 @@ public class OverheatableEntity : EndableEntity
     protected override void OnEnd()
     {
         // Debug.Log("On End From Overheatable Entity");
+
+        foreach (GameObject obj in particlesOnDeath)
+        {
+            Instantiate(obj, transform.position, Quaternion.identity);
+        }
 
         base.OnEnd();
 

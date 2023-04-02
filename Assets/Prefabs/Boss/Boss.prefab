@@ -776,7 +776,7 @@ Transform:
   m_GameObject: {fileID: 1220624308639587362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4559155299825079984}
@@ -2197,13 +2197,9 @@ MonoBehaviour:
     available:
       percentageMap:
       - key: {fileID: 7885544056425709480}
-        value: 40
+        value: 50
       - key: {fileID: 7885544056158720997}
-        value: 40
-      - key: {fileID: 2031117155908681347}
-        value: 10
-      - key: {fileID: 8081500927886883647}
-        value: 10
+        value: 50
   enterPhaseTime: 0
   barrelRotatorsSpeed: 0
   plateRotatorsSpeed: 0
@@ -2508,13 +2504,9 @@ MonoBehaviour:
     available:
       percentageMap:
       - key: {fileID: 7885544056425709480}
-        value: 25
+        value: 50
       - key: {fileID: 7885544056158720997}
-        value: 25
-      - key: {fileID: 2031117155908681347}
-        value: 25
-      - key: {fileID: 8081500927886883647}
-        value: 25
+        value: 50
   enterPhaseTime: 0
   barrelRotatorsSpeed: 0
   plateRotatorsSpeed: 0
@@ -3054,6 +3046,7 @@ GameObject:
   - component: {fileID: 6692938010683863987}
   - component: {fileID: 1200041711}
   - component: {fileID: 1200041713}
+  - component: {fileID: 6128645449607495712}
   m_Layer: 19
   m_Name: BossFleshy
   m_TagString: Untagged
@@ -3387,6 +3380,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &6128645449607495712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299825079986}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4717313882725679959
 GameObject:
   m_ObjectHideFlags: 0
@@ -3705,7 +3711,7 @@ Transform:
   m_GameObject: {fileID: 5104268000480730048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 2, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4559155299825079984}

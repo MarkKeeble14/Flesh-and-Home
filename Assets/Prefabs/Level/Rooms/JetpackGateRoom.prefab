@@ -244,8 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff5729b738eb7e44a3f9ff670f762f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpawned: 0
-  timeBetweenSpawnAttempts: 10
+  maxSpawned: 2
+  timeBetweenSpawnAttempts: 4
   chanceToSpawn: {x: 1, y: 3}
   feastableSpawn: {fileID: -1068128480174535724, guid: d63ef9e6398ebb942945eb6885c935ca,
     type: 3}
