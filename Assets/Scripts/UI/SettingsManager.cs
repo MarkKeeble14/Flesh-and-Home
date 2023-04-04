@@ -32,6 +32,7 @@ public class SettingsManager : MonoBehaviour
     private float horizontalSpeedMultiplier = 1f;
     private float verticalSpeedMultiplier = 1f;
     private InputManager inputManager;
+    private bool holdBreath;
     [SerializeField]
     private float holdDownMouseSpeed;
 
@@ -91,17 +92,17 @@ public class SettingsManager : MonoBehaviour
 
     private void Update()
     {
-        Cursor.lockState = CursorLockMode.Confined;
         if (inputManager.PlayerInputActions.Player.HoldBreath.IsPressed())
         {
-            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * holdDownMouseSpeed * 0.025f;
-            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * holdDownMouseSpeed * 0.025f;
+            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * holdDownMouseSpeed;
+            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * holdDownMouseSpeed;
         }
         else
         {
-            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed * 0.025f;
-            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed * 0.025f;
+            playerPOV.m_HorizontalAxis.m_MaxSpeed = xMaxSpeed;
+            playerPOV.m_VerticalAxis.m_MaxSpeed = yMaxSpeed;
         }
+
     }
 
     private void InitFloatSetting(string key, float defaultValue, Slider slider, Action<float> InitAction)
@@ -118,5 +119,6 @@ public class SettingsManager : MonoBehaviour
             slider.value = value;
         }
     }
+
 }
 
