@@ -232,7 +232,7 @@
   },
   "HubStareAtArmoredDoor": {
     "speaker": "Controller",
-    "text": "That looks too think for your rifle. On the bright side, archaeologists often carry laser cutters, so there might be one in these ruins somewhere.",
+    "text": "That looks too thick for your rifle. On the bright side, archaeologists often carry laser cutters, so there might be one in these ruins somewhere.",
     "iff": "friend",
     "speakTime": "5",
     "speechClip": "EN/"
@@ -373,7 +373,7 @@
   "BossSpinUp2": {
     "speaker": "Hero",
     "text": "Huh?",
-    "iff": "neutral",
+    "iff": "friend",
     "speakTime": "1",
     "speechClip": "EN/"
   },
@@ -442,7 +442,7 @@
   },
   "BossEndControllerBack5": {
     "speaker": "Controller",
-    "text": "Damn, so we were too slow then? Okay, head back to the ship. We'll discuss more once you're clear of any danger.",
+    "text": "Damn, so we were too slow then? Copy, head back to the ship. We'll discuss it once you're clear of threats.",
     "iff": "friend",
     "speakTime": "5",
     "speechClip": "EN/"

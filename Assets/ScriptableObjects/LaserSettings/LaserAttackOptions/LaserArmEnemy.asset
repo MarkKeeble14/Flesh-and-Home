@@ -25,7 +25,7 @@ MonoBehaviour:
     beamCollapseSpeed: 3
     beamOverheatCollapseSpeed: 0
   laserStayDuration: 3
-  visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
+  visuals: {fileID: 11400000, guid: c5bf0501f48c24641905f81d06a22abf, type: 2}
   canTargetPlayer: 1
   followPlayerSpeed: 0.45
   chanceToTargetPlayer: {x: 1, y: 1}

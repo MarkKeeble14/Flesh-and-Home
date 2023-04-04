@@ -19,10 +19,22 @@ public class TextPopupManager : MonoBehaviour
         StartCoroutine(ExecuteSpawnText(text, duration));
     }
 
+    private IEnumerator ForceDestroyAfter(GameObject text, float duration)
+    {
+        for (float t = 0; t < duration; t += Time.unscaledDeltaTime)
+        {
+            yield return null;
+        }
+
+        Destroy(text);
+    }
+
     private IEnumerator ExecuteSpawnText(string text, float duration)
     {
         TextMeshProUGUI spawned = Instantiate(onUnlockPopupText, spawnedTextParent);
         spawned.text = text;
+
+        StartCoroutine(ForceDestroyAfter(spawned.gameObject, duration + 5.0f));
 
         for (float t = 0; t < duration; t += Time.deltaTime)
         {

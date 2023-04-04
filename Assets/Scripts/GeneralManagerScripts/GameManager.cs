@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        fuelStore.Reset();
     }
 
     public void RestartGame()

@@ -179,7 +179,7 @@ MonoBehaviour:
   tempSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
     type: 3}
   onEndClip:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 2944dda4f43d4014f84f1984d956673c, type: 3}
     volume: 1
     pitch: 1
   maxHealth: 100
@@ -198,7 +198,7 @@ MonoBehaviour:
   rigidbodiesToEnableOnDeath: []
   renderer: {fileID: 1918519635}
   onTakeDamageClip:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 95ecf09e2ab2e144b89e79fbbe152ecc, type: 3}
     volume: 1
     pitch: 1
   spawnDamageText: 1
@@ -223,11 +223,11 @@ MonoBehaviour:
   settleSpeed: 0.25
   visualComponent: {fileID: 1918519633}
   onTickClip:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 95ecf09e2ab2e144b89e79fbbe152ecc, type: 3}
     volume: 1
     pitch: 1
   onEmptyClip:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 2944dda4f43d4014f84f1984d956673c, type: 3}
     volume: 1
     pitch: 1
 --- !u!95 &418038370
