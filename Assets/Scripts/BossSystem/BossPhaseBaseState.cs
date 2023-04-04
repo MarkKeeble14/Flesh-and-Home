@@ -33,6 +33,8 @@ public abstract class BossPhaseBaseState : AttackingEnemy
     private Vector2 chanceToSpawnFuelTrigger;
     [SerializeField] private Vector2 chanceToSpawnFuelTriggerPerSpawnpoint = new Vector2(1, 10000);
 
+    [SerializeField] private GameEvent[] enterPhaseEvents;
+    [SerializeField] protected bool waitForIdleDialogueBeforeExit = true;
 
     public virtual void EnterState(BossPhaseManager boss)
     {
@@ -52,6 +54,11 @@ public abstract class BossPhaseBaseState : AttackingEnemy
         // Set rotator speeds
         boss.SetBarrelRotatorsSpeed(barrelRotatorsSpeed);
         boss.SetPlateRotatorsSpeed(plateRotatorsSpeed);
+
+        foreach (GameEvent gameEvent in enterPhaseEvents)
+        {
+            gameEvent.Call();
+        }
     }
 
     protected abstract IEnumerator StateBehaviour(BossPhaseManager boss);

@@ -90,6 +90,8 @@ MonoBehaviour:
   movementSource: {fileID: 939019202987002304}
   dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
     type: 3}
+  anim: {fileID: 0}
+  walkAnimBoolParamter: 
   enableOnAwake: 1
   alterRigidbody: 1
   spawned: {fileID: -1068128480174535724}
@@ -107,8 +109,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.1
-  m_Speed: 8
-  m_Acceleration: 8
+  m_Speed: 9
+  m_Acceleration: 12.5
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 0

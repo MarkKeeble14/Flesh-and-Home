@@ -19,6 +19,8 @@ public class PulseGrenadeLauncherSettings : WeaponAttachmentController
             return;
         }
 
+        Firing = true;
+
         PulseGrenade spawned = Instantiate(pulseGrenadePrefab, grenadeSpawnPos.position, Quaternion.identity);
         spawned.Set(settings, Camera.main.transform.forward);
 
@@ -29,6 +31,7 @@ public class PulseGrenadeLauncherSettings : WeaponAttachmentController
 
     private void Update()
     {
+        Firing = false;
         if (fireRateTimer > 0)
         {
             fireRateTimer -= Time.deltaTime;

@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb7453023df865499aea1f6c1daed44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useText: 1
   label: 
   isSlidingDoor: 1
   allowPlayerControl: 1
@@ -208,7 +209,7 @@ MonoBehaviour:
   slideSpeed: 1
   nudgeAmount: 0.125
   shakeSource: {fileID: 9080569573715557851}
-  shakeStrength: 5
+  shakeStrength: 2.5
   door: {fileID: 2041011343539784274}
 --- !u!114 &7143263843975954654
 MonoBehaviour:

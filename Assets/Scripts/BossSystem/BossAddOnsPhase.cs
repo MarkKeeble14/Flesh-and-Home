@@ -53,14 +53,14 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
     public override void EnterState(BossPhaseManager boss)
     {
-        Debug.Log("Entering Adds Phase");
+        // Debug.Log("Entering Adds Phase");
 
         base.EnterState(boss);
     }
 
     public override void ExitState(BossPhaseManager boss)
     {
-        Debug.Log("Exiting Adds Phase");
+        // Debug.Log("Exiting Adds Phase");
 
         base.ExitState(boss);
     }
@@ -94,6 +94,8 @@ public class BossAddOnsPhase : BossPhaseBaseState
         yield return new WaitForSeconds(pauseDuration);
 
         yield return StartCoroutine(CommonRoutineCrash(boss, dropCurve, dropSpeed, groundShakeImpulseForce, startCrashClip, finishCrashClip));
+
+        StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt, this));
 
         // Audio
         constantNoiseSource.enabled = true;
@@ -171,8 +173,6 @@ public class BossAddOnsPhase : BossPhaseBaseState
             () => Destroy(traveller.gameObject));
         }
 
-        StartCoroutine(onCrashDownAttack.StartAttack(GameManager._Instance.PlayerAimAt, this));
-
         // Main Loop
         bool success = false;
         float timer = timeBetweenAttacks;
@@ -239,6 +239,11 @@ public class BossAddOnsPhase : BossPhaseBaseState
 
         // Pause
         yield return new WaitForSeconds(pauseDuration);
+
+        if (waitForIdleDialogueBeforeExit)
+        {
+            yield return new WaitUntil(() => DialogueManager._Instance.Idle);
+        }
 
         // Switch State
         boss.LoadNextPhase();

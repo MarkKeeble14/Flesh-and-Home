@@ -11,9 +11,12 @@ public abstract class WeaponAttachmentController : MonoBehaviour
     public Color Color => color;
     [SerializeField] private Sprite sprite;
     public Sprite Sprite => sprite;
+    public bool Firing { get; protected set; }
 
     public virtual void EnterState(PlayerAttachmentHandler handler)
     {
+        // Debug.Log("Enter State: " + this.GetType().ToString());
+
         // Audio
         equipAttachmentClip.PlayOneShot(handler.source);
 
@@ -22,6 +25,8 @@ public abstract class WeaponAttachmentController : MonoBehaviour
 
     public virtual void ExitState(PlayerAttachmentHandler handler)
     {
+        // Debug.Log("Exit State: " + this.GetType().ToString());
+
         InputManager._Instance.PlayerInputActions.Player.FireAttachment.performed -= Fire;
     }
 

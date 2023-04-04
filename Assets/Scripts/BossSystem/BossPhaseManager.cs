@@ -57,6 +57,8 @@ public class BossPhaseManager : MonoBehaviour
     [SerializeField] private OpenDoorGameEvent enterDoor;
     [SerializeField] private OpenDoorGameEvent exitDoor;
 
+    [SerializeField] private GameEvent[] onEndEvents;
+
     private void Awake()
     {
         // Add Barrel Rotators
@@ -82,6 +84,8 @@ public class BossPhaseManager : MonoBehaviour
             });
         }
         numPlatesOnBegin = armorPlating.Count;
+
+        GameManager._Instance.StartGameTimer();
     }
 
     public void SetBarrelRotatorsSpeed(float speed)
@@ -138,8 +142,11 @@ public class BossPhaseManager : MonoBehaviour
             Debug.Log("Out of Phases");
             isDone = true;
 
-            // enterDoor.LockOpened();
-            exitDoor.LockOpened();
+            // HERE
+            foreach (GameEvent gameEvent in onEndEvents)
+            {
+                gameEvent.Call();
+            }
 
             return null;
         }

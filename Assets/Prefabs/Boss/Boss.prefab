@@ -666,6 +666,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   barrelSetHolder: {fileID: 3688273097040236901}
 --- !u!1 &950321064742407902
 GameObject:
@@ -735,6 +737,7 @@ MonoBehaviour:
   - {fileID: 6937021556066863655}
   settings:
     Damage: 7.5
+    damageBoost: 0
     HitForce: 0
     Speed: 40
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -746,6 +749,7 @@ MonoBehaviour:
       m_Bits: 512
   maxLaserCalls: 32
   minMaxTimeBetweenShots: {x: 0.25, y: 0.25}
+  aimAtPlayer: 0
 --- !u!1 &1220624308639587362
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +776,7 @@ Transform:
   m_GameObject: {fileID: 1220624308639587362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4559155299825079984}
@@ -856,6 +860,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   barrelSetHolder: {fileID: 1765267798185173455}
 --- !u!1 &1252814719271583680
 GameObject:
@@ -922,6 +928,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: 92995b6680f92984c8411af8b1f818ab,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   maxLaserCalls: 32
   barrelOptionHolders:
   - {fileID: 4559155299664616357}
@@ -992,6 +1000,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   maxLaserCalls: 12
   barrelOptionHolders:
   - {fileID: 4559155299664616357}
@@ -1117,6 +1127,7 @@ MonoBehaviour:
   barrelSetHolder: {fileID: 4219836553912982098}
   settings:
     Damage: 5
+    damageBoost: 0
     HitForce: 0
     Speed: 50
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -1127,6 +1138,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
   minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
+  aimAtPlayer: 0
 --- !u!1 &2341526280254663138
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,6 +1258,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   barrelSetHolder: {fileID: 6599270303227461859}
 --- !u!1 &3412864779145093466
 GameObject:
@@ -1315,6 +1329,7 @@ MonoBehaviour:
   - {fileID: 6937021556066863655}
   settings:
     Damage: 2.5
+    damageBoost: 0
     HitForce: 0
     Speed: 60
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -1326,6 +1341,7 @@ MonoBehaviour:
       m_Bits: 512
   maxLaserCalls: 16
   minMaxTimeBetweenShots: {x: 0.1, y: 0.1}
+  aimAtPlayer: 0
 --- !u!1 &4126770852396286739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,6 +1410,7 @@ MonoBehaviour:
   - {fileID: 6937021556066863655}
   settings:
     Damage: 5
+    damageBoost: 0
     HitForce: 0
     Speed: 50
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -1405,6 +1422,7 @@ MonoBehaviour:
       m_Bits: 512
   maxLaserCalls: 4
   minMaxTimeBetweenShots: {x: 0.1, y: 0.25}
+  aimAtPlayer: 0
 --- !u!1 &4559155297982300587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1461,6 +1479,7 @@ GameObject:
   - component: {fileID: 7881108961409635393}
   - component: {fileID: 193684192667313155}
   - component: {fileID: 8221368592841426486}
+  - component: {fileID: 7100931660329467218}
   m_Layer: 10
   m_Name: BossShell
   m_TagString: Untagged
@@ -1515,7 +1534,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a68b3d725d99b824bb1cfd89f87e6f6e, type: 2}
+  - {fileID: 2100000, guid: 4662f03a22352524c9204e7acc6d8159, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1607,6 +1626,8 @@ MonoBehaviour:
   movementSource: {fileID: 193684192667313155}
   dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
     type: 3}
+  anim: {fileID: 0}
+  walkAnimBoolParamter: 
   enableOnAwake: 0
   alterRigidbody: 0
 --- !u!114 &7881108961409635393
@@ -1844,6 +1865,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7100931660329467218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155298250650242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54630a42d6c69b34a8d938b6b96bc7e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fleshPrefab: {fileID: 3891363802100026366, guid: 1978dcbbf4b28f54bb17ba30b63e3b4c,
+    type: 3}
+  spawnOn:
+    serializedVersion: 2
+    m_Bits: 1024
+  depthOffsetRange: {x: -0.25, y: -1.5}
+  timeBetweenSpawns: 0.0025
+  minMaxScale: {x: 2, y: 3.25}
+  minMaxGrowSpeed: {x: 1.5, y: 3}
+  minMaxShrinkSpeed: {x: 1.5, y: 3}
+  heightAllowance: 10
+  Enabled: 1
 --- !u!1 &4559155299548615666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1900,6 +1945,12 @@ GameObject:
   - component: {fileID: 299655286}
   - component: {fileID: 299655282}
   - component: {fileID: 1662478180}
+  - component: {fileID: 1063525905277549672}
+  - component: {fileID: 8219460954364504870}
+  - component: {fileID: 7183658593111329793}
+  - component: {fileID: 1395933899536850115}
+  - component: {fileID: 8776273277873850084}
+  - component: {fileID: 7564962959641771730}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -1963,6 +2014,9 @@ MonoBehaviour:
     type: 3}
   enterDoor: {fileID: 0}
   exitDoor: {fileID: 0}
+  onEndEvents:
+  - {fileID: 1395933899536850115}
+  - {fileID: 8776273277873850084}
 --- !u!114 &299655287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2006,9 +2060,13 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
-  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+  addFuelTriggerPrefab: {fileID: -7931111759567345103, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
+  enterPhaseEvents:
+  - {fileID: 1063525905277549672}
+  - {fileID: 7564962959641771730}
+  waitForIdleDialogueBeforeExit: 1
   riseCurve:
     serializedVersion: 2
     m_Curve:
@@ -2046,6 +2104,7 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
+  exitTime: 2.5
 --- !u!114 &299655284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2113,9 +2172,12 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
-  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+  addFuelTriggerPrefab: {fileID: -7931111759567345103, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
+  enterPhaseEvents:
+  - {fileID: 8219460954364504870}
+  waitForIdleDialogueBeforeExit: 1
   numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   platesNeededToDestroyToAdvance: 3
@@ -2135,13 +2197,9 @@ MonoBehaviour:
     available:
       percentageMap:
       - key: {fileID: 7885544056425709480}
-        value: 40
+        value: 50
       - key: {fileID: 7885544056158720997}
-        value: 40
-      - key: {fileID: 2031117155908681347}
-        value: 10
-      - key: {fileID: 8081500927886883647}
-        value: 10
+        value: 50
   enterPhaseTime: 0
   barrelRotatorsSpeed: 0
   plateRotatorsSpeed: 0
@@ -2170,11 +2228,13 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
-  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+  addFuelTriggerPrefab: {fileID: -7931111759567345103, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
+  enterPhaseEvents: []
+  waitForIdleDialogueBeforeExit: 1
   duration: 30
-  numAttacksAtOnce: 1
+  numAttacksAtOnce: 2
   onCrashDownAttack: {fileID: 2754082744787138833}
   timeBetweenAttacks: 5
   returnToSpawnSpeed: 25
@@ -2194,11 +2254,11 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 384
-  groundShakeImpulseForce: 1
+  groundShakeImpulseForce: 5
   riseBeforeEnding: 1
   pauseDuration: 1
-  riseSpeed: 0.05
-  riseDuration: 4
+  riseSpeed: 0.125
+  riseDuration: 5
   riseCurve:
     serializedVersion: 2
     m_Curve:
@@ -2327,8 +2387,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeSpeed: 5
-  shakeStrength: 0.02
+  shakeSpeed: 7.5
+  shakeStrength: 0.04
   startCrashClip:
     clip: {fileID: 0}
     volume: 1
@@ -2419,9 +2479,12 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
-  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+  addFuelTriggerPrefab: {fileID: -7931111759567345103, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
+  enterPhaseEvents:
+  - {fileID: 7183658593111329793}
+  waitForIdleDialogueBeforeExit: 1
   numAttacksAtOnce: 4
   timeBetweenAttacks: 1
   bossShell: {fileID: 7881108961409635393}
@@ -2472,13 +2535,15 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1406886947}
-  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+  addFuelTriggerPrefab: {fileID: -7931111759567345103, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 10000}
+  enterPhaseEvents: []
+  waitForIdleDialogueBeforeExit: 1
   duration: 60
   numAttacksAtOnce: 1
   onCrashDownAttack: {fileID: 54373864176638256}
-  timeBetweenAttacks: 3
+  timeBetweenAttacks: 4
   returnToSpawnSpeed: 25
   availableAddOns:
     percentageMap:
@@ -2496,11 +2561,11 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 384
-  groundShakeImpulseForce: 1
+  groundShakeImpulseForce: 10
   riseBeforeEnding: 0
   pauseDuration: 1
-  riseSpeed: 0.1
-  riseDuration: 4
+  riseSpeed: 0.3
+  riseDuration: 5
   riseCurve:
     serializedVersion: 2
     m_Curve:
@@ -2552,7 +2617,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dropSpeed: 1.5
+  dropSpeed: 5
   dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -2629,8 +2694,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  shakeSpeed: 10
-  shakeStrength: 0.075
+  shakeSpeed: 15
+  shakeStrength: 0.1
   startCrashClip:
     clip: {fileID: 0}
     volume: 1
@@ -2709,18 +2774,21 @@ MonoBehaviour:
   shakeImpulseSource: {fileID: 1595823104}
   groundShakeImpulseSource: {fileID: 1950324736}
   shakeSource: {fileID: 1662478180}
-  addFuelTriggerPrefab: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+  addFuelTriggerPrefab: {fileID: -7931111759567345103, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
-  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 2500}
+  chanceToSpawnFuelTriggerPerSpawnpoint: {x: 1, y: 1000}
+  enterPhaseEvents: []
+  waitForIdleDialogueBeforeExit: 1
   numAttacksAtOnce: 2
   timeBetweenAttacks: 0
   barrelHolder: {fileID: 4559155298250650246}
   bossFlesh: {fileID: 1200041714}
   timeBeforeFleshySpawns: 3
   timeAfterFleshyKillBeforeDropBarrels: 2.5
+  turnOff: {fileID: 7100931660329467218}
   parentToUnequipped: {fileID: 0}
-  platesMinMaxForcePerAxis: {x: -750, y: 750}
-  platesMinMaxTorquePerAxis: {x: -125, y: 125}
+  platesMinMaxForcePerAxis: {x: -1250, y: 1250}
+  platesMinMaxTorquePerAxis: {x: -150, y: 150}
   barrelsMinMaxForcePerAxis: {x: -100, y: 100}
   barrelsMinMaxTorquePerAxis: {x: -5, y: 5}
   fleshySpawnClip:
@@ -2824,6 +2892,113 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1063525905277549672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299601775635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d626c51c909812c4ba6a8486110f2433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: 0
+  label: 
+  onTriggerDialogue:
+    lineIds:
+    - BossSpinUp1
+    - BossSpinUp2
+    - BossSpinUp3
+    - BossSpinUp4
+--- !u!114 &8219460954364504870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299601775635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d626c51c909812c4ba6a8486110f2433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: 1
+  label: 
+  onTriggerDialogue:
+    lineIds:
+    - BossExplanationArmor
+--- !u!114 &7183658593111329793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299601775635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d626c51c909812c4ba6a8486110f2433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: 1
+  label: 
+  onTriggerDialogue:
+    lineIds:
+    - BossExplanationSoft
+--- !u!114 &1395933899536850115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299601775635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d626c51c909812c4ba6a8486110f2433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: 1
+  label: 
+  onTriggerDialogue:
+    lineIds:
+    - BossEndControllerBack1
+    - BossEndControllerBack2
+    - BossEndControllerBack3
+    - BossEndControllerBack4
+--- !u!114 &8776273277873850084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299601775635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7614cfe2c65961e408664c2411d74a3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: 1
+  label: 
+  door: {fileID: 0}
+  openOrClosed: 0
+  delay: 0
+  coroutineCaller: {fileID: 0}
+--- !u!114 &7564962959641771730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559155299601775635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de09ecd0e1de3d549b9957685c86e651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useText: 1
+  label: 
+  toDestroy: []
 --- !u!1 &4559155299664616356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2871,8 +3046,7 @@ GameObject:
   - component: {fileID: 6692938010683863987}
   - component: {fileID: 1200041711}
   - component: {fileID: 1200041713}
-  - component: {fileID: 688889819296936332}
-  - component: {fileID: 3244498498606665534}
+  - component: {fileID: 6128645449607495712}
   m_Layer: 19
   m_Name: BossFleshy
   m_TagString: Untagged
@@ -2893,6 +3067,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4772072698014855196}
+  - {fileID: 4839636455982233609}
   m_Father: {fileID: 4559155299601775632}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2915,6 +3090,8 @@ MonoBehaviour:
   movementSource: {fileID: 6692938010683863987}
   dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
     type: 3}
+  anim: {fileID: 0}
+  walkAnimBoolParamter: 
   speed: 10
   rotateTowardsMovementDirection: 0
 --- !u!114 &4559155299825079987
@@ -2943,7 +3120,7 @@ MonoBehaviour:
   heightAllowance: 10
   spawnOnGround: 1
   maxNumEnemiesCanHaveSpawned: 5
-  chanceToSpawnEnemyPerFrame: {x: 1, y: 2500}
+  chanceToSpawnEnemyPerFrame: {x: 1, y: 1250}
   enemyOptions:
     percentageMap:
     - key: {fileID: 4943259806079289315, guid: 3f85aba7303787b44a038f78a3ebfa2a, type: 3}
@@ -3203,7 +3380,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &688889819296936332
+--- !u!65 &6128645449607495712
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3214,25 +3391,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 2, z: 3}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3244498498606665534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4559155299825079986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 702110bb688e4bd43b55e49d8e278c09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 2.5
-  tickRate: 0.25
-  dealDamageTo:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!1 &4717313882725679959
 GameObject:
   m_ObjectHideFlags: 0
@@ -3299,6 +3459,7 @@ MonoBehaviour:
   barrelSetHolder: {fileID: 2279130278040657870}
   settings:
     Damage: 5
+    damageBoost: 0
     HitForce: 0
     Speed: 50
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -3309,6 +3470,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
   minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
+  aimAtPlayer: 0
 --- !u!1 &5006981122804496195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3377,6 +3539,7 @@ MonoBehaviour:
   - {fileID: 6937021556066863655}
   settings:
     Damage: 7.5
+    damageBoost: 0
     HitForce: 0
     Speed: 40
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -3388,6 +3551,7 @@ MonoBehaviour:
       m_Bits: 512
   maxLaserCalls: 32
   minMaxTimeBetweenShots: {x: 0.25, y: 0.25}
+  aimAtPlayer: 0
 --- !u!1 &5076539868468295122
 GameObject:
   m_ObjectHideFlags: 0
@@ -3508,6 +3672,7 @@ MonoBehaviour:
   barrelSetHolder: {fileID: 3688273097040236901}
   settings:
     Damage: 5
+    damageBoost: 0
     HitForce: 0
     Speed: 50
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -3518,6 +3683,70 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
   minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
+  aimAtPlayer: 0
+--- !u!1 &5104268000480730048
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4839636455982233609}
+  - component: {fileID: 7997460798800749629}
+  - component: {fileID: 7468141776097049093}
+  m_Layer: 0
+  m_Name: DamageHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4839636455982233609
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5104268000480730048}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4559155299825079984}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7997460798800749629
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5104268000480730048}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7468141776097049093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5104268000480730048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702110bb688e4bd43b55e49d8e278c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0.25
+  tickRate: 0.05
+  dealDamageTo:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &5136936638344744944
 GameObject:
   m_ObjectHideFlags: 0
@@ -3614,6 +3843,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   barrelSetHolder: {fileID: 4219836553912982098}
 --- !u!1 &5941830948853981882
 GameObject:
@@ -3735,6 +3966,7 @@ MonoBehaviour:
   barrelSetHolder: {fileID: 6599270303227461859}
   settings:
     Damage: 5
+    damageBoost: 0
     HitForce: 0
     Speed: 50
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -3745,6 +3977,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
   minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
+  aimAtPlayer: 0
 --- !u!1 &6227935156087273065
 GameObject:
   m_ObjectHideFlags: 0
@@ -3895,6 +4128,7 @@ MonoBehaviour:
   barrelSetHolder: {fileID: 6823342879682449955}
   settings:
     Damage: 5
+    damageBoost: 0
     HitForce: 0
     Speed: 50
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -3905,6 +4139,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
   minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
+  aimAtPlayer: 0
 --- !u!1 &6998629952719309927
 GameObject:
   m_ObjectHideFlags: 0
@@ -3970,6 +4205,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   barrelSetHolder: {fileID: 2279130278040657870}
 --- !u!1 &7478859432974368545
 GameObject:
@@ -4036,6 +4273,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: 92995b6680f92984c8411af8b1f818ab,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   maxLaserCalls: 32
   barrelOptionHolders:
   - {fileID: 4559155299664616357}
@@ -4160,6 +4399,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   barrelSetHolder: {fileID: 6823342879682449955}
 --- !u!1 &7836360545476628150
 GameObject:
@@ -4227,6 +4468,7 @@ MonoBehaviour:
   barrelSetHolder: {fileID: 1765267798185173455}
   settings:
     Damage: 5
+    damageBoost: 0
     HitForce: 0
     Speed: 50
     Visuals: {fileID: 11400000, guid: bcfc52f6c7b04ca4e9cc7bd900e08f58, type: 2}
@@ -4237,6 +4479,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 512
   minMaxTimeBetweenShots: {x: 0.025, y: 0.1}
+  aimAtPlayer: 0
 --- !u!1 &8029395801953975960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4356,6 +4599,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   maxLaserCalls: 12
   barrelOptionHolders:
   - {fileID: 4559155299664616357}
@@ -4426,6 +4671,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   barrelSetHolder: {fileID: 5023830293163225693}
 --- !u!1 &8902665601811258763
 GameObject:
@@ -4549,6 +4796,8 @@ MonoBehaviour:
   rangeIncreaseOnBoost: 0
   laserAttackerOptions: {fileID: 11400000, guid: a93edbc640d7174498f5cf0fee2da925,
     type: 2}
+  damageBoost: 0
+  radiusBoost: 0
   barrelOptionHolders:
   - {fileID: 4559155297982300584}
   - {fileID: 6937021556066863655}
@@ -4728,6 +4977,11 @@ PrefabInstance:
       propertyPath: removeFromPoolWhenActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
+      propertyPath: impulseSourceData.impulseMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}
 --- !u!4 &2165622810390475401 stripped
@@ -4869,6 +5123,11 @@ PrefabInstance:
         type: 3}
       propertyPath: removeFromPoolWhenActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
+      propertyPath: impulseSourceData.impulseMultiplier
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}
@@ -9527,6 +9786,11 @@ PrefabInstance:
       propertyPath: timeBetweenThumps
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
+      propertyPath: impulseSourceData.impulseMultiplier
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}
 --- !u!114 &2754082744787138833 stripped
@@ -10603,6 +10867,11 @@ PrefabInstance:
         type: 3}
       propertyPath: timeBetweenThumps
       value: 0.34
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885544057106927055, guid: 4048e0c829ab1044db85a1e02b709813,
+        type: 3}
+      propertyPath: impulseSourceData.impulseMultiplier
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4048e0c829ab1044db85a1e02b709813, type: 3}

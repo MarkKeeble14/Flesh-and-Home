@@ -17,6 +17,8 @@ public class FeastingEnemy : MonoBehaviour
     public int FeastLevel => feastLevel;
     private Vector3 targetScale;
 
+    [SerializeField] private DialogueGameEvent onFeastDialogue;
+
     private void Awake()
     {
         targetScale = transform.localScale;
@@ -33,6 +35,12 @@ public class FeastingEnemy : MonoBehaviour
 
     public void FeastOnEntity(FeastableEntity feastableEntity)
     {
+        if (onFeastDialogue != null)
+        {
+            onFeastDialogue.Call();
+            Destroy(onFeastDialogue.gameObject);
+        }
+
         // TODO
         if (feastableEntity.TryGetComponent(out FeastingEnemy feastingEnemy))
         {

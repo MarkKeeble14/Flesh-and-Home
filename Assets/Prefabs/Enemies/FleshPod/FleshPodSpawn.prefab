@@ -41,9 +41,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2408590238653804397}
-  - component: {fileID: 1880253660273465759}
+  - component: {fileID: 6486819894451595762}
   m_Layer: 12
-  m_Name: InstaAttack
+  m_Name: HurlAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ Transform:
   m_Father: {fileID: 6704034944944037798}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1880253660273465759
+--- !u!114 &6486819894451595762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,19 +73,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4089155000316615083}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24d593cbae2452845aa442513dd8bef5, type: 3}
+  m_Script: {fileID: 11500000, guid: d6b89222065c52d439006d9f6e8098e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasTimeBetweenAttacks: 1
-  timeBetweenAttacks: 0.25
-  disableMoveWhileBetweenAttacks: 1
-  disableMovementWhileAttacking: 1
+  hasTimeBetweenAttacks: 0
+  timeBetweenAttacks: 0
+  disableMoveWhileBetweenAttacks: 0
+  disableMovementWhileAttacking: 0
   followWhileAttacking: 0
   rotateWhileAttacking: 0
   hasMaxRange: 1
-  maxRange: 2
+  maxRange: 10
   removeFromPoolWhenActive: 0
-  source: {fileID: 805400335660515332}
+  source: {fileID: 7496811503299157509}
   onStartClip:
     clip: {fileID: 0}
     volume: 1
@@ -94,7 +94,14 @@ MonoBehaviour:
     clip: {fileID: 0}
     volume: 1
     pitch: 1
-  damage: 0.125
+  rangeIncreaseOnBoost: 0
+  waitTime: 1
+  launchForce: 2000
+  onPrime:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  onHurlCollisions: {fileID: 1029294100133880249}
 --- !u!1 &5023724996855043178
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,6 +123,7 @@ GameObject:
   - component: {fileID: 5023724996855043176}
   - component: {fileID: 1941884154462041485}
   - component: {fileID: -4030935778139801945}
+  - component: {fileID: 1029294100133880249}
   m_Layer: 12
   m_Name: FleshPodSpawn
   m_TagString: Untagged
@@ -132,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 5023724996855043178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.15, z: 0.2}
+  m_LocalScale: {x: 0.4, y: 0.3, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6704034944944037798}
@@ -228,7 +236,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 7.5
+  m_Speed: 12.5
   m_Acceleration: 3
   avoidancePriority: 50
   m_AngularSpeed: 200
@@ -453,6 +461,8 @@ MonoBehaviour:
   movementSource: {fileID: 7496811503299157509}
   dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
     type: 3}
+  anim: {fileID: 0}
+  walkAnimBoolParamter: 
   enableOnAwake: 0
   alterRigidbody: 1
   timeAfterGroundCollisionToMove: 0
@@ -519,10 +529,11 @@ MonoBehaviour:
   attackPool:
     available:
       percentageMap:
-      - key: {fileID: 1880253660273465759}
+      - key: {fileID: 6486819894451595762}
         value: 100
   activateOnStart: 1
   roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
+  renderer: {fileID: 0}
   enemyStates:
     dictionary:
     - key: 0
@@ -565,3 +576,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f209ad97556e2254b96ec6cb978bd7f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1029294100133880249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5023724996855043178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0146f9be185b24e876b622cfa3df5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0.5
+  onExplode:
+    clip: {fileID: 0}
+    volume: 1
+    pitch: 1
+  tempAudioSource: {fileID: 154073653811095868, guid: d0bd94bf96149ba4b8aa48a56954ac0b,
+    type: 3}
+  particlesOnExplode:
+  - {fileID: 7452595122835858426, guid: 49ea45a6784bd054cae3f798a47dda54, type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  primed: 0

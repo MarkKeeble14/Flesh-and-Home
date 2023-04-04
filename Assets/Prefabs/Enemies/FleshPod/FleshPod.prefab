@@ -185,11 +185,11 @@ MonoBehaviour:
   maxHealth: 100
   acceptDamage: 1
   spawnHealthTrigger: 0
-  healthTrigger: {fileID: 5708385125351423535, guid: 66c11f9f9898a664381a8d81e397204a,
+  healthTrigger: {fileID: -5896302889873632466, guid: 66c11f9f9898a664381a8d81e397204a,
     type: 3}
   chanceToSpawnHealthTrigger: {x: 1, y: 6}
   spawnFuelTrigger: 1
-  fuelTrigger: {fileID: 356225051794016206, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
+  fuelTrigger: {fileID: -7931111759567345103, guid: 3ebda3c06e8163b4f8ac926f7d118aa8,
     type: 3}
   chanceToSpawnFuelTrigger: {x: 1, y: 6}
   acceptKnockback: 0

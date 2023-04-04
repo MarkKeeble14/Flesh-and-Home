@@ -10,6 +10,7 @@ public class FlamethrowerTrigger : MonoBehaviour
 
     [Header("Visual")]
     [SerializeField] private bool showMesh;
+    [SerializeField] private Color meshColor;
 
     [Header("References")]
     [SerializeField] private new Collider collider;
@@ -24,6 +25,11 @@ public class FlamethrowerTrigger : MonoBehaviour
     public void Deactivate()
     {
         active = false;
+    }
+
+    private void Awake()
+    {
+        renderer.material.color = meshColor;
     }
 
     private void OnTriggerStay(Collider other)

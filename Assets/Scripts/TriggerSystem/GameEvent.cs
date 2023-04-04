@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(EventManager))]
 public abstract class GameEvent : MonoBehaviour
 {
     public bool Active { get; protected set; }

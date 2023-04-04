@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HealthStore
   m_EditorClassIdentifier: 
   startingFloat: 100
-  currentFloat: 100
+  currentFloat: 29.5

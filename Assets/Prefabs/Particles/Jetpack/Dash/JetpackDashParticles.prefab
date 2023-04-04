@@ -49,7 +49,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4832,6 +4832,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 895810715902408538, guid: 7a74e63a9b8e8834aa52e3f9a92a8435,
         type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 895810715902408538, guid: 7a74e63a9b8e8834aa52e3f9a92a8435,
+        type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -5064,6 +5069,11 @@ PrefabInstance:
         type: 3}
       propertyPath: looping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895810715902408538, guid: 7a74e63a9b8e8834aa52e3f9a92a8435,
+        type: 3}
+      propertyPath: stopAction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 895810715902408538, guid: 7a74e63a9b8e8834aa52e3f9a92a8435,
         type: 3}
@@ -5367,6 +5377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2052529302734354322, guid: f0a3c5b6f4a3408429dd4f604301214f,
         type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2052529302734354322, guid: f0a3c5b6f4a3408429dd4f604301214f,
+        type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -5549,6 +5564,11 @@ PrefabInstance:
         type: 3}
       propertyPath: looping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895810715902408538, guid: 7a74e63a9b8e8834aa52e3f9a92a8435,
+        type: 3}
+      propertyPath: stopAction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 895810715902408538, guid: 7a74e63a9b8e8834aa52e3f9a92a8435,
         type: 3}
@@ -5852,6 +5872,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2052529302734354322, guid: f0a3c5b6f4a3408429dd4f604301214f,
         type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2052529302734354322, guid: f0a3c5b6f4a3408429dd4f604301214f,
+        type: 3}
       propertyPath: ShapeModule.m_Rotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -6089,6 +6114,11 @@ PrefabInstance:
         type: 3}
       propertyPath: looping
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2052529302734354322, guid: f0a3c5b6f4a3408429dd4f604301214f,
+        type: 3}
+      propertyPath: stopAction
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2052529302734354322, guid: f0a3c5b6f4a3408429dd4f604301214f,
         type: 3}
