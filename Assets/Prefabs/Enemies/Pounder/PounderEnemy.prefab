@@ -133,7 +133,7 @@ MonoBehaviour:
     horizontalMinMaxImpulse: {x: -0.5, y: 0.5}
     impulseMultiplier: 2.5
   emitClip:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 9f87525e92f31dd4fa98bdde5dea5930, type: 3}
     volume: 1
     pitch: 1
   endClip:
@@ -590,6 +590,8 @@ MonoBehaviour:
   movementSource: {fileID: 959702198628339929}
   dummyPoint: {fileID: 2832123189459728824, guid: 059b9bb7985445049bb1f262d1ce6dc7,
     type: 3}
+  anim: {fileID: 0}
+  walkAnimBoolParamter: 
   enableOnAwake: 1
   alterRigidbody: 1
 --- !u!114 &2281779296839727250
@@ -665,6 +667,7 @@ MonoBehaviour:
   onFeastAttacksToBoost:
   - {fileID: 8898761843540015141}
   - {fileID: 1161270424339828263}
+  onFeastDialogue: {fileID: 0}
 --- !u!114 &8899907301702536468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,6 +689,7 @@ MonoBehaviour:
         value: 30
   activateOnStart: 0
   roomEnemySettings: {fileID: 11400000, guid: 50a314c3999bc0542b1bd50b174c7244, type: 2}
+  renderer: {fileID: 0}
   enemyStates:
     dictionary:
     - key: 0
@@ -1296,7 +1300,7 @@ MonoBehaviour:
     horizontalMinMaxImpulse: {x: -0.5, y: 0.5}
     impulseMultiplier: 2.5
   emitClip:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 713a758ca2d2fda469a0879e0b86c914, type: 3}
     volume: 1
     pitch: 1
   endClip:

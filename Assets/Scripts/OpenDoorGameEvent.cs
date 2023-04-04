@@ -28,6 +28,10 @@ public class OpenDoorGameEvent : GameEvent
     [SerializeField] private Transform door;
     private TriggerHelperText helperText;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+    public AudioClip clip;
+
     private void Awake()
     {
         helperText = FindObjectOfType<TriggerHelperText>();
@@ -107,7 +111,7 @@ public class OpenDoorGameEvent : GameEvent
         Vector3 beginOpenPos = door.localPosition;
         float time = 0;
         isOpen = true;
-
+        audioSource.PlayOneShot(clip);
         while (door.localPosition != openPosition)
         {
             door.localPosition = Vector3.Lerp(beginOpenPos, openPosition, time);
@@ -127,7 +131,7 @@ public class OpenDoorGameEvent : GameEvent
         Vector3 beginClosePos = door.localPosition;
         float time = 0;
         isOpen = false;
-
+        audioSource.PlayOneShot(clip);
         while (door.localPosition != closePosition)
         {
             door.localPosition = Vector3.Lerp(beginClosePos, closePosition, time);
