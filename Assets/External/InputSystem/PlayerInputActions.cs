@@ -279,7 +279,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""id"": ""440adf3b-8bef-495d-b086-35cbde4682d9"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""StickDeadzone,DeltaTimeScale"",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
