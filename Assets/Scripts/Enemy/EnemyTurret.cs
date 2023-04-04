@@ -76,37 +76,5 @@ public class EnemyTurret : MonoBehaviour
         yield return new WaitForSeconds(delay);
         lineRenderer.enabled = false;
     }
-
-    // void shoot()
-    // {
-    //     GameObject clone =  Instantiate(projectile, muzzle.position, transform.rotation);
-    //     clone.GetComponent<Rigidbody>().AddForce(head.forward * projectileSpeed);
-    //
-    //     if (clone.GetComponent<Collider>() != null)
-    //     {
-    //         
-    //         if (clone.GetComponent<Collider>().TryGetComponent(out IDamageable damageable))
-    //         {
-    //             damageable.Damage(damage, DamageSource.RIFLE);
-    //             Debug.Log("Damaged: " + damageable);
-    //         }
-    //     } 
-    //     Destroy(clone, 2);
-    // }
     
-    // void shoot()
-    // {
-    //     GameObject clone = Instantiate(projectile, muzzle.position, transform.rotation);
-    //     clone.GetComponent<Rigidbody>().AddForce(head.forward * projectileSpeed);
-    //     Destroy(clone, 2);
-    // }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        if (other.name == "PlayerHitbox")
-        {
-            Debug.Log("hit");
-        }
-    }
 }
