@@ -631,7 +631,7 @@ MonoBehaviour:
   - {fileID: 7947259757976992371}
   renderer: {fileID: 959702198628339925}
   onTakeDamageClip:
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 95ecf09e2ab2e144b89e79fbbe152ecc, type: 3}
     volume: 1
     pitch: 1
   spawnDamageText: 1
